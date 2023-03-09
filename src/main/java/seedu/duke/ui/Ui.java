@@ -25,7 +25,16 @@ public class Ui {
         System.out.println(message);
     }
 
-    private static void printf(String format, Object... args) {
+    /**
+     * The printf function is used to print based on the format and the arguments
+     * given. This function is used to mimic {@code System.out.printf}
+     *
+     * @param format The string format to be printed.
+     * @param args   The arguments to be printed.
+     * @throws java.util.IllegalFormatException If an invalid format given.
+     * @throws NullPointerException             If the format is null.
+     **/
+    public static void printf(String format, Object... args) {
         System.out.printf(format, args);
     }
 

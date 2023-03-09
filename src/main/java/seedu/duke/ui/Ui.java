@@ -53,4 +53,13 @@ public class Ui {
     public static void printFarewell() {
         printMessage(Message.FAREWELL.getMessage());
     }
+
+    /**
+     * The printHelp prints out the help message based on the user's request.
+     */
+    public static void printHelp() {
+        printMessage(Message.HELP.getMessage());
+    }
+
+
 }

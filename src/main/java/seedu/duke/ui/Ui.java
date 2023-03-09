@@ -21,7 +21,7 @@ public class Ui {
         return input;
     }
 
-    private static void println(Object message) {
+    private static void printMessage(Object message) {
         System.out.println(message);
     }
 
@@ -30,18 +30,18 @@ public class Ui {
     }
 
     /**
-     * The printWelcomeMessage prints out the welcome message upon
+     * The printGreeting prints out the welcome message upon
      * the initialisation of the chatbot.
      */
-    public static void printWelcomeMessage() {
-        println(Message.WELCOME.getMessage());
+    public static void printGreeting() {
+        printMessage(Message.GREETING.getMessage());
     }
 
     /**
-     * The printGoodbyeMessage prints out the welcome message upon
+     * The printFarewell prints out the welcome message upon
      * the termination of the chatbot.
      */
-    public static void printGoodbyeMessage() {
-        println(Message.GOODBYE.getMessage());
+    public static void printFarewell() {
+        printMessage(Message.FAREWELL.getMessage());
     }
 }

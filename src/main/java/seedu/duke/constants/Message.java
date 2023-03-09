@@ -5,8 +5,8 @@ package seedu.duke.constants;
  */
 public enum Message {
 
-    GOODBYE("Thank you for using MoneyMoover! We hope to see you again soon :)"),
-    WELCOME("Welcome to MoneyMoover!");
+    FAREWELL("Thank you for using MoneyMoover! We hope to see you again soon :)"),
+    GREETING("Welcome to MoneyMoover!");
     private String message;
 
     Message(String message) {

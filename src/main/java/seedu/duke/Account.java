@@ -4,6 +4,11 @@ public class Account {
     private int balance;
     private final Currency CURRENCY;
 
+    Account(int initialBalance, Currency currency){
+        this.CURRENCY = currency;
+        balance = initialBalance;
+    }
+
     public float getBalance(){
         return balance / 100.0f;
     }
@@ -64,11 +69,6 @@ public class Account {
     public String toString(){
         String currencyType = currencyToString(CURRENCY);
         return currencyType + ": " + Float.toString(balance / 100.0f);
-    }
-
-    Account(int initialBalance, Currency currency){
-        this.CURRENCY = currency;
-        balance = initialBalance;
     }
 
 }

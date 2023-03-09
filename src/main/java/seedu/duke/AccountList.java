@@ -6,7 +6,10 @@ public class AccountList {
     // Currency implementation only specifies one account per currency, if required would have to change to a
     // Hashmap of ArrayList of account in the future and randomly generate an ID for that account
     private HashMap<Currency, Account> accountHashMap;
-
+    AccountList(){
+        accountHashMap = new HashMap<>();
+    }
+    
     public void addAccount(Currency currency, int initialBalance){
         if(accountHashMap.containsKey(currency)){
             // todo throw some exception signalling account already exists

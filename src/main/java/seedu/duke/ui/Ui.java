@@ -36,4 +36,12 @@ public class Ui {
     public static void printWelcomeMessage() {
         println(Message.WELCOME.getMessage());
     }
+
+    /**
+     * The printGoodbyeMessage prints out the welcome message upon
+     * the termination of the chatbot.
+     */
+    public static void printGoodbyeMessage() {
+        println(Message.GOODBYE.getMessage());
+    }
 }

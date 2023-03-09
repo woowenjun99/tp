@@ -1,5 +1,7 @@
 package seedu.duke.ui;
 
+import seedu.duke.constants.Message;
+
 import java.util.Scanner;
 
 /**
@@ -10,16 +12,28 @@ public class Ui {
      * The getUserInput reads in the user input as a string
      * and returns the input for the parser.
      *
-     * @return The user input.
+     * @return The user input as a string.
      */
-    public String getUserInput() {
+    public static String getUserInput() {
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
         in.close();
         return input;
     }
 
-    private void println(Object message) {
+    private static void println(Object message) {
         System.out.println(message);
+    }
+
+    private static void printf(String format, Object... args) {
+        System.out.printf(format, args);
+    }
+
+    /**
+     * The printWelcomeMessage prints out the welcome message upon
+     * the initialisation of the chatbot.
+     */
+    public static void printWelcomeMessage() {
+        println(Message.WELCOME.getMessage());
     }
 }

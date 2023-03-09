@@ -2,13 +2,13 @@ package seedu.duke;
 
 public class Account {
     private int balance;
-    private Currency currency;
+    private final Currency CURRENCY;
 
     public float getBalance(){
         return balance / 100.0f;
     }
     public Currency getCurrencyType(){
-        return currency;
+        return CURRENCY;
     }
     public void updateBalance(float changeInBalance){
         int newBalance = balance - (int)(changeInBalance * 100);
@@ -62,12 +62,12 @@ public class Account {
     }
     @Override
     public String toString(){
-        String currencyType = currencyToString(currency);
+        String currencyType = currencyToString(CURRENCY);
         return currencyType + ": " + Float.toString(balance / 100.0f);
     }
 
-    Account(Currency currency, int initialBalance){
-        this.currency = currency;
+    Account(int initialBalance, Currency currency){
+        this.CURRENCY = currency;
         balance = initialBalance;
     }
 

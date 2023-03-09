@@ -11,7 +11,7 @@ public class AccountList {
         if(accountHashMap.containsKey(currency)){
             // todo throw some exception signalling account already exists
         }
-        accountHashMap.put(currency, new Account(currency,initialBalance));
+        accountHashMap.put(currency, new Account(initialBalance, currency));
     }
 
     public void deleteAccount(Currency currency){

@@ -60,6 +60,4 @@ public class Ui {
     public static void printHelp() {
         printMessage(Message.HELP.getMessage());
     }
-
-
 }

@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import java.util.Arrays;
-import java.util.Optional;
 
 public enum CommandType {
     EXIT("exit"),
@@ -15,8 +13,9 @@ public enum CommandType {
         return command;
     }
     public static CommandType get(String command) {
-        if (command == null)
+        if (command == null) {
             throw new NullPointerException("Command is null");
+        }
         for(CommandType commandType : CommandType.values()){
             if(commandType.getCommand().equals(command)){
                 return commandType;

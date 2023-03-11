@@ -4,11 +4,6 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandType;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ShowRateCommand;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 public class Parser {
     public static Command parseInput(String input) throws IndexOutOfBoundsException, IllegalArgumentException{
         CommandType command;

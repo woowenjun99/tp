@@ -6,5 +6,13 @@ public abstract class Command {
     public Command(boolean isExit){
         this.isExit = isExit;
     }
+
+    /**
+     * Executes the command implemented by the subclass
+     */
     public abstract void execute();
+
+    public boolean isExit () {
+        return isExit;
+    }
 }

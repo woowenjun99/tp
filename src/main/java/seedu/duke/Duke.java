@@ -22,8 +22,6 @@ public class Duke {
                 isExit = c.isExit();
             } catch (IllegalArgumentException e) {
                 ui.printMessage(e.getMessage());
-            } catch(Exception e){
-                e.printStackTrace();
             } finally {
                 ui.printSpacer();
             }

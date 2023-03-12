@@ -17,6 +17,13 @@ public class Account {
     public Currency getCurrencyType(){
         return CURRENCY;
     }
+
+    /**
+     * Updates the balance of the account
+     * @param changeInBalance the amount added or subtract from the account
+     * @param action specifies whether to add or subtract value
+     * @throws NotEnoughInAccountException if the balance would become negative
+     */
     public void updateBalance(float changeInBalance, String action) throws NotEnoughInAccountException {
         int newBalance;
         if (action.equals("add")) {

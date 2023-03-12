@@ -11,13 +11,19 @@ import seedu.duke.constants.ErrorMessage;
 
 public class ExchangeCommand extends Command {
 
+    /**
+     * Constructor for exchange command
+     * @param input input for exchange command
+     */
     public ExchangeCommand (String input) {
         super(false, input);
     }
 
+    /**
+     * Converts the requested amount and changes the account balances
+     */
     @Override
     public void execute(Ui ui) {
-        // Throw an error if accounts for either currency doesn't exist, or initial doesn't have enough
         try {
             ui.printSpacer();
 
@@ -31,6 +37,7 @@ public class ExchangeCommand extends Command {
             oldAcc.updateBalance(amount, "subtract");
             Account newAcc = AccountList.getAccount(exchangeRate.getTarget());
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
+            ui.printSpacer();
 
         // Exception handling
         } catch (NoAccountException e) {
@@ -46,6 +53,12 @@ public class ExchangeCommand extends Command {
         }
     }
 
+    /**
+     * Converts input into Forex object for use in execution
+     * @return Forex object with intial and target currencies
+     * @throws IllegalArgumentException if the currences are not supported
+     * @throws InvalidExchangeArgumentException if arguments are incorrect
+     */
     public Forex formatInput() throws InvalidExchangeArgumentException {
         String[] splitInput = input.trim().split(" ");
         if (splitInput.length != 4) {
@@ -56,6 +69,12 @@ public class ExchangeCommand extends Command {
         return new Forex(initial, target);
     }
 
+    /**
+     * Retrieves the amount to be converted from the input
+     * @throws NullPointerException if the amount is null
+     * @throws NumberFormatException if the amount is non-numeric
+     * @return float representing amount to be converted
+     */
     public float parseAmount() throws InvalidNumberException {
         try {
             String amount = input.trim().split(" ")[4];

@@ -31,11 +31,16 @@ public class AddCommand extends Command {
         this.amount = Integer.parseInt(words[2]);
     }
 
+    private void printSuccess(Ui ui) {
+        ui.printf("You have successfully added %s %d into your account", this.currency.name(), this.amount);
+    }
+
     @Override
     public void execute(Ui ui) {
         try {
             processCommand();
             account.addAmount(this.currency, this.amount);
+            printSuccess(ui);
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);
         } catch (NumberFormatException e) {

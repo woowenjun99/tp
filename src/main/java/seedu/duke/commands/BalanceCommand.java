@@ -16,15 +16,14 @@ import java.util.HashMap;
  * handle the getBalance command by the user.
  */
 public class BalanceCommand extends Command {
-    private AccountList accounts = AccountList.getInstance();
     private String command;
     private final String ALL = "ALL";
 
     /**
      * @param command The full user input including the command word {@code balance SGD}.
      */
-    public BalanceCommand(String command) {
-        super(false, command);
+    public BalanceCommand(String command, AccountList account) {
+        super(false, command, account);
         this.command = command.trim();
     }
 
@@ -46,10 +45,10 @@ public class BalanceCommand extends Command {
 
     private HashMap<Currency, Account> getBalance(String currencyString) throws NoAccountException {
         if (currencyString == ALL) {
-            return accounts.getAccountHashMap();
+            return super.account.getAccountHashMap();
         }
         Currency currency = convertStringToEnum(currencyString);
-        return accounts.getBalance(currency);
+        return super.account.getBalance(currency);
     }
 
     private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {

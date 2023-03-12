@@ -1,14 +1,17 @@
 package seedu.duke.commands;
 
+import seedu.duke.AccountList;
 import seedu.duke.ui.Ui;
 
 public abstract class Command {
     protected final boolean isExit;
     protected final String input;
+    protected final AccountList account;
 
-    public Command(boolean isExit, String input){
+    public Command(boolean isExit, String input, AccountList account){
         this.isExit = isExit;
         this.input = input;
+        this.account = account;
     }
 
     /**

@@ -4,7 +4,7 @@ package seedu.duke.constants;
  * Contains the messages that will be printed by the ui chatbot
  */
 public enum Message {
-
+    BALANCE("Here are the balances that you have requested:"),
     FAREWELL("Thank you for using MoneyMoover! We hope to see you again soon :)"),
     HELP("here are the commands available:\n" +
             "\t help - show list of commands\n" +

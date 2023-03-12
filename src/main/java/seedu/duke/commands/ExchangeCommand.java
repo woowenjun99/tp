@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.commands;
 
 import seedu.duke.Account;
 import seedu.duke.AccountList;

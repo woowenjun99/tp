@@ -5,6 +5,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandType;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ShowRateCommand;
+import seedu.duke.commands.ExchangeCommand;
 import seedu.duke.constants.Message;
 
 /**

@@ -14,6 +14,7 @@ public abstract class Command {
     /**
      * Executes the command implemented by the subclass
      */
+
     public abstract void execute(Ui ui);
 
     public boolean isExit () {

@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
+import seedu.duke.constants.ErrorMessage;
 import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
@@ -36,15 +37,13 @@ public class AddCommand extends Command {
             processCommand();
             account.addAmount(this.currency, this.amount);
         } catch (InvalidAddCommandException e) {
-            ui.printMessage(
-                    "Please check that you have provided the input in the following format: add <Currency> <Amount>"
-            );
+            ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);
         } catch (NumberFormatException e) {
             ui.printMessage("Please provide a numerical amount");
         } catch (IllegalArgumentException e) {
-            ui.printMessage("Please provide a valid currency");
+            ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (NoAccountException e) {
-            ui.printMessage("The account that you have requested to add funds to does not exist.");
+            ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
         }
     }
 }

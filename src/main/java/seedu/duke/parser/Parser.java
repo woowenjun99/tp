@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import seedu.duke.commands.BalanceCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandType;
 import seedu.duke.commands.ExitCommand;
@@ -30,6 +31,8 @@ public class Parser {
 
 
         switch(command){
+        case BALANCE:
+            return new BalanceCommand(input);
         case EXIT:
             return new ExitCommand();
         case SHOW_RATE:

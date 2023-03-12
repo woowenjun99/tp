@@ -53,7 +53,7 @@ public class BalanceCommand extends Command {
     }
 
     private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {
-        ui.printMessage(Message.BALANCE);
+        ui.printMessage(Message.BALANCE.getMessage());
         balances.forEach((currency, account) -> {
             ui.printf("%s: %f\n", currency.name(), account.getBalance());
         });

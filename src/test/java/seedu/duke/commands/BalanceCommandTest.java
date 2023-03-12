@@ -40,7 +40,7 @@ public class BalanceCommandTest {
     }
 
     @Test
-    public void processCommand_multipleCurrenciesSpecified_shouldThrowInvalidCommandError() {
+    public void processCommand_multipleCurrenciesSpecified_shouldThrowError() {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
@@ -54,7 +54,7 @@ public class BalanceCommandTest {
     }
 
     @Test
-    public void convertStringToEnum_invalidCurrency_shouldThrowInvalidArgumentError() {
+    public void convertStringToEnum_invalidCurrency_shouldThrowIllegalArgumentException() {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("convertStringToEnum", String.class);
             method.setAccessible(true);
@@ -99,7 +99,7 @@ public class BalanceCommandTest {
     }
 
     @Test
-    public void getBalance_ifNoAccountExists_shouldThrowError() {
+    public void getBalance_ifNoAccountExists_shouldThrowException() {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class);
             method.setAccessible(true);

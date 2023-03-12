@@ -57,7 +57,7 @@ public class AccountList {
      * 
      * @return The hashmap containing all the accounts.
      */
-    public HashMap<Currency, Account> getAllBalance() {
+    public HashMap<Currency, Account> getAccountHashMap() {
         return accountHashMap;
     }
 }

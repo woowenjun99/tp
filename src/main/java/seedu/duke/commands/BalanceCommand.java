@@ -46,7 +46,7 @@ public class BalanceCommand extends Command {
 
     private HashMap<Currency, Account> getBalance(String currencyString) throws NoAccountException {
         if (currencyString == ALL) {
-            return accounts.getAllBalance();
+            return accounts.getAccountHashMap();
         }
         Currency currency = convertStringToEnum(currencyString);
         return accounts.getBalance(currency);

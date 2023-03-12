@@ -19,7 +19,9 @@ public enum Message {
             "\t Available Currencies: MYR, SGD, USD, YUAN, THB, EU"),
     GREETING("Welcome to MoneyMoover!"),
     ERR_UNKNOWN_COMMAND("Sorry, I don't understand that command. Type 'help' to see the list of commands."),
-    ERR_INVALID_SHOW_RATE("show-rate must be used with the following format: show-rate <CURRENCY1> <CURRENCY2>");
+    ERR_INVALID_SHOW_RATE("show-rate must be used with the following format: show-rate <CURRENCY1> <CURRENCY2>"),
+    SUCCESSFUL_ADD_COMMAND("You have successfully added %s %d into your account");
+
     private String message;
 
     Message(String message) {

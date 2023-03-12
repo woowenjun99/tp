@@ -5,11 +5,14 @@ import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.ui.Ui;
 
 public class AddCommand extends Command {
+    private Currency currency;
+    private int amount;
+
     public AddCommand(String input) {
         super(false, input);
     }
 
-    private Currency getCurrency(String currencyString) throws IllegalArgumentException {
+    private Currency getCurrency(String currencyString) {
         return Currency.valueOf(currencyString);
     }
 
@@ -20,6 +23,8 @@ public class AddCommand extends Command {
         if (!isValidCommand) {
             throw new InvalidAddCommandException();
         }
+        this.currency = getCurrency(words[1]);
+        this.amount = Integer.parseInt(words[2]);
     }
 
     @Override

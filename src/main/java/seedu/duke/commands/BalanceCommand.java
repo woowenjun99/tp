@@ -6,6 +6,7 @@ import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.exceptions.InvalidBalanceCommandException;
 import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.ui.Ui;
 
 import java.util.HashMap;
 
@@ -19,7 +20,7 @@ public class BalanceCommand extends Command {
     private final String ALL = "ALL";
 
     /**
-     * @param command The full user input including the command.
+     * @param command The full user input including the command word {@code balance SGD}.
      */
     public BalanceCommand(String command) {
         super(false);
@@ -51,9 +52,9 @@ public class BalanceCommand extends Command {
     }
 
     private void printCurrencies(HashMap<Currency, Account> currencies) {
-        System.out.println("Here are the balances that you have requested:");
+        Ui.printMessage("Here are the balances that you have requested:");
         currencies.forEach((currency, account) -> {
-            System.out.printf("%s: %f\n", currency.name(), account.getBalance());
+            Ui.printf("%s: %f\n", currency.name(), account.getBalance());
         });
     }
 

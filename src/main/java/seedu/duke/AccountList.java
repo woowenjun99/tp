@@ -7,19 +7,11 @@ import java.util.HashMap;
 public class AccountList {
     // Currency implementation only specifies one account per currency, if required would have to change to a
     // Hashmap of ArrayList of account in the future and randomly generate an ID for that account
-    private static AccountList instance;
     private final HashMap<Currency, Account> accountHashMap;
 
 
-    private AccountList() {
+    public AccountList() {
         accountHashMap = new HashMap<>();
-    }
-
-    public static AccountList getInstance() {
-        if (instance == null) {
-            instance = new AccountList();
-        }
-        return instance;
     }
 
     public void addAccount(Currency currency, int initialBalance) {

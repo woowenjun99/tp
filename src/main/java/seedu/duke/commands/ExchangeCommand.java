@@ -25,11 +25,9 @@ public class ExchangeCommand extends Command {
     @Override
     public void execute(Ui ui) {
         try {
-            ui.printSpacer();
-
             // Parse input
-            float amount = parseAmount();
             Forex exchangeRate = formatInput();
+            float amount = parseAmount();
             System.out.println(exchangeRate);
 
             // Retrieve and edit accounts
@@ -56,7 +54,7 @@ public class ExchangeCommand extends Command {
     /**
      * Converts input into Forex object for use in execution
      * @return Forex object with intial and target currencies
-     * @throws IllegalArgumentException if the currences are not supported
+     * @throws IllegalArgumentException if the currencies are not supported
      * @throws InvalidExchangeArgumentException if arguments are incorrect
      */
     public Forex formatInput() throws InvalidExchangeArgumentException {
@@ -64,8 +62,8 @@ public class ExchangeCommand extends Command {
         if (splitInput.length != 4) {
             throw new InvalidExchangeArgumentException();
         }
-        Currency initial  = Currency.valueOf(splitInput[2]);
-        Currency target = Currency.valueOf(splitInput[3]);
+        Currency initial  = Currency.valueOf(splitInput[1]);
+        Currency target = Currency.valueOf(splitInput[2]);
         return new Forex(initial, target);
     }
 
@@ -77,10 +75,13 @@ public class ExchangeCommand extends Command {
      */
     public float parseAmount() throws InvalidNumberException {
         try {
-            String amount = input.trim().split(" ")[4];
+            String amount = input.trim().split(" ")[3];
             float amountAsFloat = Float.parseFloat(amount);
+            if (amountAsFloat <= 0) {
+                throw new InvalidNumberException();
+            }
             return amountAsFloat;
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             throw new InvalidNumberException();
         }
     }

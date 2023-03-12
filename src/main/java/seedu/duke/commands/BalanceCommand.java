@@ -4,22 +4,29 @@ import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
-import seedu.duke.exceptions.InvalidBalanceCommand;
+import seedu.duke.exceptions.InvalidBalanceCommandException;
 import seedu.duke.exceptions.NoAccountException;
 
 import java.util.HashMap;
 
+/**
+ * BalanceCommand is a subclass of the Command class that is used to 
+ * handle the getBalance command by the user.
+ */
 public class BalanceCommand extends Command {
     private AccountList accounts = AccountList.getInstance();
     private String command;
     private final String ALL = "ALL";
 
+    /**
+     * @param command The full user input including the command.
+     */
     public BalanceCommand(String command) {
         super(false);
         this.command = command.trim();
     }
 
-    private String processCommand() throws InvalidBalanceCommand {
+    private String processCommand() throws InvalidBalanceCommandException {
         String[] words = command.split(" ");
         switch (words.length) {
         case 1:
@@ -27,7 +34,7 @@ public class BalanceCommand extends Command {
         case 2:
             return words[1];
         default:
-            throw new InvalidBalanceCommand();
+            throw new InvalidBalanceCommandException();
         }
     }
 
@@ -50,13 +57,16 @@ public class BalanceCommand extends Command {
         });
     }
 
+    /**
+     * Gets the currencies from the AccountList and displays it onto the screen.
+     */
     @Override
     public void execute() {
         try {
             String currencyString = processCommand();
             HashMap<Currency, Account> currencies = getBalance(currencyString);
             printCurrencies(currencies);
-        } catch (InvalidBalanceCommand e) {
+        } catch (InvalidBalanceCommandException e) {
             System.out.println(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);
         } catch (IllegalArgumentException e) {
             System.out.println(ErrorMessage.INVALID_CURRENCY);

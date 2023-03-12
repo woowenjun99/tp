@@ -36,6 +36,13 @@ public class AccountList {
         accountHashMap.remove(currency);
     }
 
+    /**
+     * Gets the specific currency from the AccountList.
+     * 
+     * @param currency The currency account that we would like to retrieve.
+     * @return A hashmap containing the currency and the account details.
+     * @throws NoAccountException If the account does not exist.
+     */
     public HashMap<Currency, Account> getBalance(Currency currency) throws NoAccountException {
         if (!accountHashMap.containsKey(currency)) {
             throw new NoAccountException();
@@ -45,6 +52,11 @@ public class AccountList {
         return newMap;
     }
 
+    /**
+     * Gets all the accounts from the accountList.
+     * 
+     * @return The hashmap containing all the accounts.
+     */
     public HashMap<Currency, Account> getAllBalance() {
         return accountHashMap;
     }

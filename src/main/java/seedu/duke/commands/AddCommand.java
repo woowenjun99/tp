@@ -39,7 +39,7 @@ public class AddCommand extends Command {
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);
         } catch (NumberFormatException e) {
-            ui.printMessage("Please provide a numerical amount");
+            ui.printMessage(ErrorMessage.INVALID_NUMERICAL_AMOUNT);
         } catch (IllegalArgumentException e) {
             ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (NoAccountException e) {

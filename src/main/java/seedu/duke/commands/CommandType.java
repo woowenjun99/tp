@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 
 public enum CommandType {
+    ADD("add"),
     BALANCE("balance"),
     EXIT("exit"),
     SHOW_RATE("show-rate");

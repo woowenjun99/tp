@@ -4,7 +4,8 @@ package seedu.duke.commands;
 public enum CommandType {
     BALANCE("balance"),
     EXIT("exit"),
-    SHOW_RATE("show-rate");
+    SHOW_RATE("show-rate"),
+    EXCHANGE("exchange");
     private String command;
 
     CommandType(String command){

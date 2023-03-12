@@ -9,6 +9,11 @@ public class BalanceCommand extends Command {
     private AccountList accounts = AccountList.getInstance();
     private String command;
 
+    BalanceCommand(String command) {
+        super(false);
+        this.command = command.trim();
+    }
+
     private String processCommand() throws InvalidBalanceCommand {
         String[] words = command.split(" ");
         switch (words.length) {
@@ -23,11 +28,6 @@ public class BalanceCommand extends Command {
 
     private Currency convertStringToEnum(String currency) throws IllegalArgumentException {
         return Currency.valueOf(currency);
-    }
-
-    BalanceCommand(String command) {
-        super(false);
-        this.command = command.trim();
     }
 
     @Override

@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     }
 
     private void processCommand() throws InvalidAddCommandException {
-        String[] words = input.split(" ");
+        String[] words = super.input.split(" ");
         // Format: [Command, CURRENCY, AMOUNT]
         boolean isValidCommand = words.length == 3;
         if (!isValidCommand) {
@@ -29,6 +29,12 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(Ui ui) {
-
+        try {
+            processCommand();
+        } catch (InvalidAddCommandException e) {
+            ui.printMessage(
+                    "Please check that you have provided the input in the following format: add <Currency> <Amount>"
+            );
+        }
     }
 }

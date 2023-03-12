@@ -1,19 +1,27 @@
 package seedu.duke.commands;
 
 import seedu.duke.Currency;
+import seedu.duke.ui.Ui;
 
+/**
+ * Command to print the exchange rate between two currencies
+ */
 public class ShowRateCommand extends Command {
     private Currency from;
     private Currency to;
-    public ShowRateCommand(String from, String to) {
-        super(false);
-        this.from = Currency.valueOf(from);
-        this.to = Currency.valueOf(to);
+    public ShowRateCommand(String input) {
+        super(false, input);
     }
 
     @Override
-    public void execute() {
+    public void execute(Ui ui) {
         // TODO: fully implement
-        System.out.println("The current exchange rate is 1.0 SGD = 1.0 USD");
+        try {
+            String[] args = input.split(" ");
+            Currency from = Currency.valueOf(args[0]);
+            Currency to = Currency.valueOf(args[1]);
+        } catch (IllegalArgumentException e) {
+            ui.printInvalidShowRate();
+        }
     }
 }

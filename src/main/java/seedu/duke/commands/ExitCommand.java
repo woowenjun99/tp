@@ -1,12 +1,17 @@
 package seedu.duke.commands;
 
+import seedu.duke.ui.Ui;
+
+/**
+ * Command to exit the program
+ */
 public class ExitCommand extends Command{
     public ExitCommand() {
-        super(true);
+        super(true, "");
     }
 
     @Override
-    public void execute() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public void execute(Ui ui) {
+        ui.printFarewell();
     }
 }

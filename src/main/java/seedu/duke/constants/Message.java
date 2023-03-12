@@ -17,7 +17,9 @@ public enum Message {
             "\t create-account $/CURRENCY - creates an account of that currency\n" +
             "\t exit - exits the program\n" +
             "\t Available Currencies: MYR, SGD, USD, YUAN, THB, EU"),
-    GREETING("Welcome to MoneyMoover!");
+    GREETING("Welcome to MoneyMoover!"),
+    ERR_UNKNOWN_COMMAND("Sorry, I don't understand that command. Type 'help' to see the list of commands."),
+    ERR_INVALID_SHOW_RATE("show-rate must be used with the following format: show-rate <CURRENCY1> <CURRENCY2>");
     private String message;
 
     Message(String message) {

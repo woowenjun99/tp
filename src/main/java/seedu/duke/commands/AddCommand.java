@@ -11,10 +11,9 @@ import seedu.duke.ui.Ui;
 public class AddCommand extends Command {
     private Currency currency;
     private int amount;
-    private AccountList account = AccountList.getInstance();
 
-    public AddCommand(String input) {
-        super(false, input);
+    public AddCommand(String input, AccountList account) {
+        super(false, input, account);
     }
 
     private Currency getCurrency(String currencyString) {
@@ -40,7 +39,7 @@ public class AddCommand extends Command {
     public void execute(Ui ui) {
         try {
             processCommand();
-            account.addAmount(this.currency, this.amount);
+            super.account.addAmount(this.currency, this.amount);
             printSuccess(ui);
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);

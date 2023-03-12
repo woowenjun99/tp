@@ -15,7 +15,8 @@ public class Forex {
     /**
      * Hash map to store all exchange rates. Rather than a 2D array,
      * just stores rate of S$1 in each currency. All exchanges
-     * convert first to SGD, then from SGD to their target.
+     * convert first to SGD, then from SGD to their target. To be
+     * implemented using API.
      */
     private static HashMap<Currency, Integer> exchangeRates = new HashMap<Currency, Integer>();
 
@@ -33,7 +34,8 @@ public class Forex {
     }
 
     // Prints the exchange relationship
-    public void printForex() {
+    @Override
+    public void toString() {
         System.out.println("Exchanging from " + initial + " to " + target);
     }
 
@@ -41,6 +43,7 @@ public class Forex {
      * Converts an amount from the initial currency to the target currency.
      * First converts initial into SGD, then from SGD into target.
      * @param amount amount to be converted from initial to target
+     * @return amount converted to target currency
      */
     public float convert(float amount) {
         float amountInSGD = amount / exchangeRates.get(initial);

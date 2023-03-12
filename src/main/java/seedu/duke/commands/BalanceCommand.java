@@ -4,6 +4,7 @@ import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
+import seedu.duke.constants.Message;
 import seedu.duke.exceptions.InvalidBalanceCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
@@ -52,7 +53,7 @@ public class BalanceCommand extends Command {
     }
 
     private void printCurrencies(HashMap<Currency, Account> currencies) {
-        Ui.printMessage("Here are the balances that you have requested:");
+        Ui.printMessage(Message.BALANCE);
         currencies.forEach((currency, account) -> {
             Ui.printf("%s: %f\n", currency.name(), account.getBalance());
         });

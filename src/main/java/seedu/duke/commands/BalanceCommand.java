@@ -52,9 +52,9 @@ public class BalanceCommand extends Command {
         return accounts.getBalance(currency);
     }
 
-    private void printCurrencies(HashMap<Currency, Account> currencies) {
+    private void printCurrencies(HashMap<Currency, Account> balances) {
         Ui.printMessage(Message.BALANCE);
-        currencies.forEach((currency, account) -> {
+        balances.forEach((currency, account) -> {
             Ui.printf("%s: %f\n", currency.name(), account.getBalance());
         });
     }
@@ -66,8 +66,8 @@ public class BalanceCommand extends Command {
     public void execute() {
         try {
             String currencyString = processCommand();
-            HashMap<Currency, Account> currencies = getBalance(currencyString);
-            printCurrencies(currencies);
+            HashMap<Currency, Account> balances = getBalance(currencyString);
+            printCurrencies(balances);
         } catch (InvalidBalanceCommandException e) {
             System.out.println(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);
         } catch (IllegalArgumentException e) {

@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.Currency;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -46,4 +47,32 @@ public class BalanceCommandTest {
             fail();
         }
     }
+
+    @Test
+    public void convertStringToEnum_InvalidCurrency_ShouldThrowInvalidArgumentError() {
+        try {
+            Method method = BalanceCommand.class.getDeclaredMethod("convertStringToEnum", String.class);
+            method.setAccessible(true);
+            BalanceCommand command = new BalanceCommand("balance Me");
+            assertThrows(IllegalArgumentException.class, () -> {
+                method.invoke(command);
+            });
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void convertStringToEnum_ValidCurrency_ShouldReturnCorrespondingCurrency() {
+        try {
+            Method method = BalanceCommand.class.getDeclaredMethod("convertStringToEnum", String.class);
+            method.setAccessible(true);
+            BalanceCommand command = new BalanceCommand("balance");
+            assertEquals(Currency.CNY, method.invoke(command, "CNY"));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+
 }

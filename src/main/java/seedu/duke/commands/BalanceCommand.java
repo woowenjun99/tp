@@ -3,11 +3,11 @@ package seedu.duke.commands;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.exceptions.InvalidBalanceCommand;
+import seedu.duke.exceptions.NoAccountException;
 
 public class BalanceCommand extends Command {
     private AccountList accounts = AccountList.getInstance();
     private String command;
-
 
     private String processCommand() throws InvalidBalanceCommand {
         String[] words = command.split(" ");
@@ -21,7 +21,7 @@ public class BalanceCommand extends Command {
         }
     }
 
-    private Currency convertStringToEnum(String currency) {
+    private Currency convertStringToEnum(String currency) throws IllegalArgumentException {
         return Currency.valueOf(currency);
     }
 
@@ -33,10 +33,18 @@ public class BalanceCommand extends Command {
     @Override
     public void execute() {
         try {
-            String currency = processCommand();
-        } catch (InvalidBalanceCommand e) {
-            System.out.println("An invalid balance command is provided.");
-        }
+            String currencyString = processCommand();
+            if (currencyString == "ALL") {
+            }
 
+            Currency currency = convertStringToEnum(currencyString);
+            float balance = accounts.getBalance(currency);
+        } catch (InvalidBalanceCommand e) {
+            System.out.println("Please do not provide more than one currency.");
+        } catch (IllegalArgumentException e) {
+            System.out.println("An invalid currency has been provided.");
+        } catch (NoAccountException e) {
+            System.out.println("You do not have an account for the currency.");
+        }
     }
 }

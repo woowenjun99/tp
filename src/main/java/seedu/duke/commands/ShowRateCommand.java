@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.ui.Ui;
 
@@ -9,8 +10,8 @@ import seedu.duke.ui.Ui;
 public class ShowRateCommand extends Command {
     private Currency from;
     private Currency to;
-    public ShowRateCommand(String input) {
-        super(false, input);
+    public ShowRateCommand(String input, AccountList account) {
+        super(false, input, account);
     }
 
     @Override

@@ -18,12 +18,12 @@ public class Forex {
      * convert first to SGD, then from SGD to their target. To be
      * implemented using API.
      */
-    private static HashMap<Currency, Integer> exchangeRates = new HashMap<Currency, Integer>();
+    private static HashMap<Currency, Float> exchangeRates = new HashMap<Currency, Float>();
 
     // Sets dummy equal exchange rate to SGD
     public static void populateRates() {
         for (Currency currency : Currency.values()) {
-            exchangeRates.put(currency, 1);
+            exchangeRates.put(currency, 1.0f);
         }
     }
 
@@ -35,8 +35,8 @@ public class Forex {
 
     // Prints the exchange relationship
     @Override
-    public void toString() {
-        System.out.println("Exchanging from " + initial + " to " + target);
+    public String toString() {
+        return "Exchanging from " + initial + " to " + target;
     }
 
     /**

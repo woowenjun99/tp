@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.*;
+
 public class Account {
     private int balance;
     private final Currency CURRENCY;
@@ -15,7 +17,7 @@ public class Account {
     public Currency getCurrencyType(){
         return CURRENCY;
     }
-    public void updateBalance(float changeInBalance, String action){
+    public void updateBalance(float changeInBalance, String action) throws NotEnoughInAccountException {
         int newBalance;
         if (action.equals("add")) {
             newBalance = balance + (int)(changeInBalance * 100);
@@ -26,7 +28,7 @@ public class Account {
             return;
         }
         if(newBalance < 0){
-            // todo throw some exception
+            throw new NotEnoughInAccountException();
         } 
         balance = newBalance;
     }

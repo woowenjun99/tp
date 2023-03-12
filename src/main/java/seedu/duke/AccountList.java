@@ -61,7 +61,10 @@ public class AccountList {
         return accountHashMap;
     }
 
-    public static Account getAccount(Currency currency) {
+    public static Account getAccount(Currency currency) throws NoAccountException {
+        if (!getInstance().getAccountHashMap().containsKey(currency)) {
+            throw new NoAccountException();
+        }
         return getInstance().getAccountHashMap().get(currency);
     }
 }

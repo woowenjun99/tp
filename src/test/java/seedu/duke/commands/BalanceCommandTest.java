@@ -1,10 +1,13 @@
 package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.Account;
+import seedu.duke.AccountList;
 import seedu.duke.Currency;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -76,5 +79,53 @@ public class BalanceCommandTest {
         }
     }
 
+    @Test
+    public void getBalance_ifCurrencyIsNotSpecified_shouldReturnAllCurrencies() {
+        AccountList account = AccountList.getInstance();
+        account.addAccount(Currency.CNY, 200);
+        account.addAccount(Currency.EUR, 40);
 
+        try {
+            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class);
+            method.setAccessible(true);
+            BalanceCommand command = new BalanceCommand("balance");
+            HashMap<Currency, Account> output = (HashMap<Currency, Account>) method.invoke(command, "ALL");
+            assertEquals(2, output.size());
+            assertEquals(200, (int) 100 * output.get(Currency.CNY).getBalance());
+            assertEquals(40, (int) 100 * output.get(Currency.EUR).getBalance());
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void getBalance_ifNoAccountExists_shouldThrowError() {
+        try {
+            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class);
+            method.setAccessible(true);
+            BalanceCommand command = new BalanceCommand("balance");
+            assertThrows(InvocationTargetException.class, ()->{
+                method.invoke(command, "CNY");
+            });
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void getBalance_ifCurrencyExist_shouldReturnCurrency() {
+        AccountList account = AccountList.getInstance();
+        account.addAccount(Currency.CNY, 200);
+
+        try {
+            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class);
+            method.setAccessible(true);
+            BalanceCommand command = new BalanceCommand("CNY");
+            HashMap<Currency, Account> output = (HashMap<Currency, Account>) method.invoke(command, "CNY");
+            assertEquals(1, output.size());
+            assertEquals(200, (int) 100 * output.get(Currency.CNY).getBalance());
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }

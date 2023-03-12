@@ -8,10 +8,17 @@ import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
 
+/**
+ * This class is used to deal with the addCommand.
+ */
 public class AddCommand extends Command {
     private Currency currency;
     private int amount;
 
+    /**
+     * @param input   The user input including the command.
+     * @param account The global AccountList instance.
+     */
     public AddCommand(String input, AccountList account) {
         super(false, input, account);
     }
@@ -35,6 +42,11 @@ public class AddCommand extends Command {
         ui.printf(Message.SUCCESSFUL_ADD_COMMAND.getMessage(), this.currency.name(), this.amount);
     }
 
+    /**
+     * Adds the currency into the existing account if found and print a success message.
+     *
+     * @param ui The instance of the UI class.
+     */
     @Override
     public void execute(Ui ui) {
         try {

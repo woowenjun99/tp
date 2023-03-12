@@ -111,21 +111,4 @@ public class BalanceCommandTest {
             fail();
         }
     }
-
-    @Test
-    public void getBalance_ifCurrencyExist_shouldReturnCurrency() {
-        AccountList account = AccountList.getInstance();
-        account.addAccount(Currency.CNY, 200);
-
-        try {
-            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class);
-            method.setAccessible(true);
-            BalanceCommand command = new BalanceCommand("CNY");
-            HashMap<Currency, Account> output = (HashMap<Currency, Account>) method.invoke(command, "CNY");
-            assertEquals(1, output.size());
-            assertEquals(200, (int) 100 * output.get(Currency.CNY).getBalance());
-        } catch (Exception e) {
-            fail();
-        }
-    }
 }

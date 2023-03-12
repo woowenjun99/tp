@@ -12,7 +12,7 @@ public class BalanceCommand extends Command {
     private AccountList accounts = AccountList.getInstance();
     private String command;
 
-    BalanceCommand(String command) {
+    public BalanceCommand(String command) {
         super(false);
         this.command = command.trim();
     }
@@ -41,11 +41,19 @@ public class BalanceCommand extends Command {
         return accounts.getBalance(currency);
     }
 
+    private void printCurrencies(HashMap<Currency, Account> currencies) {
+        System.out.println("Here are the balances that you have requested:");
+        currencies.forEach((currency, account) -> {
+            System.out.printf("%s: %f\n", currency.name(), account.getBalance());
+        });
+    }
+
     @Override
     public void execute() {
         try {
             String currencyString = processCommand();
             HashMap<Currency, Account> currencies = getBalance(currencyString);
+            printCurrencies(currencies);
         } catch (InvalidBalanceCommand e) {
             System.out.println("Please do not provide more than one currency.");
         } catch (IllegalArgumentException e) {

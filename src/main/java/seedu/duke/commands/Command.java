@@ -1,18 +1,23 @@
 package seedu.duke.commands;
 
-public abstract class Command {
-    private final boolean isExit;
+import seedu.duke.ui.Ui;
 
-    public Command(boolean isExit) {
+public abstract class Command {
+    protected final boolean isExit;
+    protected final String input;
+
+    public Command(boolean isExit, String input){
         this.isExit = isExit;
+        this.input = input;
     }
 
     /**
      * Executes the command implemented by the subclass
      */
-    public abstract void execute();
 
-    public boolean isExit() {
+    public abstract void execute(Ui ui);
+
+    public boolean isExit () {
         return isExit;
     }
 }

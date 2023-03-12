@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
+import seedu.duke.constants.Message;
 import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
@@ -32,7 +33,7 @@ public class AddCommand extends Command {
     }
 
     private void printSuccess(Ui ui) {
-        ui.printf("You have successfully added %s %d into your account", this.currency.name(), this.amount);
+        ui.printf(Message.SUCCESSFUL_ADD_COMMAND.getMessage(), this.currency.name(), this.amount);
     }
 
     @Override

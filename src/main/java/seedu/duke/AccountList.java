@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.BalanceCommandException;
+import seedu.duke.exceptions.NoAccountException;
 
 import java.util.HashMap;
 
@@ -35,10 +35,10 @@ public class AccountList {
         accountHashMap.remove(currency);
     }
 
-    public float getBalance(Currency currency) throws BalanceCommandException {
+    public float getBalance(Currency currency) throws NoAccountException {
         if (!accountHashMap.containsKey(currency)) {
             // todo throw some exception signalling no such account
-            throw new BalanceCommandException();
+            throw new NoAccountException();
         }
         return accountHashMap.get(currency).getBalance();
     }

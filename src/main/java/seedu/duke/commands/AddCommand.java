@@ -35,6 +35,10 @@ public class AddCommand extends Command {
             ui.printMessage(
                     "Please check that you have provided the input in the following format: add <Currency> <Amount>"
             );
+        } catch (NumberFormatException e) {
+            ui.printMessage("Please provide a numerical amount");
+        } catch (IllegalArgumentException e) {
+            ui.printMessage("Please provide a valid currency");
         }
     }
 }

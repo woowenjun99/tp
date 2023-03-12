@@ -60,4 +60,8 @@ public class AccountList {
     public HashMap<Currency, Account> getAccountHashMap() {
         return accountHashMap;
     }
+
+    public static Account getAccount(Currency currency) {
+        return getInstance().getAccountHashMap().get(currency);
+    }
 }

@@ -15,11 +15,19 @@ public class Account {
     public Currency getCurrencyType(){
         return CURRENCY;
     }
-    public void updateBalance(float changeInBalance){
-        int newBalance = balance - (int)(changeInBalance * 100);
+    public void updateBalance(float changeInBalance, String action){
+        int newBalance;
+        if (action.equals("add")) {
+            newBalance = balance + (int)(changeInBalance * 100);
+        } else if (action.equals("subtract")) {
+            newBalance = balance - (int)(changeInBalance * 100);
+        } else {
+            System.out.println("Error in updating balance");
+            return;
+        }
         if(newBalance < 0){
             // todo throw some exception
-        }
+        } 
         balance = newBalance;
     }
 

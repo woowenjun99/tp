@@ -6,10 +6,9 @@ import seedu.duke.Currency;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
 
 public class AddCommandTest {
     @Test
@@ -33,6 +32,20 @@ public class AddCommandTest {
             method.setAccessible(true);
             AddCommand command = new AddCommand("add JPY 200");
             assertEquals(Currency.JPY, method.invoke(command, "JPY"));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void processCommand_commandLessThanThreeWords_shouldThrowException() {
+        try {
+            Method method = AddCommand.class.getDeclaredMethod("processCommand");
+            method.setAccessible(true);
+            AddCommand command = new AddCommand("add JPY");
+            assertThrows(InvocationTargetException.class, () -> {
+                method.invoke(command);
+            });
         } catch (Exception e) {
             fail();
         }

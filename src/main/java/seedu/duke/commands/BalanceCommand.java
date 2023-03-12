@@ -24,7 +24,7 @@ public class BalanceCommand extends Command {
      * @param command The full user input including the command word {@code balance SGD}.
      */
     public BalanceCommand(String command) {
-        super(false);
+        super(false, command);
         this.command = command.trim();
     }
 
@@ -52,10 +52,10 @@ public class BalanceCommand extends Command {
         return accounts.getBalance(currency);
     }
 
-    private void printCurrencies(HashMap<Currency, Account> balances) {
-        Ui.printMessage(Message.BALANCE);
+    private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {
+        ui.printMessage(Message.BALANCE);
         balances.forEach((currency, account) -> {
-            Ui.printf("%s: %f\n", currency.name(), account.getBalance());
+            ui.printf("%s: %f\n", currency.name(), account.getBalance());
         });
     }
 
@@ -63,11 +63,11 @@ public class BalanceCommand extends Command {
      * Gets the currencies from the AccountList and displays it onto the screen.
      */
     @Override
-    public void execute() {
+    public void execute(Ui ui) {
         try {
             String currencyString = processCommand();
             HashMap<Currency, Account> balances = getBalance(currencyString);
-            printCurrencies(balances);
+            printCurrencies(balances, ui);
         } catch (InvalidBalanceCommandException e) {
             System.out.println(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);
         } catch (IllegalArgumentException e) {

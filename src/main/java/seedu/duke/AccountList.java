@@ -36,11 +36,16 @@ public class AccountList {
         accountHashMap.remove(currency);
     }
 
-    public float getBalance(Currency currency) throws NoAccountException {
+    public HashMap<Currency, Account> getBalance(Currency currency) throws NoAccountException {
         if (!accountHashMap.containsKey(currency)) {
-            // todo throw some exception signalling no such account
             throw new NoAccountException();
         }
-        return accountHashMap.get(currency).getBalance();
+        HashMap<Currency, Account> newMap = new HashMap<>();
+        newMap.put(currency, accountHashMap.get(currency));
+        return newMap;
+    }
+
+    public HashMap<Currency, Account> getAllBalance() {
+        return accountHashMap;
     }
 }

@@ -1,9 +1,12 @@
 package seedu.duke.commands;
 
+import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.exceptions.InvalidBalanceCommand;
 import seedu.duke.exceptions.NoAccountException;
+
+import java.util.HashMap;
 
 public class BalanceCommand extends Command {
     private AccountList accounts = AccountList.getInstance();
@@ -30,15 +33,19 @@ public class BalanceCommand extends Command {
         return Currency.valueOf(currency);
     }
 
+    private HashMap<Currency, Account> getBalance(String currencyString) throws NoAccountException {
+        if (currencyString == "ALL") {
+            return accounts.getAllBalance();
+        }
+        Currency currency = convertStringToEnum(currencyString);
+        return accounts.getBalance(currency);
+    }
+
     @Override
     public void execute() {
         try {
             String currencyString = processCommand();
-            if (currencyString == "ALL") {
-            }
-
-            Currency currency = convertStringToEnum(currencyString);
-            float balance = accounts.getBalance(currency);
+            HashMap<Currency, Account> currencies = getBalance(currencyString);
         } catch (InvalidBalanceCommand e) {
             System.out.println("Please do not provide more than one currency.");
         } catch (IllegalArgumentException e) {

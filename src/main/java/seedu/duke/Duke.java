@@ -7,6 +7,7 @@ import seedu.duke.parser.Parser;
 public class Duke {
 
     private static Ui ui;
+    private static AccountList account = new AccountList();
 
     /**
      * Runs the main input loop until the exit command is called
@@ -17,7 +18,7 @@ public class Duke {
             try {
                 String fullCommand = ui.getUserInput();
                 ui.printSpacer();
-                Command c = Parser.parseInput(fullCommand);
+                Command c = Parser.parseInput(fullCommand, account);
                 c.execute(ui);
                 isExit = c.isExit();
             } catch (IllegalArgumentException e) {

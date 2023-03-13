@@ -14,7 +14,7 @@ import seedu.duke.ui.Ui;
  */
 public class AddCommand extends Command {
     private Currency currency;
-    private int amount;
+    private float amount;
 
     /**
      * @param input   The user input including the command.
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
             throw new InvalidAddCommandException();
         }
         this.currency = getCurrency(words[1]);
-        this.amount = Integer.parseInt(words[2]);
+        this.amount = Float.parseFloat(words[2]);
         if (this.amount <= 0) {
             throw new InvalidAmountToAddException();
         }
@@ -67,6 +67,8 @@ public class AddCommand extends Command {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
         } catch (InvalidAmountToAddException e) {
             ui.printMessage(ErrorMessage.INVALID_AMOUNT_TO_ADD);
+        } catch (NullPointerException e) {
+            ui.printMessage(ErrorMessage.NO_AMOUNT_PROVIDED);
         }
     }
 }

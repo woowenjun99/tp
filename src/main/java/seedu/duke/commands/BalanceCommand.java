@@ -22,8 +22,8 @@ public class BalanceCommand extends Command {
     /**
      * @param command The full user input including the command word {@code balance SGD}.
      */
-    public BalanceCommand(String command, AccountList account) {
-        super(false, command, account);
+    public BalanceCommand(String command) {
+        super(false, command);
         this.command = command.trim();
     }
 
@@ -43,12 +43,12 @@ public class BalanceCommand extends Command {
         return Currency.valueOf(currency);
     }
 
-    private HashMap<Currency, Account> getBalance(String currencyString) throws NoAccountException {
+    private HashMap<Currency, Account> getBalance(String currencyString, AccountList account) throws NoAccountException {
         if (currencyString == ALL) {
-            return super.account.getAccountHashMap();
+            return account.getAccountHashMap();
         }
         Currency currency = convertStringToEnum(currencyString);
-        return super.account.getBalance(currency);
+        return account.getBalance(currency);
     }
 
     private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {
@@ -62,10 +62,10 @@ public class BalanceCommand extends Command {
      * Gets the currencies from the AccountList and displays it onto the screen.
      */
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, AccountList account) {
         try {
             String currencyString = processCommand();
-            HashMap<Currency, Account> balances = getBalance(currencyString);
+            HashMap<Currency, Account> balances = getBalance(currencyString, account);
             printCurrencies(balances, ui);
         } catch (InvalidBalanceCommandException e) {
             System.out.println(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);

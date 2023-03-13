@@ -5,6 +5,7 @@ import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
 import seedu.duke.exceptions.InvalidAddCommandException;
+import seedu.duke.exceptions.InvalidAmountToAddException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
 
@@ -26,7 +27,8 @@ public class AddCommand extends Command {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand() throws InvalidAddCommandException {
+    private void processCommand() throws InvalidAddCommandException,
+            InvalidAmountToAddException {
         String[] words = super.input.split(" ");
         // Format: [Command, CURRENCY, AMOUNT]
         boolean isValidCommand = words.length == 3;
@@ -35,6 +37,9 @@ public class AddCommand extends Command {
         }
         this.currency = getCurrency(words[1]);
         this.amount = Integer.parseInt(words[2]);
+        if (this.amount <= 0) {
+            throw new InvalidAmountToAddException();
+        }
     }
 
     private void printSuccess(Ui ui) {
@@ -60,6 +65,8 @@ public class AddCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
+        } catch (InvalidAmountToAddException e) {
+            ui.printMessage(ErrorMessage.INVALID_AMOUNT_TO_ADD);
         }
     }
 }

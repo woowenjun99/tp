@@ -63,8 +63,9 @@ public class AccountList {
         if (!this.getAccountHashMap().containsKey(currency)) {
             throw new NoAccountException();
         }
-        return getInstance().getAccountHashMap().get(currency);
-        
+        return this.getAccountHashMap().get(currency);
+    }
+
     public void addAmount(Currency currency, int amount) throws NoAccountException {
         if (!accountHashMap.containsKey(currency)) {
             throw new NoAccountException();

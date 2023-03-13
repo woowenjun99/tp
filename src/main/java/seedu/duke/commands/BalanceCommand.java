@@ -36,7 +36,7 @@ public class BalanceCommand extends Command {
             return words[1];
         default:
             throw new InvalidBalanceCommandException();
-        };
+        }
     }
 
     private Currency convertStringToEnum(String currency) throws IllegalArgumentException {

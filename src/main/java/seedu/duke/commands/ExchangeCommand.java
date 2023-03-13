@@ -9,7 +9,7 @@ import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.InvalidExchangeArgumentException;
 import seedu.duke.exceptions.InvalidNumberException;
-import seedu.duke.NotEnoughInAccountException;
+import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.constants.ErrorMessage;
 
 public class ExchangeCommand extends Command {

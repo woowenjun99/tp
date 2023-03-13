@@ -5,10 +5,8 @@ public enum CommandType {
     BALANCE("balance"),
     EXIT("exit"),
     SHOW_RATE("show-rate"),
-    EXCHANGE("exchange"),
-    SHOW_RATE("show-rate");
+    EXCHANGE("exchange");
     private String command;
-    private final String command;
 
     CommandType(String command){
         this.command = command;

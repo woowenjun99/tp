@@ -18,8 +18,8 @@ public class Duke {
             try {
                 String fullCommand = ui.getUserInput();
                 ui.printSpacer();
-                Command c = Parser.parseInput(fullCommand, account);
-                c.execute(ui);
+                Command c = Parser.parseInput(fullCommand);
+                c.execute(ui, account);
                 isExit = c.isExit();
             } catch (IllegalArgumentException e) {
                 ui.printMessage(e.getMessage());

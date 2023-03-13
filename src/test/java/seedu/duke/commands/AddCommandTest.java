@@ -80,12 +80,12 @@ public class AddCommandTest {
     public void execute_correctInputProvided_shouldUpdateAmount() {
         try {
             AccountList account = new AccountList();
-            account.addAccount(Currency.KRW, 2000);
-            AddCommand command = new AddCommand("add KRW 2000");
+            account.addAccount(Currency.KRW, 4000);
+            AddCommand command = new AddCommand("add KRW 200.00");
             Ui ui = new Ui();
             command.execute(ui, account);
-            int expectedAmount =  (int) account.getBalance(Currency.KRW).get(Currency.KRW).getBalance() * 100;
-            assertEquals(4000, expectedAmount);
+            int expectedAmount =  (int) account.getBalance(Currency.KRW).get(Currency.KRW).getBalance();
+            assertEquals(4200, expectedAmount);
         } catch (Exception e) {
             fail();
         }

@@ -6,7 +6,7 @@ public class Account {
 
     Account(int initialBalance, Currency currency){
         this.CURRENCY = currency;
-        balance = initialBalance;
+        balance = initialBalance * 100;
     }
 
     public float getBalance(){

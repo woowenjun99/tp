@@ -43,7 +43,8 @@ public class BalanceCommand extends Command {
         return Currency.valueOf(currency);
     }
 
-    private HashMap<Currency, Account> getBalance(String currencyString, AccountList account) throws NoAccountException {
+    private HashMap<Currency, Account> getBalance(String currencyString, AccountList account)
+            throws NoAccountException {
         if (currencyString == ALL) {
             return account.getAccountHashMap();
         }

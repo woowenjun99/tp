@@ -1,6 +1,5 @@
 package seedu.duke.commands;
 
-
 public enum CommandType {
     ADD("add"),
     BALANCE("balance"),

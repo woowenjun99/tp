@@ -7,7 +7,7 @@ import seedu.duke.parser.Parser;
 public class Duke {
 
     private static Ui ui;
-    private static AccountList account = new AccountList();
+    private static final AccountList account = new AccountList();
 
     /**
      * Runs the main input loop until the exit command is called

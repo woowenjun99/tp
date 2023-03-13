@@ -90,4 +90,16 @@ public class AddCommandTest {
             fail();
         }
     }
+
+    @Test
+    public void processCommand_amountLessThanZero_shouldThrowException() {
+        try {
+            Method method = AddCommand.class.getDeclaredMethod("processCommand");
+            method.setAccessible(true);
+            AddCommand command = new AddCommand("add JPY -1");
+            assertThrows(InvocationTargetException.class, () -> method.invoke(command));
+        } catch (Exception e) {
+            fail();
+        }
+    }
 }

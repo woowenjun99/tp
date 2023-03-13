@@ -10,12 +10,12 @@ import seedu.duke.ui.Ui;
 public class ShowRateCommand extends Command {
     private Currency from;
     private Currency to;
-    public ShowRateCommand(String input, AccountList account) {
-        super(false, input, account);
+    public ShowRateCommand(String input) {
+        super(false, input);
     }
 
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, AccountList account) {
         // TODO: fully implement
         try {
             String[] args = input.split(" ");

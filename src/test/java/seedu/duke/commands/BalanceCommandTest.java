@@ -57,7 +57,7 @@ public class BalanceCommandTest {
             Method method = BalanceCommand.class.getDeclaredMethod("convertStringToEnum", String.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");
-            assertThrows(IllegalArgumentException.class, () -> method.invoke(command, "ME"));
+            assertThrows(InvocationTargetException.class, () -> method.invoke(command, "ME"));
         } catch (Exception e) {
             fail();
         }

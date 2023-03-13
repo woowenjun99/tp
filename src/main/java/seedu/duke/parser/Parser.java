@@ -1,6 +1,5 @@
 package seedu.duke.parser;
 
-import seedu.duke.AccountList;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.BalanceCommand;
 import seedu.duke.commands.Command;
@@ -21,7 +20,7 @@ public class Parser {
      * @throws IndexOutOfBoundsException if the user input is invalid
      * @throws IllegalArgumentException if the user input is invalid
      */
-    public static Command parseInput(String input, AccountList account) throws IndexOutOfBoundsException,
+    public static Command parseInput(String input) throws IndexOutOfBoundsException,
             IllegalArgumentException{
 
         String[] args = input.split(" ");
@@ -33,17 +32,16 @@ public class Parser {
             throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
         }
 
-
         switch(command){
         case BALANCE:
-            return new BalanceCommand(input, account);
+            return new BalanceCommand(input);
         case EXIT:
-            return new ExitCommand(account);
+            return new ExitCommand();
         case ADD:
-            return new AddCommand(input, account);
+            return new AddCommand(input);
         case SHOW_RATE:
             try{
-                return new ShowRateCommand(args[1], account);
+                return new ShowRateCommand(args[1]);
             } catch (IndexOutOfBoundsException e){
                 throw new IllegalArgumentException(Message.ERR_INVALID_SHOW_RATE.getMessage());
             }

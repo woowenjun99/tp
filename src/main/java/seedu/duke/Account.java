@@ -24,46 +24,7 @@ public class Account {
     }
 
     private static String currencyToString(Currency currency){
-        String currencyType;
-        switch (currency){
-        case SGD:
-            currencyType = "SGD";
-            break;
-        case USD:
-            currencyType = "USD";
-            break;
-        case CNY:
-            currencyType = "CNY";
-            break;
-        case EUR:
-            currencyType = "EUR";
-            break;
-        case GBP:
-            currencyType = "GBP";
-            break;
-        case IDR:
-            currencyType = "IDR";
-            break;
-        case JPY:
-            currencyType = "JPY";
-            break;
-        case KRW:
-            currencyType = "KRW";
-            break;
-        case MYR:
-            currencyType = "MYR";
-            break;
-        case THB:
-            currencyType = "THB";
-            break;
-        case VND:
-            currencyType = "VND";
-            break;
-        default:
-            // todo throw some error for undefined or unhandled currency type
-            currencyType = "";
-        }
-        return currencyType;
+        return currency.name();
     }
     @Override
     public String toString(){

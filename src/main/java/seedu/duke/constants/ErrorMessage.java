@@ -10,4 +10,5 @@ public interface ErrorMessage {
     String INVALID_NUMERICAL_AMOUNT = "Please provide a an integer for the amount to update";
     String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
     String NO_SUCH_ACCOUNT = "You do not have an account for the currency.";
+    String NO_AMOUNT_PROVIDED = "Please provide an amount to be added.";
 }

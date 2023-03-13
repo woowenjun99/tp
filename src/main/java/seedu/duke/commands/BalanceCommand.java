@@ -16,7 +16,7 @@ import java.util.HashMap;
  * handle the getBalance command by the user.
  */
 public class BalanceCommand extends Command {
-    private String command;
+    private final String command;
     private final String ALL = "ALL";
 
     /**
@@ -29,14 +29,11 @@ public class BalanceCommand extends Command {
 
     private String processCommand() throws InvalidBalanceCommandException {
         String[] words = command.split(" ");
-        switch (words.length) {
-        case 1:
-            return ALL;
-        case 2:
-            return words[1];
-        default:
-            throw new InvalidBalanceCommandException();
-        }
+        return switch (words.length) {
+        case 1 -> ALL;
+        case 2 -> words[1];
+        default -> throw new InvalidBalanceCommandException();
+        };
     }
 
     private Currency convertStringToEnum(String currency) throws IllegalArgumentException {
@@ -45,7 +42,7 @@ public class BalanceCommand extends Command {
 
     private HashMap<Currency, Account> getBalance(String currencyString, AccountList account)
             throws NoAccountException {
-        if (currencyString == ALL) {
+        if (currencyString.equals(ALL)) {
             return account.getAccountHashMap();
         }
         Currency currency = convertStringToEnum(currencyString);
@@ -54,9 +51,7 @@ public class BalanceCommand extends Command {
 
     private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {
         ui.printMessage(Message.BALANCE.getMessage());
-        balances.forEach((currency, account) -> {
-            ui.printf("%s: %f\n", currency.name(), account.getBalance());
-        });
+        balances.forEach((currency, account) -> ui.printf("%s: %f\n", currency.name(), account.getBalance()));
     }
 
     /**

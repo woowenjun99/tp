@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.NotEnoughInAccountException;
 
 public class Account {
     private int balance;
@@ -43,6 +43,7 @@ public class Account {
     private static String currencyToString(Currency currency){
         return currency.name();
     }
+
     @Override
     public String toString(){
         String currencyType = currencyToString(CURRENCY);

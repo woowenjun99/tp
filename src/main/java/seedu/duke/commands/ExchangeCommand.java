@@ -31,13 +31,15 @@ public class ExchangeCommand extends Command {
             // Parse input
             Forex exchangeRate = formatInput();
             float amount = parseAmount();
-            System.out.println(exchangeRate);
 
             // Retrieve and edit accounts
             Account oldAcc = acclist.getAccount(exchangeRate.getInitial());
             oldAcc.updateBalance(amount, "subtract");
             Account newAcc = acclist.getAccount(exchangeRate.getTarget());
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
+            System.out.println(exchangeRate);
+            System.out.println("Balance of initial account --> " + oldAcc);
+            System.out.println("Balance of target account --> " + newAcc);
 
         // Exception handling
         } catch (NoAccountException e) {

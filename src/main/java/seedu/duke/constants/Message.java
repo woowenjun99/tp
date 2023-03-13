@@ -6,7 +6,7 @@ package seedu.duke.constants;
 public enum Message {
     BALANCE("Here are the balances that you have requested:"),
     FAREWELL("Thank you for using MoneyMoover! We hope to see you again soon :)"),
-    HELP("""
+    HELP("
             here are the commands available:
             \t help - show list of commands
             \t add $/CURRENCY AMOUNT - adds that amount of money into that currency account
@@ -17,7 +17,7 @@ public enum Message {
             \t delete-account $/CURRENCY - deletes the account of that currency
             \t create-account $/CURRENCY - creates an account of that currency
             \t exit - exits the program
-            \t Available Currencies: MYR, SGD, USD, YUAN, THB, EU"""),
+            \t Available Currencies: MYR, SGD, USD, YUAN, THB, EU"),
     GREETING("Welcome to MoneyMoover!"),
     ERR_UNKNOWN_COMMAND("Sorry, I don't understand that command. Type 'help' to see the list of commands."),
     ERR_INVALID_SHOW_RATE("show-rate must be used with the following format: show-rate <CURRENCY1> <CURRENCY2>"),

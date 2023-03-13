@@ -6,7 +6,10 @@ import seedu.duke.Forex;
 import seedu.duke.Currency;
 import seedu.duke.commands.Command;
 import seedu.duke.ui.Ui;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.exceptions.InvalidExchangeArgumentException;
+import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.NotEnoughInAccountException;
 import seedu.duke.constants.ErrorMessage;
 
 public class ExchangeCommand extends Command {
@@ -23,7 +26,7 @@ public class ExchangeCommand extends Command {
      * Converts the requested amount and changes the account balances
      */
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, AccountList acclist) {
         try {
             // Parse input
             Forex exchangeRate = formatInput();
@@ -31,11 +34,10 @@ public class ExchangeCommand extends Command {
             System.out.println(exchangeRate);
 
             // Retrieve and edit accounts
-            Account oldAcc = AccountList.getAccount(exchangeRate.getInitial());
+            Account oldAcc = acclist.getAccount(exchangeRate.getInitial());
             oldAcc.updateBalance(amount, "subtract");
-            Account newAcc = AccountList.getAccount(exchangeRate.getTarget());
+            Account newAcc = acclist.getAccount(exchangeRate.getTarget());
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
-            ui.printSpacer();
 
         // Exception handling
         } catch (NoAccountException e) {

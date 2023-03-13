@@ -4,7 +4,6 @@ import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Forex;
 import seedu.duke.Currency;
-import seedu.duke.commands.Command;
 import seedu.duke.ui.Ui;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.InvalidExchangeArgumentException;
@@ -73,9 +72,9 @@ public class ExchangeCommand extends Command {
 
     /**
      * Retrieves the amount to be converted from the input
+     * @return float representing amount to be converted
      * @throws NullPointerException if the amount is null
      * @throws NumberFormatException if the amount is non-numeric
-     * @return float representing amount to be converted
      */
     public float parseAmount() throws InvalidNumberException {
         try {

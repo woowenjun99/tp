@@ -4,10 +4,10 @@ import seedu.duke.exceptions.NotEnoughInAccountException;
 
 public class Account {
     private int balance;
-    private final Currency CURRENCY;
+    private Currency currency;
 
     Account(int initialBalance, Currency currency){
-        this.CURRENCY = currency;
+        this.currency = currency;
         balance = initialBalance;
     }
 
@@ -15,7 +15,7 @@ public class Account {
         return balance / 100.0f;
     }
     public Currency getCurrencyType(){
-        return CURRENCY;
+        return currency;
     }
 
     /**
@@ -46,7 +46,7 @@ public class Account {
 
     @Override
     public String toString(){
-        String currencyType = currencyToString(CURRENCY);
+        String currencyType = currencyToString(currency);
         return currencyType + ": " + balance / 100.0f;
     }
 

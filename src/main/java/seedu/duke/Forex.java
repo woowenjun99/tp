@@ -9,28 +9,28 @@ import java.util.HashMap;
  */
 public class Forex {
 
+    /**
+    * Hash map to store all exchange rates. Rather than a 2D array,
+    * just stores rate of S$1 in each currency. All exchanges
+    * convert first to SGD, then from SGD to their target. To be
+    * implemented using API.
+    */
+    private static HashMap<Currency, Float> exchangeRates = new HashMap<Currency, Float>();
+
     private Currency initial;
     private Currency target;
 
-    /**
-     * Hash map to store all exchange rates. Rather than a 2D array,
-     * just stores rate of S$1 in each currency. All exchanges
-     * convert first to SGD, then from SGD to their target. To be
-     * implemented using API.
-     */
-    private static HashMap<Currency, Float> exchangeRates = new HashMap<Currency, Float>();
+    // Constructor
+    public Forex(Currency from, Currency to) {
+        initial = from;
+        target = to;
+    }
 
     // Sets dummy equal exchange rate to SGD
     public static void populateRates() {
         for (Currency currency : Currency.values()) {
             exchangeRates.put(currency, 1.0f);
         }
-    }
-
-    // Constructor
-    public Forex(Currency from, Currency to) {
-        initial = from;
-        target = to;
     }
 
     // Prints the exchange relationship

@@ -30,11 +30,11 @@ public class BalanceCommand extends Command {
     private String processCommand() throws InvalidBalanceCommandException {
         String[] words = command.split(" ");
         switch (words.length) {
-        case 1 :
+        case 1:
             return ALL;
-        case 2 :
+        case 2:
             return words[1];
-        default :
+        default:
             throw new InvalidBalanceCommandException();
         }
     }

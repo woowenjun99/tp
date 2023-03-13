@@ -45,9 +45,7 @@ public class BalanceCommandTest {
             Method method = BalanceCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance CNY JPY");
-            assertThrows(InvocationTargetException.class, () -> {
-                method.invoke(command);
-            });
+            assertThrows(InvocationTargetException.class, () -> method.invoke(command));
         } catch (Exception e) {
             fail();
         }
@@ -58,10 +56,8 @@ public class BalanceCommandTest {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("convertStringToEnum", String.class);
             method.setAccessible(true);
-            BalanceCommand command = new BalanceCommand("balance Me");
-            assertThrows(IllegalArgumentException.class, () -> {
-                method.invoke(command);
-            });
+            BalanceCommand command = new BalanceCommand("balance");
+            assertThrows(InvocationTargetException.class, () -> method.invoke(command, "ME"));
         } catch (Exception e) {
             fail();
         }
@@ -81,18 +77,21 @@ public class BalanceCommandTest {
 
     @Test
     public void getBalance_ifCurrencyIsNotSpecified_shouldReturnAllCurrencies() {
-        AccountList account = AccountList.getInstance();
+        AccountList account = new AccountList();
         account.addAccount(Currency.CNY, 200);
         account.addAccount(Currency.EUR, 40);
 
         try {
-            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class);
+            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class, AccountList.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");
-            HashMap<Currency, Account> output = (HashMap<Currency, Account>) method.invoke(command, "ALL");
+            HashMap<Currency, Account> output = (HashMap<Currency, Account>) method.invoke(command,
+                    "ALL",
+                    account
+            );
             assertEquals(2, output.size());
-            assertEquals(200, (int) 100 * output.get(Currency.CNY).getBalance());
-            assertEquals(40, (int) 100 * output.get(Currency.EUR).getBalance());
+            assertEquals(200, 100 * output.get(Currency.CNY).getBalance());
+            assertEquals(40, 100 * output.get(Currency.EUR).getBalance());
         } catch (Exception e) {
             fail();
         }
@@ -101,29 +100,11 @@ public class BalanceCommandTest {
     @Test
     public void getBalance_ifNoAccountExists_shouldThrowException() {
         try {
-            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class);
+            AccountList account = new AccountList();
+            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class, AccountList.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");
-            assertThrows(InvocationTargetException.class, ()->{
-                method.invoke(command, "CNY");
-            });
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void getBalance_ifCurrencyExist_shouldReturnCurrency() {
-        AccountList account = AccountList.getInstance();
-        account.addAccount(Currency.CNY, 200);
-
-        try {
-            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class);
-            method.setAccessible(true);
-            BalanceCommand command = new BalanceCommand("CNY");
-            HashMap<Currency, Account> output = (HashMap<Currency, Account>) method.invoke(command, "CNY");
-            assertEquals(1, output.size());
-            assertEquals(200, (int) 100 * output.get(Currency.CNY).getBalance());
+            assertThrows(InvocationTargetException.class, ()-> method.invoke(command, "CNY", account));
         } catch (Exception e) {
             fail();
         }

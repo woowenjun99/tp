@@ -16,8 +16,7 @@ import java.util.HashMap;
  * handle the getBalance command by the user.
  */
 public class BalanceCommand extends Command {
-    private AccountList accounts = AccountList.getInstance();
-    private String command;
+    private final String command;
     private final String ALL = "ALL";
 
     /**
@@ -30,43 +29,39 @@ public class BalanceCommand extends Command {
 
     private String processCommand() throws InvalidBalanceCommandException {
         String[] words = command.split(" ");
-        switch (words.length) {
-        case 1:
-            return ALL;
-        case 2:
-            return words[1];
-        default:
-            throw new InvalidBalanceCommandException();
-        }
+        return switch (words.length) {
+        case 1 -> ALL;
+        case 2 -> words[1];
+        default -> throw new InvalidBalanceCommandException();
+        };
     }
 
     private Currency convertStringToEnum(String currency) throws IllegalArgumentException {
         return Currency.valueOf(currency);
     }
 
-    private HashMap<Currency, Account> getBalance(String currencyString) throws NoAccountException {
-        if (currencyString == ALL) {
-            return accounts.getAccountHashMap();
+    private HashMap<Currency, Account> getBalance(String currencyString, AccountList account)
+            throws NoAccountException {
+        if (currencyString.equals(ALL)) {
+            return account.getAccountHashMap();
         }
         Currency currency = convertStringToEnum(currencyString);
-        return accounts.getBalance(currency);
+        return account.getBalance(currency);
     }
 
     private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {
         ui.printMessage(Message.BALANCE.getMessage());
-        balances.forEach((currency, account) -> {
-            ui.printf("%s: %f\n", currency.name(), account.getBalance());
-        });
+        balances.forEach((currency, account) -> ui.printf("%s: %f\n", currency.name(), account.getBalance()));
     }
 
     /**
      * Gets the currencies from the AccountList and displays it onto the screen.
      */
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, AccountList account) {
         try {
             String currencyString = processCommand();
-            HashMap<Currency, Account> balances = getBalance(currencyString);
+            HashMap<Currency, Account> balances = getBalance(currencyString, account);
             printCurrencies(balances, ui);
         } catch (InvalidBalanceCommandException e) {
             System.out.println(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);

@@ -19,8 +19,7 @@ public class Ui {
      * @return The user input as a string.
      */
     public String getUserInput() {
-        String input = in.nextLine();
-        return input;
+        return in.nextLine();
     }
 
     /**

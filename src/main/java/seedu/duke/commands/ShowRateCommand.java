@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.ui.Ui;
 
@@ -14,7 +15,7 @@ public class ShowRateCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, AccountList account) {
         // TODO: fully implement
         try {
             String[] args = input.split(" ");

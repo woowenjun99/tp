@@ -41,7 +41,7 @@ Format: `balance <Currency>`
 
 Example of usage:
 
-```
+```text
 >>> balance
 >>> Here are the balances that you have requested:
 >>> USD: 2.0000
@@ -54,12 +54,29 @@ Example of usage:
 
 Example of error messages:
 
-```
+```text
 >>> balance ME
 >>> An invalid currency has been provided.
 
 >>> balance JPY
 >>> You do not have an account for the currency.
+```
+
+### Deposit money into existing account `add`
+
+-   If the user has an existing account, he can choose to add money into it.
+-   An error will be thrown if either the currency or amount is not provided, the currency is not one of the registered currency, the amount is not numeric or the account with the currency does not exist.
+
+Format: `add <Currency> <Amount>`
+
+Currency: Compulsory argument. A registered currency.
+Amount: Compulsory argument. The amount to be deposited.
+
+Example of usage:
+
+```text
+>>> add CNY 200
+>>> You have successfully added CNY 2.0000 into your account
 ```
 
 ## FAQ

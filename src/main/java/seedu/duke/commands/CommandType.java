@@ -1,11 +1,11 @@
 package seedu.duke.commands;
 
-
 public enum CommandType {
+    ADD("add"),
     BALANCE("balance"),
     EXIT("exit"),
     SHOW_RATE("show-rate");
-    private String command;
+    private final String command;
 
     CommandType(String command){
         this.command = command;

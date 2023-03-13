@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.ui.Ui;
+import seedu.duke.AccountList;
 
 /**
  * Command to exit the program
@@ -11,7 +12,7 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, AccountList account) {
         ui.printFarewell();
     }
 }

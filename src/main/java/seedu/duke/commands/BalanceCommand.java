@@ -29,14 +29,11 @@ public class BalanceCommand extends Command {
 
     private String processCommand() throws InvalidBalanceCommandException {
         String[] words = command.split(" ");
-        switch (words.length) {
-        case 1:
-            return ALL;
-        case 2:
-            return words[1];
-        default:
-            throw new InvalidBalanceCommandException();
-        }
+        return switch (words.length) {
+        case 1 -> ALL;
+        case 2 -> words[1];
+        default -> throw new InvalidBalanceCommandException();
+        };
     }
 
     private Currency convertStringToEnum(String currency) throws IllegalArgumentException {

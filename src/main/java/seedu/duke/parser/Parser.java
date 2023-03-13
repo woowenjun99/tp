@@ -6,6 +6,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandType;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ShowRateCommand;
+import seedu.duke.commands.ExchangeCommand;
 import seedu.duke.constants.Message;
 
 /**
@@ -44,6 +45,8 @@ public class Parser {
             } catch (IndexOutOfBoundsException e){
                 throw new IllegalArgumentException(Message.ERR_INVALID_SHOW_RATE.getMessage());
             }
+        case EXCHANGE:
+            return new ExchangeCommand(input);
         default:
             throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
         }

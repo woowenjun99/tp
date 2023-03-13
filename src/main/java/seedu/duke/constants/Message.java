@@ -6,7 +6,7 @@ package seedu.duke.constants;
 public enum Message {
     BALANCE("Here are the balances that you have requested:"),
     FAREWELL("Thank you for using MoneyMoover! We hope to see you again soon :)"),
-    HELP("here are the commands available:\n"
+    HELP("Here are the commands available:\n"
             + "\t help - show list of commands\n"
             + "\t add $/CURRENCY AMOUNT - adds that amount of money into that currency account\n"
             + "\t exchange $/CURRENCY1 AMOUNT $/CURRENCY2 - transfer funds from a currency account\n"

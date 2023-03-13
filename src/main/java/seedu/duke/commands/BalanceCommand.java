@@ -16,8 +16,9 @@ import java.util.HashMap;
  * handle the getBalance command by the user.
  */
 public class BalanceCommand extends Command {
+
+    private static final String ALL = "ALL";
     private final String command;
-    private final String ALL = "ALL";
 
     /**
      * @param command The full user input including the command word {@code balance SGD}.

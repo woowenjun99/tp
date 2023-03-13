@@ -17,10 +17,9 @@ public class AddCommand extends Command {
 
     /**
      * @param input   The user input including the command.
-     * @param account The global AccountList instance.
      */
-    public AddCommand(String input, AccountList account) {
-        super(false, input, account);
+    public AddCommand(String input) {
+        super(false, input);
     }
 
     private Currency getCurrency(String currencyString) {
@@ -48,10 +47,10 @@ public class AddCommand extends Command {
      * @param ui The instance of the UI class.
      */
     @Override
-    public void execute(Ui ui) {
+    public void execute(Ui ui, AccountList account) {
         try {
             processCommand();
-            super.account.addAmount(this.currency, this.amount);
+            account.addAmount(this.currency, this.amount);
             printSuccess(ui);
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);

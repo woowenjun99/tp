@@ -68,7 +68,7 @@ public class Account {
     @Override
     public String toString(){
         String currencyType = currencyToString(CURRENCY);
-        return currencyType + ": " + Float.toString(balance / 100.0f);
+        return currencyType + ": " + balance / 100.0f;
     }
 
 }

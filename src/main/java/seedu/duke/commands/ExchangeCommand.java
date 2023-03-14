@@ -56,7 +56,7 @@ public class ExchangeCommand extends Command {
 
     /**
      * Converts input into Forex object for use in execution
-     * @return Forex object with intial and target currencies
+     * @return Forex object with initial and target currencies
      * @throws IllegalArgumentException if the currencies are not supported
      * @throws InvalidExchangeArgumentException if arguments are incorrect
      */

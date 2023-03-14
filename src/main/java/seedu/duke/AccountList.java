@@ -46,7 +46,7 @@ public class AccountList {
     /**
      * Gets all the accounts from the accountList.
      *
-     * @return The hashmap containing all the accounts.
+     * @return An array list containing all the accounts.
      */
     public ArrayList<Account> getAllAccounts() {
         ArrayList<Account> accounts = new ArrayList<>();

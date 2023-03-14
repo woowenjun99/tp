@@ -15,7 +15,6 @@ public interface ErrorMessage {
 
     String INVALID_WITHDRAW_COMMAND = "Please check that you have correctly provided the currency and amount";
     String INSUFFICIENT_WITHDRAW_BALANCE = "You do not have sufficient balance to withdraw.";
-    String NEGATIVE_WITHDRAWAL_AMOUNT   = "You have entered a negative withdrawal amount.";
     String NO_AMOUNT_PROVIDED = "Please provide an amount to be added.";
 
     String INVALID_EXCHANGE_ARGUMENT = "Please structure your exchange as " + 

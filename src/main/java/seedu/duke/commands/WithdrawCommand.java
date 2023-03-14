@@ -28,7 +28,7 @@ public class WithdrawCommand extends Command {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand() throws InvalidWithdrawCommandException, NegativeWithdrawalAmountException {
+    private void processCommand() throws InvalidWithdrawCommandException {
         String[] words = super.input.split(" ");
         // Format: [Command, CURRENCY, AMOUNT]
         boolean isValidCommand = words.length == 3;
@@ -38,8 +38,7 @@ public class WithdrawCommand extends Command {
         this.currency = getCurrency(words[2]);
         this.amount = Float.parseFloat(words[1]);
         if (this.amount <= 0) {
-
-            throw new NegativeWithdrawalAmountException();
+            throw new InvalidWithdrawCommandException();
         }
 
 
@@ -71,8 +70,6 @@ public class WithdrawCommand extends Command {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
         } catch (InsufficientAccountBalance e) {
             ui.printMessage(ErrorMessage.INSUFFICIENT_WITHDRAW_BALANCE);
-        }catch (NegativeWithdrawalAmountException e){
-            ui.printMessage(ErrorMessage.NEGATIVE_WITHDRAWAL_AMOUNT);
         }
     }
 }

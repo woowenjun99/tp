@@ -8,6 +8,8 @@ public interface ErrorMessage {
     String INVALID_AMOUNT_TO_ADD = "Please provide a value greater than 0";
     String INVALID_CURRENCY = "An invalid currency has been provided.";
     String INVALID_NUMERICAL_AMOUNT = "Please provide a float amount to update";
+    String INVALID_CREATE_ACCOUNT_COMMAND = "Please check that you have correctly provided " +
+            "the currency of the account to add";
     String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
     String NO_SUCH_ACCOUNT = "You do not have an account for the currency.";
     String NO_AMOUNT_PROVIDED = "Please provide an amount to be added.";
@@ -16,4 +18,5 @@ public interface ErrorMessage {
     String NOT_ENOUGH_IN_ACCOUNT = "Please ensure you have enough money in your" + 
             " starting currency account to perform this transaction";
     String INVALID_NUMBER = "Please enter a valid number to exchange";
+    String ACCOUNT_ALREADY_EXISTS = "You already have an account of this currency";
 }

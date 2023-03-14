@@ -22,6 +22,7 @@ public class Forex {
 
     // Constructor
     public Forex(Currency from, Currency to) {
+        populateRates();
         initial = from;
         target = to;
     }
@@ -50,7 +51,6 @@ public class Forex {
      * @return amount converted to target currency
      */
     public float convert(float amount) {
-        populateRates();
         float amountInSGD = amount / exchangeRates.get(initial);
         float amountInTarget = amountInSGD * exchangeRates.get(target);
         return amountInTarget;

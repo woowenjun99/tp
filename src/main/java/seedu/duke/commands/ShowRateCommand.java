@@ -26,9 +26,7 @@ public class ShowRateCommand extends Command {
     */
     @Override
     public void execute(Ui ui, AccountList accounts) {
-        System.out.println(input);
         try {
-            Forex.populateRates(); 
             float val;
             String[] args = input.split(" ");
             if (args.length < 3 || args.length > 4) {

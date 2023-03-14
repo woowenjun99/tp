@@ -13,8 +13,7 @@ import seedu.duke.constants.ErrorMessage;
  * Command to print the exchange rate between two currencies
  */
 public class ShowRateCommand extends Command {
-    private Currency from;
-    private Currency to;
+
     public ShowRateCommand(String input) {
         super(false, input);
     }
@@ -56,8 +55,8 @@ public class ShowRateCommand extends Command {
 
     /**
     * Prints the exchange rate between two currencies with a specified amount
-    * @param temp a Forex object containing the exchange rate
-    * @param instance a float of the amount to be converted on the exchange rate
+    * @param instance a Forex object containing the exchange rate
+    * @param amt a float of the amount to be converted on the exchange rate
     * @throws InvalidNumberException if the amount is negative
     */
     private void printRate(Forex instance, float amt) throws InvalidNumberException {

@@ -4,7 +4,7 @@ import seedu.duke.exceptions.NotEnoughInAccountException;
 
 public class Account {
     private int balance;
-    private Currency currency;
+    private final Currency currency;
 
     Account(int initialBalance, Currency currency){
         this.currency = currency;

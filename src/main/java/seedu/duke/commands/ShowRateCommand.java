@@ -26,9 +26,9 @@ public class ShowRateCommand extends Command {
     */
     @Override
     public void execute(Ui ui, AccountList accounts) {
+        String[] args = input.split(" ");
         try {
             float val;
-            String[] args = input.split(" ");
             if (args.length < 3 || args.length > 4) {
                 throw new InvalidShowrateArgumentException();
             }
@@ -46,7 +46,11 @@ public class ShowRateCommand extends Command {
                 ui.printMessage(getRateString(reverse, val));
             }
         } catch (IllegalArgumentException e) {
-            ui.printMessage(ErrorMessage.INVALID_CURRENCY);
+            if (args.length == 4 && !args[3].matches("[0-9\\.]+")) {
+                ui.printMessage(ErrorMessage.INVALID_NUMBER);
+            } else {
+                ui.printMessage(ErrorMessage.INVALID_CURRENCY);
+            }
         } catch (InvalidNumberException e) {
             ui.printMessage(ErrorMessage.NEGATIVE_NUMBER);
         } catch (InvalidShowrateArgumentException e) {

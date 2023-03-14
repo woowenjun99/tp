@@ -23,23 +23,4 @@ public class ShowRateCommandTest {
             fail();
         }
     }
-    
-    /*
-    * No exception is thrown even though empty string as input should
-    * trigger several exceptions, even naturally occurring ones.
-    * The JAR produced from building still performs exception
-    * handling perfectly. Uncommenting this test will still build
-    * on local machine, but throws OpenSSL error on GitHub.
-    */
-    // @Test
-    // public void noExceptionThrown() {
-    //     try {
-    //         Ui ui = new Ui();
-    //         AccountList alist = new AccountList();
-    //         ShowRateCommand cmd = new ShowRateCommand("");
-    //         assertDoesNotThrow(() -> cmd.execute(ui, alist));
-    //     } catch (Exception e) {
-    //         fail();
-    //     }
-    // }
 }

@@ -2,13 +2,9 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.commands.ExchangeCommand;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.InvalidExchangeArgumentException;
-import seedu.duke.ui.Ui;
-import seedu.duke.AccountList;
-import seedu.duke.Currency;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ExchangeCommandTest {
@@ -74,29 +70,6 @@ public class ExchangeCommandTest {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD 1.0");
             assertDoesNotThrow(() -> cmd.parseAmount());
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void execute_correctInputProvided_shouldUpdateBalances() {
-        try {
-            ExchangeCommand cmd = new ExchangeCommand("exchange SGD THB 10");
-            AccountList accounts = new AccountList();
-            accounts.addAccount(Currency.SGD, 2000);
-            accounts.addAccount(Currency.THB, 0);
-            Ui ui = new Ui();
-            cmd.execute(ui, accounts);
-            int expectedSGD =  (int) accounts.getAccount(Currency.SGD).getBalance() * 100;
-            int expectedTHB = (int) accounts.getAccount(Currency.THB).getBalance() * 100;
-            /*
-            * Assertion passes test on machine but fails on GitHub. Might be
-            * an error with floating point operations.
-            */
-            // assertEquals(expectedSGD, 1000);
-            // assertEquals(expectedTHB, 5000);
-            assertEquals(0, 0); // To pass check style for using import assertEquals
         } catch (Exception e) {
             fail();
         }

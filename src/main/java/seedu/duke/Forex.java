@@ -29,7 +29,11 @@ public class Forex {
     // Sets dummy equal exchange rate to SGD
     public static void populateRates() {
         for (Currency currency : Currency.values()) {
-            exchangeRates.put(currency, 1.0f);
+            if (Account.currencyToString(currency).equals("SGD")) {
+                exchangeRates.put(currency, 1.0f);
+            } else {
+                exchangeRates.put(currency, 5.0f);
+            }
         }
     }
 

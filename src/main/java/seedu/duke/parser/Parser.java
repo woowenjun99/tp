@@ -18,24 +18,26 @@ import seedu.duke.constants.Message;
 public class Parser {
     /**
      * Parses the user input and returns the appropriate command
+     *
      * @param input the user input
      * @return the command to be executed
      * @throws IndexOutOfBoundsException if the user input is invalid
-     * @throws IllegalArgumentException if the user input is invalid
+     * @throws IllegalArgumentException  if the user input is invalid
      */
-    public static Command parseInput(String input) throws IndexOutOfBoundsException,
-            IllegalArgumentException{
+    public static Command parseInput (String input) throws IndexOutOfBoundsException,
+            IllegalArgumentException {
 
         String[] args = input.split(" ");
 
         CommandType command;
-        try{
+        try {
             command = CommandType.get(args[0]);
-        } catch (IndexOutOfBoundsException e){
+        } catch (IndexOutOfBoundsException e) {
             throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
         }
 
-        switch(command){
+
+        switch (command) {
         case BALANCE:
             return new BalanceCommand(input);
         case EXIT:
@@ -43,9 +45,9 @@ public class Parser {
         case ADD:
             return new AddCommand(input);
         case SHOW_RATE:
-            try{
+            try {
                 return new ShowRateCommand(input);
-            } catch (IndexOutOfBoundsException e){
+            } catch (IndexOutOfBoundsException e) {
                 throw new IllegalArgumentException(Message.ERR_INVALID_SHOW_RATE.getMessage());
             }
         case EXCHANGE:

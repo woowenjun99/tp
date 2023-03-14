@@ -1,11 +1,10 @@
-import org.junit.jupiter.api.Test;
-import seedu.duke.commands.ShowRateCommand;
-import seedu.duke.ui.Ui;
-import seedu.duke.AccountList;
+package seedu.duke.commands;
 
-// import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
+import seedu.duke.AccountList;
+import seedu.duke.ui.Ui;
+
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-// import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ShowRateCommandTest {

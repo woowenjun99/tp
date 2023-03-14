@@ -8,7 +8,6 @@ import seedu.duke.Currency;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -100,7 +99,9 @@ public class BalanceCommandTest {
                     CNYAccount = account;
                 }
             }
-            if(CNYAccount == null || EURAccount == null)fail();
+            if(CNYAccount == null || EURAccount == null){
+                fail();
+            }
             System.out.println(CNYAccount.getBalance());
             System.out.println(EURAccount.getBalance());
             assertEquals(2, output.size());

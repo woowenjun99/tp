@@ -1,74 +1,53 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.NotEnoughInAccountException;
+
 public class Account {
     private int balance;
-    private final Currency CURRENCY;
+    private Currency currency;
 
     Account(int initialBalance, Currency currency){
-        this.CURRENCY = currency;
-        balance = initialBalance;
+        this.currency = currency;
+        balance = initialBalance * 100;
     }
 
     public float getBalance(){
         return balance / 100.0f;
     }
     public Currency getCurrencyType(){
-        return CURRENCY;
+        return currency;
     }
-    public void updateBalance(float changeInBalance){
-        int newBalance = balance - (int)(changeInBalance * 100);
-        if(newBalance < 0){
-            // todo throw some exception
+
+    /**
+     * Updates the balance of the account
+     * @param changeInBalance the amount added or subtract from the account
+     * @param action specifies whether to add or subtract value
+     * @throws NotEnoughInAccountException if the balance would become negative
+     */
+    public void updateBalance(float changeInBalance, String action) throws NotEnoughInAccountException {
+        int newBalance;
+        if (action.equals("add")) {
+            newBalance = balance + (int)(changeInBalance * 100);
+        } else if (action.equals("subtract")) {
+            newBalance = balance - (int)(changeInBalance * 100);
+        } else {
+            System.out.println("Error in updating balance");
+            return;
         }
+        if(newBalance < 0){
+            throw new NotEnoughInAccountException();
+        } 
         balance = newBalance;
     }
 
     private static String currencyToString(Currency currency){
-        String currencyType;
-        switch (currency){
-        case SGD:
-            currencyType = "SGD";
-            break;
-        case USD:
-            currencyType = "USD";
-            break;
-        case CNY:
-            currencyType = "CNY";
-            break;
-        case EUR:
-            currencyType = "EUR";
-            break;
-        case GBP:
-            currencyType = "GBP";
-            break;
-        case IDR:
-            currencyType = "IDR";
-            break;
-        case JPY:
-            currencyType = "JPY";
-            break;
-        case KRW:
-            currencyType = "KRW";
-            break;
-        case MYR:
-            currencyType = "MYR";
-            break;
-        case THB:
-            currencyType = "THB";
-            break;
-        case VND:
-            currencyType = "VND";
-            break;
-        default:
-            // todo throw some error for undefined or unhandled currency type
-            currencyType = "";
-        }
-        return currencyType;
+        return currency.name();
     }
+
     @Override
     public String toString(){
-        String currencyType = currencyToString(CURRENCY);
-        return currencyType + ": " + Float.toString(balance / 100.0f);
+        String currencyType = currencyToString(currency);
+        return currencyType + ": " + balance / 100.0f;
     }
 
 }

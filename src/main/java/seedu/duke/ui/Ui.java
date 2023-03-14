@@ -8,17 +8,18 @@ import java.util.Scanner;
  * The UI Class is used to display the messages to the user.
  */
 public class Ui {
+    Scanner in;
+    public Ui(){
+        in = new Scanner(System.in);
+    }
     /**
      * The getUserInput reads in the user input as a string
      * and returns the input for the parser.
      *
      * @return The user input as a string.
      */
-    public static String getUserInput() {
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        in.close();
-        return input;
+    public String getUserInput() {
+        return in.nextLine();
     }
 
     /**
@@ -26,7 +27,7 @@ public class Ui {
      *
      * @param message The message in any type.
      */
-    public static void printMessage(Object message) {
+    public void printMessage(Object message) {
         System.out.println(message);
     }
 
@@ -39,7 +40,7 @@ public class Ui {
      * @throws java.util.IllegalFormatException If an invalid format given.
      * @throws NullPointerException             If the format is null.
      **/
-    public static void printf(String format, Object... args) {
+    public void printf(String format, Object... args) {
         System.out.printf(format, args);
     }
 
@@ -47,7 +48,7 @@ public class Ui {
      * The printGreeting prints out the welcome message upon
      * the initialisation of the chatbot.
      */
-    public static void printGreeting() {
+    public void printGreeting() {
         printMessage(Message.GREETING.getMessage());
     }
 
@@ -55,21 +56,30 @@ public class Ui {
      * The printFarewell prints out the welcome message upon
      * the termination of the chatbot.
      */
-    public static void printFarewell() {
+    public void printFarewell() {
         printMessage(Message.FAREWELL.getMessage());
     }
 
     /**
      * The printHelp prints out the help message based on the user's request.
      */
-    public static void printHelp() {
+    public void printHelp() {
         printMessage(Message.HELP.getMessage());
     }
 
     /**
      * The printSpacer is used to print hyphens to make the code looks neater.
      **/
-    public static void printSpacer() {
+    public void printSpacer() {
         printMessage("-".repeat(50));
     }
+
+    /**
+     * The printInvalidShowRate function is printed when an invalid format is provided
+     * for the show-rate command.
+     */
+    public void printInvalidShowRate(){
+        printMessage(Message.ERR_INVALID_SHOW_RATE.getMessage());
+    }
+
 }

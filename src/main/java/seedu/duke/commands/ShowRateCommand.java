@@ -48,26 +48,26 @@ public class ShowRateCommand extends Command {
                 printRate(reverse, val);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(ErrorMessage.INVALID_CURRENCY);
+            ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (InvalidNumberException e) {
-            System.out.println(ErrorMessage.NEGATIVE_NUMBER);
+            ui.printMessage(ErrorMessage.NEGATIVE_NUMBER);
         } catch (InvalidShowrateArgumentException e) {
-            System.out.println(ErrorMessage.SHOWRATE_SYNTAX);
+            ui.printMessage(ErrorMessage.SHOWRATE_SYNTAX);
         }
     }
 
     /**
     * Prints the exchange rate between two currencies with a specified amount
     * @param temp a Forex object containing the exchange rate
-    * @param amt a float of the amount to be converted on the exchange rate
+    * @param instance a float of the amount to be converted on the exchange rate
     * @throws InvalidNumberException if the amount is negative
     */
-    private void printRate(Forex temp, float amt) throws InvalidNumberException {
+    private void printRate(Forex instance, float amt) throws InvalidNumberException {
         if (amt < 0) {
             throw new InvalidNumberException();
         }
-        String from = Account.currencyToString(temp.getInitial());
-        String to = Account.currencyToString(temp.getTarget());
-        System.out.println(amt  + " " + from + " = " + temp.convert(amt) + " " + to);
+        String from = Account.currencyToString(instance.getInitial());
+        String to = Account.currencyToString(instance.getTarget());
+        System.out.println(amt  + " " + from + " = " + instance.convert(amt) + " " + to);
     }
 }

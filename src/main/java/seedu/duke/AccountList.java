@@ -55,6 +55,19 @@ public class AccountList {
         return accountHashMap;
     }
 
+    /**
+     * Retrieves an account for a chosen currency
+     * @param currency the currency of the account to be returned
+     * @return the currency account
+     * @throws NoAccountException if the user does not have an account for that currency
+     */
+    public Account getAccount(Currency currency) throws NoAccountException {
+        if (!this.getAccountHashMap().containsKey(currency)) {
+            throw new NoAccountException();
+        }
+        return this.getAccountHashMap().get(currency);
+    }
+
     public void addAmount(Currency currency, int amount) throws NoAccountException {
         if (!accountHashMap.containsKey(currency)) {
             throw new NoAccountException();

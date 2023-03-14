@@ -15,7 +15,7 @@ public class Forex {
     * convert first to SGD, then from SGD to their target. To be
     * implemented using API.
     */
-    private static HashMap<Currency, Float> exchangeRates = new HashMap<Currency, Float>();
+    private static final HashMap<Currency, Float> exchangeRates = new HashMap<>();
 
     private Currency initial;
     private Currency target;

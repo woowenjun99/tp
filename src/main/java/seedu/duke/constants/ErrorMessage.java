@@ -9,8 +9,10 @@ public interface ErrorMessage {
     String INVALID_NUMERICAL_AMOUNT = "Please provide a numerical amount";
     String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
     String NO_SUCH_ACCOUNT = "You do not have an account for the currency.";
-    
+
     String INSUFFICIENT_WITHDRAW_BALANCE = "You do not have sufficient balance to withdraw.";
+
+    String NEGATIVE_WITHDRAWAL_AMOUNT   = "You have entered a negative withdrawal amount.";
 
     String INVALID_EXCHANGE_ARGUMENT = "Please structure your exchange as " + 
             "'exchange STARTING_CURRENCY TARGET_CURRENCY AMOUNT_IN_STARTING'";

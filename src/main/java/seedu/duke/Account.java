@@ -11,8 +11,8 @@ public class Account {
         balance = initialBalance;
     }
 
-    public float getBalance(){
-        return balance / 100.0f;
+    public int getBalance(){
+        return balance;
     }
     public Currency getCurrencyType(){
         return currency;

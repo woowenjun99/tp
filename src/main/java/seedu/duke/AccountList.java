@@ -15,11 +15,11 @@ public class AccountList {
         accountHashMap = new HashMap<>();
     }
 
-    public void addAccount(Currency currency, int initialBalance) {
+    public void addAccount(Currency currency, float initialBalance) {
         if (accountHashMap.containsKey(currency)) {
             // todo throw some exception signalling account already exists
         }
-        accountHashMap.put(currency, new Account(initialBalance, currency));
+        accountHashMap.put(currency, new Account((int)initialBalance * 100, currency));
     }
 
 
@@ -83,7 +83,7 @@ public class AccountList {
             throw new NoAccountException();
         }
 
-        int currentAmount = (int) accountHashMap.get(currency).getBalance() * 100;
+        int currentAmount = this.getAccount(currency).getBalance();
         int newBalance = currentAmount - amount;
         if(newBalance < 0){
             throw new InsufficientAccountBalance();

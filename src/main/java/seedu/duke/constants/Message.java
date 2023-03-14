@@ -21,8 +21,8 @@ public enum Message {
     ERR_UNKNOWN_COMMAND("Sorry, I don't understand that command. Type 'help' to see the list of commands."),
     ERR_INVALID_SHOW_RATE("show-rate must be used with the following format: show-rate <CURRENCY1> <CURRENCY2>"),
     SUCCESSFUL_ADD_COMMAND("You have successfully added %s %f into your account"),
-    SUCCESSFUL_WITHDRAW_COMMAND("You have succesfully withdraw %f %s from your account\n " +
-            "Now you have remaining %f %s in your account ");
+    SUCCESSFUL_WITHDRAW_COMMAND("You have successfully withdraw %.2f %s from your account\n " +
+            "Now you have remaining %.2f %s in your account ");
 
     private final String message;
 

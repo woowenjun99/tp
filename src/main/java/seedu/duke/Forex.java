@@ -50,6 +50,7 @@ public class Forex {
      * @return amount converted to target currency
      */
     public float convert(float amount) {
+        populateRates();
         float amountInSGD = amount / exchangeRates.get(initial);
         float amountInTarget = amountInSGD * exchangeRates.get(target);
         return amountInTarget;

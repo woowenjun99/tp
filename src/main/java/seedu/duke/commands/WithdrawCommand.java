@@ -36,7 +36,7 @@ public class WithdrawCommand extends Command {
             throw new InvalidAddCommandException();
         }
         this.currency = getCurrency(words[2]);
-        this.amount = Integer.parseInt(words[1]) * 100;
+        this.amount = Float.parseFloat(words[1]) * 100;
         if(this.amount <0 ){
             throw new NegativeWithdrawalAmountException();
         }

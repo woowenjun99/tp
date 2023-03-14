@@ -25,7 +25,7 @@ public class ShowRateCommand extends Command {
     * prints the value exchanged to the target currency.
     */
     @Override
-    public void execute(Ui ui, AccountList account) {
+    public void execute(Ui ui, AccountList accounts) {
         System.out.println(input);
         try {
             Forex.populateRates(); 
@@ -42,8 +42,8 @@ public class ShowRateCommand extends Command {
                 val = 1;
             }
             Forex reverse = new Forex(to, from);
-            Forex temp = new Forex(from, to);
-            printRate(temp, val);
+            Forex instance = new Forex(from, to);
+            printRate(instance, val);
             if (val == 1) {
                 printRate(reverse, val);
             }

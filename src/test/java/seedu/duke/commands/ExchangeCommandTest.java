@@ -83,13 +83,13 @@ public class ExchangeCommandTest {
     public void execute_correctInputProvided_shouldUpdateBalances() {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange SGD THB 10");
-            AccountList account = new AccountList();
-            account.addAccount(Currency.SGD, 2000);
-            account.addAccount(Currency.THB, 0);
+            AccountList accounts = new AccountList();
+            accounts.addAccount(Currency.SGD, 2000);
+            accounts.addAccount(Currency.THB, 0);
             Ui ui = new Ui();
-            cmd.execute(ui, account);
-            int expectedSGD =  (int) account.getAccount(Currency.SGD).getBalance() * 100;
-            int expectedTHB = (int) account.getAccount(Currency.THB).getBalance() * 100;
+            cmd.execute(ui, accounts);
+            int expectedSGD =  (int) accounts.getAccount(Currency.SGD).getBalance() * 100;
+            int expectedTHB = (int) accounts.getAccount(Currency.THB).getBalance() * 100;
             /*
             * Assertion passes test on machine but fails on GitHub. Might be
             * an error with floating point operations.

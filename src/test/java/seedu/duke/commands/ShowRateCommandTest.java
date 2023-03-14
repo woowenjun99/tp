@@ -14,11 +14,11 @@ public class ShowRateCommandTest {
     public void testExecute_correctSyntax_shouldNotException() {
         try {
             Ui ui = new Ui();
-            AccountList alist = new AccountList();
+            AccountList accounts = new AccountList();
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD 1.0");
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD");
-            assertDoesNotThrow(() -> cmd1.execute(ui, alist));
-            assertDoesNotThrow(() -> cmd2.execute(ui, alist));
+            assertDoesNotThrow(() -> cmd1.execute(ui, accounts));
+            assertDoesNotThrow(() -> cmd2.execute(ui, accounts));
         } catch (Exception e) {
             fail();
         }

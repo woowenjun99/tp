@@ -7,7 +7,7 @@ import seedu.duke.Currency;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -77,21 +77,36 @@ public class BalanceCommandTest {
 
     @Test
     public void getBalance_ifCurrencyIsNotSpecified_shouldReturnAllCurrencies() {
-        AccountList account = new AccountList();
+        AccountList accounts = new AccountList();
 
         try {
-            account.addAccount(Currency.CNY, 200.0f);
-            account.addAccount(Currency.EUR, 40.0f);
-            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class, AccountList.class);
+            accounts.addAccount(Currency.CNY, 200.0f);
+            accounts.addAccount(Currency.EUR, 40.0f);
+            Method method = BalanceCommand.class.getDeclaredMethod("getAccounts", String.class, AccountList.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");
-            HashMap<Currency, Account> output = (HashMap<Currency, Account>) method.invoke(command,
+            ArrayList<Account> output = (ArrayList<Account>) method.invoke(command,
                     "ALL",
-                    account
+                    accounts
             );
+            Account CNYAccount = null;
+            Account EURAccount = null;
+            for(Account account : output){
+                if(account.getCurrencyType().equals(Currency.EUR)){
+                    EURAccount = account;
+                }
+                else if(account.getCurrencyType().equals(Currency.CNY)){
+                    CNYAccount = account;
+                }
+            }
+            if(CNYAccount == null || EURAccount == null){
+                fail();
+            }
+            System.out.println(CNYAccount.getBalance());
+            System.out.println(EURAccount.getBalance());
             assertEquals(2, output.size());
-            assertEquals(200, output.get(Currency.CNY).getBalance());
-            assertEquals(40, output.get(Currency.EUR).getBalance());
+            assertEquals(200, CNYAccount.getBalance());
+            assertEquals(40, EURAccount.getBalance());
         } catch (Exception e) {
             fail();
         }
@@ -101,7 +116,7 @@ public class BalanceCommandTest {
     public void getBalance_ifNoAccountExists_shouldThrowException() {
         try {
             AccountList account = new AccountList();
-            Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class, AccountList.class);
+            Method method = BalanceCommand.class.getDeclaredMethod("getAccounts", String.class, AccountList.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");
             assertThrows(InvocationTargetException.class, ()-> method.invoke(command, "CNY", account));

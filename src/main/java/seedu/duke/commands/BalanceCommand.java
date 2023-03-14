@@ -9,7 +9,7 @@ import seedu.duke.exceptions.InvalidBalanceCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * BalanceCommand is a subclass of the Command class that is used to 
@@ -44,18 +44,26 @@ public class BalanceCommand extends Command {
         return Currency.valueOf(currency);
     }
 
-    private HashMap<Currency, Account> getBalance(String currencyString, AccountList account)
+    private ArrayList<Account> getAccounts(String currencyString, AccountList accounts)
             throws NoAccountException {
+        ArrayList<Account> accountArrayList;
         if (currencyString.equals(ALL)) {
-            return account.getAccountHashMap();
+            // Return all accounts
+            accountArrayList = accounts.getAllAccounts();
         }
-        Currency currency = convertStringToEnum(currencyString);
-        return account.getBalance(currency);
+        else{
+            Currency currency = convertStringToEnum(currencyString);
+            accountArrayList = new ArrayList<>();
+            accountArrayList.add(accounts.getAccount(currency));
+        }
+        return accountArrayList;
     }
 
-    private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {
+    private void printCurrencies(ArrayList<Account> accountArrayList, Ui ui) {
         ui.printMessage(Message.BALANCE.getMessage());
-        balances.forEach((currency, account) -> ui.printf("%s: %f\n", currency.name(), account.getBalance()));
+        for(Account account : accountArrayList){
+            ui.printMessage(account.toString());
+        }
     }
 
     /**
@@ -65,8 +73,8 @@ public class BalanceCommand extends Command {
     public void execute(Ui ui, AccountList account) {
         try {
             String currencyString = processCommand();
-            HashMap<Currency, Account> balances = getBalance(currencyString, account);
-            printCurrencies(balances, ui);
+            ArrayList<Account> accountArrayList = getAccounts(currencyString, account);
+            printCurrencies(accountArrayList, ui);
         } catch (InvalidBalanceCommandException e) {
             ui.printMessage(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);
         } catch (IllegalArgumentException e) {

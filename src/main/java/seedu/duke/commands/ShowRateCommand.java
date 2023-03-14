@@ -58,7 +58,7 @@ public class ShowRateCommand extends Command {
     * Prints the exchange rate between two currencies with a specified amount
     * @param instance a Forex object containing the exchange rate
     * @param amt a float of the amount to be converted on the exchange rate
-    * @return a string containing the
+    * @return a string containing the exchange rates to be printed
     * @throws InvalidNumberException if the amount is negative
     */
     private String getRateString(Forex instance, float amt) throws InvalidNumberException {

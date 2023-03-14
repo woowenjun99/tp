@@ -50,7 +50,7 @@ public class Account {
     @Override
     public String toString () {
         String currencyType = currencyToString(currency);
-        return currencyType + ": " + balance / 100.0f;
+        return currencyType + ": " + String.format("%.2f", balance / 100.0f);
     }
 
 }

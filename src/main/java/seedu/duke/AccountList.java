@@ -5,6 +5,7 @@ import seedu.duke.exceptions.AccountNotEmptyException;
 import seedu.duke.exceptions.AccountAlreadyExistsException;
 import seedu.duke.exceptions.NoAccountException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AccountList {
@@ -48,28 +49,16 @@ public class AccountList {
     }
 
     /**
-     * Gets the specific currency from the AccountList.
-     * 
-     * @param currency The currency account that we would like to retrieve.
-     * @return A hashmap containing the currency and the account details.
-     * @throws NoAccountException If the account does not exist.
-     */
-    public HashMap<Currency, Account> getBalance(Currency currency) throws NoAccountException {
-        if (!accountHashMap.containsKey(currency)) {
-            throw new NoAccountException();
-        }
-        HashMap<Currency, Account> newMap = new HashMap<>();
-        newMap.put(currency, accountHashMap.get(currency));
-        return newMap;
-    }
-
-    /**
      * Gets all the accounts from the accountList.
      *
-     * @return The hashmap containing all the accounts.
+     * @return An array list containing all the accounts.
      */
-    public HashMap<Currency, Account> getAccountHashMap() {
-        return accountHashMap;
+    public ArrayList<Account> getAllAccounts() {
+        ArrayList<Account> accounts = new ArrayList<>();
+        accountHashMap.forEach(((currency, account) -> {
+            accounts.add(account);
+        }));
+        return accounts;
     }
 
     /**
@@ -79,11 +68,10 @@ public class AccountList {
      * @throws NoAccountException if the user does not have an account for that currency
      */
     public Account getAccount(Currency currency) throws NoAccountException {
-        if (!this.getAccountHashMap().containsKey(currency)) {
+        if (!accountHashMap.containsKey(currency)) {
             throw new NoAccountException();
         }
-        
-        return this.getAccountHashMap().get(currency);
+        return accountHashMap.get(currency);
     }
 
     public void addAmount(Currency currency, float amount) throws NoAccountException {

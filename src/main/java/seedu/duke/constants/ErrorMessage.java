@@ -21,4 +21,5 @@ public interface ErrorMessage {
     String NEGATIVE_NUMBER = "Please enter a positive number to show the rate!";
     String SHOWRATE_SYNTAX = "Please structure show-rate as 'show-rate CURRENCY CURRENCY [AMOUNT]'";
     String ACCOUNT_ALREADY_EXISTS = "You already have an account of this currency";
+    String INVALID_UPDATE_BALANCE_ACTION = "The provided action for updating balance was invalid";
 }

@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.InsufficientAccountBalance;
 import seedu.duke.exceptions.NoAccountException;
 
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class AccountList {
         }
         accountHashMap.put(currency, new Account(initialBalance, currency));
     }
+
 
     public void deleteAccount(Currency currency) {
         if (!accountHashMap.containsKey(currency)) {
@@ -61,5 +63,19 @@ public class AccountList {
         int currentAmount = (int) accountHashMap.get(currency).getBalance() * 100;
         int newBalance = currentAmount + amount;
         accountHashMap.put(currency, new Account(newBalance, currency));
+    }
+
+    public int withdrawAmount(int amount,Currency currency) throws NoAccountException, InsufficientAccountBalance{
+        if(!accountHashMap.containsKey(currency)){
+            throw new NoAccountException();
+        }
+
+        int currentAmount = (int) accountHashMap.get(currency).getBalance() * 100;
+        int newBalance = currentAmount - amount;
+        if(newBalance < 0){
+            throw new InsufficientAccountBalance();
+        }
+        accountHashMap.put(currency, new  Account(newBalance,currency));
+        return newBalance;
     }
 }

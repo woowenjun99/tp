@@ -5,5 +5,6 @@ public enum CommandType {
     BALANCE,
     EXIT,
     SHOW_RATE,
-    EXCHANGE
+    EXCHANGE,
+    CREATE_ACCOUNT
 }

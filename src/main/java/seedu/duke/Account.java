@@ -6,9 +6,9 @@ public class Account {
     private int balance;
     private final Currency currency;
 
-    Account(int initialBalance, Currency currency){
+    Account(float initialBalance, Currency currency){
         this.currency = currency;
-        balance = initialBalance * 100;
+        balance = (int)(initialBalance * 100);
     }
 
     public float getBalance(){

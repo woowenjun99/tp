@@ -90,8 +90,8 @@ public class BalanceCommandTest {
                     account
             );
             assertEquals(2, output.size());
-            assertEquals(200, 100 * output.get(Currency.CNY).getBalance());
-            assertEquals(40, 100 * output.get(Currency.EUR).getBalance());
+            assertEquals(200, output.get(Currency.CNY).getBalance());
+            assertEquals(40, output.get(Currency.EUR).getBalance());
         } catch (Exception e) {
             fail();
         }

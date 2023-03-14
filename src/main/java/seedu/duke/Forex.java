@@ -17,8 +17,8 @@ public class Forex {
     */
     private static final HashMap<Currency, Float> exchangeRates = new HashMap<>();
 
-    private Currency initial;
-    private Currency target;
+    private final Currency initial;
+    private final Currency target;
 
     // Constructor
     public Forex(Currency from, Currency to) {

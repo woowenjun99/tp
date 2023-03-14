@@ -25,16 +25,16 @@ public class ExchangeCommand extends Command {
      * Converts the requested amount and changes the account balances
      */
     @Override
-    public void execute(Ui ui, AccountList acclist) {
+    public void execute(Ui ui, AccountList accounts) {
         try {
             // Parse input
             Forex exchangeRate = formatInput();
             float amount = parseAmount();
 
             // Retrieve and edit accounts
-            Account oldAcc = acclist.getAccount(exchangeRate.getInitial());
+            Account oldAcc = accounts.getAccount(exchangeRate.getInitial());
             oldAcc.updateBalance(amount, "subtract");
-            Account newAcc = acclist.getAccount(exchangeRate.getTarget());
+            Account newAcc = accounts.getAccount(exchangeRate.getTarget());
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
             System.out.println(exchangeRate);
             System.out.println("Balance of initial account --> " + oldAcc);

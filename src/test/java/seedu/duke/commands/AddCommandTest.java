@@ -80,7 +80,7 @@ public class AddCommandTest {
     public void execute_correctInputProvided_shouldUpdateAmount() {
         try {
             AccountList account = new AccountList();
-            account.addAccount(Currency.KRW, 4000);
+            account.addAccount(Currency.KRW, 4000.0f);
             AddCommand command = new AddCommand("add KRW 200.00");
             Ui ui = new Ui();
             command.execute(ui, account);

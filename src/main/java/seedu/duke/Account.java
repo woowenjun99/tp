@@ -6,9 +6,9 @@ public class Account {
     private int balance;
     private Currency currency;
 
-    Account(int initialBalance, Currency currency){
+    Account(float initialBalance, Currency currency){
         this.currency = currency;
-        balance = initialBalance * 100;
+        balance = (int)(initialBalance * 100);
     }
 
     public float getBalance(){
@@ -40,7 +40,7 @@ public class Account {
         balance = newBalance;
     }
 
-    private static String currencyToString(Currency currency){
+    public static String currencyToString(Currency currency){
         return currency.name();
     }
 

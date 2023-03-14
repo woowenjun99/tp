@@ -78,10 +78,10 @@ public class BalanceCommandTest {
     @Test
     public void getBalance_ifCurrencyIsNotSpecified_shouldReturnAllCurrencies() {
         AccountList account = new AccountList();
-        account.addAccount(Currency.CNY, 200);
-        account.addAccount(Currency.EUR, 40);
 
         try {
+            account.addAccount(Currency.CNY, 200.0f);
+            account.addAccount(Currency.EUR, 40.0f);
             Method method = BalanceCommand.class.getDeclaredMethod("getBalance", String.class, AccountList.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");

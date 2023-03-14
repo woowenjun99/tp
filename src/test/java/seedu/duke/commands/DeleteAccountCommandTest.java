@@ -3,14 +3,13 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
+import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DeleteAccountCommandTest {
     @Test
@@ -59,7 +58,7 @@ public class DeleteAccountCommandTest {
             command.execute(ui, account);
 
             // Account should not be removed if account not empty
-            account.getAccount(Currency.KRW);
+            assertDoesNotThrow(()->account.getAccount(Currency.KRW));
 
         } catch (Exception e) {
             fail();
@@ -87,13 +86,7 @@ public class DeleteAccountCommandTest {
             Ui ui = new Ui();
             command.execute(ui, account);
 
-            // fail test if account not removed
-            try {
-                account.getAccount(Currency.KRW);
-                fail();
-            }catch(Exception e) {
-                System.out.print("");
-            }
+            assertThrows(NoAccountException.class,()->account.getAccount(Currency.KRW));
         } catch (Exception e) {
             fail();
         }

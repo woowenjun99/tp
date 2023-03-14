@@ -10,7 +10,6 @@ import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * BalanceCommand is a subclass of the Command class that is used to 

@@ -70,13 +70,13 @@ public class AccountList {
         return this.getAccountHashMap().get(currency);
     }
 
-    public void addAmount(Currency currency, int amount) throws NoAccountException {
+    public void addAmount(Currency currency, float amount) throws NoAccountException {
         if (!accountHashMap.containsKey(currency)) {
             throw new NoAccountException();
         }
 
-        int currentAmount = (int) accountHashMap.get(currency).getBalance() * 100;
-        int newBalance = currentAmount + amount;
+        int currentAmount = (int) accountHashMap.get(currency).getBalance();
+        int newBalance = currentAmount + (int) amount;
         accountHashMap.put(currency, new Account(newBalance, currency));
     }
 }

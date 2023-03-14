@@ -45,7 +45,7 @@ public class Parser {
             return new AddCommand(input);
         case SHOW_RATE:
             try{
-                return new ShowRateCommand(args[1]);
+                return new ShowRateCommand(input);
             } catch (IndexOutOfBoundsException e){
                 throw new IllegalArgumentException(Message.ERR_INVALID_SHOW_RATE.getMessage());
             }

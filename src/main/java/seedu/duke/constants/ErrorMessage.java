@@ -18,5 +18,7 @@ public interface ErrorMessage {
     String NOT_ENOUGH_IN_ACCOUNT = "Please ensure you have enough money in your" + 
             " starting currency account to perform this transaction";
     String INVALID_NUMBER = "Please enter a valid number to exchange";
+    String NEGATIVE_NUMBER = "Please enter a positive number to show the rate!";
+    String SHOWRATE_SYNTAX = "Please structure show-rate as 'show-rate CURRENCY CURRENCY [AMOUNT]'";
     String ACCOUNT_ALREADY_EXISTS = "You already have an account of this currency";
 }

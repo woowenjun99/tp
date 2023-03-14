@@ -40,7 +40,7 @@ public class Account {
         balance = newBalance;
     }
 
-    private static String currencyToString(Currency currency){
+    public static String currencyToString(Currency currency){
         return currency.name();
     }
 

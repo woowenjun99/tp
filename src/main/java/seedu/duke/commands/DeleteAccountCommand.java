@@ -5,7 +5,6 @@ import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
 import seedu.duke.exceptions.AccountNotEmptyException;
-import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.InvalidDeleteAccountCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;

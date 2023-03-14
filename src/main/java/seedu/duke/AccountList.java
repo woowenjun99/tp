@@ -1,5 +1,7 @@
 package seedu.duke;
 
+
+import seedu.duke.exceptions.AccountNotEmptyException;
 import seedu.duke.exceptions.AccountAlreadyExistsException;
 import seedu.duke.exceptions.NoAccountException;
 
@@ -36,9 +38,12 @@ public class AccountList {
      * @param currency The currency type of the account to be deleted
      * @throws NoAccountException If the account does not exist
      */
-    public void deleteAccount(Currency currency) throws NoAccountException{
+    public void deleteAccount(Currency currency) throws NoAccountException, AccountNotEmptyException {
         if (!accountHashMap.containsKey(currency)) {
             throw new NoAccountException();
+        }
+        if ((int)accountHashMap.get(currency).getBalance() != 0){
+            throw new AccountNotEmptyException();
         }
         accountHashMap.remove(currency);
     }

@@ -2,23 +2,19 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
-import seedu.duke.constants.Message;
-import seedu.duke.exceptions.AccountAlreadyExistsException;
-import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class CreateAccountTest {
     private final PrintStream standardOut = System.out;
@@ -71,6 +67,7 @@ public class CreateAccountTest {
         Command command = new CreateAccountCommand("create-account EUR");
         command.execute(ui,accounts);
         command.execute(ui,accounts);
-        assertEquals("You have successfully added the EUR account\n" + ErrorMessage.ACCOUNT_ALREADY_EXISTS, outputStreamCaptor.toString().trim());
+        assertEquals("You have successfully added the EUR account\n" +
+                ErrorMessage.ACCOUNT_ALREADY_EXISTS, outputStreamCaptor.toString().trim());
     }
 }

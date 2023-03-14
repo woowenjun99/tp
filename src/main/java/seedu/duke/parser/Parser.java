@@ -1,13 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.BalanceCommand;
-import seedu.duke.commands.Command;
-import seedu.duke.commands.CommandType;
-import seedu.duke.commands.CreateAccountCommand;
-import seedu.duke.commands.ExchangeCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.ShowRateCommand;
+import seedu.duke.commands.*;
 import seedu.duke.constants.Message;
 
 /**
@@ -40,6 +33,8 @@ public class Parser {
             return new ExitCommand();
         case ADD:
             return new AddCommand(input);
+        case WITHDRAW:
+            return new WithdrawCommand(input);
         case SHOW_RATE:
             try{
                 return new ShowRateCommand(input);
@@ -50,6 +45,7 @@ public class Parser {
             return new ExchangeCommand(input);
         case CREATE_ACCOUNT:
             return new CreateAccountCommand(input);
+
         default:
             throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
         }

@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
-import seedu.duke.ui.Ui;
 import seedu.duke.AccountList;
+import seedu.duke.ui.Ui;
 
 public abstract class Command {
     protected final boolean isExit;
@@ -16,7 +16,7 @@ public abstract class Command {
      * Executes the command implemented by the subclass
      */
 
-    public abstract void execute(Ui ui, AccountList account);
+    public abstract void execute(Ui ui, AccountList accounts);
 
     public boolean isExit () {
         return isExit;

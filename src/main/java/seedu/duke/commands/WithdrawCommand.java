@@ -47,7 +47,7 @@ public class WithdrawCommand extends Command {
 
     private void printSuccess(Ui ui, float newBalance) {
         ui.printf(Message.SUCCESSFUL_WITHDRAW_COMMAND.getMessage(), newBalance, this.currency.name(),
-                (float)this.amount/100, this.currency.name());
+                this.amount/100, this.currency.name());
     }
 
     /**

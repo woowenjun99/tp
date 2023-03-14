@@ -27,9 +27,12 @@ public class Parser {
 
         CommandType command;
         try{
-            command = CommandType.get(args[0]);
+            String commandString = args[0].replace("-", "_").toUpperCase();
+            command = CommandType.valueOf(commandString);
         } catch (IndexOutOfBoundsException e){
             throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("No command found named " + args[0]);
         }
 
         switch(command){

@@ -47,8 +47,7 @@ public class Forex {
      */
     public float convert(float amount) {
         float amountInSGD = amount / exchangeRates.get(initial);
-        float amountInTarget = amountInSGD * exchangeRates.get(target);
-        return amountInTarget;
+        return amountInSGD * exchangeRates.get(target);
     }
 
     // Accessor methods

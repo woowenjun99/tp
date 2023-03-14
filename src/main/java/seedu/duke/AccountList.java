@@ -80,13 +80,13 @@ public class AccountList {
         accountHashMap.put(currency, new Account(newBalance, currency));
     }
 
-    public int withdrawAmount(int amount,Currency currency) throws NoAccountException, InsufficientAccountBalance{
+    public int withdrawAmount(float amount,Currency currency) throws NoAccountException, InsufficientAccountBalance{
         if(!accountHashMap.containsKey(currency)){
             throw new NoAccountException();
         }
 
         int currentAmount = (int)accountHashMap.get(currency).getBalance();
-        int newBalance = currentAmount - amount;
+        int newBalance = currentAmount - (int)amount;
         if(newBalance < 0){
             throw new InsufficientAccountBalance();
         }

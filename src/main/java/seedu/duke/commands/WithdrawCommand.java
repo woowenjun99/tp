@@ -4,10 +4,7 @@ import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
-import seedu.duke.exceptions.InsufficientAccountBalance;
-import seedu.duke.exceptions.InvalidAddCommandException;
-import seedu.duke.exceptions.NegativeWithdrawalAmountException;
-import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.exceptions.*;
 import seedu.duke.ui.Ui;
 
 /**
@@ -15,7 +12,7 @@ import seedu.duke.ui.Ui;
  */
 public class WithdrawCommand extends Command {
     private Currency currency;
-    private int amount;
+    private float amount;
 
     /**
      * @param input   The user input including the command.
@@ -28,16 +25,16 @@ public class WithdrawCommand extends Command {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand() throws InvalidAddCommandException, NegativeWithdrawalAmountException {
+    private void processCommand() throws InvalidWithdrawCommandException, NegativeWithdrawalAmountException {
         String[] words = super.input.split(" ");
         // Format: [Command, CURRENCY, AMOUNT]
         boolean isValidCommand = words.length == 3;
         if (!isValidCommand) {
-            throw new InvalidAddCommandException();
+            throw new InvalidWithdrawCommandException();
         }
         this.currency = getCurrency(words[2]);
-        this.amount = Integer.parseInt(words[1]) * 100;
-        if(this.amount <0 ){
+        this.amount = Float.parseFloat(words[1]);
+        if (this.amount <= 0) {
             throw new NegativeWithdrawalAmountException();
         }
 
@@ -58,10 +55,10 @@ public class WithdrawCommand extends Command {
     public void execute(Ui ui, AccountList accounts) {
         try {
             processCommand();
-            float newBalance = accounts.withdrawAmount(this.amount, this.currency)/100;
+            float newBalance = accounts.withdrawAmount(this.amount, this.currency);
             printSuccess(ui, newBalance);
-        } catch (InvalidAddCommandException e) {
-            ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);
+        } catch (InvalidWithdrawCommandException e) {
+            ui.printMessage(ErrorMessage.INVALID_WITHDRAW_COMMAND);
         } catch (NumberFormatException e) {
             ui.printMessage(ErrorMessage.INVALID_NUMERICAL_AMOUNT);
         } catch (IllegalArgumentException e) {

@@ -90,7 +90,7 @@ public class WithdrawCommandTest {
             WithdrawCommand command = new WithdrawCommand("withdraw 2000 KRW");
             Ui ui = new Ui();
             command.execute(ui, accounts);
-            int expectedAmount =  (int) accounts.getBalance(Currency.KRW).get(Currency.KRW).getBalance()/100;
+            int expectedAmount =  (int) accounts.getBalance(Currency.KRW).get(Currency.KRW).getBalance();
             assertEquals(2000.00, expectedAmount);
         } catch (Exception e) {
             fail();

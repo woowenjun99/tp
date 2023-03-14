@@ -15,7 +15,7 @@ public class ShowRateCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, AccountList account) {
+    public void execute(Ui ui, AccountList accounts) {
         // TODO: fully implement
         try {
             String[] args = input.split(" ");

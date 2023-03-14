@@ -52,10 +52,10 @@ public class AddCommand extends Command {
      * @param ui The instance of the UI class.
      */
     @Override
-    public void execute(Ui ui, AccountList account) {
+    public void execute(Ui ui, AccountList accounts) {
         try {
             processCommand();
-            account.addAmount(this.currency, this.amount);
+            accounts.addAmount(this.currency, this.amount);
             printSuccess(ui);
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);

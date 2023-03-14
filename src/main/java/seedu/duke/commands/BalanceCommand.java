@@ -44,13 +44,13 @@ public class BalanceCommand extends Command {
         return Currency.valueOf(currency);
     }
 
-    private HashMap<Currency, Account> getBalance(String currencyString, AccountList account)
+    private HashMap<Currency, Account> getBalance(String currencyString, AccountList accounts)
             throws NoAccountException {
         if (currencyString.equals(ALL)) {
-            return account.getAccountHashMap();
+            return accounts.getAccountHashMap();
         }
         Currency currency = convertStringToEnum(currencyString);
-        return account.getBalance(currency);
+        return accounts.getBalance(currency);
     }
 
     private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {

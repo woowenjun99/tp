@@ -12,7 +12,7 @@ public class ExitCommand extends Command{
     }
 
     @Override
-    public void execute(Ui ui, AccountList account) {
+    public void execute(Ui ui, AccountList accounts) {
         ui.printFarewell();
     }
 }

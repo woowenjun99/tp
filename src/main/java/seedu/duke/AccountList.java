@@ -73,7 +73,7 @@ public class AccountList {
             throw new NoAccountException();
         }
 
-        int currentAmount = (int) accountHashMap.get(currency).getBalance() * 100;
+        int currentAmount = (int) accountHashMap.get(currency).getBalance();
         int newBalance = currentAmount + amount;
         accountHashMap.put(currency, new Account(newBalance, currency));
     }

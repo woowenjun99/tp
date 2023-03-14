@@ -84,7 +84,7 @@ public class AddCommandTest {
             AddCommand command = new AddCommand("add KRW 2000");
             Ui ui = new Ui();
             command.execute(ui, account);
-            int expectedAmount =  (int) account.getBalance(Currency.KRW).get(Currency.KRW).getBalance() * 100;
+            int expectedAmount =  (int) account.getBalance(Currency.KRW).get(Currency.KRW).getBalance()/ 100;
             assertEquals(4000, expectedAmount);
         } catch (Exception e) {
             fail();

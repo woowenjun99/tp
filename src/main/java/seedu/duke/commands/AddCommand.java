@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             throw new InvalidAddCommandException();
         }
         this.currency = getCurrency(words[1]);
-        this.amount = Integer.parseInt(words[2]);
+        this.amount = Integer.parseInt(words[2]) * 100;
     }
 
     private void printSuccess(Ui ui) {

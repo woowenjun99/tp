@@ -6,7 +6,8 @@ public enum CommandType {
     EXIT("exit"),
     SHOW_RATE("show-rate"),
     EXCHANGE("exchange"),
-    CREATE_ACCOUNT("create-account");
+    CREATE_ACCOUNT("create-account"),
+    DELETE_ACCOUNT("delete-account");
     private String command;
 
     CommandType(String command){

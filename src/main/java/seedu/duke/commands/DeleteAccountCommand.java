@@ -47,10 +47,10 @@ public class DeleteAccountCommand extends Command {
      * @param ui The instance of the UI class.
      */
     @Override
-    public void execute(Ui ui, AccountList account) {
+    public void execute(Ui ui, AccountList accounts) {
         try {
             processCommand();
-            account.deleteAccount(this.currency);
+            accounts.deleteAccount(this.currency);
             printSuccess(ui);
         } catch (InvalidDeleteAccountCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_DELETE_ACCOUNT_COMMAND);

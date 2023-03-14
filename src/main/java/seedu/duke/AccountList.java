@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.AccountAlreadyExistsException;
-import seedu.duke.exceptions.AccountDoesNotExistException;
 import seedu.duke.exceptions.NoAccountException;
 
 import java.util.HashMap;
@@ -16,6 +15,13 @@ public class AccountList {
         accountHashMap = new HashMap<>();
     }
 
+    /**
+     * Adds an account to the account list
+     *
+     * @param currency The currency of the new account to be added
+     * @param initialBalance The initial balance of the new account to be added
+     * @throws AccountAlreadyExistsException If the account already exists
+     */
     public void addAccount(Currency currency, float initialBalance) throws AccountAlreadyExistsException{
         if (accountHashMap.containsKey(currency)) {
             throw new AccountAlreadyExistsException();
@@ -23,9 +29,15 @@ public class AccountList {
         accountHashMap.put(currency, new Account(initialBalance, currency));
     }
 
-    public void deleteAccount(Currency currency) throws AccountDoesNotExistException{
+    /**
+     * Deletes an account from the account list
+     *
+     * @param currency The currency type of the account to be deleted
+     * @throws NoAccountException If the account does not exist
+     */
+    public void deleteAccount(Currency currency) throws NoAccountException{
         if (!accountHashMap.containsKey(currency)) {
-            throw new AccountDoesNotExistException();
+            throw new NoAccountException();
         }
         accountHashMap.remove(currency);
     }

@@ -21,7 +21,7 @@ public enum Message {
     ERR_UNKNOWN_COMMAND("Sorry, I don't understand that command. Type 'help' to see the list of commands."),
     ERR_INVALID_SHOW_RATE("show-rate must be used with the following format: show-rate <CURRENCY1> <CURRENCY2>"),
     SUCCESSFUL_ADD_COMMAND("You have successfully added %s %.2f into your account"),
-    SUCCESSFUL_CREATE_ACCOUNT_COMMAND("You have successfully added the %s account");
+    SUCCESSFUL_CREATE_ACCOUNT_COMMAND("You have successfully added the %s account\n");
     private final String message;
 
     Message(String message) {

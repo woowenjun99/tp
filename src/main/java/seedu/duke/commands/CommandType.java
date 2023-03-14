@@ -5,7 +5,8 @@ public enum CommandType {
     BALANCE("balance"),
     EXIT("exit"),
     SHOW_RATE("show-rate"),
-    EXCHANGE("exchange");
+    EXCHANGE("exchange"),
+    CREATE_ACCOUNT("create-account");
     private String command;
 
     CommandType(String command){

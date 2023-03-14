@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.AccountNotEmptyException;
 import seedu.duke.exceptions.NoAccountException;
 
 import java.util.HashMap;
@@ -21,9 +22,12 @@ public class AccountList {
         accountHashMap.put(currency, new Account(initialBalance, currency));
     }
 
-    public void deleteAccount(Currency currency) {
+    public void deleteAccount(Currency currency) throws NoAccountException, AccountNotEmptyException {
         if (!accountHashMap.containsKey(currency)) {
-            // todo throw some exception signalling account already exists
+            throw new NoAccountException();
+        }
+        if ((int)accountHashMap.get(currency).getBalance() != 0){
+            throw new AccountNotEmptyException();
         }
         accountHashMap.remove(currency);
     }

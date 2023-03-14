@@ -14,4 +14,8 @@ public interface ErrorMessage {
     String NOT_ENOUGH_IN_ACCOUNT = "Please ensure you have enough money in your" + 
             " starting currency account to perform this transaction";
     String INVALID_NUMBER = "Please enter a valid number to exchange";
+
+    String INVALID_DELETE_ACCOUNT_COMMAND = "Please check that you have correctly provided the " +
+            "currency account to delete";
+    String ACCOUNT_NOT_EMPTY     = "Please empty your currency account before account deletion";
 }

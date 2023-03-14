@@ -6,5 +6,6 @@ public enum CommandType {
     EXIT,
     SHOW_RATE,
     EXCHANGE,
-    CREATE_ACCOUNT
+    CREATE_ACCOUNT,
+    DELETE_ACCOUNT
 }

@@ -68,11 +68,11 @@ public class BalanceCommand extends Command {
             HashMap<Currency, Account> balances = getBalance(currencyString, account);
             printCurrencies(balances, ui);
         } catch (InvalidBalanceCommandException e) {
-            System.out.println(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);
+            ui.printMessage(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);
         } catch (IllegalArgumentException e) {
-            System.out.println(ErrorMessage.INVALID_CURRENCY);
+            ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (NoAccountException e) {
-            System.out.println(ErrorMessage.NO_SUCH_ACCOUNT);
+            ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
         }
     }
 }

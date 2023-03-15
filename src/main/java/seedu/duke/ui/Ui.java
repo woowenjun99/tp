@@ -82,4 +82,7 @@ public class Ui {
         printMessage(Message.ERR_INVALID_SHOW_RATE.getMessage());
     }
 
+    public void printNewLine() {
+        System.out.println();
+    }
 }

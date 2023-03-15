@@ -9,10 +9,10 @@ import seedu.duke.exceptions.InvalidBalanceCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
- * BalanceCommand is a subclass of the Command class that is used to 
+ * BalanceCommand is a subclass of the Command class that is used to
  * handle the getBalance command by the user.
  */
 public class BalanceCommand extends Command {
@@ -23,12 +23,12 @@ public class BalanceCommand extends Command {
     /**
      * @param command The full user input including the command word {@code balance SGD}.
      */
-    public BalanceCommand(String command) {
+    public BalanceCommand (String command) {
         super(false, command);
         this.command = command.trim();
     }
 
-    private String processCommand() throws InvalidBalanceCommandException {
+    private String processCommand () throws InvalidBalanceCommandException {
         String[] words = command.split(" ");
         switch (words.length) {
         case 1:
@@ -40,39 +40,46 @@ public class BalanceCommand extends Command {
         }
     }
 
-    private Currency convertStringToEnum(String currency) throws IllegalArgumentException {
+    private Currency convertStringToEnum (String currency) throws IllegalArgumentException {
         return Currency.valueOf(currency);
     }
 
-    private HashMap<Currency, Account> getBalance(String currencyString, AccountList account)
+    private ArrayList<Account> getAccounts (String currencyString, AccountList accounts)
             throws NoAccountException {
+        ArrayList<Account> accountArrayList;
         if (currencyString.equals(ALL)) {
-            return account.getAccountHashMap();
+            // Return all accounts
+            accountArrayList = accounts.getAllAccounts();
+        } else {
+            Currency currency = convertStringToEnum(currencyString);
+            accountArrayList = new ArrayList<>();
+            accountArrayList.add(accounts.getAccount(currency));
         }
-        Currency currency = convertStringToEnum(currencyString);
-        return account.getBalance(currency);
+        return accountArrayList;
     }
 
-    private void printCurrencies(HashMap<Currency, Account> balances, Ui ui) {
+    private void printCurrencies (ArrayList<Account> accountArrayList, Ui ui) {
         ui.printMessage(Message.BALANCE.getMessage());
-        balances.forEach((currency, account) -> ui.printf("%s: %f\n", currency.name(), account.getBalance()));
+        for (Account account : accountArrayList) {
+            ui.printMessage(account.toString());
+        }
     }
 
     /**
      * Gets the currencies from the AccountList and displays it onto the screen.
      */
     @Override
-    public void execute(Ui ui, AccountList account) {
+    public void execute (Ui ui, AccountList account) {
         try {
             String currencyString = processCommand();
-            HashMap<Currency, Account> balances = getBalance(currencyString, account);
-            printCurrencies(balances, ui);
+            ArrayList<Account> accountArrayList = getAccounts(currencyString, account);
+            printCurrencies(accountArrayList, ui);
         } catch (InvalidBalanceCommandException e) {
-            System.out.println(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);
+            ui.printMessage(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);
         } catch (IllegalArgumentException e) {
-            System.out.println(ErrorMessage.INVALID_CURRENCY);
+            ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (NoAccountException e) {
-            System.out.println(ErrorMessage.NO_SUCH_ACCOUNT);
+            ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
         }
     }
 }

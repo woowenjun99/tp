@@ -12,7 +12,7 @@ public class AccountTest {
     public void updateBalance_exceedAmount_shouldThrowException () {
         Account account = new Account(0, Currency.JPY);
         assertThrows(TooLargeAmountException.class,
-                () -> account.updateBalance(1_000_000_001, "add")
+                () -> account.updateBalance(10_000_001, "add")
         );
     }
 

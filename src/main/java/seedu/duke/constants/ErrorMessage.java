@@ -29,5 +29,7 @@ public interface ErrorMessage {
     String SHOWRATE_SYNTAX = "Please structure show-rate as 'show-rate CURRENCY CURRENCY [AMOUNT]'";
     String ACCOUNT_ALREADY_EXISTS = "You already have an account of this currency";
     String INVALID_UPDATE_BALANCE_ACTION = "The provided action for updating balance was invalid";
+    String EXCHANGE_AMOUNT_TOO_SMALL = "The amount is too small to exchange " +
+            "(e.g. does not become at least 0.01 in the target currency)";
 
 }

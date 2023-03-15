@@ -29,5 +29,6 @@ public interface ErrorMessage {
     String SHOWRATE_SYNTAX = "Please structure show-rate as 'show-rate CURRENCY CURRENCY [AMOUNT]'";
     String ACCOUNT_ALREADY_EXISTS = "You already have an account of this currency";
     String INVALID_UPDATE_BALANCE_ACTION = "The provided action for updating balance was invalid";
-
+    String EXCEED_AMOUNT_ALLOWED = "You are not allowed to store more than $1,000,000 in your account. Please" 
+        + " check how much you have in your balance and how much you are depositing before adding the value in.";
 }

@@ -39,6 +39,7 @@ public class AddCommand extends Command {
             throw new InvalidAddCommandException();
         }
         this.currency = getCurrency(words[1]);
+
         this.amount = Float.parseFloat(words[2]);
         if (this.amount <= 0) {
             throw new InvalidAmountToAddException();

@@ -1,6 +1,7 @@
 package seedu.duke;
 
 
+import seedu.duke.exceptions.InsufficientAccountBalance;
 import seedu.duke.exceptions.AccountNotEmptyException;
 import seedu.duke.exceptions.AccountAlreadyExistsException;
 import seedu.duke.exceptions.NoAccountException;
@@ -12,7 +13,6 @@ public class AccountList {
     // Currency implementation only specifies one account per currency, if required would have to change to a
     // Hashmap of ArrayList of account in the future and randomly generate an ID for that account
     private final HashMap<Currency, Account> accountHashMap;
-
 
     public AccountList () {
         accountHashMap = new HashMap<>();
@@ -29,7 +29,7 @@ public class AccountList {
         if (accountHashMap.containsKey(currency)) {
             throw new AccountAlreadyExistsException();
         }
-        accountHashMap.put(currency, new Account(initialBalance, currency));
+        accountHashMap.put(currency, new Account((int) initialBalance, currency));
     }
 
     /**
@@ -75,5 +75,30 @@ public class AccountList {
         return accountHashMap.get(currency);
     }
 
+    public void addAmount(Currency currency, float amount) throws NoAccountException {
+        if (!accountHashMap.containsKey(currency)) {
+            throw new NoAccountException();
+        }
+
+        int currentAmount = (int) accountHashMap.get(currency).getBalance();
+
+        int newBalance = currentAmount + (int) amount;
+
+        accountHashMap.put(currency, new Account(newBalance, currency));
+    }
+
+    public int withdrawAmount(float amount, Currency currency) throws NoAccountException, InsufficientAccountBalance {
+        if (!accountHashMap.containsKey(currency)) {
+            throw new NoAccountException();
+        }
+
+        int currentAmount = (int) accountHashMap.get(currency).getBalance();
+        int newBalance = currentAmount - (int) amount;
+        if (newBalance < 0) {
+            throw new InsufficientAccountBalance();
+        }
+        accountHashMap.put(currency, new Account(newBalance, currency));
+        return newBalance;
+    }
 
 }

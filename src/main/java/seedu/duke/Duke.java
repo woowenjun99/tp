@@ -12,7 +12,7 @@ public class Duke {
     /**
      * Runs the main input loop until the exit command is called
      */
-    public static void run(){
+    public static void run() {
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -29,6 +29,7 @@ public class Duke {
 
         }
     }
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */

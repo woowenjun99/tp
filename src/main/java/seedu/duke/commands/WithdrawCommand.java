@@ -1,12 +1,14 @@
 package seedu.duke.commands;
 
+import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
-import seedu.duke.exceptions.InsufficientAccountBalance;
 import seedu.duke.exceptions.InvalidWithdrawCommandException;
 import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.exceptions.NotEnoughInAccountException;
+import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.ui.Ui;
 
 /**
@@ -19,15 +21,15 @@ public class WithdrawCommand extends Command {
     /**
      * @param input The user input including the command.
      */
-    public WithdrawCommand(String input) {
+    public WithdrawCommand (String input) {
         super(false, input);
     }
 
-    private Currency getCurrency(String currencyString) {
+    private Currency getCurrency (String currencyString) {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand() throws InvalidWithdrawCommandException {
+    private void processCommand () throws InvalidWithdrawCommandException {
         String[] words = super.input.split(" ");
         // Format: [Command, CURRENCY, AMOUNT]
         boolean isValidCommand = words.length == 3;
@@ -43,9 +45,10 @@ public class WithdrawCommand extends Command {
 
     }
 
-    private void printSuccess(Ui ui, float newBalance) {
-        ui.printf(Message.SUCCESSFUL_WITHDRAW_COMMAND.getMessage(), newBalance, this.currency.name(),
-                this.amount / 100, this.currency.name());
+    private void printSuccess (Ui ui, float newBalance) {
+        ui.printf(Message.SUCCESSFUL_WITHDRAW_COMMAND.getMessage(), this.amount, this.currency.name(),
+                newBalance / 100, this.currency.name());
+        ui.printNewLine();
     }
 
     /**
@@ -54,11 +57,12 @@ public class WithdrawCommand extends Command {
      * @param ui The instance of the UI class.
      */
     @Override
-    public void execute(Ui ui, AccountList accounts) {
+    public void execute (Ui ui, AccountList accounts) {
         try {
             processCommand();
-            float newBalance = accounts.withdrawAmount(this.amount, this.currency);
-            printSuccess(ui, newBalance);
+            Account account = accounts.getAccount(this.currency);
+            account.updateBalance(this.amount, "subtract");
+            printSuccess(ui, account.getBalance());
         } catch (InvalidWithdrawCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_WITHDRAW_COMMAND);
         } catch (NumberFormatException e) {
@@ -67,8 +71,10 @@ public class WithdrawCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
-        } catch (InsufficientAccountBalance e) {
-            ui.printMessage(ErrorMessage.INSUFFICIENT_WITHDRAW_BALANCE);
+        } catch (NotEnoughInAccountException e) {
+            ui.printMessage(ErrorMessage.NOT_ENOUGH_IN_ACCOUNT);
+        } catch (InvalidUpdateBalanceActionException e) {
+            ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         }
     }
 }

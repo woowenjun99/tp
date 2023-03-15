@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
@@ -7,6 +8,8 @@ import seedu.duke.constants.Message;
 import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.InvalidAmountToAddException;
 import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.exceptions.NotEnoughInAccountException;
+import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.ui.Ui;
 
 /**
@@ -17,17 +20,17 @@ public class AddCommand extends Command {
     private float amount;
 
     /**
-     * @param input   The user input including the command.
+     * @param input The user input including the command.
      */
-    public AddCommand(String input) {
+    public AddCommand (String input) {
         super(false, input);
     }
 
-    private Currency getCurrency(String currencyString) {
+    private Currency getCurrency (String currencyString) {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand() throws InvalidAddCommandException,
+    private void processCommand () throws InvalidAddCommandException,
             InvalidAmountToAddException {
         String[] words = super.input.split(" ");
         // Format: [Command, CURRENCY, AMOUNT]
@@ -42,8 +45,8 @@ public class AddCommand extends Command {
         }
     }
 
-    private void printSuccess(Ui ui) {
-        ui.printf(Message.SUCCESSFUL_ADD_COMMAND.getMessage(), this.currency.name(), this.amount / 100.0);
+    private void printSuccess (Ui ui) {
+        ui.printf(Message.SUCCESSFUL_ADD_COMMAND.getMessage(), this.currency.name(), this.amount);
         ui.printNewLine();
     }
 
@@ -53,10 +56,11 @@ public class AddCommand extends Command {
      * @param ui The instance of the UI class.
      */
     @Override
-    public void execute(Ui ui, AccountList account) {
+    public void execute (Ui ui, AccountList accounts) {
         try {
             processCommand();
-            account.addAmount(this.currency, this.amount);
+            Account account = accounts.getAccount(this.currency);
+            account.updateBalance(this.amount, "add");
             printSuccess(ui);
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);
@@ -70,6 +74,11 @@ public class AddCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_AMOUNT_TO_ADD);
         } catch (NullPointerException e) {
             ui.printMessage(ErrorMessage.NO_AMOUNT_PROVIDED);
+        } catch (NotEnoughInAccountException e) {
+            // this should not happen since we are adding money
+            ui.printMessage(ErrorMessage.NOT_ENOUGH_IN_ACCOUNT);
+        } catch (InvalidUpdateBalanceActionException e) {
+            ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         }
     }
 }

@@ -5,12 +5,12 @@ import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.TooLargeAmountException;
 
 public class Account {
-    private int balance;
+    private long balance;
     private final Currency currency;
 
     Account (float initialBalance, Currency currency) {
         this.currency = currency;
-        balance = (int) (initialBalance * 100);
+        balance = (long) (initialBalance * 100);
     }
 
     public float getBalance () {
@@ -30,15 +30,15 @@ public class Account {
      */
     public void updateBalance (float changeInBalance, String action) throws NotEnoughInAccountException,
             InvalidUpdateBalanceActionException, TooLargeAmountException {
-        int newBalance;
+        long newBalance;
         if (action.equals("add")) {
-            newBalance = balance + (int) (changeInBalance * 100);
-            final int UPPER_BOUND = 1_000_000_000;
+            newBalance = balance + (long) (changeInBalance * 100);
+            long UPPER_BOUND = 1_000_000_000;
             if (newBalance > UPPER_BOUND) {
                 throw new TooLargeAmountException();
             }
         } else if (action.equals("subtract")) {
-            newBalance = balance - (int) (changeInBalance * 100);
+            newBalance = balance - (long) (changeInBalance * 100);
         } else {
             throw new InvalidUpdateBalanceActionException();
         }

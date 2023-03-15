@@ -13,7 +13,8 @@ public enum Message {
             + "\t exchange CURRENCY1 CURRENCY2 AMOUNT - transfer funds from a currency1 account\n"
             + "\t\t                                   into its equivalent value in currency2 account\n"
             + "\t withdraw CURRENCY AMOUNT - withdraws that amount of money from that currency account\n"
-            + "\t show-rate CURRENCY1 CURRENCY2 [AMOUNT] - shows the value of each dollar in CURRENCY1 in terms of CURRENCY2\n"
+            + "\t show-rate CURRENCY1 CURRENCY2 [AMOUNT] - shows the value of each dollar in CURRENCY1 in " +
+            "terms of CURRENCY2\n"
             + "\t delete-account CURRENCY - deletes the account of that currency\n"
             + "\t create-account CURRENCY - creates an account of that currency\n"
             + "\t exit - exits the program\n"

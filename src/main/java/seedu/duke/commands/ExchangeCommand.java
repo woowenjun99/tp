@@ -37,8 +37,8 @@ public class ExchangeCommand extends Command {
 
             // Retrieve and edit accounts
             Account oldAcc = accounts.getAccount(exchangeRate.getInitial());
-            oldAcc.updateBalance(amount, "subtract");
             Account newAcc = accounts.getAccount(exchangeRate.getTarget());
+            oldAcc.updateBalance(amount, "subtract");
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
             ui.printMessage(exchangeRate);
             ui.printMessage("Balance of initial account --> " + oldAcc);

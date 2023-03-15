@@ -44,6 +44,7 @@ public class AddCommand extends Command {
 
     private void printSuccess(Ui ui) {
         ui.printf(Message.SUCCESSFUL_ADD_COMMAND.getMessage(), this.currency.name(), this.amount / 100.0);
+        ui.printNewLine();
     }
 
     /**

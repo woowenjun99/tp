@@ -12,13 +12,14 @@ import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
+import java.math.BigDecimal;
 
 /**
  * This class is used to deal with the addCommand.
  */
 public class AddCommand extends Command {
     private Currency currency;
-    private float amount;
+    private BigDecimal amount;
 
     /**
      * @param input The user input including the command.
@@ -41,8 +42,8 @@ public class AddCommand extends Command {
         }
         this.currency = getCurrency(words[1]);
 
-        this.amount = Float.parseFloat(words[2]);
-        if (this.amount <= 0) {
+        this.amount = new BigDecimal(words[2]);
+        if (this.amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidAmountToAddException();
         }
     }

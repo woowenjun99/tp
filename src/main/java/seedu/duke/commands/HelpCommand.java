@@ -11,6 +11,6 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(Ui ui, AccountList account) {
-        ui.printMessage(Message.HELP);
+        ui.printMessage(Message.HELP.getMessage());
     }
 }

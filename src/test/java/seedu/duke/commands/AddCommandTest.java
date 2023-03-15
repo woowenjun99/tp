@@ -84,7 +84,9 @@ public class AddCommandTest {
             AddCommand command = new AddCommand("add KRW 200.00");
             Ui ui = new Ui();
             command.execute(ui, account);
-            int expectedAmount =  (int) account.getAccount(Currency.KRW).getBalance();
+
+            int expectedAmount = (int) account.getAccount(Currency.KRW).getBalance();
+
             assertEquals(4200, expectedAmount);
         } catch (Exception e) {
             fail();
@@ -98,6 +100,7 @@ public class AddCommandTest {
             method.setAccessible(true);
             AddCommand command = new AddCommand("add JPY -1");
             assertThrows(InvocationTargetException.class, () -> method.invoke(command));
+
         } catch (Exception e) {
             fail();
         }

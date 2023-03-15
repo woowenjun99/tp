@@ -105,8 +105,10 @@ public class BalanceCommandTest {
             System.out.println(CNYAccount.getBalance());
             System.out.println(EURAccount.getBalance());
             assertEquals(2, output.size());
+
             assertEquals(200, CNYAccount.getBalance());
             assertEquals(40, EURAccount.getBalance());
+
         } catch (Exception e) {
             fail();
         }

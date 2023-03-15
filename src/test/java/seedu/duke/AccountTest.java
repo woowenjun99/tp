@@ -19,7 +19,7 @@ public class AccountTest {
     @Test
     public void updateBalance_validInput_shouldAddCorrectly () {
         Account account = new Account(0, Currency.JPY);
-        assertDoesNotThrow(() -> account.updateBalance(1_000_000, "add"));
-        assertEquals(1_000_000, account.getBalance());
+        assertDoesNotThrow(() -> account.updateBalance(10_000_000, "add"));
+        assertEquals(10_000_000, account.getBalance());
     }
 }

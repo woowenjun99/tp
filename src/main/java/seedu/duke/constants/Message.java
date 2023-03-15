@@ -28,11 +28,11 @@ public enum Message {
 
     private final String message;
 
-    Message(String message) {
+    Message (String message) {
         this.message = message;
     }
 
-    public String getMessage() {
+    public String getMessage () {
         return message;
     }
 }

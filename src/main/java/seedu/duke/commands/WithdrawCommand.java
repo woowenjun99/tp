@@ -21,15 +21,15 @@ public class WithdrawCommand extends Command {
     /**
      * @param input The user input including the command.
      */
-    public WithdrawCommand (String input) {
+    public WithdrawCommand(String input) {
         super(false, input);
     }
 
-    private Currency getCurrency (String currencyString) {
+    private Currency getCurrency(String currencyString) {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand () throws InvalidWithdrawCommandException {
+    private void processCommand() throws InvalidWithdrawCommandException {
         String[] words = super.input.split(" ");
         // Format: [Command, CURRENCY, AMOUNT]
         boolean isValidCommand = words.length == 3;
@@ -45,9 +45,9 @@ public class WithdrawCommand extends Command {
 
     }
 
-    private void printSuccess (Ui ui, float newBalance) {
+    private void printSuccess(Ui ui, float newBalance) {
         ui.printf(Message.SUCCESSFUL_WITHDRAW_COMMAND.getMessage(), this.amount, this.currency.name(),
-                newBalance / 100, this.currency.name());
+                newBalance, this.currency.name());
         ui.printNewLine();
     }
 
@@ -57,7 +57,7 @@ public class WithdrawCommand extends Command {
      * @param ui The instance of the UI class.
      */
     @Override
-    public void execute (Ui ui, AccountList accounts) {
+    public void execute(Ui ui, AccountList accounts) {
         try {
             processCommand();
             Account account = accounts.getAccount(this.currency);

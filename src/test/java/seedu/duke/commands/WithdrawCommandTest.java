@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class WithdrawCommandTest {
     @Test
-    public void getCurrency_invalidCurrency_shouldThrowException(){
+    public void getCurrency_invalidCurrency_shouldThrowException() {
         try {
             Method method = WithdrawCommand.class.getDeclaredMethod("getCurrency", String.class);
             method.setAccessible(true);
@@ -70,12 +70,12 @@ public class WithdrawCommandTest {
     }
 
     @Test
-    public void getCurrency_validCurrency_shouldReturnCorrespondingCurrency(){
+    public void getCurrency_validCurrency_shouldReturnCorrespondingCurrency() {
         try {
             Method method = WithdrawCommand.class.getDeclaredMethod("getCurrency", String.class);
             method.setAccessible(true);
             WithdrawCommand command = new WithdrawCommand("add JPY 200");
-            assertEquals(Currency.JPY,method.invoke(command, "JPY"));
+            assertEquals(Currency.JPY, method.invoke(command, "JPY"));
         } catch (Exception e) {
             fail();
         }
@@ -83,14 +83,14 @@ public class WithdrawCommandTest {
 
 
     @Test
-    public void execute_correctInputProvided_shouldUpdateAmount(){
+    public void execute_correctInputProvided_shouldUpdateAmount() {
         try {
             AccountList accounts = new AccountList();
             accounts.addAccount(Currency.KRW, 4000);
-            WithdrawCommand command = new WithdrawCommand("withdraw 2000 KRW");
+            WithdrawCommand command = new WithdrawCommand("withdraw KRW 2000");
             Ui ui = new Ui();
             command.execute(ui, accounts);
-            int expectedAmount =  (int) accounts.getAccount(Currency.KRW).getBalance();
+            int expectedAmount = (int) accounts.getAccount(Currency.KRW).getBalance();
             assertEquals(2000.00, expectedAmount);
         } catch (Exception e) {
             fail();

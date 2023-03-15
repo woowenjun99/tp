@@ -17,7 +17,7 @@ public class WithdrawCommand extends Command {
     private float amount;
 
     /**
-     * @param input   The user input including the command.
+     * @param input The user input including the command.
      */
     public WithdrawCommand(String input) {
         super(false, input);
@@ -34,8 +34,8 @@ public class WithdrawCommand extends Command {
         if (!isValidCommand) {
             throw new InvalidWithdrawCommandException();
         }
-        this.currency = getCurrency(words[2]);
-        this.amount = Float.parseFloat(words[1]);
+        this.currency = getCurrency(words[1]);
+        this.amount = Float.parseFloat(words[2]);
         if (this.amount <= 0) {
             throw new InvalidWithdrawCommandException();
         }
@@ -45,7 +45,7 @@ public class WithdrawCommand extends Command {
 
     private void printSuccess(Ui ui, float newBalance) {
         ui.printf(Message.SUCCESSFUL_WITHDRAW_COMMAND.getMessage(), newBalance, this.currency.name(),
-                this.amount/100, this.currency.name());
+                this.amount / 100, this.currency.name());
     }
 
     /**

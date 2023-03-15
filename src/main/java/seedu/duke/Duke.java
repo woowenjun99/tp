@@ -7,19 +7,19 @@ import seedu.duke.parser.Parser;
 public class Duke {
 
     private static Ui ui;
-    private static final AccountList account = new AccountList();
+    private static final AccountList accounts = new AccountList();
 
     /**
      * Runs the main input loop until the exit command is called
      */
-    public static void run() {
+    public static void run () {
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.getUserInput();
                 ui.printSpacer();
                 Command c = Parser.parseInput(fullCommand);
-                c.execute(ui, account);
+                c.execute(ui, accounts);
                 isExit = c.isExit();
             } catch (IllegalArgumentException e) {
                 ui.printMessage(e.getMessage());
@@ -33,7 +33,7 @@ public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         ui = new Ui();
         ui.printGreeting();
         ui.printSpacer();

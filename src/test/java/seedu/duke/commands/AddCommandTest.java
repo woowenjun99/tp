@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddCommandTest {
     @Test
-    public void getCurrency_invalidCurrencyProvided_shouldThrowException() {
+    public void getCurrency_invalidCurrencyProvided_shouldThrowException () {
         try {
             Method method = AddCommand.class.getDeclaredMethod("getCurrency", String.class);
             method.setAccessible(true);
@@ -27,7 +27,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void getCurrency_validCurrencyProvided_shouldReturnCorrespondingCurrency() {
+    public void getCurrency_validCurrencyProvided_shouldReturnCorrespondingCurrency () {
         try {
             Method method = AddCommand.class.getDeclaredMethod("getCurrency", String.class);
             method.setAccessible(true);
@@ -39,7 +39,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void processCommand_commandLessThanThreeWords_shouldThrowException() {
+    public void processCommand_commandLessThanThreeWords_shouldThrowException () {
         try {
             Method method = AddCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
@@ -51,7 +51,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void processCommand_amountNotInt_shouldThrowException() {
+    public void processCommand_amountNotInt_shouldThrowException () {
         try {
             Method method = AddCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
@@ -63,7 +63,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void processCommand_correctInputFormat_shouldNotThrowException() {
+    public void processCommand_correctInputFormat_shouldNotThrowException () {
         try {
             Method method = AddCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
@@ -77,15 +77,15 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_correctInputProvided_shouldUpdateAmount() {
+    public void execute_correctInputProvided_shouldUpdateAmount () {
         try {
-            AccountList account = new AccountList();
-            account.addAccount(Currency.KRW, 4000.0f);
+            AccountList accounts = new AccountList();
+            accounts.addAccount(Currency.KRW, 4000.0f);
             AddCommand command = new AddCommand("add KRW 200.00");
             Ui ui = new Ui();
-            command.execute(ui, account);
+            command.execute(ui, accounts);
 
-            int expectedAmount = (int) account.getAccount(Currency.KRW).getBalance();
+            int expectedAmount = (int) accounts.getAccount(Currency.KRW).getBalance();
 
             assertEquals(4200, expectedAmount);
         } catch (Exception e) {
@@ -94,7 +94,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void processCommand_amountLessThanZero_shouldThrowException() {
+    public void processCommand_amountLessThanZero_shouldThrowException () {
         try {
             Method method = AddCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);

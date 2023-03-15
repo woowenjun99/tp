@@ -69,10 +69,10 @@ public class BalanceCommand extends Command {
      * Gets the currencies from the AccountList and displays it onto the screen.
      */
     @Override
-    public void execute (Ui ui, AccountList account) {
+    public void execute (Ui ui, AccountList accounts) {
         try {
             String currencyString = processCommand();
-            ArrayList<Account> accountArrayList = getAccounts(currencyString, account);
+            ArrayList<Account> accountArrayList = getAccounts(currencyString, accounts);
             printCurrencies(accountArrayList, ui);
         } catch (InvalidBalanceCommandException e) {
             ui.printMessage(ErrorMessage.MORE_THAN_ONE_CURRENCY_PROVIDED);

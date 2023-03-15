@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeleteAccountCommandTest {
     @Test
-    public void getCurrency_invalidCurrencyProvided_shouldThrowException() {
+    public void getCurrency_invalidCurrencyProvided_shouldThrowException () {
         try {
             Method method = DeleteAccountCommand.class.getDeclaredMethod("getCurrency", String.class);
             method.setAccessible(true);
@@ -28,7 +28,7 @@ public class DeleteAccountCommandTest {
     }
 
     @Test
-    public void getCurrency_validCurrencyProvided_shouldReturnCorrespondingCurrency() {
+    public void getCurrency_validCurrencyProvided_shouldReturnCorrespondingCurrency () {
         try {
             Method method = DeleteAccountCommand.class.getDeclaredMethod("getCurrency", String.class);
             method.setAccessible(true);
@@ -40,7 +40,7 @@ public class DeleteAccountCommandTest {
     }
 
     @Test
-    public void processCommand_commandLessThanTwoWords_shouldThrowException() {
+    public void processCommand_commandLessThanTwoWords_shouldThrowException () {
         try {
             Method method = AddCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
@@ -52,44 +52,45 @@ public class DeleteAccountCommandTest {
     }
 
     @Test
-    public void execute_accountNotEmpty_shouldThrowException() {
+    public void execute_accountNotEmpty_shouldThrowException () {
         try {
-            AccountList account = new AccountList();
-            account.addAccount(Currency.KRW, 1000);
+            AccountList accounts = new AccountList();
+            accounts.addAccount(Currency.KRW, 1000);
             DeleteAccountCommand command = new DeleteAccountCommand("delete-account KRW");
             Ui ui = new Ui();
-            command.execute(ui, account);
+            command.execute(ui, accounts);
 
             // Account should not be removed if account not empty
-            assertDoesNotThrow(()->account.getAccount(Currency.KRW));
+            assertDoesNotThrow(() -> accounts.getAccount(Currency.KRW));
 
         } catch (Exception e) {
             fail();
         }
     }
+
     @Test
-    public void deleteAccount_nonExistCurrency_shouldThrowException() {
+    public void deleteAccount_nonExistCurrency_shouldThrowException () {
         try {
             Method method = AccountList.class.getDeclaredMethod(("deleteAccount"), Currency.class);
             method.setAccessible(true);
-            AccountList account = new AccountList();
-            account.addAccount(Currency.KRW, 1000);
-            assertThrows(InvocationTargetException.class, () -> method.invoke(account, Currency.JPY));
+            AccountList accounts = new AccountList();
+            accounts.addAccount(Currency.KRW, 1000);
+            assertThrows(InvocationTargetException.class, () -> method.invoke(accounts, Currency.JPY));
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void execute_correctInputProvided_shouldDeleteAccount() {
+    public void execute_correctInputProvided_shouldDeleteAccount () {
         try {
-            AccountList account = new AccountList();
-            account.addAccount(Currency.KRW, 0);
+            AccountList accounts = new AccountList();
+            accounts.addAccount(Currency.KRW, 0);
             DeleteAccountCommand command = new DeleteAccountCommand("delete-account KRW");
             Ui ui = new Ui();
-            command.execute(ui, account);
+            command.execute(ui, accounts);
 
-            assertThrows(NoAccountException.class,()->account.getAccount(Currency.KRW));
+            assertThrows(NoAccountException.class, () -> accounts.getAccount(Currency.KRW));
         } catch (Exception e) {
             fail();
         }

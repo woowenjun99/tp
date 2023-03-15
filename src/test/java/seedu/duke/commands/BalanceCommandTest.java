@@ -114,11 +114,11 @@ public class BalanceCommandTest {
     @Test
     public void getBalance_ifNoAccountExists_shouldThrowException () {
         try {
-            AccountList account = new AccountList();
+            AccountList accounts = new AccountList();
             Method method = BalanceCommand.class.getDeclaredMethod("getAccounts", String.class, AccountList.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");
-            assertThrows(InvocationTargetException.class, () -> method.invoke(command, "CNY", account));
+            assertThrows(InvocationTargetException.class, () -> method.invoke(command, "CNY", accounts));
         } catch (Exception e) {
             fail();
         }

@@ -33,7 +33,7 @@ public class Account {
         int newBalance;
         if (action.equals("add")) {
             newBalance = balance + (int) (changeInBalance * 100);
-            final int UPPER_BOUND = 100_000_000;
+            final int UPPER_BOUND = 1_000_000_000;
             if (newBalance > UPPER_BOUND) {
                 throw new TooLargeAmountException();
             }

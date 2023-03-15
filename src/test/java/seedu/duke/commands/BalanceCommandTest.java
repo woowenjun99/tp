@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class BalanceCommandTest {
     @Test
-    public void processCommand_noCurrencySpecified_shouldReturnAll() {
+    public void processCommand_noCurrencySpecified_shouldReturnAll () {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
@@ -28,7 +28,7 @@ public class BalanceCommandTest {
     }
 
     @Test
-    public void processCommand_oneCurrencySpecified_shouldReturnOne() {
+    public void processCommand_oneCurrencySpecified_shouldReturnOne () {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
@@ -40,7 +40,7 @@ public class BalanceCommandTest {
     }
 
     @Test
-    public void processCommand_multipleCurrenciesSpecified_shouldThrowError() {
+    public void processCommand_multipleCurrenciesSpecified_shouldThrowError () {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
@@ -52,7 +52,7 @@ public class BalanceCommandTest {
     }
 
     @Test
-    public void convertStringToEnum_invalidCurrency_shouldThrowIllegalArgumentException() {
+    public void convertStringToEnum_invalidCurrency_shouldThrowIllegalArgumentException () {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("convertStringToEnum", String.class);
             method.setAccessible(true);
@@ -64,7 +64,7 @@ public class BalanceCommandTest {
     }
 
     @Test
-    public void convertStringToEnum_validCurrency_shouldReturnCorrespondingCurrency() {
+    public void convertStringToEnum_validCurrency_shouldReturnCorrespondingCurrency () {
         try {
             Method method = BalanceCommand.class.getDeclaredMethod("convertStringToEnum", String.class);
             method.setAccessible(true);
@@ -76,7 +76,7 @@ public class BalanceCommandTest {
     }
 
     @Test
-    public void getBalance_ifCurrencyIsNotSpecified_shouldReturnAllCurrencies() {
+    public void getBalance_ifCurrencyIsNotSpecified_shouldReturnAllCurrencies () {
         AccountList accounts = new AccountList();
 
         try {
@@ -89,37 +89,36 @@ public class BalanceCommandTest {
                     "ALL",
                     accounts
             );
-            Account CNYAccount = null;
-            Account EURAccount = null;
-            for(Account account : output){
-                if(account.getCurrencyType().equals(Currency.EUR)){
-                    EURAccount = account;
-                }
-                else if(account.getCurrencyType().equals(Currency.CNY)){
-                    CNYAccount = account;
+            Account cnyAccount = null;
+            Account eurAccount = null;
+            for (Account account : output) {
+                if (account.getCurrencyType().equals(Currency.EUR)) {
+                    eurAccount = account;
+                } else if (account.getCurrencyType().equals(Currency.CNY)) {
+                    cnyAccount = account;
                 }
             }
-            if(CNYAccount == null || EURAccount == null){
+            if (cnyAccount == null || eurAccount == null) {
                 fail();
             }
-            System.out.println(CNYAccount.getBalance());
-            System.out.println(EURAccount.getBalance());
+            System.out.println(cnyAccount.getBalance());
+            System.out.println(eurAccount.getBalance());
             assertEquals(2, output.size());
-            assertEquals(200, CNYAccount.getBalance());
-            assertEquals(40, EURAccount.getBalance());
+            assertEquals(200, cnyAccount.getBalance());
+            assertEquals(40, eurAccount.getBalance());
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void getBalance_ifNoAccountExists_shouldThrowException() {
+    public void getBalance_ifNoAccountExists_shouldThrowException () {
         try {
             AccountList account = new AccountList();
             Method method = BalanceCommand.class.getDeclaredMethod("getAccounts", String.class, AccountList.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");
-            assertThrows(InvocationTargetException.class, ()-> method.invoke(command, "CNY", account));
+            assertThrows(InvocationTargetException.class, () -> method.invoke(command, "CNY", account));
         } catch (Exception e) {
             fail();
         }

@@ -12,7 +12,7 @@ import seedu.duke.ui.Ui;
 import java.util.ArrayList;
 
 /**
- * BalanceCommand is a subclass of the Command class that is used to 
+ * BalanceCommand is a subclass of the Command class that is used to
  * handle the getBalance command by the user.
  */
 public class BalanceCommand extends Command {
@@ -23,12 +23,12 @@ public class BalanceCommand extends Command {
     /**
      * @param command The full user input including the command word {@code balance SGD}.
      */
-    public BalanceCommand(String command) {
+    public BalanceCommand (String command) {
         super(false, command);
         this.command = command.trim();
     }
 
-    private String processCommand() throws InvalidBalanceCommandException {
+    private String processCommand () throws InvalidBalanceCommandException {
         String[] words = command.split(" ");
         switch (words.length) {
         case 1:
@@ -40,18 +40,17 @@ public class BalanceCommand extends Command {
         }
     }
 
-    private Currency convertStringToEnum(String currency) throws IllegalArgumentException {
+    private Currency convertStringToEnum (String currency) throws IllegalArgumentException {
         return Currency.valueOf(currency);
     }
 
-    private ArrayList<Account> getAccounts(String currencyString, AccountList accounts)
+    private ArrayList<Account> getAccounts (String currencyString, AccountList accounts)
             throws NoAccountException {
         ArrayList<Account> accountArrayList;
         if (currencyString.equals(ALL)) {
             // Return all accounts
             accountArrayList = accounts.getAllAccounts();
-        }
-        else{
+        } else {
             Currency currency = convertStringToEnum(currencyString);
             accountArrayList = new ArrayList<>();
             accountArrayList.add(accounts.getAccount(currency));
@@ -59,9 +58,9 @@ public class BalanceCommand extends Command {
         return accountArrayList;
     }
 
-    private void printCurrencies(ArrayList<Account> accountArrayList, Ui ui) {
+    private void printCurrencies (ArrayList<Account> accountArrayList, Ui ui) {
         ui.printMessage(Message.BALANCE.getMessage());
-        for(Account account : accountArrayList){
+        for (Account account : accountArrayList) {
             ui.printMessage(account.toString());
         }
     }
@@ -70,7 +69,7 @@ public class BalanceCommand extends Command {
      * Gets the currencies from the AccountList and displays it onto the screen.
      */
     @Override
-    public void execute(Ui ui, AccountList account) {
+    public void execute (Ui ui, AccountList account) {
         try {
             String currencyString = processCommand();
             ArrayList<Account> accountArrayList = getAccounts(currencyString, account);

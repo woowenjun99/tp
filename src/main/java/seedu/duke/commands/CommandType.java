@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import seedu.duke.constants.Message;
+
 public enum CommandType {
     ADD("add"),
     WITHDRAW("withdraw"),
@@ -12,15 +14,15 @@ public enum CommandType {
     HELP("help");
     private String command;
 
-    CommandType(String command) {
+    CommandType (String command) {
         this.command = command;
     }
 
-    public String getCommand() {
+    public String getCommand () {
         return command;
     }
 
-    public static CommandType get(String command) {
+    public static CommandType get (String command) {
         if (command == null) {
             throw new NullPointerException("Command is null");
         }
@@ -29,6 +31,6 @@ public enum CommandType {
                 return commandType;
             }
         }
-        throw new IllegalArgumentException("No command found named " + command);
+        throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
     }
 }

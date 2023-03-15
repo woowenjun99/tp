@@ -9,6 +9,7 @@ import seedu.duke.exceptions.InvalidWithdrawCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
+import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
 
 /**
@@ -75,6 +76,8 @@ public class WithdrawCommand extends Command {
             ui.printMessage(ErrorMessage.NOT_ENOUGH_IN_ACCOUNT);
         } catch (InvalidUpdateBalanceActionException e) {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
+        } catch (TooLargeAmountException e) {
+            ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
         }
     }
 }

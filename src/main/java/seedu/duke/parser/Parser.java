@@ -1,6 +1,5 @@
 package seedu.duke.parser;
 
-
 import seedu.duke.commands.BalanceCommand;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ShowRateCommand;
@@ -10,6 +9,8 @@ import seedu.duke.commands.DeleteAccountCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandType;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.WithdrawCommand;
+
 import seedu.duke.constants.Message;
 
 /**
@@ -44,6 +45,8 @@ public class Parser {
             return new ExitCommand();
         case ADD:
             return new AddCommand(input);
+        case WITHDRAW:
+            return new WithdrawCommand(input);
         case SHOW_RATE:
             try {
                 return new ShowRateCommand(input);

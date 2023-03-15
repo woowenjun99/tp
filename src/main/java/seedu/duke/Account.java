@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
+import seedu.duke.exceptions.TooLargeAmountException;
 
 public class Account {
     private int balance;
@@ -28,10 +29,14 @@ public class Account {
      * @throws NotEnoughInAccountException if the balance would become negative
      */
     public void updateBalance (float changeInBalance, String action) throws NotEnoughInAccountException,
-            InvalidUpdateBalanceActionException {
+            InvalidUpdateBalanceActionException, TooLargeAmountException {
         int newBalance;
         if (action.equals("add")) {
             newBalance = balance + (int) (changeInBalance * 100);
+            final int UPPER_BOUND = 100_000_000;
+            if (newBalance > UPPER_BOUND) {
+                throw new TooLargeAmountException();
+            }
         } else if (action.equals("subtract")) {
             newBalance = balance - (int) (changeInBalance * 100);
         } else {

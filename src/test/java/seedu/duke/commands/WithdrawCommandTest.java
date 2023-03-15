@@ -19,7 +19,7 @@ public class WithdrawCommandTest {
         try {
             Method method = WithdrawCommand.class.getDeclaredMethod("getCurrency", String.class);
             method.setAccessible(true);
-            WithdrawCommand command = new WithdrawCommand("add JPY 200");
+            WithdrawCommand command = new WithdrawCommand("withdraw JPY 200");
             assertThrows(InvocationTargetException.class, () -> method.invoke(command, "JP"));
 
         } catch (Exception e) {
@@ -32,8 +32,8 @@ public class WithdrawCommandTest {
         try {
             Method method = WithdrawCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
-            WithdrawCommand command = new WithdrawCommand("add JPY");
-            WithdrawCommand command1 = new WithdrawCommand("add");
+            WithdrawCommand command = new WithdrawCommand("withdraw JPY");
+            WithdrawCommand command1 = new WithdrawCommand("withdraw");
             WithdrawCommand command2 = new WithdrawCommand("200 JPY");
             assertThrows(InvocationTargetException.class, () -> method.invoke(command));
             assertThrows(InvocationTargetException.class, () -> method.invoke(command1));
@@ -48,7 +48,7 @@ public class WithdrawCommandTest {
         try {
             Method method = WithdrawCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
-            WithdrawCommand command = new WithdrawCommand("add -100 JPY");
+            WithdrawCommand command = new WithdrawCommand("withdraw -100 JPY");
             assertThrows(InvocationTargetException.class, () -> method.invoke(command));
         } catch (Exception e) {
             fail();
@@ -60,8 +60,8 @@ public class WithdrawCommandTest {
         try {
             Method method = WithdrawCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
-            WithdrawCommand command = new WithdrawCommand("add m JPY");
-            WithdrawCommand command1 = new WithdrawCommand("add JPY m");
+            WithdrawCommand command = new WithdrawCommand("withdraw m JPY");
+            WithdrawCommand command1 = new WithdrawCommand("withdraw JPY m");
             assertThrows(InvocationTargetException.class, () -> method.invoke(command));
             assertThrows(InvocationTargetException.class, () -> method.invoke(command1));
         } catch (Exception e) {
@@ -74,7 +74,7 @@ public class WithdrawCommandTest {
         try {
             Method method = WithdrawCommand.class.getDeclaredMethod("getCurrency", String.class);
             method.setAccessible(true);
-            WithdrawCommand command = new WithdrawCommand("add JPY 200");
+            WithdrawCommand command = new WithdrawCommand("withdraw JPY 200");
             assertEquals(Currency.JPY, method.invoke(command, "JPY"));
         } catch (Exception e) {
             fail();

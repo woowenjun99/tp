@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     private float amount;
 
     /**
-     * @param input   The user input including the command.
+     * @param input The user input including the command.
      */
     public AddCommand(String input) {
         super(false, input);

@@ -75,3 +75,4 @@ Please use the following format for linking documentation:
 
 - [ ] Changes have been tested
 - [ ] All automated tests pass
+- [ ] Relevant Tags and Milestones have been added

@@ -4,14 +4,14 @@ import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Forex;
 import seedu.duke.Currency;
+import seedu.duke.exceptions.ExchangeAmountTooSmallException;
+import seedu.duke.exceptions.InvalidExchangeArgumentException;
+import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.exceptions.NotEnoughInAccountException;
+import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.ui.Ui;
 import seedu.duke.constants.ErrorMessage;
-
-import seedu.duke.exceptions.NoAccountException;
-import seedu.duke.exceptions.InvalidExchangeArgumentException;
-import seedu.duke.exceptions.InvalidNumberException;
-import seedu.duke.exceptions.NotEnoughInAccountException;
-import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 
 
 public class ExchangeCommand extends Command {
@@ -38,6 +38,10 @@ public class ExchangeCommand extends Command {
             // Retrieve and edit accounts
             Account oldAcc = accounts.getAccount(exchangeRate.getInitial());
             Account newAcc = accounts.getAccount(exchangeRate.getTarget());
+            float convertedAmount = exchangeRate.convert(amount);
+            if (convertedAmount < 0.01) {
+                throw new ExchangeAmountTooSmallException();
+            }
             oldAcc.updateBalance(amount, "subtract");
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
             ui.printMessage(exchangeRate);
@@ -57,6 +61,8 @@ public class ExchangeCommand extends Command {
             ui.printMessage(ErrorMessage.NOT_ENOUGH_IN_ACCOUNT);
         } catch (InvalidUpdateBalanceActionException e) {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
+        } catch (ExchangeAmountTooSmallException e) {
+            ui.printMessage(ErrorMessage.EXCHANGE_AMOUNT_TOO_SMALL);
         }
     }
 

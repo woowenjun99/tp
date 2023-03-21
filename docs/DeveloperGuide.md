@@ -39,9 +39,6 @@ original source as well}
 
 ## Setting up
 
-layout: page
-title: Setting up and getting started
-
 ### Setting up the project in your computer
 
 First, **fork** this repo, and **clone** the fork into your computer.
@@ -70,12 +67,11 @@ If you plan to use Intellij IDEA (highly recommended):
     2. Click the Gear Icon next to the `Scheme` box and then click `Import Scheme → IntelliJ IDEA code style XML`.
     3. Select the `DefaultCodeStyle.xml` file in the root of the project directory.
 
-
 2. **Set up CI**
 
-This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those
-files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
-required.
+   This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those
+   files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
+   required.
 
 3. **Learn the design**
 
@@ -150,11 +146,14 @@ The following sequence diagram shows how the Create Account operation works
 
 ### Target user profile
 
-{Describe the target user profile}
+- Students who are planning to travel overseas
+- People who need to exchange money for travel
+- People who are comfortable using a CLI
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a
+Command Line Interface (CLI) while still having the features of other money management applications.
 
 ### User Stories
 

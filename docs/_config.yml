@@ -1,0 +1,14 @@
+title: "MoneyMoover"
+theme: minima
+
+header_pages:
+  - UserGuide.md
+  - DeveloperGuide.md
+  - AboutUs.md
+
+markdown: kramdown
+
+repository: "AY2223S2-CS2113-T13-1/tp"
+
+plugins:
+  - jemoji

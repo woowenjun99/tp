@@ -56,6 +56,8 @@ original source as well}
 
 ### Add/Withdraw feature
 
+The add/wtihdraw money feature is facilitated by `AddCommand` and `WithdrawCommand`. Both of them extends `Command`.
+
 ### View balance feature
 
 ### Show-rate feature

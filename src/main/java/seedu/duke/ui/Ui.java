@@ -8,7 +8,7 @@ import java.util.Scanner;
  * The UI Class is used to display the messages to the user.
  */
 public class Ui {
-    Scanner in;
+    private final Scanner in;
     public Ui(){
         in = new Scanner(System.in);
     }

@@ -72,18 +72,18 @@ The current implementation initialises the `Account` with 0 balance
 Given below is an example of the usage of the Create Account feature and the mechanism at each step
 
 Step 1: The user launches the application for the first time and `AccountList` is created with no `Account`'s
-> Todo Add an object diagram for accountlist
+![AccountListObjectDiagram1](../images/AccountListObjectDiagram1.png)
 
 Step 2: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is a valid string representing one
 of the elements of the `Currency` enum
-> Todo Add an object diagram for accountlist and one account
+![AccountListObjectDiagram1](../images/AccountListObjectDiagram2.png)
 
 Step 3: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is also valid but different to that
 in step 1.
-> Todo Add an object diagram for accountlist and 2 accounts
+![AccountListObjectDiagram1](../images/AccountListObjectDiagram3.png)
 
 The following sequence diagram shows how the Create Account operation works
-> Todo Add a sequence diagram for create account operation, stemming from CreateAccountCommand
+![AccountListObjectDiagram1](../images/CreateAccountSeqDiagram.png)
 
 ### Delete-account feature
 

@@ -7,7 +7,7 @@ public abstract class Command {
     protected final boolean isExit;
     protected final String input;
 
-    public Command(boolean isExit, String input){
+    public Command (boolean isExit, String input) {
         this.isExit = isExit;
         this.input = input;
     }
@@ -16,7 +16,7 @@ public abstract class Command {
      * Executes the command implemented by the subclass
      */
 
-    public abstract void execute(Ui ui, AccountList account);
+    public abstract void execute (Ui ui, AccountList accounts);
 
     public boolean isExit () {
         return isExit;

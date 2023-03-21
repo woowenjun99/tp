@@ -40,17 +40,50 @@ original source as well}
 
 ### Architecture
 
+## Product scope
+
 ### UI component
 
 ### Parser component
 
-### AccountList Component
+### Accounts Component
+
+Here is a class diagram of the Accounts component
+![AccountListClassDiagram](../images/AccountListClassDiagram.png)
+
+The `Accounts` Component
+
+* Stores the `AccountList` which contains all the user's accounts
+* `AccountList` handles all logic dealing with accounts
+* `Account` stores both its currency type and its balance
+* There can be only one `Currency` per `Account`
+* There can be only one `Account` of each `Currency`
 
 ### Forex component
 
 ## Implementation
 
 ### Create-account feature
+
+The create account feature is facilitated by `AccountList` Class within the `Accounts` Component  
+The method called from `AccountList` is the `addAccount` method which creates a new `Account` object  
+The current implementation initialises the `Account` with 0 balance
+
+Given below is an example of the usage of the Create Account feature and the mechanism at each step
+
+Step 1: The user launches the application for the first time and `AccountList` is created with no `Account`'s
+![AccountListObjectDiagram1](../images/AccountListObjectDiagram1.png)
+
+Step 2: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is a valid string representing one
+of the elements of the `Currency` enum
+![AccountListObjectDiagram1](../images/AccountListObjectDiagram2.png)
+
+Step 3: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is also valid but different to that
+in step 1.
+![AccountListObjectDiagram1](../images/AccountListObjectDiagram3.png)
+
+The following sequence diagram shows how the Create Account operation works
+![AccountListObjectDiagram1](../images/CreateAccountSeqDiagram.png)
 
 ### Delete-account feature
 

@@ -61,25 +61,10 @@ public class Ui {
     }
 
     /**
-     * The printHelp prints out the help message based on the user's request.
-     */
-    public void printHelp() {
-        printMessage(Message.HELP.getMessage());
-    }
-
-    /**
      * The printSpacer is used to print hyphens to make the code looks neater.
      **/
     public void printSpacer() {
         printMessage("-".repeat(50));
-    }
-
-    /**
-     * The printInvalidShowRate function is printed when an invalid format is provided
-     * for the show-rate command.
-     */
-    public void printInvalidShowRate(){
-        printMessage(Message.ERR_INVALID_SHOW_RATE.getMessage());
     }
 
     public void printNewLine() {

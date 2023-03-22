@@ -2,30 +2,31 @@
 
 <!-- TOC -->
 
-* [Developer Guide](#developer-guide)
-    * [Acknowledgements](#acknowledgements)
-    * [Setting up, getting started](#setting-up-getting-started)
-    * [Design](#design)
-        * [Architecture](#architecture)
-        * [UI component](#ui-component)
-        * [Parser component](#parser-component)
-        * [AccountList Component](#accountlist-component)
-        * [Forex component](#forex-component)
-    * [Implementation](#implementation)
-        * [Create-account feature](#create-account-feature)
-        * [Delete-account feature](#delete-account-feature)
-        * [Add/Withdraw feature](#addwithdraw-feature)
-        * [View balance feature](#view-balance-feature)
-        * [Show-rate feature](#show-rate-feature)
-        * [Money exchange feature](#money-exchange-feature)
-    * [Appendix: Requirements](#appendix--requirements)
-        * [Product scope](#product-scope)
-        * [Target user profile](#target-user-profile)
-        * [Value proposition](#value-proposition)
-        * [User Stories](#user-stories)
-        * [Non-Functional Requirements](#non-functional-requirements)
-        * [Glossary](#glossary)
-    * [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
+- [Developer Guide](#developer-guide)
+  - [Acknowledgements](#acknowledgements)
+  - [Setting up, getting started](#setting-up-getting-started)
+  - [Design](#design)
+    - [Architecture](#architecture)
+  - [Product scope](#product-scope)
+    - [UI component](#ui-component)
+    - [Parser component](#parser-component)
+    - [Accounts Component](#accounts-component)
+    - [Forex component](#forex-component)
+  - [Implementation](#implementation)
+    - [Create-account feature](#create-account-feature)
+    - [Delete-account feature](#delete-account-feature)
+    - [Add/Withdraw feature](#addwithdraw-feature)
+    - [View balance feature](#view-balance-feature)
+    - [Show-rate feature](#show-rate-feature)
+    - [Money exchange feature](#money-exchange-feature)
+  - [Appendix: Requirements](#appendix-requirements)
+    - [Product scope](#product-scope-1)
+    - [Target user profile](#target-user-profile)
+    - [Value proposition](#value-proposition)
+    - [User Stories](#user-stories)
+    - [Non-Functional Requirements](#non-functional-requirements)
+    - [Glossary](#glossary)
+  - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 <!-- TOC -->
 
@@ -44,6 +45,18 @@ original source as well}
 
 ### UI component
 
+The API of this component is specified in the `Ui.java`.
+
+![UI Class Diagram](../images/UiClassDiagram.png)
+
+The UI class deals with the user interaction with the application, which includes the printing and the logic to read in inputs. We will pass in the instance of UI into the `execute` method of the `Command` class. The main features includes:
+
+1. Printing text such as new line, spacer, farewell message, greeting message.
+
+2. Empowers the users to print customised message in `printf` and `printMessage` method.
+
+3. Reads in the user input as `String`.
+
 ### Parser component
 
 ### Accounts Component
@@ -53,11 +66,11 @@ Here is a class diagram of the Accounts component
 
 The `Accounts` Component
 
-* Stores the `AccountList` which contains all the user's accounts
-* `AccountList` handles all logic dealing with accounts
-* `Account` stores both its currency type and its balance
-* There can be only one `Currency` per `Account`
-* There can be only one `Account` of each `Currency`
+-   Stores the `AccountList` which contains all the user's accounts
+-   `AccountList` handles all logic dealing with accounts
+-   `Account` stores both its currency type and its balance
+-   There can be only one `Currency` per `Account`
+-   There can be only one `Account` of each `Currency`
 
 ### Forex component
 
@@ -110,7 +123,7 @@ The following sequence diagram shows how the Create Account operation works
 ### User Stories
 
 | Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
+| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
 | v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
 | v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
@@ -120,7 +133,7 @@ The following sequence diagram shows how the Create Account operation works
 
 ### Glossary
 
-* *glossary item* - Definition
+-   _glossary item_ - Definition
 
 ## Appendix: Instructions for manual testing
 

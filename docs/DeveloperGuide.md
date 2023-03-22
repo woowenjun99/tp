@@ -72,6 +72,12 @@ The `Forex` Component
 - Each `Forex` object has an initial and target `Currency`
 - There is only one instance of the `exchangeRates` hash map.
 
+The `Currency` Enum
+
+- Keeps all currency types supported by the exchange
+- Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
+- Each `Forex` instance must have two `Currency` associated with it
+
 ## Implementation
 
 ### Create-account feature

@@ -101,11 +101,14 @@ The `Currency` Enum
 
 ### Create/Delete account feature
 
-This feature is facilitated by `AccountList` Class within the `Accounts` Component  
-The method called from `AccountList` is the `addAccount` method which creates a new `Account` object  
-The current implementation initialises the `Account` with 0 balance
+This feature is facilitated by `AccountList` Class within the `Accounts` Component.
+The method called from `AccountList` is the `addAccount` method which creates a new `Account` object.The `deleteAccount`
+method called from `AccountList` delete the specified `Account` object.
 
-Given below is an example of the usage of the Create Account feature and the mechanism at each step
+The current implementation initialises the `Account` with 0 balance.
+Only currency account which 0 balance can be deleted.
+
+Given below is an example of the usage of this feature and the mechanism at each step
 
 Step 1: The user launches the application for the first time and `AccountList` is created with no `Account`
 ![AccountListObjectDiagram1](images/AccountListObjectDiagram1.png)
@@ -117,6 +120,10 @@ of the elements of the `Currency` enum
 Step 3: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is also valid but different to that
 in step 1.
 ![AccountListObjectDiagram1](images/AccountListObjectDiagram3.png)
+
+Step 4: The user passes the command `delete-account CURRENCY`, for example `delete-account SGD`.
+
+![AccountListObjectDiagram4](images/AccountListObjectDiagram4.png)
 
 The following sequence diagram shows how the Create Account operation works
 ![AccountListObjectDiagram1](images/CreateAccountSeqDiagram.png)

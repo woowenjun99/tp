@@ -3,30 +3,30 @@
 <!-- TOC -->
 
 - [Developer Guide](#developer-guide)
-  - [Acknowledgements](#acknowledgements)
-  - [Setting up, getting started](#setting-up-getting-started)
-  - [Design](#design)
-    - [Architecture](#architecture)
-  - [Product scope](#product-scope)
-    - [UI component](#ui-component)
-    - [Parser component](#parser-component)
-    - [Accounts Component](#accounts-component)
-    - [Forex component](#forex-component)
-  - [Implementation](#implementation)
-    - [Create-account feature](#create-account-feature)
-    - [Delete-account feature](#delete-account-feature)
-    - [Add/Withdraw feature](#addwithdraw-feature)
-    - [View balance feature](#view-balance-feature)
-    - [Show-rate feature](#show-rate-feature)
-    - [Money exchange feature](#money-exchange-feature)
-  - [Appendix: Requirements](#appendix-requirements)
-    - [Product scope](#product-scope-1)
-    - [Target user profile](#target-user-profile)
-    - [Value proposition](#value-proposition)
-    - [User Stories](#user-stories)
-    - [Non-Functional Requirements](#non-functional-requirements)
-    - [Glossary](#glossary)
-  - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    - [Acknowledgements](#acknowledgements)
+    - [Setting up, getting started](#setting-up-getting-started)
+    - [Design](#design)
+        - [Architecture](#architecture)
+    - [Product scope](#product-scope)
+        - [UI component](#ui-component)
+        - [Parser component](#parser-component)
+        - [Accounts Component](#accounts-component)
+        - [Forex component](#forex-component)
+    - [Implementation](#implementation)
+        - [Create-account feature](#create-account-feature)
+        - [Delete-account feature](#delete-account-feature)
+        - [Add/Withdraw feature](#addwithdraw-feature)
+        - [View balance feature](#view-balance-feature)
+        - [Show-rate feature](#show-rate-feature)
+        - [Money exchange feature](#money-exchange-feature)
+    - [Appendix: Requirements](#appendix-requirements)
+        - [Product scope](#product-scope-1)
+        - [Target user profile](#target-user-profile)
+        - [Value proposition](#value-proposition)
+        - [User Stories](#user-stories)
+        - [Non-Functional Requirements](#non-functional-requirements)
+        - [Glossary](#glossary)
+    - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
 
 <!-- TOC -->
 
@@ -47,9 +47,10 @@ original source as well}
 
 The API of this component is specified in the `Ui.java`.
 
-![UI Class Diagram](../images/UiClassDiagram.png)
+![UI Class Diagram](images/UiClassDiagram.png)
 
-The UI class deals with the user interaction with the application, which includes the printing and the logic to read in inputs. We will pass in the instance of UI into the `execute` method of the `Command` class. The main features includes:
+The UI class deals with the user interaction with the application, which includes the printing and the logic to read in
+inputs. We will pass in the instance of UI into the `execute` method of the `Command` class. The main features includes:
 
 1. Printing text such as new line, spacer, farewell message, greeting message.
 
@@ -62,15 +63,15 @@ The UI class deals with the user interaction with the application, which include
 ### Accounts Component
 
 Here is a class diagram of the Accounts component
-![AccountListClassDiagram](../images/AccountListClassDiagram.png)
+![AccountListClassDiagram](images/AccountListClassDiagram.png)
 
 The `Accounts` Component
 
--   Stores the `AccountList` which contains all the user's accounts
--   `AccountList` handles all logic dealing with accounts
--   `Account` stores both its currency type and its balance
--   There can be only one `Currency` per `Account`
--   There can be only one `Account` of each `Currency`
+- Stores the `AccountList` which contains all the user's accounts
+- `AccountList` handles all logic dealing with accounts
+- `Account` stores both its currency type and its balance
+- There can be only one `Currency` per `Account`
+- There can be only one `Account` of each `Currency`
 
 ### Forex component
 
@@ -85,18 +86,18 @@ The current implementation initialises the `Account` with 0 balance
 Given below is an example of the usage of the Create Account feature and the mechanism at each step
 
 Step 1: The user launches the application for the first time and `AccountList` is created with no `Account`'s
-![AccountListObjectDiagram1](../images/AccountListObjectDiagram1.png)
+![AccountListObjectDiagram1](images/AccountListObjectDiagram1.png)
 
 Step 2: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is a valid string representing one
 of the elements of the `Currency` enum
-![AccountListObjectDiagram1](../images/AccountListObjectDiagram2.png)
+![AccountListObjectDiagram1](images/AccountListObjectDiagram2.png)
 
 Step 3: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is also valid but different to that
 in step 1.
-![AccountListObjectDiagram1](../images/AccountListObjectDiagram3.png)
+![AccountListObjectDiagram1](images/AccountListObjectDiagram3.png)
 
 The following sequence diagram shows how the Create Account operation works
-![AccountListObjectDiagram1](../images/CreateAccountSeqDiagram.png)
+![AccountListObjectDiagram1](images/CreateAccountSeqDiagram.png)
 
 ### Delete-account feature
 
@@ -125,7 +126,7 @@ The add/wtihdraw money feature is facilitated by `AddCommand` and `WithdrawComma
 ### User Stories
 
 | Version | As a ... | I want to ...             | So that I can ...                                           |
-| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
+|---------|----------|---------------------------|-------------------------------------------------------------|
 | v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
 | v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
@@ -135,7 +136,7 @@ The add/wtihdraw money feature is facilitated by `AddCommand` and `WithdrawComma
 
 ### Glossary
 
--   _glossary item_ - Definition
+- _glossary item_ - Definition
 
 ## Appendix: Instructions for manual testing
 

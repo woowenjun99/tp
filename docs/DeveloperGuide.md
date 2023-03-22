@@ -118,6 +118,23 @@ The `Accounts` Component
 
 ### Forex component
 
+Here is a class diagram of the Forex component
+![ForexClassDiagram](../images/ForexClassDiagram.png)
+
+The `Forex` Component
+
+- Stores the exchange rates of 1 SGD to all supported currencies in a hash map
+- Each `Forex` object represents the relationship between two currencies
+- `convert` can be called on a `Forex` object to convert an amount using the relationship
+- Each `Forex` object has an initial and target `Currency`
+- There is only one instance of the `exchangeRates` hash map.
+
+The `Currency` Enum
+
+- Keeps all currency types supported by the exchange
+- Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
+- Each `Forex` instance must have two `Currency` associated with it
+
 ## Implementation
 
 ### Create-account feature
@@ -171,7 +188,7 @@ Command Line Interface (CLI) while still having the features of other money mana
 ### User Stories
 
 | Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
+| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
 | v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
 | v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 

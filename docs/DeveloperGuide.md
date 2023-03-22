@@ -170,6 +170,31 @@ The following sequence diagram shows how the Create Account operation works
 
 ### Money exchange feature
 
+The exchange feature is facilitated using `Account` instances stored within an `AccountList`
+object. The main functionality is facilitated by the `convert` function within the `Forex`
+component. The current implementation reads manual exchange rates from an online source. Future
+implementation will use an API to maintain up-to-date exchange rates.
+
+Exchange rate soure: https://www.xe.com/currencyconverter/convert
+
+This command is executed under the assumption that an `Account` for both the initial and target
+currencies exist. To avoid redundancy, please see the `create-account` feature in the developer
+guide for more specific steps on how `Accounts` are created.
+
+The exchange command executes as follows:
+
+- Initial and target currencies are parsed from the user input
+- A Forex object is created using the parsed currencies (see `Forex` component for more information)
+- The amount to be exchanged is parsed from the user input
+- The `Accounts` for both currencies are retrieveed
+- The converted value is calculated using the `Forex` object
+- The value of the initial `Account` is updated
+- The value of the target `Account` is updated
+- The new balances are printed
+
+The following sequence diagram shows how the Exchange command works
+![ExchangeSeqDiagram](../images/ExchangeSeqDiagram.png)
+
 ## Appendix: Requirements
 
 ### Product scope

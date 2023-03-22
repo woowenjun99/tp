@@ -77,9 +77,9 @@ The `Accounts` Component
 
 ## Implementation
 
-### Create-account feature
+### Create/Delete account feature
 
-The create account feature is facilitated by `AccountList` Class within the `Accounts` Component  
+This feature is facilitated by `AccountList` Class within the `Accounts` Component  
 The method called from `AccountList` is the `addAccount` method which creates a new `Account` object  
 The current implementation initialises the `Account` with 0 balance
 
@@ -122,7 +122,7 @@ account balance
 The following sequence diagram shows how the add money operation works
 ![](images/AddCommandSeqDiagram.png)
 
-The following sequence diagram shows how the add money operation works
+The following sequence diagram shows how the money withdrawal operation works
 ![](images/WithdrawCommandSeqDiagram.png)
 
 ### View balance feature

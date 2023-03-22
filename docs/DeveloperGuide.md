@@ -30,11 +30,47 @@
         * [Glossary](#glossary)
     * [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
 
-<!-- TOC -->Actions config files (in `.github/workflows` folder). When GitHub detects those
-files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
-required.
+<!-- TOC -->
 
+## Acknowledgements
+
+{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
+original source as well}
+
+## Setting up
+
+### Setting up the project in your computer
+
+First, **fork** this repo, and **clone** the fork into your computer.
+If you plan to use Intellij IDEA (highly recommended):
+
+1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the
+   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to to ensure Intellij is configured to use **JDK 11
+   **.
+2. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle
+   project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into
+   IDEA.<br>
+   :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
+3. **Verify the setup**:
+    1. Run the `seedu.duke.Duke` and try a few commands.
+    2. Run the tests using `./gradlew check` to ensure they all pass.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Before writing code
+
+1. **Configure the coding style**
+   If using IDEA, you can use the following steps to import the code style settings.
+    1. Go to `File → Settings → Editor → Code Style`
+    2. Click the Gear Icon next to the `Scheme` box and then click `Import Scheme → IntelliJ IDEA code style XML`.
+    3. Select the `DefaultCodeStyle.xml` file in the root of the project directory.
+2. **Set up CI**
+   This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those
+   files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
+   required.
 3. **Learn the design**
+   When you are ready to start coding, we recommend that you get some sense of the overall design by reading
+   about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).
 
 When you are ready to start coding, we recommend that you get some sense of the overall design by reading
 about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).

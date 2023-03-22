@@ -60,28 +60,14 @@ If you plan to use Intellij IDEA (highly recommended):
 ### Before writing code
 
 1. **Configure the coding style**
-<<<<<<< HEAD
-
-    If using IDEA, you can use the following steps to import the code style settings.
-
-=======
    If using IDEA, you can use the following steps to import the code style settings.
->>>>>>> master
     1. Go to `File → Settings → Editor → Code Style`
     2. Click the Gear Icon next to the `Scheme` box and then click `Import Scheme → IntelliJ IDEA code style XML`.
     3. Select the `DefaultCodeStyle.xml` file in the root of the project directory.
 2. **Set up CI**
-<<<<<<< HEAD
-
-    This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those
-    files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
-    required.
-
-=======
    This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those
    files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
    required.
->>>>>>> master
 3. **Learn the design**
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading
    about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).

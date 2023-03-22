@@ -2,31 +2,31 @@
 
 <!-- TOC -->
 
-- [Developer Guide](#developer-guide)
-    - [Acknowledgements](#acknowledgements)
-    - [Setting up, getting started](#setting-up-getting-started)
-    - [Design](#design)
-        - [Architecture](#architecture)
-    - [Product scope](#product-scope)
-        - [UI component](#ui-component)
-        - [Parser component](#parser-component)
-        - [Accounts Component](#accounts-component)
-        - [Forex component](#forex-component)
-    - [Implementation](#implementation)
-        - [Create-account feature](#create-account-feature)
-        - [Delete-account feature](#delete-account-feature)
-        - [Add/Withdraw feature](#addwithdraw-feature)
-        - [View balance feature](#view-balance-feature)
-        - [Show-rate feature](#show-rate-feature)
-        - [Money exchange feature](#money-exchange-feature)
-    - [Appendix: Requirements](#appendix-requirements)
-        - [Product scope](#product-scope-1)
-        - [Target user profile](#target-user-profile)
-        - [Value proposition](#value-proposition)
-        - [User Stories](#user-stories)
-        - [Non-Functional Requirements](#non-functional-requirements)
-        - [Glossary](#glossary)
-    - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+* [Developer Guide](#developer-guide)
+    * [Acknowledgements](#acknowledgements)
+    * [Setting up, getting started](#setting-up-getting-started)
+    * [Design](#design)
+        * [Architecture](#architecture)
+    * [Product scope](#product-scope)
+        * [UI component](#ui-component)
+        * [Parser component](#parser-component)
+        * [Accounts Component](#accounts-component)
+        * [Forex component](#forex-component)
+    * [Implementation](#implementation)
+        * [Create-account feature](#create-account-feature)
+        * [Delete-account feature](#delete-account-feature)
+        * [Add/Withdraw money feature](#addwithdraw-money-feature)
+        * [View balance feature](#view-balance-feature)
+        * [Show-rate feature](#show-rate-feature)
+        * [Money exchange feature](#money-exchange-feature)
+    * [Appendix: Requirements](#appendix--requirements)
+        * [Product scope](#product-scope-1)
+        * [Target user profile](#target-user-profile)
+        * [Value proposition](#value-proposition)
+        * [User Stories](#user-stories)
+        * [Non-Functional Requirements](#non-functional-requirements)
+        * [Glossary](#glossary)
+    * [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
 
 <!-- TOC -->
 
@@ -101,9 +101,29 @@ The following sequence diagram shows how the Create Account operation works
 
 ### Delete-account feature
 
-### Add/Withdraw feature
+### Add/Withdraw money feature
 
-The add/wtihdraw money feature is facilitated by `AddCommand` and `WithdrawCommand`. Both of them extends `Command`.
+The add money(deposit) and withdraw money feature is facilitated by `AddCommand` and `WithdrawCommand` which both
+extends the `Command` class. With the provided input from user (`CURRENCY` and `AMOUNT`),  `AddCommand`
+and `WithdrawCommand`
+update the balance of respective currency account accordingly.
+
+Step 1. The newly created `SGD` account has an initial balance of 0
+![AddWithdrawCommandObjectDiagram1](images/AddWithdrawCommandObjectDiagram1.png)
+
+Step 2. The user passes command `add CURRENCY AMOUNT` (eg. `add SGD 100`), where `CURRENCY` must be one of the available
+currency and `AMOUNT` must be non-zero
+![AddWithdrawCommandObjectDiagram2](images/AddWithdrawCommandObjectDiagram2.png)
+
+Step 3. The user passes command `withdraw` (eg. `withdraw SGD 25`), where `AMOUNT` must be smaller than the currency
+account balance
+![AddWithdrawCommandObjectDiagram3](images/AddWithdrawCommandObjectDiagram3.png)
+
+The following sequence diagram shows how the add money operation works
+![](images/AddCommandSeqDiagram.png)
+
+The following sequence diagram shows how the add money operation works
+![](images/WithdrawCommandSeqDiagram.png)
 
 ### View balance feature
 

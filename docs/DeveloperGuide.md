@@ -117,7 +117,7 @@ The `Accounts` Component
 ### Forex component
 
 Here is a class diagram of the Forex component
-![ForexClassDiagram](../images/ForexClassDiagram.png)
+![ForexClassDiagram](images/ForexClassDiagram.png)
 
 The `Forex` Component
 

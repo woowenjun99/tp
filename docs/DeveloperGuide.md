@@ -4,16 +4,18 @@
 
 * [Developer Guide](#developer-guide)
     * [Acknowledgements](#acknowledgements)
-    * [Setting up, getting started](#setting-up-getting-started)
+    * [Setting up](#setting-up)
+        * [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+        * [Before writing code](#before-writing-code)
+    * [Architecture](#architecture)
     * [Design](#design)
-        * [Architecture](#architecture)
     * [Product scope](#product-scope)
         * [UI component](#ui-component)
         * [Parser component](#parser-component)
         * [Accounts Component](#accounts-component)
         * [Forex component](#forex-component)
     * [Implementation](#implementation)
-        * [Create-account feature](#create-account-feature)
+        * [Create/Delete account feature](#createdelete-account-feature)
         * [Delete-account feature](#delete-account-feature)
         * [Add/Withdraw money feature](#addwithdraw-money-feature)
         * [View balance feature](#view-balance-feature)
@@ -28,18 +30,20 @@
         * [Glossary](#glossary)
     * [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
 
-<!-- TOC -->
+<!-- TOC -->Actions config files (in `.github/workflows` folder). When GitHub detects those
+files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
+required.
 
-## Acknowledgements
+3. **Learn the design**
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+When you are ready to start coding, we recommend that you get some sense of the overall design by reading
+about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).
 
-## Setting up, getting started
+## Architecture
+
+![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
 ## Design
-
-### Architecture
 
 ## Product scope
 
@@ -63,6 +67,7 @@ inputs. We will pass in the instance of UI into the `execute` method of the `Com
 ### Accounts Component
 
 Here is a class diagram of the Accounts component
+
 ![AccountListClassDiagram](images/AccountListClassDiagram.png)
 
 The `Accounts` Component
@@ -75,6 +80,23 @@ The `Accounts` Component
 
 ### Forex component
 
+Here is a class diagram of the Forex component
+![ForexClassDiagram](../images/ForexClassDiagram.png)
+
+The `Forex` Component
+
+- Stores the exchange rates of 1 SGD to all supported currencies in a hash map
+- Each `Forex` object represents the relationship between two currencies
+- `convert` can be called on a `Forex` object to convert an amount using the relationship
+- Each `Forex` object has an initial and target `Currency`
+- There is only one instance of the `exchangeRates` hash map.
+
+The `Currency` Enum
+
+- Keeps all currency types supported by the exchange
+- Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
+- Each `Forex` instance must have two `Currency` associated with it
+
 ## Implementation
 
 ### Create/Delete account feature
@@ -85,7 +107,7 @@ The current implementation initialises the `Account` with 0 balance
 
 Given below is an example of the usage of the Create Account feature and the mechanism at each step
 
-Step 1: The user launches the application for the first time and `AccountList` is created with no `Account`'s
+Step 1: The user launches the application for the first time and `AccountList` is created with no `Account`
 ![AccountListObjectDiagram1](images/AccountListObjectDiagram1.png)
 
 Step 2: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is a valid string representing one
@@ -112,17 +134,19 @@ Step 1. The newly created `SGD` account has an initial balance of 0
 ![AddWithdrawCommandObjectDiagram1](images/AddWithdrawCommandObjectDiagram1.png)
 
 Step 2. The user passes command `add CURRENCY AMOUNT` (eg. `add SGD 100`), where `CURRENCY` must be one of the available
-currency and `AMOUNT` must be non-zero
+currency and `AMOUNT` must be positive numbers.
 ![AddWithdrawCommandObjectDiagram2](images/AddWithdrawCommandObjectDiagram2.png)
 
 Step 3. The user passes command `withdraw` (eg. `withdraw SGD 25`), where `AMOUNT` must be smaller than the currency
-account balance
+account balance.
 ![AddWithdrawCommandObjectDiagram3](images/AddWithdrawCommandObjectDiagram3.png)
 
-The following sequence diagram shows how the add money operation works
+The following sequence diagram shows how the add money operation works.
+
 ![](images/AddCommandSeqDiagram.png)
 
-The following sequence diagram shows how the money withdrawal operation works
+The following sequence diagram shows how the money withdrawal operation works.
+
 ![](images/WithdrawCommandSeqDiagram.png)
 
 ### View balance feature
@@ -131,17 +155,45 @@ The following sequence diagram shows how the money withdrawal operation works
 
 ### Money exchange feature
 
+The exchange feature is facilitated using `Account` instances stored within an `AccountList`
+object. The main functionality is facilitated by the `convert` function within the `Forex`
+component. The current implementation reads manual exchange rates from an online source. Future
+implementation will use an API to maintain up-to-date exchange rates.
+
+Exchange rate soure: https://www.xe.com/currencyconverter/convert
+
+This command is executed under the assumption that an `Account` for both the initial and target
+currencies exist. To avoid redundancy, please see the `create-account` feature in the developer
+guide for more specific steps on how `Accounts` are created.
+
+The exchange command executes as follows:
+
+- Initial and target currencies are parsed from the user input
+- A Forex object is created using the parsed currencies (see `Forex` component for more information)
+- The amount to be exchanged is parsed from the user input
+- The `Accounts` for both currencies are retrieveed
+- The converted value is calculated using the `Forex` object
+- The value of the initial `Account` is updated
+- The value of the target `Account` is updated
+- The new balances are printed
+
+The following sequence diagram shows how the Exchange command works
+![ExchangeSeqDiagram](../images/ExchangeSeqDiagram.png)
+
 ## Appendix: Requirements
 
 ### Product scope
 
 ### Target user profile
 
-{Describe the target user profile}
+- Students who are planning to travel overseas
+- People who need to exchange money for travel
+- People who are comfortable using a CLI
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a
+Command Line Interface (CLI) while still having the features of other money management applications.
 
 ### User Stories
 

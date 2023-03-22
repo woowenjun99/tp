@@ -1,35 +1,33 @@
 # Developer Guide
 
 <!-- TOC -->
-
-- [Developer Guide](#developer-guide)
-  - [Acknowledgements](#acknowledgements)
-  - [Setting up](#setting-up)
-    - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
-    - [Before writing code](#before-writing-code)
-  - [Architecture](#architecture)
-  - [Design](#design)
-  - [Product scope](#product-scope)
-    - [UI component](#ui-component)
-    - [Parser component](#parser-component)
-    - [Accounts Component](#accounts-component)
-    - [Forex component](#forex-component)
-  - [Implementation](#implementation)
-    - [Create/Delete account feature](#createdelete-account-feature)
-    - [Delete-account feature](#delete-account-feature)
-    - [Add/Withdraw money feature](#addwithdraw-money-feature)
-    - [View balance feature](#view-balance-feature)
-    - [Show-rate feature](#show-rate-feature)
-    - [Money exchange feature](#money-exchange-feature)
-  - [Appendix: Requirements](#appendix-requirements)
-    - [Product scope](#product-scope-1)
-    - [Target user profile](#target-user-profile)
-    - [Value proposition](#value-proposition)
-    - [User Stories](#user-stories)
-    - [Non-Functional Requirements](#non-functional-requirements)
-    - [Glossary](#glossary)
-  - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-
+* [Developer Guide](#developer-guide)
+  * [Acknowledgements](#acknowledgements)
+  * [Setting up](#setting-up)
+    * [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+    * [Before writing code](#before-writing-code)
+  * [Design](#design)
+    * [Architecture](#architecture)
+    * [General Sequence](#general-sequence)
+    * [UI component](#ui-component)
+    * [Parser component](#parser-component)
+    * [Accounts Component](#accounts-component)
+    * [Forex component](#forex-component)
+  * [Implementation](#implementation)
+    * [Create/Delete account feature](#createdelete-account-feature)
+    * [Delete-account feature](#delete-account-feature)
+    * [Add/Withdraw money feature](#addwithdraw-money-feature)
+    * [View balance feature](#view-balance-feature)
+    * [Show-rate feature](#show-rate-feature)
+    * [Money exchange feature](#money-exchange-feature)
+  * [Appendix: Requirements](#appendix--requirements)
+    * [Product scope](#product-scope)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+    * [User Stories](#user-stories)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
 <!-- TOC -->
 
 ## Acknowledgements
@@ -45,7 +43,7 @@ First, **fork** this repo, and **clone** the fork into your computer.
 If you plan to use Intellij IDEA (highly recommended):
 
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the
-   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to to ensure Intellij is configured to use **JDK 11
+   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 11
    **.
 2. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle
    project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into
@@ -75,13 +73,29 @@ If you plan to use Intellij IDEA (highly recommended):
 When you are ready to start coding, we recommend that you get some sense of the overall design by reading
 about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).
 
-## Architecture
+## Design
+
+### Architecture
 
 ![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
-## Design
+The diagram above provides a high-level overview of how the project is structured. The main components are:
 
-## Product scope
+1. The `Main` class which initialises all the other components at startup, and connects them with each other
+2. The `UI` component which is responsible for all user input and output
+3. The `Parser` component which parses user input and creates the relevant Command objects
+4. The `Command` component which executes the logic
+5. The `Accounts` component which manages the user's accounts
+6. The `Forex` (Foreign Exchange) component which handles exchange-rate related logic
+7. The `Transactions` component which manages the user's transactions
+8. The `Storage` component which handles the saving and loading of data to disk
+
+### General Sequence
+
+The following is a high-level sequence of a single `create-account SGD` command, which demonstrates how the components
+interact with each other:
+
+![BasicSequence](images/BasicSequence.png)
 
 ### UI component
 
@@ -99,6 +113,13 @@ inputs. We will pass in the instance of UI into the `execute` method of the `Com
 3. Reads in the user input as `String`.
 
 ### Parser component
+
+![Parser Class Diagram](images/ParserClassDiagram.png)
+
+The `Parser` Component
+
+- Parses the user input and creates the relevant `Command` object
+- Makes use of the `CommandType` enum to determine the type of command to create
 
 ### Accounts Component
 
@@ -207,7 +228,7 @@ object. The main functionality is facilitated by the `convert` function within t
 component. The current implementation reads manual exchange rates from an online source. Future
 implementation will use an API to maintain up-to-date exchange rates.
 
-Exchange rate soure: https://www.xe.com/currencyconverter/convert
+Exchange rate source: https://www.xe.com/currencyconverter/convert
 
 This command is executed under the assumption that an `Account` for both the initial and target
 currencies exist. To avoid redundancy, please see the `create-account` feature in the developer
@@ -218,14 +239,14 @@ The exchange command executes as follows:
 -   Initial and target currencies are parsed from the user input
 -   A Forex object is created using the parsed currencies (see `Forex` component for more information)
 -   The amount to be exchanged is parsed from the user input
--   The `Accounts` for both currencies are retrieveed
+-   The `Accounts` for both currencies are retrieved
 -   The converted value is calculated using the `Forex` object
 -   The value of the initial `Account` is updated
 -   The value of the target `Account` is updated
 -   The new balances are printed
 
 The following sequence diagram shows how the Exchange command works
-![ExchangeSeqDiagram](../images/ExchangeSeqDiagram.png)
+![ExchangeSeqDiagram](images/ExchangeSeqDiagram.png)
 
 ## Appendix: Requirements
 

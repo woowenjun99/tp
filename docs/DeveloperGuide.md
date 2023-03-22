@@ -7,9 +7,9 @@
     * [Setting up](#setting-up)
         * [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
         * [Before writing code](#before-writing-code)
-    * [Architecture](#architecture)
     * [Design](#design)
-    * [Product scope](#product-scope)
+        * [Architecture](#architecture)
+        * [General Sequence](#general-sequence)
         * [UI component](#ui-component)
         * [Parser component](#parser-component)
         * [Accounts Component](#accounts-component)
@@ -22,7 +22,7 @@
         * [Show-rate feature](#show-rate-feature)
         * [Money exchange feature](#money-exchange-feature)
     * [Appendix: Requirements](#appendix--requirements)
-        * [Product scope](#product-scope-1)
+        * [Product scope](#product-scope)
         * [Target user profile](#target-user-profile)
         * [Value proposition](#value-proposition)
         * [User Stories](#user-stories)
@@ -75,13 +75,29 @@ If you plan to use Intellij IDEA (highly recommended):
 When you are ready to start coding, we recommend that you get some sense of the overall design by reading
 about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).
 
-## Architecture
+## Design
+
+### Architecture
 
 ![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
-## Design
+The diagram above provides a high-level overview of how the project is structured. The main components are:
 
-## Product scope
+1. The `Main` class which initialises all the other components at startup, and connects them with each other
+2. The `UI` component which is responsible for all user input and output
+3. The `Parser` component which parses user input and creates the relevant Command objects
+4. The `Command` component which executes the logic
+5. The `Accounts` component which manages the user's accounts
+6. The `Forex` (Foreign Exchange) component which handles exchange-rate related logic
+7. The `Transactions` component which manages the user's transactions
+8. The `Storage` component which handles the saving and loading of data to disk
+
+### General Sequence
+
+The following is a high-level sequence of a single `create-account SGD` command, which demonstrates how the components
+interact with each other:
+
+![BasicSequence](images/BasicSequence.png)
 
 ### UI component
 
@@ -99,6 +115,13 @@ inputs. We will pass in the instance of UI into the `execute` method of the `Com
 3. Reads in the user input as `String`.
 
 ### Parser component
+
+![Parser Class Diagram](images/ParserClassDiagram.png)
+
+The `Parser` Component
+
+- Parses the user input and creates the relevant `Command` object
+- Makes use of the `CommandType` enum to determine the type of command to create
 
 ### Accounts Component
 
@@ -221,7 +244,7 @@ The exchange command executes as follows:
 - The new balances are printed
 
 The following sequence diagram shows how the Exchange command works
-![ExchangeSeqDiagram](../images/ExchangeSeqDiagram.png)
+![ExchangeSeqDiagram](images/ExchangeSeqDiagram.png)
 
 ## Appendix: Requirements
 

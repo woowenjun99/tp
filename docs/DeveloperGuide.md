@@ -1,35 +1,33 @@
 # Developer Guide
 
 <!-- TOC -->
-
 * [Developer Guide](#developer-guide)
-    * [Acknowledgements](#acknowledgements)
-    * [Setting up](#setting-up)
-        * [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
-        * [Before writing code](#before-writing-code)
-    * [Design](#design)
-        * [Architecture](#architecture)
-        * [General Sequence](#general-sequence)
-        * [UI component](#ui-component)
-        * [Parser component](#parser-component)
-        * [Accounts Component](#accounts-component)
-        * [Forex component](#forex-component)
-    * [Implementation](#implementation)
-        * [Create/Delete account feature](#createdelete-account-feature)
-        * [Delete-account feature](#delete-account-feature)
-        * [Add/Withdraw money feature](#addwithdraw-money-feature)
-        * [View balance feature](#view-balance-feature)
-        * [Show-rate feature](#show-rate-feature)
-        * [Money exchange feature](#money-exchange-feature)
-    * [Appendix: Requirements](#appendix--requirements)
-        * [Product scope](#product-scope)
-        * [Target user profile](#target-user-profile)
-        * [Value proposition](#value-proposition)
-        * [User Stories](#user-stories)
-        * [Non-Functional Requirements](#non-functional-requirements)
-        * [Glossary](#glossary)
-    * [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
-
+  * [Acknowledgements](#acknowledgements)
+  * [Setting up](#setting-up)
+    * [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+    * [Before writing code](#before-writing-code)
+  * [Design](#design)
+    * [Architecture](#architecture)
+    * [General Sequence](#general-sequence)
+    * [UI component](#ui-component)
+    * [Parser component](#parser-component)
+    * [Accounts Component](#accounts-component)
+    * [Forex component](#forex-component)
+  * [Implementation](#implementation)
+    * [Create/Delete account feature](#createdelete-account-feature)
+    * [Delete-account feature](#delete-account-feature)
+    * [Add/Withdraw money feature](#addwithdraw-money-feature)
+    * [View balance feature](#view-balance-feature)
+    * [Show-rate feature](#show-rate-feature)
+    * [Money exchange feature](#money-exchange-feature)
+  * [Appendix: Requirements](#appendix--requirements)
+    * [Product scope](#product-scope)
+    * [Target user profile](#target-user-profile)
+    * [Value proposition](#value-proposition)
+    * [User Stories](#user-stories)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+  * [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
 <!-- TOC -->
 
 ## Acknowledgements
@@ -45,7 +43,7 @@ First, **fork** this repo, and **clone** the fork into your computer.
 If you plan to use Intellij IDEA (highly recommended):
 
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the
-   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to to ensure Intellij is configured to use **JDK 11
+   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 11
    **.
 2. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle
    project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into
@@ -55,7 +53,7 @@ If you plan to use Intellij IDEA (highly recommended):
     1. Run the `seedu.duke.Duke` and try a few commands.
     2. Run the tests using `./gradlew check` to ensure they all pass.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ### Before writing code
 
@@ -131,11 +129,11 @@ Here is a class diagram of the Accounts component
 
 The `Accounts` Component
 
-- Stores the `AccountList` which contains all the user's accounts
-- `AccountList` handles all logic dealing with accounts
-- `Account` stores both its currency type and its balance
-- There can be only one `Currency` per `Account`
-- There can be only one `Account` of each `Currency`
+-   Stores the `AccountList` which contains all the user's accounts
+-   `AccountList` handles all logic dealing with accounts
+-   `Account` stores both its currency type and its balance
+-   There can be only one `Currency` per `Account`
+-   There can be only one `Account` of each `Currency`
 
 ### Forex component
 
@@ -144,17 +142,17 @@ Here is a class diagram of the Forex component
 
 The `Forex` Component
 
-- Stores the exchange rates of 1 SGD to all supported currencies in a hash map
-- Each `Forex` object represents the relationship between two currencies
-- `convert` can be called on a `Forex` object to convert an amount using the relationship
-- Each `Forex` object has an initial and target `Currency`
-- There is only one instance of the `exchangeRates` hash map.
+-   Stores the exchange rates of 1 SGD to all supported currencies in a hash map
+-   Each `Forex` object represents the relationship between two currencies
+-   `convert` can be called on a `Forex` object to convert an amount using the relationship
+-   Each `Forex` object has an initial and target `Currency`
+-   There is only one instance of the `exchangeRates` hash map.
 
 The `Currency` Enum
 
-- Keeps all currency types supported by the exchange
-- Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
-- Each `Forex` instance must have two `Currency` associated with it
+-   Keeps all currency types supported by the exchange
+-   Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
+-   Each `Forex` instance must have two `Currency` associated with it
 
 ## Implementation
 
@@ -217,6 +215,10 @@ The following sequence diagram shows how the money withdrawal operation works.
 
 ### View balance feature
 
+The view balance feature is facilitated using `Account` instances stored within the `AccountList` object. The main functionality is to view the balance of a specific currency if the currency is specified, else view all the currencies in the account.
+
+![BalanceSequenceDiagram](images/BalanceSeqDiagram.png)
+
 ### Show-rate feature
 
 ### Money exchange feature
@@ -226,7 +228,7 @@ object. The main functionality is facilitated by the `convert` function within t
 component. The current implementation reads manual exchange rates from an online source. Future
 implementation will use an API to maintain up-to-date exchange rates.
 
-Exchange rate soure: https://www.xe.com/currencyconverter/convert
+Exchange rate source: https://www.xe.com/currencyconverter/convert
 
 This command is executed under the assumption that an `Account` for both the initial and target
 currencies exist. To avoid redundancy, please see the `create-account` feature in the developer
@@ -234,14 +236,14 @@ guide for more specific steps on how `Accounts` are created.
 
 The exchange command executes as follows:
 
-- Initial and target currencies are parsed from the user input
-- A Forex object is created using the parsed currencies (see `Forex` component for more information)
-- The amount to be exchanged is parsed from the user input
-- The `Accounts` for both currencies are retrieveed
-- The converted value is calculated using the `Forex` object
-- The value of the initial `Account` is updated
-- The value of the target `Account` is updated
-- The new balances are printed
+-   Initial and target currencies are parsed from the user input
+-   A Forex object is created using the parsed currencies (see `Forex` component for more information)
+-   The amount to be exchanged is parsed from the user input
+-   The `Accounts` for both currencies are retrieved
+-   The converted value is calculated using the `Forex` object
+-   The value of the initial `Account` is updated
+-   The value of the target `Account` is updated
+-   The new balances are printed
 
 The following sequence diagram shows how the Exchange command works
 ![ExchangeSeqDiagram](images/ExchangeSeqDiagram.png)
@@ -252,9 +254,9 @@ The following sequence diagram shows how the Exchange command works
 
 ### Target user profile
 
-- Students who are planning to travel overseas
-- People who need to exchange money for travel
-- People who are comfortable using a CLI
+-   Students who are planning to travel overseas
+-   People who need to exchange money for travel
+-   People who are comfortable using a CLI
 
 ### Value proposition
 
@@ -274,7 +276,7 @@ Command Line Interface (CLI) while still having the features of other money mana
 
 ### Glossary
 
-- _glossary item_ - Definition
+-   _glossary item_ - Definition
 
 ## Appendix: Instructions for manual testing
 

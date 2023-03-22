@@ -118,6 +118,7 @@ The exchange command executes as follows:
 - The new balances are printed
 
 The following sequence diagram shows how the Exchange command works
+![ExchangeSeqDiagram](../images/ExchangeSeqDiagram.png)
 
 ## Appendix: Requirements
 

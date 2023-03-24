@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
 
+import seedu.duke.api.ExchangeRates;
+
 /**
  * Forex object represents the relationship between two currencies. All
  * exchange rates are stored in a hash map that uses the ticker as a key
@@ -17,14 +19,13 @@ public class Forex {
      * convert first to SGD, then from SGD to their target. To be
      * implemented using API.
      */
-    private static final HashMap<Currency, BigDecimal> exchangeRates = new HashMap<Currency, BigDecimal>();
+    private static HashMap<Currency, BigDecimal> exchangeRates;
 
     private Currency initial;
     private Currency target;
 
     // Constructor
     public Forex (Currency from, Currency to) {
-        populateRates();
         initial = from;
         target = to;
     }
@@ -34,18 +35,14 @@ public class Forex {
      * correct as of 2023-03-15 18:15 SGT according to
      * <a href="https://www.xe.com/currencyconverter/convert">https://www.xe.com/currencyconverter/convert</a>
      */
-    public static void populateRates () {
-        exchangeRates.put(Currency.SGD, BigDecimal.valueOf(1.000f));
-        exchangeRates.put(Currency.MYR, BigDecimal.valueOf(3.3295727f));
-        exchangeRates.put(Currency.USD, BigDecimal.valueOf(0.74265183f));
-        exchangeRates.put(Currency.IDR, BigDecimal.valueOf(11442.776f));
-        exchangeRates.put(Currency.JPY, BigDecimal.valueOf(99.414735f));
-        exchangeRates.put(Currency.THB, BigDecimal.valueOf(25.689173f));
-        exchangeRates.put(Currency.CNY, BigDecimal.valueOf(5.1222378f));
-        exchangeRates.put(Currency.GBP, BigDecimal.valueOf(0.61293137f));
-        exchangeRates.put(Currency.EUR, BigDecimal.valueOf(0.69567172f));
-        exchangeRates.put(Currency.KRW, BigDecimal.valueOf(974.90478f));
-        exchangeRates.put(Currency.VND, BigDecimal.valueOf(17490.625f));
+    public static void initializeRates() {
+        System.out.println("Initializing exchange rates. Please wait 5 seconds...");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            System.out.println("Rates not initialized");
+        }
+        exchangeRates = ExchangeRates.getExchangeRates();
     }
 
     // Prints the exchange relationship

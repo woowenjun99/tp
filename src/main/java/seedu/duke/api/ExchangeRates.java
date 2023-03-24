@@ -1,6 +1,10 @@
 package seedu.duke.api;
 
 import java.util.Map;
+import java.util.HashMap;
+import java.math.BigDecimal;
+
+import seedu.duke.Currency;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -12,12 +16,13 @@ public class ExchangeRates {
     private static final String BASE_CURRENCY = "USD";
 
     private static Map<String, Double> exchangeRatesMap;
+    private static HashMap<Currency, BigDecimal> savedMap;
 
     public ExchangeRates() {
         fetchExchangeRates(APP_ID, BASE_CURRENCY);
     }
 
-    public static void fetchExchangeRates(String appId, String baseCurrency) {
+    private static void fetchExchangeRates(String appId, String baseCurrency) {
         ExchangeRatesApi api = ExchangeRatesApiClient.getExchangeRatesApi();
         Call<ExchangeRatesResponse> call = api.getLatestExchangeRates(appId, baseCurrency);
         call.enqueue(new Callback<ExchangeRatesResponse>() {
@@ -26,7 +31,7 @@ public class ExchangeRates {
                 if (response.isSuccessful()) {
                     ExchangeRatesResponse rates = response.body();
                     exchangeRatesMap = rates.getExchangeRates();
-                    printMap();
+                    saveMap(exchangeRatesMap);
                 } else {
                     System.out.println("Failure");
                 }
@@ -39,9 +44,25 @@ public class ExchangeRates {
         });
     }
 
-    public static void printMap() {
-        for (String currency : exchangeRatesMap.keySet()) {
-            System.out.println(currency + ": " + exchangeRatesMap.get(currency));
+    private static void saveMap(Map<String, Double> exchangeRatesMap) {
+        HashMap<Currency, BigDecimal> filteredMap = filterMap(exchangeRatesMap);
+        savedMap = filteredMap;
+    }
+
+    private static HashMap<Currency, BigDecimal> filterMap(Map<String, Double> exchangeRatesMap) {
+        HashMap<Currency, BigDecimal> convertedMap = new HashMap<>();
+        for (Currency currency : Currency.values()) {
+            String currencyString = currency.toString();
+            if (exchangeRatesMap.containsKey(currencyString)) {
+                Double exchangeRate = exchangeRatesMap.get(currencyString);
+                BigDecimal exchangeRateDecimal = BigDecimal.valueOf(exchangeRate);
+                convertedMap.put(currency, exchangeRateDecimal);
+            }
         }
+        return convertedMap;
+    }
+
+    public static HashMap<Currency, BigDecimal> getExchangeRates() {
+        return savedMap;
     }
 }

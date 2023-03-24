@@ -3,7 +3,6 @@ package seedu.duke;
 import seedu.duke.commands.Command;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
-import seedu.duke.api.ExchangeRates;
 
 public class Duke {
 
@@ -37,7 +36,6 @@ public class Duke {
     public static void main (String[] args) {
         ui = new Ui();
         ui.printGreeting();
-        ExchangeRates init = new ExchangeRates();
         Forex.initializeRates();
         ui.printSpacer();
         run();

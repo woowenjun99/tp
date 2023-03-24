@@ -39,7 +39,9 @@ public class Forex {
      * This method will only be called once upon starting the program.
      */ 
     public static void initializeRates() {
-        ui.printMessage(Message.LOADING_EXCHANGE_RATES);
+        Ui ui = new Ui();
+        ExchangeRates initRates = new ExchangeRates();
+        ui.printMessage(Message.LOADING_EXCHANGE_RATES.getMessage());
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {

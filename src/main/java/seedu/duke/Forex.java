@@ -31,10 +31,10 @@ public class Forex {
     }
 
     /**
-     * Populates the exchange rates hash map with the current exchange rates,
-     * correct as of 2023-03-15 18:15 SGT according to
-     * <a href="https://www.xe.com/currencyconverter/convert">https://www.xe.com/currencyconverter/convert</a>
-     */
+     * Initializes the exchange rates by fetching them from the ExchangeRates class.
+     * Buffers for 5 seconds to allow the API call to go through.
+     * This method will only be called once upon starting the program.
+     */ 
     public static void initializeRates() {
         System.out.println("Initializing exchange rates. Please wait 5 seconds...");
         try {

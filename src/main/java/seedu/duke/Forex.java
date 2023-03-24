@@ -3,6 +3,9 @@ package seedu.duke;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+import seedu.duke.ui.Ui;
+import seedu.duke.constants.ErrorMessage;
+import seedu.duke.constants.Message;
 
 import seedu.duke.api.ExchangeRates;
 
@@ -36,11 +39,11 @@ public class Forex {
      * This method will only be called once upon starting the program.
      */ 
     public static void initializeRates() {
-        System.out.println("Initializing exchange rates. Please wait 5 seconds...");
+        ui.printMessage(Message.LOADING_EXCHANGE_RATES);
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
-            System.out.println("Rates not initialized");
+            ui.printMessage(ErrorMessage.RATE_LOADING_INCOMPLETE);
         }
         exchangeRates = ExchangeRates.getExchangeRates();
     }

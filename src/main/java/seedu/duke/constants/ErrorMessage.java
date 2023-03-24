@@ -33,5 +33,6 @@ public interface ErrorMessage {
         + " check how much you have in your balance and how much you are depositing before adding the value in.";
     String EXCHANGE_AMOUNT_TOO_SMALL = "The amount is too small to exchange " +
             "(e.g. does not become at least 0.01 in the target currency)";
+    String RATE_LOADING_INCOMPLETE = "The rates did not have adequate time to load! Please restart MoneyMoover."
 
 }

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.math.BigDecimal;
 
 import seedu.duke.Currency;
+import seedu.duke.ui.Ui;
+import seedu.duke.constants.ErrorMessage;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +33,7 @@ public class ExchangeRates {
      * @param baseCurrency The base currency, always USD
      */
     private static void fetchExchangeRates(String appId, String baseCurrency) {
+        Ui ui = new Ui();
         ExchangeRatesApi api = ExchangeRatesApiClient.getExchangeRatesApi();
         Call<ExchangeRatesResponse> call = api.getLatestExchangeRates(appId, baseCurrency);
         call.enqueue(new Callback<ExchangeRatesResponse>() {
@@ -41,13 +44,13 @@ public class ExchangeRates {
                     exchangeRatesMap = rates.getExchangeRates();
                     saveMap(exchangeRatesMap);
                 } else {
-                    System.out.println("Failure");
+                    ui.printMessage(ErrorMessage.RESPONSE_CODE_OUT_OF_BOUNDS);
                 }
             }
 
             @Override
             public void onFailure(Call<ExchangeRatesResponse> call, Throwable t) {
-                System.out.println("Failure");
+                ui.printMessage(ErrorMessage.NETWORK_OR_UNEXPECTED_ERROR);
             }
         });
     }

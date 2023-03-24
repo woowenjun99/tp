@@ -26,7 +26,7 @@ public enum Message {
             "Now you have remaining %.2f %s in your account "),
     SUCCESSFUL_DELETE_ACCOUNT_COMMAND("You have successfully deleted your %s account\n"),
     SUCCESSFUL_ADD_COMMAND("You have successfully added %s %.2f into your account"),
-    LOADING_EXCHANGE_RATES("Initializing exchange rates. Please wait 5 seconds..."),
+    LOADING_EXCHANGE_RATES("Initializing live exchange rates. Please wait 5 seconds..."),
     SUCCESSFUL_CREATE_ACCOUNT_COMMAND("You have successfully added the %s account\n");
 
     private final String message;

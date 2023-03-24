@@ -1,34 +1,35 @@
 # Developer Guide
 
 <!-- TOC -->
-* [Developer Guide](#developer-guide)
-  * [Acknowledgements](#acknowledgements)
-  * [Setting up](#setting-up)
-    * [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
-    * [Before writing code](#before-writing-code)
-  * [Design](#design)
-    * [Architecture](#architecture)
-    * [General Sequence](#general-sequence)
-    * [UI component](#ui-component)
-    * [Parser component](#parser-component)
-    * [Accounts Component](#accounts-component)
-    * [Forex component](#forex-component)
-  * [Implementation](#implementation)
-    * [Create/Delete account feature](#createdelete-account-feature)
-    * [Delete-account feature](#delete-account-feature)
-    * [Add/Withdraw money feature](#addwithdraw-money-feature)
-    * [View balance feature](#view-balance-feature)
-    * [Show-rate feature](#show-rate-feature)
-    * [Money exchange feature](#money-exchange-feature)
-  * [Appendix: Requirements](#appendix--requirements)
-    * [Product scope](#product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
-    * [User Stories](#user-stories)
-    * [Non-Functional Requirements](#non-functional-requirements)
-    * [Glossary](#glossary)
-  * [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
-<!-- TOC -->
+
+- [Developer Guide](#developer-guide)
+  - [Acknowledgements](#acknowledgements)
+  - [Setting up](#setting-up)
+    - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+    - [Before writing code](#before-writing-code)
+  - [Design](#design)
+    - [Architecture](#architecture)
+    - [General Sequence](#general-sequence)
+    - [UI component](#ui-component)
+    - [Parser component](#parser-component)
+    - [Accounts Component](#accounts-component)
+    - [Forex component](#forex-component)
+  - [Implementation](#implementation)
+    - [Create/Delete account feature](#createdelete-account-feature)
+    - [Delete-account feature](#delete-account-feature)
+    - [Add/Withdraw money feature](#addwithdraw-money-feature)
+    - [View balance feature](#view-balance-feature)
+    - [Show-rate feature](#show-rate-feature)
+    - [Money exchange feature](#money-exchange-feature)
+  - [Appendix: Requirements](#appendix--requirements)
+    - [Product scope](#product-scope)
+    - [Target user profile](#target-user-profile)
+    - [Value proposition](#value-proposition)
+    - [User Stories](#user-stories)
+    - [Non-Functional Requirements](#non-functional-requirements)
+    - [Glossary](#glossary)
+  - [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
+  <!-- TOC -->
 
 ## Acknowledgements
 
@@ -50,8 +51,8 @@ If you plan to use Intellij IDEA (highly recommended):
    IDEA.<br>
    :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
 3. **Verify the setup**:
-    1. Run the `seedu.duke.Duke` and try a few commands.
-    2. Run the tests using `./gradlew check` to ensure they all pass.
+   1. Run the `seedu.duke.Duke` and try a few commands.
+   2. Run the tests using `./gradlew check` to ensure they all pass.
 
 ---
 
@@ -59,9 +60,9 @@ If you plan to use Intellij IDEA (highly recommended):
 
 1. **Configure the coding style**
    If using IDEA, you can use the following steps to import the code style settings.
-    1. Go to `File → Settings → Editor → Code Style`
-    2. Click the Gear Icon next to the `Scheme` box and then click `Import Scheme → IntelliJ IDEA code style XML`.
-    3. Select the `DefaultCodeStyle.xml` file in the root of the project directory.
+   1. Go to `File → Settings → Editor → Code Style`
+   2. Click the Gear Icon next to the `Scheme` box and then click `Import Scheme → IntelliJ IDEA code style XML`.
+   3. Select the `DefaultCodeStyle.xml` file in the root of the project directory.
 2. **Set up CI**
    This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those
    files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
@@ -129,11 +130,11 @@ Here is a class diagram of the Accounts component
 
 The `Accounts` Component
 
--   Stores the `AccountList` which contains all the user's accounts
--   `AccountList` handles all logic dealing with accounts
--   `Account` stores both its currency type and its balance
--   There can be only one `Currency` per `Account`
--   There can be only one `Account` of each `Currency`
+- Stores the `AccountList` which contains all the user's accounts
+- `AccountList` handles all logic dealing with accounts
+- `Account` stores both its currency type and its balance
+- There can be only one `Currency` per `Account`
+- There can be only one `Account` of each `Currency`
 
 ### Forex component
 
@@ -142,17 +143,17 @@ Here is a class diagram of the Forex component
 
 The `Forex` Component
 
--   Stores the exchange rates of 1 SGD to all supported currencies in a hash map
--   Each `Forex` object represents the relationship between two currencies
--   `convert` can be called on a `Forex` object to convert an amount using the relationship
--   Each `Forex` object has an initial and target `Currency`
--   There is only one instance of the `exchangeRates` hash map.
+- Stores the exchange rates of 1 SGD to all supported currencies in a hash map
+- Each `Forex` object represents the relationship between two currencies
+- `convert` can be called on a `Forex` object to convert an amount using the relationship
+- Each `Forex` object has an initial and target `Currency`
+- There is only one instance of the `exchangeRates` hash map.
 
 The `Currency` Enum
 
--   Keeps all currency types supported by the exchange
--   Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
--   Each `Forex` instance must have two `Currency` associated with it
+- Keeps all currency types supported by the exchange
+- Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
+- Each `Forex` instance must have two `Currency` associated with it
 
 ## Implementation
 
@@ -190,7 +191,7 @@ The following sequence diagram shows how the Create Account operation works
 ### Add/Withdraw money feature
 
 The add money(deposit) and withdraw money feature is facilitated by `AddCommand` and `WithdrawCommand` which both
-extends the `Command` class. With the provided input from user (`CURRENCY` and `AMOUNT`),  `AddCommand`
+extends the `Command` class. With the provided input from user (`CURRENCY` and `AMOUNT`), `AddCommand`
 and `WithdrawCommand`
 update the balance of respective currency account accordingly.
 
@@ -221,6 +222,25 @@ The view balance feature is facilitated using `Account` instances stored within 
 
 ### Show-rate feature
 
+The exchange feature is facilitated using two `Forex` instances to represent the
+exchange rates between two currencies. The current implementation reads manual exchange
+rates from an online source. Future implementation will use an API to maintain up-to-date
+exchange rates.
+
+Exchange rate source: https://www.xe.com/currencyconverter/convert
+
+The show-rate command executes as follows
+
+- The initial and target currency are parsed from the input
+- If the user included an amount, the amount is also parsed
+- A `Forex` object showing the rate from the initial to the target currency is made
+- A `Forex` object showing the rate from the target to the initial currency is made
+- The Ui prints the exchanged amount if an amount was provided by the user for both rates
+- The Ui will print the unit rate both ways if no amount was provided
+
+The following sequence diagram shows how the Show Rate command works
+![ShowRateSeqDiagram](images/ShowRateSeqDiagram.png)
+
 ### Money exchange feature
 
 The exchange feature is facilitated using `Account` instances stored within an `AccountList`
@@ -236,14 +256,14 @@ guide for more specific steps on how `Accounts` are created.
 
 The exchange command executes as follows:
 
--   Initial and target currencies are parsed from the user input
--   A Forex object is created using the parsed currencies (see `Forex` component for more information)
--   The amount to be exchanged is parsed from the user input
--   The `Accounts` for both currencies are retrieved
--   The converted value is calculated using the `Forex` object
--   The value of the initial `Account` is updated
--   The value of the target `Account` is updated
--   The new balances are printed
+- Initial and target currencies are parsed from the user input
+- A Forex object is created using the parsed currencies (see `Forex` component for more information)
+- The amount to be exchanged is parsed from the user input
+- The `Accounts` for both currencies are retrieved
+- The converted value is calculated using the `Forex` object
+- The value of the initial `Account` is updated
+- The value of the target `Account` is updated
+- The new balances are printed
 
 The following sequence diagram shows how the Exchange command works
 ![ExchangeSeqDiagram](images/ExchangeSeqDiagram.png)
@@ -254,9 +274,9 @@ The following sequence diagram shows how the Exchange command works
 
 ### Target user profile
 
--   Students who are planning to travel overseas
--   People who need to exchange money for travel
--   People who are comfortable using a CLI
+- Students who are planning to travel overseas
+- People who need to exchange money for travel
+- People who are comfortable using a CLI
 
 ### Value proposition
 
@@ -266,7 +286,7 @@ Command Line Interface (CLI) while still having the features of other money mana
 ### User Stories
 
 | Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
+| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
 | v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
 | v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 
@@ -276,7 +296,7 @@ Command Line Interface (CLI) while still having the features of other money mana
 
 ### Glossary
 
--   _glossary item_ - Definition
+- _glossary item_ - Definition
 
 ## Appendix: Instructions for manual testing
 

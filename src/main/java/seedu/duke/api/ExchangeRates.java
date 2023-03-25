@@ -81,6 +81,7 @@ public class ExchangeRates {
                 convertedMap.put(currency, exchangeRateDecimal);
             }
         }
+        assert convertedMap.size() == Currency.values().length;
         return convertedMap;
     }
 

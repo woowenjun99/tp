@@ -68,7 +68,7 @@ public class ShowRateCommand extends Command {
      * @return a string containing the exchange rates to be printed
      * @throws InvalidNumberException if the amount is negative
      */
-    private String getRateString (Forex instance, BigDecimal amt) throws InvalidNumberException {
+    public String getRateString (Forex instance, BigDecimal amt) throws InvalidNumberException {
         if (amt.compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidNumberException();
         }

@@ -1,11 +1,13 @@
 package seedu.duke;
 
 import seedu.duke.constants.DateConstants;
+import seedu.duke.exceptions.InvalidSearchTransactionByDateException;
 import seedu.duke.exceptions.NoTransactionsOfSearchParameterException;
 import seedu.duke.exceptions.NoTransactionsRecordedException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -122,11 +124,17 @@ public class TransactionManager {
     }
 
     public String getAllTransactionsOfDate (String dateString) throws NoTransactionsRecordedException,
-            NoTransactionsOfSearchParameterException {
+            NoTransactionsOfSearchParameterException, InvalidSearchTransactionByDateException {
         if (transactions.size() == 0) {
             throw new NoTransactionsRecordedException();
         }
-        LocalDate date = LocalDate.parse(dateString, DateConstants.INPUT_DATE_TIME_FORMATTER);
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateString, DateConstants.INPUT_DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new InvalidSearchTransactionByDateException();
+        }
+
         String stringToReturn = "";
         for (int i = transactions.size() - 1; i >= 0; --i) {
             Transaction transaction = transactions.get(i);

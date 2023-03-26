@@ -3,10 +3,9 @@ package seedu.duke.commands;
 import seedu.duke.ui.Ui;
 import seedu.duke.AccountList;
 import seedu.duke.Forex;
-import seedu.duke.Currency;
+import seedu.duke.exceptions.IllegalCurrencyException;
 import seedu.duke.exceptions.InvalidNumberException;
-
-import java.math.BigDecimal;
+import seedu.duke.exceptions.InvalidShowrateArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -30,57 +29,51 @@ public class ShowRateCommandTest {
         }
     }
 
-    /**
-     * Potential exceptions are all caught and handled by execute, so if
-     * no exception is thrown in these cases, then it means the code
-     * does not break under any of these circumstances.
-     */
-    // @Test
-    // public void testExecute_incorrectSyntax_shouldHandleThrowInvalidShowRateArgumentException() {
-    //     try {
-    //         Ui ui = new Ui();
-    //         AccountList accounts = new AccountList();
-    //         ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB");
-    //         ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD USD MYR");
-    //         cmd1.execute(ui, accounts);
-    //         cmd2.execute(ui, accounts);
-    //     } catch (Exception e) {
-    //         fail();
-    //     }
-    // }
-
     @Test
-    public void testExecute_invalidCurrencyOrNumber_shouldHandleIllegalArgumentException() {
+    public void testParseInput_invalidCurrency_shouldThrowIllegalCurrencyException() {
         try {
-            Ui ui = new Ui();
-            AccountList accounts = new AccountList();
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB XYZ");
-            ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD CS_2113");
-            cmd1.execute(ui, accounts);
-            cmd2.execute(ui, accounts);
+            ShowRateCommand cmd2 = new ShowRateCommand("show-rate SGD 1");
+            assertThrows(IllegalCurrencyException.class, cmd1::parseInput);
+            assertThrows(IllegalCurrencyException.class, cmd2::parseInput);
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void testExecute_negativeNumber_shouldHandleInvalidNumberException() {
+    public void testParseInput_invalidInputLength_shouldThrowInvalidShowrateArgumentException() {
         try {
-            Ui ui = new Ui();
-            AccountList accounts = new AccountList();
-            ShowRateCommand cmd = new ShowRateCommand("show-rate THB SGD -1.24");
-            cmd.execute(ui, accounts);
+            ShowRateCommand cmd1 = new ShowRateCommand("show-rate");
+            ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB");
+            ShowRateCommand cmd3 = new ShowRateCommand("show-rate SGD THB 1 2");
+            assertThrows(InvalidShowrateArgumentException.class, cmd1::parseInput);
+            assertThrows(InvalidShowrateArgumentException.class, cmd2::parseInput);
+            assertThrows(InvalidShowrateArgumentException.class, cmd3::parseInput);
         } catch (Exception e) {
             fail();
         }
     }
 
-    public void testGetRateString_negativeNumber_shouldThrowInvalidNumberException() {
+    @Test
+    public void testParseAmount_nonNumericValue_shouldThrowIllegalArgumentException() {
         try {
-            ShowRateCommand cmd = new ShowRateCommand("show-rate THB SGD 1");
-            Forex inst = new Forex(Currency.SGD, Currency.USD);
-            BigDecimal negativeVal = new BigDecimal(-1.25);
-            assertThrows(InvalidNumberException.class, () -> cmd.getRateString(inst, negativeVal));
+            ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD F");
+            ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD ../");
+            assertThrows(IllegalArgumentException.class, cmd1::parseAmount);
+            assertThrows(IllegalArgumentException.class, cmd2::parseAmount);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testParseAmount_negativeValue_shouldThrowInvalidNumberException() {
+        try {
+            ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD -0.001");
+            ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD -1000000");
+            assertThrows(InvalidNumberException.class, cmd1::parseAmount);
+            assertThrows(InvalidNumberException.class, cmd2::parseAmount);
         } catch (Exception e) {
             fail();
         }

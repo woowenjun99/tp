@@ -1,6 +1,8 @@
 package seedu.duke.storage;
 
 import com.google.gson.Gson;
+import seedu.duke.AccountList;
+import seedu.duke.Currency;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,12 +13,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Store {
-    private final String FILE_NAME = "store.json";
-    private final File file = new File(FILE_NAME);
-    private final Gson gson = new Gson();
-    private final Logger logger = Logger.getLogger("logger");
+    private final static String FILE_NAME = "store.json";
+    private final static File file = new File(FILE_NAME);
+    private final static Gson gson = new Gson();
+    private final static Logger logger = Logger.getLogger("logger");
 
-    private void createFileIfNotExist () throws IOException {
+    private static void createFileIfNotExist () throws IOException {
         if (file.createNewFile()) {
             FileWriter writer = new FileWriter(FILE_NAME);
             // Add in an empty array to prevent error from being thrown.
@@ -25,11 +27,18 @@ public class Store {
         }
     }
 
-    private void getFromStore () {
+    public static void getFromStore (AccountList accounts) {
         try {
             createFileIfNotExist();
             BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));
             Storage[] store = gson.fromJson(br, Storage[].class);
+            for (Storage account: store) {
+                Currency currency = Currency.valueOf(account.getCurrency());
+                long value = account.getValue();
+                accounts.addAccount(currency, value);
+            }
+            // If the 2 lengths do not match, there is a problem.
+            assert accounts.getAllAccounts().size() == store.length;
         } catch (Exception e) {
             logger.log(Level.WARNING, "An unexpected error occurred!");
         }

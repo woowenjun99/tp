@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class TransactionManager {
     private static TransactionManager instance = null;
     ArrayList<Transaction> transactions;
-    
+
     private TransactionManager () {
         transactions = new ArrayList<>();
     }
@@ -33,8 +34,10 @@ public class TransactionManager {
      * @param currency    The currency associated with the transaction
      * @param description The description associated with the transaction
      */
-    public void addTransaction (Currency currency, String description) {
-        Transaction newTransaction = new Transaction(currency, description);
+    public void addTransaction (Currency currency, String description, boolean isCredit,
+                                BigDecimal changeInBalance, BigDecimal balanceAfterTransaction) {
+        Transaction newTransaction = new Transaction(currency, description, isCredit,
+                changeInBalance, balanceAfterTransaction);
         transactions.add(newTransaction);
     }
 

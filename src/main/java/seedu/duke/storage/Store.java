@@ -13,10 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Store {
-    private final static String FILE_NAME = "store.json";
-    private final static File file = new File(FILE_NAME);
-    private final static Gson gson = new Gson();
-    private final static Logger logger = Logger.getLogger("logger");
+    private static final String FILE_NAME = "store.json";
+    private static final File file = new File(FILE_NAME);
+    private static final Gson gson = new Gson();
+    private static final Logger logger = Logger.getLogger("logger");
 
     private static void createFileIfNotExist () throws IOException {
         if (file.createNewFile()) {

@@ -18,7 +18,7 @@ public class TransactionCommand extends Command {
 
     /**
      * Prints the transactions made by the user
-     * Optional parameters allow the user to search by date, month, description or currency
+     * Optional flags allow the user to search by date, month, description or currency
      *
      * @param ui       The instance of the UI class
      * @param accounts The instance of the AccountList class
@@ -55,13 +55,18 @@ public class TransactionCommand extends Command {
         }
     }
 
+    /**
+     * Method that prints all transactions in the transaction list
+     *
+     * @param ui The instance of the UI class
+     * @throws NoTransactionsRecordedException if there are no transactions in the list
+     */
     private static void printAllTransactions (Ui ui) throws NoTransactionsRecordedException {
         TransactionManager transactionManager = TransactionManager.getInstance();
         String transactionsString;
         transactionsString = transactionManager.getAllTransactionsString();
         ui.printMessage(Message.SHOW_ALL_TRANSACTIONS_HEADER.getMessage());
         ui.printMessage(transactionsString);
-        return;
     }
 
     /**
@@ -78,6 +83,22 @@ public class TransactionCommand extends Command {
         return stringToSearch.substring(stringToSearch.indexOf(" ", substringStartIndex)).trim();
     }
 
+    /**
+     * Method that prints transactions within some search parameters
+     * The search parameters are determined by the flag passed in
+     *
+     * @param ui   The instance of the UI class
+     * @param args The String array representing the user input split by space
+     * @param flag The String flag determining which search parameters are used
+     * @throws InvalidSearchTransactionByDescException     if the description given to search by is invalid
+     * @throws NoTransactionsRecordedException             if there are no transactions in the list
+     * @throws InvalidSearchTransactionByMonthException    if the month given to search by is invalid
+     * @throws InvalidSearchTransactionByDateException     if the date given to search by is invalid
+     * @throws InvalidSearchTransactionByCurrencyException if the currency given to search by is invalid
+     * @throws NoTransactionsOfSearchParameterException    if there are no transactions matching search parameters
+     * @throws InvalidTransactionFlagException             if the flag given is invalid
+     * @throws IllegalArgumentException                    if the currency given to search by is invalid
+     */
     private void printTransactionsByFlag (Ui ui, String[] args, String flag) throws
             InvalidSearchTransactionByDescException, NoTransactionsRecordedException,
             InvalidSearchTransactionByMonthException, InvalidSearchTransactionByDateException,
@@ -99,6 +120,10 @@ public class TransactionCommand extends Command {
             if (args.length < 3) {
                 throw new InvalidSearchTransactionByMonthException();
             }
+            String monthString = findSubstringToEndAfterASubstring(input, TransactionFlag.TRANSACTION_MONTH_FLAG);
+            transactionsString = transactionManager.getAllTransactionsOfMonth(monthString);
+            ui.printMessage(Message.SHOW_TRANSACTIONS_OF_MONTH_HEADER.getMessage() + monthString + ":");
+            ui.printMessage(transactionsString);
             break;
         case TransactionFlag.TRANSACTION_DATE_FLAG:
             if (args.length < 3) {

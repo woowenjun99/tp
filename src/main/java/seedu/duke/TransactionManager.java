@@ -2,11 +2,13 @@ package seedu.duke;
 
 import seedu.duke.constants.DateConstants;
 import seedu.duke.exceptions.InvalidSearchTransactionByDateException;
+import seedu.duke.exceptions.InvalidSearchTransactionByMonthException;
 import seedu.duke.exceptions.NoTransactionsOfSearchParameterException;
 import seedu.duke.exceptions.NoTransactionsRecordedException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
@@ -58,6 +60,13 @@ public class TransactionManager {
         this.transactions = transactions;
     }
 
+    /**
+     * Method that appends a transaction appropriately with correct formatting to the input string
+     *
+     * @param currentString The string to append the transaction to
+     * @param transaction   The transaction to be appended
+     * @return The string after appending the transaction
+     */
     private String appendTransactionToString (String currentString, Transaction transaction) {
         if (!currentString.isEmpty()) {
             // It is not the first transaction to be inserted, thus it should have a separator
@@ -85,6 +94,14 @@ public class TransactionManager {
         return stringToReturn;
     }
 
+    /**
+     * Method that formats and returns a string representing all transactions containing a given description
+     *
+     * @param description The description to search for
+     * @return The String representing all corresponding transactions
+     * @throws NoTransactionsRecordedException          if there are no transactions in the list
+     * @throws NoTransactionsOfSearchParameterException if there are no transactions matching search parameters
+     */
     public String getAllTransactionsOfDescription (String description) throws NoTransactionsRecordedException,
             NoTransactionsOfSearchParameterException {
         if (transactions.size() == 0) {
@@ -104,6 +121,15 @@ public class TransactionManager {
         return stringToReturn;
     }
 
+    /**
+     * Method that formats and returns a string representing all transactions associated to a given currency
+     *
+     * @param currencyString The String representing the currency to search for
+     * @return The String representing all corresponding transactions
+     * @throws NoTransactionsRecordedException          if there are no transactions in the list
+     * @throws IllegalArgumentException                 if the currencyString is not a valid currency
+     * @throws NoTransactionsOfSearchParameterException if there are no transactions matching search parameters
+     */
     public String getAllTransactionsOfCurrency (String currencyString) throws NoTransactionsRecordedException,
             IllegalArgumentException, NoTransactionsOfSearchParameterException {
         if (transactions.size() == 0) {
@@ -123,6 +149,15 @@ public class TransactionManager {
         return stringToReturn;
     }
 
+    /**
+     * Method that formats and returns a string representing all transactions associated to a given date
+     *
+     * @param dateString The String representing the date to search for
+     * @return The String representing all corresponding transactions
+     * @throws NoTransactionsRecordedException          if there are no transactions in the list
+     * @throws NoTransactionsOfSearchParameterException if there are transactions matching search parameters
+     * @throws InvalidSearchTransactionByDateException  if the date string provided is in the wrong format
+     */
     public String getAllTransactionsOfDate (String dateString) throws NoTransactionsRecordedException,
             NoTransactionsOfSearchParameterException, InvalidSearchTransactionByDateException {
         if (transactions.size() == 0) {
@@ -130,7 +165,7 @@ public class TransactionManager {
         }
         LocalDate date;
         try {
-            date = LocalDate.parse(dateString, DateConstants.INPUT_DATE_TIME_FORMATTER);
+            date = LocalDate.parse(dateString, DateConstants.INPUT_DATE_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new InvalidSearchTransactionByDateException();
         }
@@ -140,6 +175,42 @@ public class TransactionManager {
             Transaction transaction = transactions.get(i);
             if (transaction.getDate().toLocalDate().isEqual(date)) {
                 // This transaction occurred on the specified day
+                stringToReturn = appendTransactionToString(stringToReturn, transaction);
+            }
+        }
+        if (stringToReturn.isEmpty()) {
+            throw new NoTransactionsOfSearchParameterException();
+        }
+        return stringToReturn;
+    }
+
+    /**
+     * Method that formats and returns a string representing all transactions associated to a given month
+     *
+     * @param monthString The String representing the month to search for
+     * @return The String representing all corresponding transactions
+     * @throws NoTransactionsRecordedException          if there are no transactions in the list
+     * @throws NoTransactionsOfSearchParameterException if there are no transactions matching search parameters
+     * @throws InvalidSearchTransactionByMonthException if the month string provided is in invalid format
+     */
+    public String getAllTransactionsOfMonth (String monthString) throws NoTransactionsRecordedException,
+            NoTransactionsOfSearchParameterException, InvalidSearchTransactionByMonthException {
+        if (transactions.size() == 0) {
+            throw new NoTransactionsRecordedException();
+        }
+        String dateString = "01-" + monthString;
+        LocalDate date;
+        try {
+            date = LocalDate.parse(dateString, DateConstants.INPUT_DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new InvalidSearchTransactionByMonthException();
+        }
+        YearMonth monthToSearch = YearMonth.from(date);
+        String stringToReturn = "";
+        for (int i = transactions.size() - 1; i >= 0; --i) {
+            Transaction transaction = transactions.get(i);
+            if (monthToSearch.equals(YearMonth.from(transaction.getDate().toLocalDate()))) {
+                // This transaction occurred on the specified month
                 stringToReturn = appendTransactionToString(stringToReturn, transaction);
             }
         }

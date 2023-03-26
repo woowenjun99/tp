@@ -8,9 +8,9 @@ import java.util.ArrayList;
  * Singleton class to allow access by commands that trigger storing a new transaction
  */
 public class TransactionManager {
-    ArrayList<Transaction> transactions;
     private static TransactionManager instance = null;
-
+    ArrayList<Transaction> transactions;
+    
     private TransactionManager () {
         transactions = new ArrayList<>();
     }

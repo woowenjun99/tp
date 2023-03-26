@@ -1,15 +1,11 @@
 package seedu.duke.storage;
 
-import java.math.BigDecimal;
 
-/**
- * @@author woowenjun99
- */
 public class Storage {
     private final String currency;
-    private final BigDecimal value;
+    private final long value;
 
-    public Storage (String currency, BigDecimal value) {
+    public Storage (String currency, long value) {
         this.currency = currency;
         this.value = value;
     }
@@ -18,7 +14,7 @@ public class Storage {
         return currency;
     }
 
-    public BigDecimal getValue () {
+    public long getValue () {
         return value;
     }
 }

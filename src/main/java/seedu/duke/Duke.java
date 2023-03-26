@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
+import seedu.duke.storage.Store;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
 
@@ -36,6 +37,7 @@ public class Duke {
     public static void main (String[] args) {
         ui = new Ui();
         ui.printGreeting();
+        Store.getFromStore();
         Forex.initializeRates();
         ui.printSpacer();
         run();

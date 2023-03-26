@@ -98,6 +98,42 @@ Examples of error messages:
 >>> Please enter a valid number to exchange
 ```
 
+### Show the exchange rate between two currencies `show-rate`
+
+The show rate has an optional parameter amount. The command will show the value of amount exchanged both ways. If amount is not provided,
+the command will use a value of 1. The command must be given supported currencies, and numerical non-negative values.
+
+Format: `show-rate <initialCurrency> <targetCurrency> [amount]`
+
+Examples of usage:
+
+```text
+>>> show-rate THB SGD
+>>> 1.00 THB =   0.039105 SGD
+>>> 1.00 SGD =  25.571956 THB
+
+>>> show-rate THB SGD 0.56
+>>> 0.56 THB =   0.021899 SGD
+>>> 0.56 SGD =  14.320295 THB
+
+>>> show-rate JPY USD 105.2
+>>> 105.20 JPY =   0.804589 USD
+>>> 105.20 USD = 13,754.897026 JPY
+```
+
+Examples of error messages:
+
+```text
+>>> show-rate SGD
+>>> Please structure show-rate as 'show-rate CURRENCY CURRENCY [AMOUNT]'
+
+>>> show-rate SGD XYZ
+>>> An invalid currency has been provided.
+
+>>> show-rate KRW CNY -12
+>>> Please enter a positive number to show the rate!
+```
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?

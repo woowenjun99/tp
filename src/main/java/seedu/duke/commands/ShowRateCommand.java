@@ -72,8 +72,8 @@ public class ShowRateCommand extends Command {
         if (amt.compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidNumberException();
         }
-        String from = Account.currencyToString(instance.getInitial());
-        String to = Account.currencyToString(instance.getTarget());
+        String from = instance.getInitial().name();
+        String to = instance.getTarget().name();
         return String.format("%.2f %s = %,10.6f %s", amt, from, instance.convert(amt), to);
     }
 }

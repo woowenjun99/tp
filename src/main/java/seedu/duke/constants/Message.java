@@ -26,7 +26,8 @@ public enum Message {
             "Now you have remaining %.2f %s in your account "),
     SUCCESSFUL_DELETE_ACCOUNT_COMMAND("You have successfully deleted your %s account\n"),
     SUCCESSFUL_ADD_COMMAND("You have successfully added %s %.2f into your account"),
-    SUCCESSFUL_CREATE_ACCOUNT_COMMAND("You have successfully added the %s account\n");
+    SUCCESSFUL_CREATE_ACCOUNT_COMMAND("You have successfully added the %s account\n"),
+    SHOW_ALL_TRANSACTIONS_HEADER("Below are all your transactions in reverse chronological order:");
 
     private final String message;
 

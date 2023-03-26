@@ -11,7 +11,8 @@ public enum CommandType {
     EXCHANGE("exchange"),
     CREATE_ACCOUNT("create-account"),
     DELETE_ACCOUNT("delete-account"),
-    HELP("help");
+    HELP("help"),
+    TRANSACTION("trans");
     private String command;
 
     CommandType (String command) {

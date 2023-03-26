@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.NoTransactionsRecordedException;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  */
 public class TransactionManager {
     private static TransactionManager instance = null;
-    ArrayList<Transaction> transactions;
+    private ArrayList<Transaction> transactions;
 
     private TransactionManager () {
         transactions = new ArrayList<>();
@@ -51,4 +53,25 @@ public class TransactionManager {
         this.transactions = transactions;
     }
 
+    /**
+     * Method that formats and returns a string representing all recorded transactions
+     *
+     * @return String representing all recorded transactions
+     * @throws NoTransactionsRecordedException if there are no recorded transactions
+     */
+    public String getAllTransactionsString () throws NoTransactionsRecordedException {
+        if (transactions.size() == 0) {
+            throw new NoTransactionsRecordedException();
+        }
+        String stringToReturn = "";
+        // Iterate backwards for reverse chronological order
+        for (int i = transactions.size() - 1; i >= 0; --i) {
+            stringToReturn = stringToReturn.concat(transactions.get(i).toString());
+            if (i > 0) {
+                // Not the first element in the list
+                stringToReturn = stringToReturn.concat("\n" + "-".repeat(50) + "\n");
+            }
+        }
+        return stringToReturn;
+    }
 }

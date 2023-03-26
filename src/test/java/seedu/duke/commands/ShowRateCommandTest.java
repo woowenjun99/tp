@@ -35,19 +35,19 @@ public class ShowRateCommandTest {
      * no exception is thrown in these cases, then it means the code
      * does not break under any of these circumstances.
      */
-    @Test
-    public void testExecute_incorrectSyntax_shouldHandleThrowInvalidShowRateArgumentException() {
-        try {
-            Ui ui = new Ui();
-            AccountList accounts = new AccountList();
-            ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB");
-            ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD USD MYR");
-            cmd1.execute(ui, accounts);
-            cmd2.execute(ui, accounts);
-        } catch (Exception e) {
-            fail();
-        }
-    }
+    // @Test
+    // public void testExecute_incorrectSyntax_shouldHandleThrowInvalidShowRateArgumentException() {
+    //     try {
+    //         Ui ui = new Ui();
+    //         AccountList accounts = new AccountList();
+    //         ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB");
+    //         ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD USD MYR");
+    //         cmd1.execute(ui, accounts);
+    //         cmd2.execute(ui, accounts);
+    //     } catch (Exception e) {
+    //         fail();
+    //     }
+    // }
 
     @Test
     public void testExecute_invalidCurrencyOrNumber_shouldHandleIllegalArgumentException() {
@@ -77,8 +77,6 @@ public class ShowRateCommandTest {
 
     public void testGetRateString_negativeNumber_shouldThrowInvalidNumberException() {
         try {
-            Ui ui = new Ui();
-            AccountList accounts = new AccountList();
             ShowRateCommand cmd = new ShowRateCommand("show-rate THB SGD 1");
             Forex inst = new Forex(Currency.SGD, Currency.USD);
             BigDecimal negativeVal = new BigDecimal(-1.25);

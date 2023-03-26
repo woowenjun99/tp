@@ -1,8 +1,11 @@
 package seedu.duke;
 
+import seedu.duke.constants.DateConstants;
+import seedu.duke.exceptions.NoTransactionsOfSearchParameterException;
 import seedu.duke.exceptions.NoTransactionsRecordedException;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -53,6 +56,15 @@ public class TransactionManager {
         this.transactions = transactions;
     }
 
+    private String appendTransactionToString (String currentString, Transaction transaction) {
+        if (!currentString.isEmpty()) {
+            // It is not the first transaction to be inserted, thus it should have a separator
+            currentString = currentString.concat("\n" + "-".repeat(50) + "\n");
+        }
+        currentString = currentString.concat(transaction.toString());
+        return currentString;
+    }
+
     /**
      * Method that formats and returns a string representing all recorded transactions
      *
@@ -66,11 +78,65 @@ public class TransactionManager {
         String stringToReturn = "";
         // Iterate backwards for reverse chronological order
         for (int i = transactions.size() - 1; i >= 0; --i) {
-            stringToReturn = stringToReturn.concat(transactions.get(i).toString());
-            if (i > 0) {
-                // Not the first element in the list
-                stringToReturn = stringToReturn.concat("\n" + "-".repeat(50) + "\n");
+            stringToReturn = appendTransactionToString(stringToReturn, transactions.get(i));
+        }
+        return stringToReturn;
+    }
+
+    public String getAllTransactionsOfDescription (String description) throws NoTransactionsRecordedException,
+            NoTransactionsOfSearchParameterException {
+        if (transactions.size() == 0) {
+            throw new NoTransactionsRecordedException();
+        }
+        String stringToReturn = "";
+        // Iterate backwards for reverse chronological order
+        for (int i = transactions.size() - 1; i >= 0; --i) {
+            Transaction transaction = transactions.get(i);
+            if (transaction.getDescription().toLowerCase().contains(description.toLowerCase())) {
+                stringToReturn = appendTransactionToString(stringToReturn, transaction);
             }
+        }
+        if (stringToReturn.isEmpty()) {
+            throw new NoTransactionsOfSearchParameterException();
+        }
+        return stringToReturn;
+    }
+
+    public String getAllTransactionsOfCurrency (String currencyString) throws NoTransactionsRecordedException,
+            IllegalArgumentException, NoTransactionsOfSearchParameterException {
+        if (transactions.size() == 0) {
+            throw new NoTransactionsRecordedException();
+        }
+        Currency currency = Currency.valueOf(currencyString);
+        String stringToReturn = "";
+        for (int i = transactions.size() - 1; i >= 0; --i) {
+            Transaction transaction = transactions.get(i);
+            if (transaction.getCurrency().equals(currency)) {
+                stringToReturn = appendTransactionToString(stringToReturn, transaction);
+            }
+        }
+        if (stringToReturn.isEmpty()) {
+            throw new NoTransactionsOfSearchParameterException();
+        }
+        return stringToReturn;
+    }
+
+    public String getAllTransactionsOfDate (String dateString) throws NoTransactionsRecordedException,
+            NoTransactionsOfSearchParameterException {
+        if (transactions.size() == 0) {
+            throw new NoTransactionsRecordedException();
+        }
+        LocalDate date = LocalDate.parse(dateString, DateConstants.INPUT_DATE_TIME_FORMATTER);
+        String stringToReturn = "";
+        for (int i = transactions.size() - 1; i >= 0; --i) {
+            Transaction transaction = transactions.get(i);
+            if (transaction.getDate().toLocalDate().isEqual(date)) {
+                // This transaction occurred on the specified day
+                stringToReturn = appendTransactionToString(stringToReturn, transaction);
+            }
+        }
+        if (stringToReturn.isEmpty()) {
+            throw new NoTransactionsOfSearchParameterException();
         }
         return stringToReturn;
     }

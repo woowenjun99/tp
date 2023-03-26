@@ -36,6 +36,9 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main (String[] args) {
+        TransactionManager transactionManager = TransactionManager.getInstance();
+        transactionManager.addTransaction(Currency.SGD, "Buy chicken rice", false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
+        transactionManager.addTransaction(Currency.SGD, "Buy chicken rice", false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
         ui = new Ui();
         ui.printGreeting();
         ui.printSpacer();

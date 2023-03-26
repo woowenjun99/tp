@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.constants.DateConstants;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,18 +11,29 @@ import java.time.format.FormatStyle;
  * A class that records essential information about transactions carried out by the user
  */
 public class Transaction {
-    private static final DateTimeFormatter DATE_TIME_FORMATTER =
-            DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
     // The date of the transaction
-    LocalDateTime date;
+    private final LocalDateTime date;
     // The Currency of the account associated with the transaction
-    Currency currency;
+    private final Currency currency;
+
+    public LocalDateTime getDate () {
+        return date;
+    }
+
+    public Currency getCurrency () {
+        return currency;
+    }
+
+    public String getDescription () {
+        return description;
+    }
+
     // The description of the transaction such as the reason for a withdrawal
-    String description;
+    private final String description;
     // isCredit is true if the amount in the account increases and false otherwise
-    boolean isCredit;
-    BigDecimal changeInBalance;
-    BigDecimal balanceAfterTransaction;
+    private final boolean isCredit;
+    private final BigDecimal changeInBalance;
+    private final BigDecimal balanceAfterTransaction;
 
 
     Transaction (Currency currency, String description, boolean isCredit,
@@ -43,11 +56,11 @@ public class Transaction {
         }
         String currencyString = currency.name();
         stringToReturn = stringToReturn.concat(currencyString);
-        stringToReturn = stringToReturn.concat(String.format("%.2f\n", changeInBalance));
+        stringToReturn = stringToReturn.concat(String.format(" %.2f\n", changeInBalance));
         stringToReturn = stringToReturn.concat("Amount in account after transaction: " + currencyString);
-        stringToReturn = stringToReturn.concat(String.format("%.2f\n", balanceAfterTransaction));
+        stringToReturn = stringToReturn.concat(String.format(" %.2f\n", balanceAfterTransaction));
         stringToReturn = stringToReturn.concat("Description: " + description + "\n");
-        stringToReturn = stringToReturn.concat("At: " + date.format(DATE_TIME_FORMATTER));
+        stringToReturn = stringToReturn.concat("At: " + date.format(DateConstants.OUTPUT_DATE_TIME_FORMATTER));
         return stringToReturn;
     }
 }

@@ -1,4 +1,4 @@
-package seedu.duke.commands;
+package seedu.duke.constants;
 
 /**
  * A public interface used to contain constants for flags used when

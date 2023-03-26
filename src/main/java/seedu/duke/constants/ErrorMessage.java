@@ -34,5 +34,19 @@ public interface ErrorMessage {
     String EXCHANGE_AMOUNT_TOO_SMALL = "The amount is too small to exchange " +
             "(e.g. does not become at least 0.01 in the target currency)";
     String NO_TRANSACTIONS_RECORDED = "You have no transactions with any of your existing accounts";
-
+    String NO_TRANSACTIONS_FOUND = "You have no transactions of the specified search parameters";
+    String INVALID_TRANSACTION_FLAG = "Sorry, I do not recognise that transaction flag, the available flags are:\n" +
+            "trans - no flag specified which prints all transactions for existing accounts\n" +
+            "trans desc <description> - search transactions by description\n" +
+            "trans m <MM-yyyy> - search transactions by month in the form MM-yyyy\n" +
+            "trans c <CURRENCY> - search transactions by valid currencies such as SGD\n" +
+            "trans d <dd-MM-yyyy> - search transactions by a specific date in the form dd-MM-yyyy";
+    String INVALID_TRANSACTIONS_OF_DESC = "Please search transactions by description in the following format:\n" +
+            "trans desc <description>";
+    String INVALID_TRANSACTIONS_OF_MONTH = "Please search transactions by month in the following format:\n" +
+            "trans m <MM-yyyy>";
+    String INVALID_TRANSACTIONS_OF_CURRENCY = "Please search transactions by currency in the following format:\n" +
+            "trans c <CURRENCY>";
+    String INVALID_TRANSACTIONS_OF_DATE = "Please search transactions by date in the following format:\n" +
+            "trans d <dd-MM-yyyy>";
 }

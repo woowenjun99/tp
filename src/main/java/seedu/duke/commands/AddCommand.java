@@ -12,6 +12,7 @@ import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
+
 import java.math.BigDecimal;
 
 /**
@@ -87,3 +88,4 @@ public class AddCommand extends Command {
         }
     }
 }
+

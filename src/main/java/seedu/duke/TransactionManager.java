@@ -51,4 +51,11 @@ public class TransactionManager {
         this.transactions = transactions;
     }
 
+    public ArrayList<Transaction> getTransactionList () {
+        return transactions;
+    }
+
+    public void deleteTransaction (Transaction transactionToBeDeleted) {
+        transactions.remove(transactionToBeDeleted);
+    }
 }

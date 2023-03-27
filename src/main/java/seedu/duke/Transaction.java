@@ -22,4 +22,8 @@ public class Transaction {
         this.changeInBalance = changeInBalance;
         this.balanceAfterTransaction = balanceAfterTransaction;
     }
+
+    public Currency getCurrency () {
+        return currency;
+    }
 }

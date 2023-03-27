@@ -38,7 +38,7 @@ public class WithdrawCommand extends Command {
 
     private void processCommand () throws InvalidWithdrawCommandException {
         String[] words = super.input.split(" ", 4);
-        // Format: [Command, CURRENCY, AMOUNT]
+        // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
         if (!isValidCommand) {
             throw new InvalidWithdrawCommandException();

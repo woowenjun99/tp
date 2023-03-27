@@ -41,8 +41,8 @@ public class AddCommand extends Command {
             InvalidAmountToAddException {
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
-        boolean isValidCommand = words.length < 3;
-        if (isValidCommand) {
+        boolean isValidCommand = words.length >= 3;
+        if (!isValidCommand) {
             throw new InvalidAddCommandException();
         }
         this.currency = getCurrency(words[1]);
@@ -103,4 +103,5 @@ public class AddCommand extends Command {
         }
     }
 }
+
 

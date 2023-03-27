@@ -8,9 +8,7 @@ import seedu.duke.ui.Ui;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class WithdrawCommandTest {
@@ -64,6 +62,23 @@ public class WithdrawCommandTest {
             WithdrawCommand command1 = new WithdrawCommand("withdraw JPY m");
             assertThrows(InvocationTargetException.class, () -> method.invoke(command));
             assertThrows(InvocationTargetException.class, () -> method.invoke(command1));
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void processCommand_correctInput_shouldNotThrowException () {
+        try {
+            Method method = WithdrawCommand.class.getDeclaredMethod("processCommand");
+            method.setAccessible(true);
+            WithdrawCommand command1 = new WithdrawCommand("withdraw JPY 100");
+            WithdrawCommand command2 = new WithdrawCommand("withdraw JPY 100 Chicken");
+            WithdrawCommand command3 = new WithdrawCommand("withdraw SGD 15 Bak Kut Teh");
+            assertDoesNotThrow(() -> method.invoke(command1));
+            assertDoesNotThrow(() -> method.invoke(command2));
+            assertDoesNotThrow(() -> method.invoke(command3));
+
         } catch (Exception e) {
             fail();
         }

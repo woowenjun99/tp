@@ -23,7 +23,7 @@ public class WithdrawCommand extends Command {
     private BigDecimal amount;
     private String description;
 
-    TransactionManager transactions = TransactionManager.getInstance();
+    private TransactionManager transactions = TransactionManager.getInstance();
 
     /**
      * @param input The user input including the command.

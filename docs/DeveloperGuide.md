@@ -155,6 +155,31 @@ The `Currency` Enum
 - Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
 - Each `Forex` instance must have two `Currency` associated with it
 
+### Open Exchange Rates API
+
+When MoneyMoover starts, the Forex class calls its static method initializeRates(). This method calls the constructor
+of the ExchangeRates class, then sleeps for 5 seconds, then retrieves the HashMap that ExchangeRates has created
+from the method fetchExchangeRates within its constructor. Forex copies the HashMap and uses it for the rest of the user
+session.
+
+fetchExchangeRates retrieves a Retrofit instance from the ExchangeRatesApiClient class, and uses it to create
+an instance of the ExchangeRatesApi, an interface that defines the methods for retrieving the exchange rates
+data from Open Exchange Rates API.
+
+fetchExchangeRates then makes a call to getLatestExchangeRates to retrieve the exchange rates using the ExchangeRatesApi instance,
+and a base currency of USD, and our API token from Open Exchange Rates.
+
+getLatestExchangeRates returns a Call object, and we enqueue a Callback object to get the onResponse() and onFailure() methods
+that will be called depending on the outcome of the Call. If the call is successful, onResponse() returns an
+ExchangeRatesResponse object containing the HashMap of ISO currency tags as Strings for keys, and doubles for rates. This data
+is then extracted using saveMap, which filters out the rates for our supported currencies and performs type conversion.
+The savedMap attribute of ExchangeRates is set to this filtered map, which is then passed to Forex via getExchangeRates.
+
+If onFalire() is called, it means an unexpected error was encountered, such as losing Internet connection.
+
+Below is a UML Diagram of the classes and their respective methods.
+![APIClassDiagram](images/APIClassDiagram.png)
+
 ## Implementation
 
 ### Create/Delete account feature

@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
+import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
 import seedu.duke.exceptions.InvalidAddCommandException;
@@ -12,6 +13,7 @@ import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
+
 import java.math.BigDecimal;
 
 /**
@@ -20,6 +22,9 @@ import java.math.BigDecimal;
 public class AddCommand extends Command {
     private Currency currency;
     private BigDecimal amount;
+
+    private String description;
+    private TransactionManager transactions = TransactionManager.getInstance();
 
     /**
      * @param input The user input including the command.
@@ -34,10 +39,10 @@ public class AddCommand extends Command {
 
     private void processCommand () throws InvalidAddCommandException,
             InvalidAmountToAddException {
-        String[] words = super.input.split(" ");
-        // Format: [Command, CURRENCY, AMOUNT]
-        boolean isValidCommand = words.length == 3;
-        if (!isValidCommand) {
+        String[] words = super.input.split(" ", 4);
+        // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
+        boolean isValidCommand = words.length < 3;
+        if (isValidCommand) {
             throw new InvalidAddCommandException();
         }
         this.currency = getCurrency(words[1]);
@@ -46,6 +51,13 @@ public class AddCommand extends Command {
         if (this.amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidAmountToAddException();
         }
+
+        if (words.length == 4) {
+            this.description = words[3];
+        } else {
+            this.description = "";
+        }
+
     }
 
     private void printSuccess (Ui ui) {
@@ -65,6 +77,10 @@ public class AddCommand extends Command {
             Account account = accounts.getAccount(this.currency);
             account.updateBalance(this.amount, "add");
             printSuccess(ui);
+
+            transactions.addTransaction(this.currency, this.description, true, this.amount,
+                    BigDecimal.valueOf(account.getBalance()));
+
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);
         } catch (NumberFormatException e) {

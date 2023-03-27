@@ -28,6 +28,10 @@ public class TransactionManager {
         return instance;
     }
 
+    public Transaction getTransaction (int index) {
+        return transactions.get(index);
+    }
+
     /**
      * Adds a new transaction to the list of transactions
      *

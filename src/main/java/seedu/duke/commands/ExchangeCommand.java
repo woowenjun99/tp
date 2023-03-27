@@ -20,8 +20,6 @@ import java.math.BigDecimal;
 
 public class ExchangeCommand extends Command {
     private TransactionManager transaction = TransactionManager.getInstance();
-    private Currency initial;
-    private Currency target;
 
     /**
      * Constructor for exchange command
@@ -56,14 +54,14 @@ public class ExchangeCommand extends Command {
             ui.printMessage("Balance of initial account --> " + oldAcc);
             ui.printMessage("Balance of target account --> " + newAcc);
 
-            String description = String.format("exchange %.2f %s to %.2f %s", amount, initial.name(),
-                    convertedAmount, target.name());
+            String description = String.format("exchange %.2f %s to %.2f %s", amount, exchangeRate.getInitial().name(),
+                    convertedAmount, exchangeRate.getTarget().name());
 
-            transaction.addTransaction(this.initial, description, false, amount,
+            transaction.addTransaction(exchangeRate.getInitial(), description, false, amount,
                     BigDecimal.valueOf(oldAcc.getBalance()));
 
-            transaction.addTransaction(this.target, description, true, convertedAmount,
-                    BigDecimal.valueOf(newAcc.getBalance()));
+            transaction.addTransaction(exchangeRate.getTarget(), description, true,
+                    convertedAmount, BigDecimal.valueOf(newAcc.getBalance()));
             // Exception handling
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
@@ -96,8 +94,8 @@ public class ExchangeCommand extends Command {
         if (splitInput.length != 4) {
             throw new InvalidExchangeArgumentException();
         }
-        initial = Currency.valueOf(splitInput[1]);
-        target = Currency.valueOf(splitInput[2]);
+        Currency initial = Currency.valueOf(splitInput[1]);
+        Currency target = Currency.valueOf(splitInput[2]);
         return new Forex(initial, target);
     }
 

@@ -1,9 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.Account;
-import seedu.duke.AccountList;
-import seedu.duke.Currency;
-import seedu.duke.Forex;
+import seedu.duke.*;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.InvalidExchangeArgumentException;
@@ -14,10 +11,14 @@ import seedu.duke.exceptions.ExchangeAmountTooSmallException;
 import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
 
+import javax.xml.crypto.dsig.TransformService;
 import java.math.BigDecimal;
 
 
 public class ExchangeCommand extends Command {
+    private TransactionManager transaction = TransactionManager.getInstance();
+    private Currency initial;
+    private Currency target;
 
     /**
      * Constructor for exchange command
@@ -52,6 +53,14 @@ public class ExchangeCommand extends Command {
             ui.printMessage("Balance of initial account --> " + oldAcc);
             ui.printMessage("Balance of target account --> " + newAcc);
 
+            String description = String.format("exchange %.2f %s to %.2f %s", amount, initial.name(),
+                    convertedAmount, target.name());
+
+            transaction.addTransaction(this.initial, description, false, amount,
+                    BigDecimal.valueOf(oldAcc.getBalance()));
+
+            transaction.addTransaction(this.target, description, true, convertedAmount,
+                    BigDecimal.valueOf(newAcc.getBalance()));
             // Exception handling
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
@@ -84,8 +93,8 @@ public class ExchangeCommand extends Command {
         if (splitInput.length != 4) {
             throw new InvalidExchangeArgumentException();
         }
-        Currency initial = Currency.valueOf(splitInput[1]);
-        Currency target = Currency.valueOf(splitInput[2]);
+        initial = Currency.valueOf(splitInput[1]);
+        target = Currency.valueOf(splitInput[2]);
         return new Forex(initial, target);
     }
 

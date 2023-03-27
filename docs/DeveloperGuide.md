@@ -3,32 +3,32 @@
 <!-- TOC -->
 
 - [Developer Guide](#developer-guide)
-  - [Acknowledgements](#acknowledgements)
-  - [Setting up](#setting-up)
-    - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
-    - [Before writing code](#before-writing-code)
-  - [Design](#design)
-    - [Architecture](#architecture)
-    - [General Sequence](#general-sequence)
-    - [UI component](#ui-component)
-    - [Parser component](#parser-component)
-    - [Accounts Component](#accounts-component)
-    - [Forex component](#forex-component)
-  - [Implementation](#implementation)
-    - [Create/Delete account feature](#createdelete-account-feature)
-    - [Delete-account feature](#delete-account-feature)
-    - [Add/Withdraw money feature](#addwithdraw-money-feature)
-    - [View balance feature](#view-balance-feature)
-    - [Show-rate feature](#show-rate-feature)
-    - [Money exchange feature](#money-exchange-feature)
-  - [Appendix: Requirements](#appendix--requirements)
-    - [Product scope](#product-scope)
-    - [Target user profile](#target-user-profile)
-    - [Value proposition](#value-proposition)
-    - [User Stories](#user-stories)
-    - [Non-Functional Requirements](#non-functional-requirements)
-    - [Glossary](#glossary)
-  - [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
+    - [Acknowledgements](#acknowledgements)
+    - [Setting up](#setting-up)
+        - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+        - [Before writing code](#before-writing-code)
+    - [Design](#design)
+        - [Architecture](#architecture)
+        - [General Sequence](#general-sequence)
+        - [UI component](#ui-component)
+        - [Parser component](#parser-component)
+        - [Accounts Component](#accounts-component)
+        - [Forex component](#forex-component)
+    - [Implementation](#implementation)
+        - [Create/Delete account feature](#createdelete-account-feature)
+        - [Delete-account feature](#delete-account-feature)
+        - [Add/Withdraw money feature](#addwithdraw-money-feature)
+        - [View balance feature](#view-balance-feature)
+        - [Show-rate feature](#show-rate-feature)
+        - [Money exchange feature](#money-exchange-feature)
+    - [Appendix: Requirements](#appendix--requirements)
+        - [Product scope](#product-scope)
+        - [Target user profile](#target-user-profile)
+        - [Value proposition](#value-proposition)
+        - [User Stories](#user-stories)
+        - [Non-Functional Requirements](#non-functional-requirements)
+        - [Glossary](#glossary)
+    - [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
   <!-- TOC -->
 
 ## Acknowledgements
@@ -51,8 +51,8 @@ If you plan to use Intellij IDEA (highly recommended):
    IDEA.<br>
    :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
 3. **Verify the setup**:
-   1. Run the `seedu.duke.Duke` and try a few commands.
-   2. Run the tests using `./gradlew check` to ensure they all pass.
+    1. Run the `seedu.duke.Duke` and try a few commands.
+    2. Run the tests using `./gradlew check` to ensure they all pass.
 
 ---
 
@@ -60,9 +60,9 @@ If you plan to use Intellij IDEA (highly recommended):
 
 1. **Configure the coding style**
    If using IDEA, you can use the following steps to import the code style settings.
-   1. Go to `File → Settings → Editor → Code Style`
-   2. Click the Gear Icon next to the `Scheme` box and then click `Import Scheme → IntelliJ IDEA code style XML`.
-   3. Select the `DefaultCodeStyle.xml` file in the root of the project directory.
+    1. Go to `File → Settings → Editor → Code Style`
+    2. Click the Gear Icon next to the `Scheme` box and then click `Import Scheme → IntelliJ IDEA code style XML`.
+    3. Select the `DefaultCodeStyle.xml` file in the root of the project directory.
 2. **Set up CI**
    This project comes with a GitHub Actions config files (in `.github/workflows` folder). When GitHub detects those
    files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up
@@ -166,12 +166,15 @@ fetchExchangeRates retrieves a Retrofit instance from the ExchangeRatesApiClient
 an instance of the ExchangeRatesApi, an interface that defines the methods for retrieving the exchange rates
 data from Open Exchange Rates API.
 
-fetchExchangeRates then makes a call to getLatestExchangeRates to retrieve the exchange rates using the ExchangeRatesApi instance,
+fetchExchangeRates then makes a call to getLatestExchangeRates to retrieve the exchange rates using the ExchangeRatesApi
+instance,
 and a base currency of USD, and our API token from Open Exchange Rates.
 
-getLatestExchangeRates returns a Call object, and we enqueue a Callback object to get the onResponse() and onFailure() methods
+getLatestExchangeRates returns a Call object, and we enqueue a Callback object to get the onResponse() and onFailure()
+methods
 that will be called depending on the outcome of the Call. If the call is successful, onResponse() returns an
-ExchangeRatesResponse object containing the HashMap of ISO currency tags as Strings for keys, and doubles for rates. This data
+ExchangeRatesResponse object containing the HashMap of ISO currency tags as Strings for keys, and doubles for rates.
+This data
 is then extracted using saveMap, which filters out the rates for our supported currencies and performs type conversion.
 The savedMap attribute of ExchangeRates is set to this filtered map, which is then passed to Forex via getExchangeRates.
 
@@ -241,7 +244,9 @@ The following sequence diagram shows how the money withdrawal operation works.
 
 ### View balance feature
 
-The view balance feature is facilitated using `Account` instances stored within the `AccountList` object. The main functionality is to view the balance of a specific currency if the currency is specified, else view all the currencies in the account.
+The view balance feature is facilitated using `Account` instances stored within the `AccountList` object. The main
+functionality is to view the balance of a specific currency if the currency is specified, else view all the currencies
+in the account.
 
 ![BalanceSequenceDiagram](images/BalanceSeqDiagram.png)
 
@@ -271,7 +276,9 @@ The following sequence diagram shows how the Show Rate command works
 The exchange feature is facilitated using `Account` instances stored within an `AccountList`
 object. The main functionality is facilitated by the `convert` function within the `Forex`
 component. The current implementation reads manual exchange rates from an online source. Future
-implementation will use an API to maintain up-to-date exchange rates.
+implementation will use an API to maintain up-to-date exchange rates. An exchange call will produce two
+transaction activity. A debit transaction will reflect on initial account and credit transaction will
+reflect on target account
 
 Exchange rate source: https://www.xe.com/currencyconverter/convert
 
@@ -311,7 +318,7 @@ Command Line Interface (CLI) while still having the features of other money mana
 ### User Stories
 
 | Version | As a ... | I want to ...             | So that I can ...                                           |
-| ------- | -------- | ------------------------- | ----------------------------------------------------------- |
+|---------|----------|---------------------------|-------------------------------------------------------------|
 | v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
 | v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
 

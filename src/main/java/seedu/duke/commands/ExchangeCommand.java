@@ -1,6 +1,10 @@
 package seedu.duke.commands;
 
-import seedu.duke.*;
+import seedu.duke.AccountList;
+import seedu.duke.Account;
+import seedu.duke.Currency;
+import seedu.duke.Forex;
+import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.InvalidExchangeArgumentException;

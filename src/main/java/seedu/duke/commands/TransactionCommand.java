@@ -76,10 +76,13 @@ public class TransactionCommand extends Command {
      *
      * @param stringToSearch The string to search within
      * @param substring      The substring to search for
-     * @return The rest of the input string after and excluding the input substring
+     * @return The rest of the input string after and excluding the input substring, null if substring is not found
      */
     private String findSubstringToEndAfterASubstring (String stringToSearch, String substring) {
         int substringStartIndex = stringToSearch.indexOf(substring);
+        if (substringStartIndex == -1) {
+            return null;
+        }
         return stringToSearch.substring(stringToSearch.indexOf(" ", substringStartIndex)).trim();
     }
 

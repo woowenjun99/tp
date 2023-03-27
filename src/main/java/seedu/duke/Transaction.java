@@ -36,8 +36,8 @@ public class Transaction {
     private final BigDecimal balanceAfterTransaction;
 
 
-    Transaction (Currency currency, String description, boolean isCredit,
-                 BigDecimal changeInBalance, BigDecimal balanceAfterTransaction) {
+    public Transaction (Currency currency, String description, boolean isCredit,
+                        BigDecimal changeInBalance, BigDecimal balanceAfterTransaction) {
         this.currency = currency;
         this.description = description;
         date = LocalDateTime.now();

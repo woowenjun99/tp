@@ -28,7 +28,6 @@ public class Duke {
             } finally {
                 ui.printSpacer();
             }
-
         }
     }
 

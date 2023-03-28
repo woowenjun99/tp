@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
+import seedu.duke.TransactionManager;
 import seedu.duke.ui.Ui;
 
 import java.lang.reflect.InvocationTargetException;
@@ -45,6 +46,7 @@ public class AddCommandTest {
             method.setAccessible(true);
             AddCommand command = new AddCommand("add JPY");
             assertThrows(InvocationTargetException.class, () -> method.invoke(command));
+
         } catch (Exception e) {
             fail();
         }
@@ -67,10 +69,21 @@ public class AddCommandTest {
         try {
             Method method = AddCommand.class.getDeclaredMethod("processCommand");
             method.setAccessible(true);
-            AddCommand command = new AddCommand("add JPY 200");
+            AddCommand command1 = new AddCommand("add JPY 200");
             assertDoesNotThrow(() -> {
-                method.invoke(command);
+                method.invoke(command1);
             });
+
+            AddCommand command2 = new AddCommand("add JPY 200 income");
+            assertDoesNotThrow(() -> {
+                method.invoke(command2);
+            });
+
+            AddCommand command3 = new AddCommand("add JPY 200 part time");
+            assertDoesNotThrow(() -> {
+                method.invoke(command3);
+            });
+
         } catch (Exception e) {
             fail();
         }
@@ -80,6 +93,7 @@ public class AddCommandTest {
     public void execute_correctInputProvided_shouldUpdateAmount () {
         try {
             AccountList accounts = new AccountList();
+            TransactionManager transactions = TransactionManager.getInstance();
             accounts.addAccount(Currency.KRW, 4000.0f);
             AddCommand command = new AddCommand("add KRW 200.00");
             Ui ui = new Ui();

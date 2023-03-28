@@ -84,7 +84,7 @@ public class TransactionCommand extends Command {
      * @param substring      The substring to search for
      * @return The rest of the input string after and excluding the input substring, null if substring is not found
      */
-    private String findSubstringToEndAfterASubstring (String stringToSearch, String substring) {
+    private String substringAfterKeyword (String stringToSearch, String substring) {
         int substringStartIndex = stringToSearch.indexOf(substring);
         if (substringStartIndex == -1) {
             return null;
@@ -120,7 +120,7 @@ public class TransactionCommand extends Command {
             if (args.length < 3) {
                 throw new InvalidSearchTransactionByDescException();
             }
-            String description = findSubstringToEndAfterASubstring(input, TransactionFlag.TRANSACTION_DESC_FLAG);
+            String description = substringAfterKeyword(input, TransactionFlag.TRANSACTION_DESC_FLAG);
             transactionsString = transactionManager.getAllTransactionsOfDescription(description);
             ui.printMessage(Message.SHOW_TRANSACTIONS_OF_DESC_HEADER.getMessage() + description + ":");
             ui.printMessage(transactionsString);
@@ -129,7 +129,7 @@ public class TransactionCommand extends Command {
             if (args.length < 3) {
                 throw new InvalidSearchTransactionByMonthException();
             }
-            String monthString = findSubstringToEndAfterASubstring(input, TransactionFlag.TRANSACTION_MONTH_FLAG);
+            String monthString = substringAfterKeyword(input, TransactionFlag.TRANSACTION_MONTH_FLAG);
             transactionsString = transactionManager.getAllTransactionsOfMonth(monthString);
             ui.printMessage(Message.SHOW_TRANSACTIONS_OF_MONTH_HEADER.getMessage() + monthString + ":");
             ui.printMessage(transactionsString);
@@ -138,7 +138,7 @@ public class TransactionCommand extends Command {
             if (args.length < 3) {
                 throw new InvalidSearchTransactionByDateException();
             }
-            String dateString = findSubstringToEndAfterASubstring(input, TransactionFlag.TRANSACTION_DATE_FLAG);
+            String dateString = substringAfterKeyword(input, TransactionFlag.TRANSACTION_DATE_FLAG);
             transactionsString = transactionManager.getAllTransactionsOfDate(dateString);
             ui.printMessage(Message.SHOW_TRANSACTIONS_OF_DATE_HEADER.getMessage() + dateString + ":");
             ui.printMessage(transactionsString);
@@ -148,7 +148,7 @@ public class TransactionCommand extends Command {
                 throw new InvalidSearchTransactionByCurrencyException();
             }
             String currencyString =
-                    findSubstringToEndAfterASubstring(input, TransactionFlag.TRANSACTION_CURRENCY_FLAG);
+                    substringAfterKeyword(input, TransactionFlag.TRANSACTION_CURRENCY_FLAG);
             transactionsString = transactionManager.getAllTransactionsOfCurrency(currencyString);
             ui.printMessage(Message.SHOW_TRANSACTIONS_OF_CURRENCY_HEADER.getMessage() + currencyString + ":");
             ui.printMessage(transactionsString);

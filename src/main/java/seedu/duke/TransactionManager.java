@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class that composites all the transactions
@@ -52,6 +53,25 @@ public class TransactionManager {
         Transaction newTransaction = new Transaction(currency, description, isCredit,
                 changeInBalance, balanceAfterTransaction);
         transactions.add(newTransaction);
+    }
+
+    /**
+     * delete all related currency transaction in the main transaction list
+     *
+     * @param currency currency to be delete
+     */
+    public void deleteCurrencyTransaction (Currency currency) {
+        Iterator<Transaction> itr = transactions.iterator();
+        while (itr.hasNext()) {
+            Transaction transaction = itr.next();
+            if (transaction.getCurrency() == currency) {
+                itr.remove();
+            }
+        }
+    }
+
+    private void deleteTransaction (Transaction transactionToBeDeleted) {
+        transactions.remove(transactionToBeDeleted);
     }
 
     /**
@@ -223,4 +243,5 @@ public class TransactionManager {
         }
         return stringToReturn;
     }
+
 }

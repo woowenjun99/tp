@@ -49,4 +49,9 @@ public interface ErrorMessage {
             "trans c <CURRENCY>";
     String INVALID_TRANSACTIONS_OF_DATE = "Please search transactions by date in the following format:\n" +
             "trans d <dd-MM-yyyy>";
+    String RATE_LOADING_INCOMPLETE = "The rates did not have adequate time to load! Please restart MoneyMoover.";
+    String RESPONSE_CODE_OUT_OF_BOUNDS = "The API server returned a code outside of 200-299. Please contact " +
+            "the MoneyMoover team to report this error!";
+    String NETWORK_OR_UNEXPECTED_ERROR = "Please check your Internet connection and try again. If problems persist " +
+            ", please report this error to the MoneyMoover team!";
 }

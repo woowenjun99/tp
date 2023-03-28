@@ -37,6 +37,7 @@ public class Duke {
     public static void main (String[] args) {
         ui = new Ui();
         ui.printGreeting();
+        Forex.initializeRates();
         ui.printSpacer();
         run();
     }

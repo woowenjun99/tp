@@ -4,8 +4,6 @@ import seedu.duke.constants.DateConstants;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 /**
  * A class that records essential information about transactions carried out by the user
@@ -15,6 +13,22 @@ public class Transaction {
     private final LocalDateTime date;
     // The Currency of the account associated with the transaction
     private final Currency currency;
+    // The description of the transaction such as the reason for a withdrawal
+    private final String description;
+    // isCredit is true if the amount in the account increases and false otherwise
+    private final boolean isCredit;
+    private final BigDecimal changeInBalance;
+    private final BigDecimal balanceAfterTransaction;
+
+    public Transaction (Currency currency, String description, boolean isCredit,
+                        BigDecimal changeInBalance, BigDecimal balanceAfterTransaction) {
+        date = LocalDateTime.now();
+        this.currency = currency;
+        this.description = description;
+        this.isCredit = isCredit;
+        this.changeInBalance = changeInBalance;
+        this.balanceAfterTransaction = balanceAfterTransaction;
+    }
 
     public LocalDateTime getDate () {
         return date;
@@ -26,24 +40,6 @@ public class Transaction {
 
     public String getDescription () {
         return description;
-    }
-
-    // The description of the transaction such as the reason for a withdrawal
-    private final String description;
-    // isCredit is true if the amount in the account increases and false otherwise
-    private final boolean isCredit;
-    private final BigDecimal changeInBalance;
-    private final BigDecimal balanceAfterTransaction;
-
-
-    public Transaction (Currency currency, String description, boolean isCredit,
-                        BigDecimal changeInBalance, BigDecimal balanceAfterTransaction) {
-        this.currency = currency;
-        this.description = description;
-        date = LocalDateTime.now();
-        this.isCredit = isCredit;
-        this.changeInBalance = changeInBalance;
-        this.balanceAfterTransaction = balanceAfterTransaction;
     }
 
     @Override

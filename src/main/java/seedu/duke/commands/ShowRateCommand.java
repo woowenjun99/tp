@@ -4,7 +4,6 @@ import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.ui.Ui;
 import seedu.duke.Forex;
-import seedu.duke.Account;
 import seedu.duke.exceptions.InvalidNumberException;
 import seedu.duke.exceptions.InvalidShowrateArgumentException;
 import seedu.duke.exceptions.IllegalCurrencyException;

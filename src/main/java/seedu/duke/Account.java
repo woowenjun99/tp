@@ -50,13 +50,9 @@ public class Account {
         balance = newBalance;
     }
 
-    public static String currencyToString (Currency currency) {
-        return currency.name();
-    }
-
     @Override
     public String toString () {
-        String currencyType = currencyToString(currency);
+        String currencyType = currency.name();
         return currencyType + ": " + String.format("%.2f", balance / 100.0);
     }
 

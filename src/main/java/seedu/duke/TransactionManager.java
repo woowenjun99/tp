@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class that composites all the transactions
@@ -60,10 +61,11 @@ public class TransactionManager {
      * @param currency currency to be delete
      */
     public void deleteCurrencyTransaction (Currency currency) {
-        ArrayList<Transaction> transactionListToBeDeleted = new ArrayList<>();
-        for (Transaction transaction : transactions) {
+        Iterator<Transaction> itr = transactions.iterator();
+        while (itr.hasNext()) {
+            Transaction transaction = itr.next();
             if (transaction.getCurrency() == currency) {
-                transactions.remove(transaction);
+                itr.remove();
             }
         }
     }
@@ -81,7 +83,7 @@ public class TransactionManager {
     public void populateTransactions (ArrayList<Transaction> transactions) {
         this.transactions = transactions;
     }
-    
+
     /**
      * Method that appends a transaction appropriately with correct formatting to the input string
      *

@@ -2,7 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
-import seedu.duke.Transaction;
+
 import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
@@ -11,7 +11,6 @@ import seedu.duke.exceptions.InvalidDeleteAccountCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.ui.Ui;
 
-import java.util.ArrayList;
 
 /**
  * This class is used to deal with the deleteAccountCommand.

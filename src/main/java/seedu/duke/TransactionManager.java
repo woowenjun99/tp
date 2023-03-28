@@ -42,6 +42,24 @@ public class TransactionManager {
     }
 
     /**
+     * delete all related currency transaction in the main transaction list
+     *
+     * @param currency currency to be delete
+     */
+    public void deleteCurrencyTransaction (Currency currency) {
+        ArrayList<Transaction> transactionListToBeDeleted = new ArrayList<>();
+        for (Transaction transaction : transactions) {
+            if (transaction.getCurrency() == currency) {
+                transactions.remove(transaction);
+            }
+        }
+    }
+
+    private void deleteTransaction (Transaction transactionToBeDeleted) {
+        transactions.remove(transactionToBeDeleted);
+    }
+
+    /**
      * Method called on starting the program to store the transactions retrieved from storage
      * into the transaction manager
      *
@@ -51,11 +69,5 @@ public class TransactionManager {
         this.transactions = transactions;
     }
 
-    public ArrayList<Transaction> getTransactionList () {
-        return transactions;
-    }
 
-    public void deleteTransaction (Transaction transactionToBeDeleted) {
-        transactions.remove(transactionToBeDeleted);
-    }
 }

@@ -46,24 +46,6 @@ public class DeleteAccountCommand extends Command {
         ui.printf(Message.SUCCESSFUL_DELETE_ACCOUNT_COMMAND.getMessage(), this.currency.name());
     }
 
-    /**
-     * delete all related currency transaction in the main transaction list
-     *
-     * @param currency currency to be delete
-     */
-
-    private void deleteCurrencyTransaction (Currency currency) {
-        ArrayList<Transaction> transactionList = transactions.getTransactionList();
-        ArrayList<Transaction> transactionListToBeDeleted = new ArrayList<>();
-        for (Transaction transaction : transactionList) {
-            if (transaction.getCurrency() == currency) {
-                transactionListToBeDeleted.add(transaction);
-            }
-        }
-        for (Transaction transactionToBeDeleted : transactionListToBeDeleted) {
-            transactions.deleteTransaction(transactionToBeDeleted);
-        }
-    }
 
     /**
      * Delete currency account if found and print a success message.
@@ -76,7 +58,7 @@ public class DeleteAccountCommand extends Command {
             processCommand();
             accounts.deleteAccount(this.currency);
             printSuccess(ui);
-            deleteCurrencyTransaction(this.currency);
+            transactions.deleteCurrencyTransaction(this.currency);
         } catch (InvalidDeleteAccountCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_DELETE_ACCOUNT_COMMAND);
         } catch (NumberFormatException e) {

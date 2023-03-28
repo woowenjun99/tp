@@ -77,8 +77,8 @@ public class WithdrawCommand extends Command {
             account.updateBalance(this.amount, "subtract");
             printSuccess(ui, account.getBalance());
 
-            transactions.addTransaction(this.currency, this.description, false
-                    , this.amount, BigDecimal.valueOf(account.getBalance()));
+            transactions.addTransaction(this.currency, this.description, false,
+                    this.amount, BigDecimal.valueOf(account.getBalance()));
 
         } catch (InvalidWithdrawCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_WITHDRAW_COMMAND);

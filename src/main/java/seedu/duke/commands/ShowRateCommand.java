@@ -55,20 +55,20 @@ public class ShowRateCommand extends Command {
      * @return a string containing the exchange rates to be printed
      */
     public String getRateString (Forex instance, BigDecimal amt) {
-        String from = Account.currencyToString(instance.getInitial());
-        String to = Account.currencyToString(instance.getTarget());
+        String from = instance.getInitial().name();
+        String to = instance.getTarget().name();
         return String.format("%.2f %s = %,10.6f %s", amt, from, instance.convert(amt), to);
     }
 
     /**
      * Parses an input string and returns a BigDecimal representing the numeric value.
      * Returns 1 if no value is provided.
-     * 
+     *
      * @return a BigDecimal representing the numeric value
      * @throws IllegalArgumentException if the input string is non-numeric
-     * @throws InvalidNumberException if the numeric value is negative
+     * @throws InvalidNumberException   if the numeric value is negative
      */
-    public BigDecimal parseAmount() throws IllegalArgumentException, InvalidNumberException {
+    public BigDecimal parseAmount () throws IllegalArgumentException, InvalidNumberException {
         String[] args = input.split(" ");
         if (args.length == 3) {
             return new BigDecimal(1);
@@ -83,12 +83,12 @@ public class ShowRateCommand extends Command {
     /**
      * Parses the input string and returns a Forex object with the currency pair.
      * The input must be of the form show-rate Currency1 Currency2 [value].
-     * 
+     *
      * @return a Forex object with the currency pair
      * @throws InvalidShowrateArgumentException if the input string is not in the expected format
-     * @throws IllegalCurrencyException if an unsupported currency is provided.
+     * @throws IllegalCurrencyException         if an unsupported currency is provided.
      */
-    public Forex parseInput() throws InvalidShowrateArgumentException, IllegalCurrencyException {
+    public Forex parseInput () throws InvalidShowrateArgumentException, IllegalCurrencyException {
         String[] args = input.split(" ");
         if (args.length < 3 || args.length > 4) {
             throw new InvalidShowrateArgumentException();

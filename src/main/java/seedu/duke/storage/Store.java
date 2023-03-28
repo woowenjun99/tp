@@ -12,12 +12,12 @@ import java.io.IOException;
 
 
 public class Store {
-    private static final String FILE_NAME = "store.json";
+    private static final String FILE_NAME = "data/store.json";
     private static final File file = new File(FILE_NAME);
     private static final Gson gson = new Gson();
 
     private static void createFileIfNotExist () throws IOException {
-        if (file.createNewFile()) {
+        if (file.getParentFile().mkdirs()) {
             FileWriter writer = new FileWriter(FILE_NAME);
             // Add in an empty array to prevent error from being thrown.
             writer.write("[]");

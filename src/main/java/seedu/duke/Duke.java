@@ -4,6 +4,8 @@ import seedu.duke.commands.Command;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.Parser;
 
+import java.math.BigDecimal;
+
 public class Duke {
 
     private static Ui ui;

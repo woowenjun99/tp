@@ -29,10 +29,26 @@ public interface ErrorMessage {
     String SHOWRATE_SYNTAX = "Please structure show-rate as 'show-rate CURRENCY CURRENCY [AMOUNT]'";
     String ACCOUNT_ALREADY_EXISTS = "You already have an account of this currency";
     String INVALID_UPDATE_BALANCE_ACTION = "The provided action for updating balance was invalid";
-    String EXCEED_AMOUNT_ALLOWED = "You are not allowed to store more than $10,000,000 in your account. Please" 
-        + " check how much you have in your balance and how much you are depositing before adding the value in.";
+    String EXCEED_AMOUNT_ALLOWED = "You are not allowed to store more than $10,000,000 in your account. Please"
+            + " check how much you have in your balance and how much you are depositing before adding the value in.";
     String EXCHANGE_AMOUNT_TOO_SMALL = "The amount is too small to exchange " +
             "(e.g. does not become at least 0.01 in the target currency)";
+    String NO_TRANSACTIONS_RECORDED = "You have no transactions with any of your existing accounts";
+    String NO_TRANSACTIONS_FOUND = "You have no transactions of the specified search parameters";
+    String INVALID_TRANSACTION_FLAG = "Sorry, I do not recognise that transaction flag, the available flags are:\n" +
+            "trans - no flag specified which prints all transactions for existing accounts\n" +
+            "trans desc <description> - search transactions by description\n" +
+            "trans m <MM-yyyy> - search transactions by month in the form MM-yyyy\n" +
+            "trans c <CURRENCY> - search transactions by valid currencies such as SGD\n" +
+            "trans d <dd-MM-yyyy> - search transactions by a specific date in the form dd-MM-yyyy";
+    String INVALID_TRANSACTIONS_OF_DESC = "Please search transactions by description in the following format:\n" +
+            "trans desc <description>";
+    String INVALID_TRANSACTIONS_OF_MONTH = "Please search transactions by month in the following format:\n" +
+            "trans m <MM-yyyy>";
+    String INVALID_TRANSACTIONS_OF_CURRENCY = "Please search transactions by currency in the following format:\n" +
+            "trans c <CURRENCY>";
+    String INVALID_TRANSACTIONS_OF_DATE = "Please search transactions by date in the following format:\n" +
+            "trans d <dd-MM-yyyy>";
     String RATE_LOADING_INCOMPLETE = "The rates did not have adequate time to load! Please restart MoneyMoover.";
     String RESPONSE_CODE_OUT_OF_BOUNDS = "The API server returned a code outside of 200-299. Please contact " +
             "the MoneyMoover team to report this error!";

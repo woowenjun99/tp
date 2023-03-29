@@ -10,6 +10,8 @@ public enum Message {
             + "\t help - show list of commands\n"
             + "\t add CURRENCY AMOUNT - adds that amount of money into that currency account\n"
             + "\t balance [CURRENCY] - view balances of accounts\n"
+            + "\t\t balance <CURRENCY> - View the balance of the specified currency in the account\n"
+            + "\t\t balance - displays all currencies\n"
             + "\t exchange CURRENCY1 CURRENCY2 AMOUNT - transfer funds from a currency1 account\n"
             + "\t\t                                   into its equivalent value in currency2 account\n"
             + "\t withdraw CURRENCY AMOUNT - withdraws that amount of money from that currency account\n"
@@ -17,6 +19,12 @@ public enum Message {
             "terms of CURRENCY2\n"
             + "\t delete-account CURRENCY - deletes the account of that currency\n"
             + "\t create-account CURRENCY - creates an account of that currency\n"
+            + "\t trans [flag] [search parameter] - displays transactions for existing accounts\n"
+            + "\t\t trans - displays all transactions\n"
+            + "\t\t trans desc <description> - displays all transactions with the matching description\n"
+            + "\t\t trans c <CURRENCY> - displays all transactions associated to the currency provided\n"
+            + "\t\t trans d <dd-MM-yyyy> - displays all transactions that occurred on the specific day provided\n"
+            + "\t\t trans m <MM-yyyy> - displays all transactions that occurred within the month provided\n"
             + "\t exit - exits the program\n"
             + "\t Available Currencies: SGD, USD, EUR, GBP, THB, MYR, IDR, VND, CNY, JPY, KRW"),
     GREETING("Welcome to MoneyMoover!"),

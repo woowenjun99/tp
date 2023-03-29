@@ -2,10 +2,12 @@
 
 ## Introduction
 
-MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a Command Line Interface (CLI)
+MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a
+Command Line Interface (CLI)
 while still having the features of other money management applications.
 
-Our app will help students to **track their expenses and income** in order to stay within their budgets, so that they have enough money to travel.
+Our app will help students to **track their expenses and income** in order to stay within their budgets, so that they
+have enough money to travel.
 It will also help them convert to foreign currencies so they can see how much they have to spend overseas.
 
 ## Quick Start
@@ -13,20 +15,45 @@ It will also help them convert to foreign currencies so they can see how much th
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features
 
 {Give detailed description of each feature}
 
-### Getting the balances of an account or multiple accounts: `balance`
+### Creating accounts `create-account`
 
-If the currency is specified, get the balance of the account with the currency. Otherwise, get the balances of all the accounts.
+Creates an account of the specified currency, the initial balance of any account created is 0.
 
-Format: `balance <Currency>`
+Format: `create-account <Currency>`
 
-- `<Currency>` is an optional argument. If the value of `<Currency>` is not provided, the balance of all the accounts will be shown.
-- An error will be shown if the currency specified is not one of our registered currency or an account with the currency does not exist.
+- `Currency` is a compulsory parameter denoting which currency the account to be created stores.
+- An error will be shown if the `Currency` provided is not one of our registered currencies
+- An error will be shown if the `Currency` account already exists
+
+```text
+>>> create-account SGD
+>>> You have successfully added the SGD account
+
+>>> create-account SGD
+>>> You already have an account of this currency
+
+>>> create-account ME
+>>> An invalid currency has been provided
+```
+
+### Getting the balances of an account or multiple accounts `balance`
+
+If the currency is specified, get the balance of the account with the currency. Otherwise, get the balances of all the
+accounts.
+
+Format: `balance [Currency]`
+
+- `[Currency]` is an optional argument. If the value of `<Currency>` is not provided, the balance of all the accounts
+  will be shown.
+- An error will be shown if the currency specified is not one of our registered currencies or an account with the
+  currency
+  does not exist.
 
 Example of usage:
 
@@ -54,7 +81,8 @@ Example of error messages:
 ### Deposit money into existing account `add`
 
 - If the user has an existing account, he can choose to add money into it.
-- An error will be thrown if either the currency or amount is not provided, the currency is not one of the registered currency, the amount is not numeric or the account with the currency does not exist.
+- An error will be thrown if either the currency or amount is not provided, the currency is not one of the registered
+  currency, the amount is not numeric or the account with the currency does not exist.
 
 Format: `add <Currency> <Amount>`
 
@@ -70,8 +98,10 @@ Example of usage:
 
 ### Exchange money between international currencies `exchange`
 
-Both an 'initial' and 'target' currency must be specified. The value provided will be subtracted from the balance of the 'initial' currency, and exchanged into the 'target currency', and will be added
-to the account of the target currency. You must have accounts for both the initial and target currency to perform this command.
+Both an 'initial' and 'target' currency must be specified. The value provided will be subtracted from the balance of
+the 'initial' currency, and exchanged into the 'target currency', and will be added
+to the account of the target currency. You must have accounts for both the initial and target currency to perform this
+command.
 
 Format: `exchange <initialCurrency> <targetCurrency> <amount>`
 
@@ -100,7 +130,8 @@ Examples of error messages:
 
 ### Show the exchange rate between two currencies `show-rate`
 
-The show rate has an optional parameter amount. The command will show the value of amount exchanged both ways. If amount is not provided,
+The show rate has an optional parameter amount. The command will show the value of amount exchanged both ways. If amount
+is not provided,
 the command will use a value of 1. The command must be given supported currencies, and numerical non-negative values.
 
 Format: `show-rate <initialCurrency> <targetCurrency> [amount]`
@@ -134,6 +165,57 @@ Examples of error messages:
 >>> Please enter a positive number to show the rate!
 ```
 
+### Show transactions `trans`
+
+If a flag and search parameter is specified, prints the transactions found under that parameter.
+Otherwise, prints all transactions in reverse chronological order
+
+Format `trans [flag] [search parameter]`:
+
+- Appropriate flags are
+    - desc - search by the description as search parameter
+    - c - search by currency as search parameter
+    - d - search by date as search parameter in the form dd-MM-yyyy
+    - m - search by month as search parameter in the form MM-yyyy
+- All transactions are printed in reverse-chronological order
+- Flag and search parameter is optional, neglecting them will print all transactions
+- An error is thrown if the flag is invalid or search parameter is invalid
+
+Examples of usage:
+
+```text
+>>> trans
+>>> Below are all your transactions in reverse chronological order:
+>>> +USD 200.00
+>>> Amount in account after transaction: USD 200.00
+>>> Description: Pass Go
+>>> At: 28 Mar 2023, 5:17:53PM
+
+>>> trans desc go
+>>> Below are all your transactions with the description go:
+>>> +USD 200.00
+>>> Amount in account after transaction: USD 200.00
+>>> Description: Pass Go
+>>> At: 28 Mar 2023, 5:17:53PM
+
+>>> trans c SGD
+>>> You have no transactions of the specified search parameters
+
+>>> trans d 28-03-2023
+>>> Below are all your transactions with the description go:
+>>> +USD 200.00
+>>> Amount in account after transaction: USD 200.00
+>>> Description: Pass Go
+>>> At: 28 Mar 2023, 5:17:53PM
+
+>>> trans m 03-2023
+>>> Below are all your transactions with the description go:
+>>> +USD 200.00
+>>> Amount in account after transaction: USD 200.00
+>>> Description: Pass Go
+>>> At: 28 Mar 2023, 5:17:53PM
+```
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -144,4 +226,6 @@ Examples of error messages:
 
 {Give a 'cheat sheet' of commands here}
 
+- Help `help`
+- Create account `create-account <Currency>`
 - Get balance `balance <Currency>`

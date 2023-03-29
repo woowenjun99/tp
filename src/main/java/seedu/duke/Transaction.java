@@ -22,6 +22,9 @@ public class Transaction {
 
     public Transaction (Currency currency, String description, boolean isCredit,
                         BigDecimal changeInBalance, BigDecimal balanceAfterTransaction) {
+        if (description.isEmpty()) {
+            description = "NIL";
+        }
         date = LocalDateTime.now();
         this.currency = currency;
         this.description = description;

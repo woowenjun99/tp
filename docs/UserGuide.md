@@ -7,16 +7,16 @@
     * [Quick Start](#quick-start)
     * [Features](#features)
         * [Viewing help: `help`](#viewing-help--help)
-        * [Getting the balances of an account or multiple accounts: `balance`](#getting-the-balances-of-an-account-or-multiple-accounts--balance)
+        * [Creating accounts `create-account`](#creating-accounts-create-account)
+        * [Delete currency account: `delete-account`](#delete-currency-account--delete-account)
+        * [Getting the balances of an account or multiple accounts `balance`](#getting-the-balances-of-an-account-or-multiple-accounts-balance)
         * [Deposit money into existing account `add`](#deposit-money-into-existing-account-add)
         * [Exchange money between international currencies `exchange`](#exchange-money-between-international-currencies-exchange)
         * [Withdrawing money: `withdraw`](#withdrawing-money--withdraw)
         * [Show the exchange rate between two currencies `show-rate`](#show-the-exchange-rate-between-two-currencies-show-rate)
-        * [Delete currency account: `delete-account`](#delete-currency-account--delete-account)
-        * [Create new currency account: `create-account`](#create-new-currency-account--create-account)
+        * [Show transactions `trans`](#show-transactions-trans)
         * [Exiting the program: `Exit`](#exiting-the-program--exit)
-* [FAQ](#faq)
-    * [FAQ](#faq-1)
+    * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
 <!-- TOC -->
@@ -34,7 +34,7 @@ It will also help them convert to foreign currencies so they can see how much th
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-   2Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features
 
@@ -66,17 +66,54 @@ Examples:
 
 ```
 
-### Getting the balances of an account or multiple accounts: `balance`
+### Creating accounts `create-account`
+
+Creates an account of the specified currency, the initial balance of any account created is 0.
+
+Format: `create-account <Currency>`
+
+- `Currency` is a compulsory parameter denoting which currency the account to be created stores.
+- An error will be shown if the `Currency` provided is not one of our registered currencies
+- An error will be shown if the `Currency` account already exists
+
+```text
+>>> create-account SGD
+>>> You have successfully added the SGD account
+
+>>> create-account SGD
+>>> You already have an account of this currency
+
+>>> create-account ME
+>>> An invalid currency has been provided
+```
+
+### Delete currency account: `delete-account`
+
+Deletes the specified accounts.
+
+Format: `delete-account CURRENCY`
+
+- Your account must have a balance of 0 to be deleted.
+- You must have an account of CURRENCY to delete it.
+
+Examples:
+
+```text
+>> delete-account USD
+>> You have successfully deleted your SGD account
+```
+
+### Getting the balances of an account or multiple accounts `balance`
 
 If the currency is specified, get the balance of the account with the currency. Otherwise, get the balances of all the
 accounts.
 
-Format: `balance <Currency>`
+Format: `balance [Currency]`
 
-- `<Currency>` is an optional argument. If the value of `<Currency>` is not provided, the balance of all the accounts
+- `[Currency]` is an optional argument. If the value of `<Currency>` is not provided, the balance of all the accounts
   will be shown.
-- An error will be shown if the currency specified is not one of our registered currency or an account with the currency
-  does not exist.
+- An error will be shown if the currency specified is not one of our registered currencies or an account with the
+  currency
 
 Example of usage:
 
@@ -200,33 +237,55 @@ Examples of error messages:
 >>> Please enter a positive number to show the rate!
 ```
 
-### Delete currency account: `delete-account`
+### Show transactions `trans`
 
-Deletes the specified accounts.
+If a flag and search parameter is specified, prints the transactions found under that parameter.
+Otherwise, prints all transactions in reverse chronological order
 
-Format: `delete-account CURRENCY`
+Format `trans [flag] [search parameter]`:
 
-- Your account must have a balance of 0 to be deleted.
-- You must have an account of CURRENCY to delete it.
+- Appropriate flags are
+    - desc - search by the description as search parameter
+    - c - search by currency as search parameter
+    - d - search by date as search parameter in the form dd-MM-yyyy
+    - m - search by month as search parameter in the form MM-yyyy
+- All transactions are printed in reverse-chronological order
+- Flag and search parameter is optional, neglecting them will print all transactions
+- An error is thrown if the flag is invalid or search parameter is invalid
 
-Examples:
-
-```text
->> delete-account USD
->> You have successfully deleted your SGD account
-```
-
-### Create new currency account: `create-account`
-
-Creates an account for the specified currency.
-
-Format: `create-account CURRENCY`
-
-Examples:
+Examples of usage:
 
 ```text
->> create-account EUR
->> You have successfully added the SGD account
+>>> trans
+>>> Below are all your transactions in reverse chronological order:
+>>> +USD 200.00
+>>> Amount in account after transaction: USD 200.00
+>>> Description: Pass Go
+>>> At: 28 Mar 2023, 5:17:53PM
+
+>>> trans desc go
+>>> Below are all your transactions with the description go:
+>>> +USD 200.00
+>>> Amount in account after transaction: USD 200.00
+>>> Description: Pass Go
+>>> At: 28 Mar 2023, 5:17:53PM
+
+>>> trans c SGD
+>>> You have no transactions of the specified search parameters
+
+>>> trans d 28-03-2023
+>>> Below are all your transactions with the description go:
+>>> +USD 200.00
+>>> Amount in account after transaction: USD 200.00
+>>> Description: Pass Go
+>>> At: 28 Mar 2023, 5:17:53PM
+
+>>> trans m 03-2023
+>>> Below are all your transactions with the description go:
+>>> +USD 200.00
+>>> Amount in account after transaction: USD 200.00
+>>> Description: Pass Go
+>>> At: 28 Mar 2023, 5:17:53PM
 ```
 
 ### Exiting the program: `Exit`

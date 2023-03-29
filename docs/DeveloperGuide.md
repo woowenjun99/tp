@@ -107,11 +107,11 @@ The API of this component is specified in the `Ui.java`.
 The UI class deals with the user interaction with the application, which includes the printing and the logic to read in
 inputs. We will pass in the instance of UI into the `execute` method of the `Command` class. The main features includes:
 
-1. Printing text such as new line, spacer, farewell message, greeting message.
+- Printing text such as new line, spacer, farewell message, greeting message.
 
-2. Empowers the users to print customised message in `printf` and `printMessage` method.
+- Empowers the users to print customised message in `printf` and `printMessage` method.
 
-3. Reads in the user input as `String`.
+- Reads in the user input as `String`.
 
 ### Parser component
 
@@ -124,7 +124,7 @@ The `Parser` Component
 
 ### Accounts Component
 
-Here is a class diagram of the Accounts component
+Here is a class diagram of the `Accounts` component
 
 ![AccountListClassDiagram](images/AccountListClassDiagram.png)
 
@@ -138,7 +138,7 @@ The `Accounts` Component
 
 ### Forex component
 
-Here is a class diagram of the Forex component
+Here is a class diagram of the `Forex` component
 ![ForexClassDiagram](images/ForexClassDiagram.png)
 
 The `Forex` Component
@@ -182,6 +182,18 @@ If onFalire() is called, it means an unexpected error was encountered, such as l
 
 Below is a UML Diagram of the classes and their respective methods.
 ![APIClassDiagram](images/APIClassDiagram.png)
+
+### Transactions Component
+
+Here is a class diagram of the `Transactions` component
+![TransactionsClassDiagram](images/TransactionsClassDiagram.png)
+
+The `Transactions` component
+
+- A `Transaction` is recorded upon every command that changes the balance of an account
+- Certain commands allow the provision of a description parameter to associate a custom description to a transaction
+- `Transactions` are only accessed through the `TransactionManager`
+- `Transactions` associated to an account are deleted if and only if the account is deleted
 
 ## Implementation
 
@@ -299,6 +311,20 @@ The exchange command executes as follows:
 
 The following sequence diagram shows how the Exchange command works
 ![ExchangeSeqDiagram](images/ExchangeSeqDiagram.png)
+
+### Show transactions feature
+
+The show transactions feature is facilitated by `TransactionCommand`, extending from the `Command` class.
+Since any one user might have many transactions, flags are used to specify search parameters for the command.
+
+The Transaction command executes as follows:
+
+- The command is parsed to determine if there are additional search parameters
+- Interaction with the `TransactionManager` to retrieve relevant accounts
+- The relevant transactions are printed
+
+The following sequence diagram shows how the Transaction command works
+![TransactionSeqDiagram](images/ShowTransactionsSeqDiagram.png)
 
 ## Appendix: Requirements
 

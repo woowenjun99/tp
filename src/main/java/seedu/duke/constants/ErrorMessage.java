@@ -37,9 +37,9 @@ public interface ErrorMessage {
     String INVALID_TRANSACTION_FLAG = "Sorry, I do not recognise that transaction flag, the available flags are:\n" +
             "trans - no flag specified which prints all transactions for existing accounts\n" +
             "trans desc <description> - search transactions by description\n" +
-            "trans m <MM-yyyy> - search transactions by month in the form MM-yyyy\n" +
             "trans c <CURRENCY> - search transactions by valid currencies such as SGD\n" +
-            "trans d <dd-MM-yyyy> - search transactions by a specific date in the form dd-MM-yyyy";
+            "trans d <dd-MM-yyyy> - search transactions by a specific date in the form dd-MM-yyyy\n" +
+            "trans m <MM-yyyy> - search transactions by month in the form MM-yyyy";
     String INVALID_TRANSACTIONS_OF_DESC = "Please search transactions by description in the following format:\n" +
             "trans desc <description>";
     String INVALID_TRANSACTIONS_OF_MONTH = "Please search transactions by month in the following format:\n" +

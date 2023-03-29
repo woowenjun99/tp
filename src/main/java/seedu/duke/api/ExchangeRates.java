@@ -94,7 +94,7 @@ public class ExchangeRates {
      */
     public static void populateRates (Ui ui) {
         savedMap = new HashMap<Currency, BigDecimal>();
-        ui.printMessage(ErrorMessage.OUDATED_RATES);
+        ui.printMessage(ErrorMessage.OUTDATED_RATES);
         savedMap.put(Currency.SGD, BigDecimal.valueOf(1.000f));
         savedMap.put(Currency.MYR, BigDecimal.valueOf(3.3295727f));
         savedMap.put(Currency.USD, BigDecimal.valueOf(0.74265183f));

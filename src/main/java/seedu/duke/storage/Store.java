@@ -49,8 +49,7 @@ public class Store implements StoreInterface {
      */
     private void createFileIfNotExist (String fullPath) throws IOException {
         File file = new File(fullPath);
-        if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs();
+        if (file.getParentFile().mkdirs()) {
             logger.log(Level.INFO, "Created directory " + directory);
         }
         if (!file.exists()) {

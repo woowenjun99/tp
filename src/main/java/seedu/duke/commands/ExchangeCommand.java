@@ -1,9 +1,10 @@
 package seedu.duke.commands;
 
-import seedu.duke.Account;
 import seedu.duke.AccountList;
+import seedu.duke.Account;
 import seedu.duke.Currency;
 import seedu.duke.Forex;
+import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.InvalidExchangeArgumentException;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 
 
 public class ExchangeCommand extends Command {
+    private TransactionManager transaction = TransactionManager.getInstance();
 
     /**
      * Constructor for exchange command
@@ -52,6 +54,14 @@ public class ExchangeCommand extends Command {
             ui.printMessage("Balance of initial account --> " + oldAcc);
             ui.printMessage("Balance of target account --> " + newAcc);
 
+            String description = String.format("exchange %.2f %s to %.2f %s", amount, exchangeRate.getInitial().name(),
+                    convertedAmount.floatValue(), exchangeRate.getTarget().name());
+
+            transaction.addTransaction(exchangeRate.getInitial(), description, false, amount,
+                    BigDecimal.valueOf(oldAcc.getBalance()));
+            
+            transaction.addTransaction(exchangeRate.getTarget(), description, true,
+                    convertedAmount, BigDecimal.valueOf(newAcc.getBalance()));
             // Exception handling
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);

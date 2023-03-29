@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.Account;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
+import seedu.duke.storage.TestStore;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -77,7 +78,8 @@ public class BalanceCommandTest {
 
     @Test
     public void getBalance_ifCurrencyIsNotSpecified_shouldReturnAllCurrencies () {
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
 
         try {
             accounts.addAccount(Currency.CNY, 200.0f);
@@ -114,7 +116,8 @@ public class BalanceCommandTest {
     @Test
     public void getBalance_ifNoAccountExists_shouldThrowException () {
         try {
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             Method method = BalanceCommand.class.getDeclaredMethod("getAccounts", String.class, AccountList.class);
             method.setAccessible(true);
             BalanceCommand command = new BalanceCommand("balance");

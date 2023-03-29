@@ -17,6 +17,12 @@ public enum Message {
             "terms of CURRENCY2\n"
             + "\t delete-account CURRENCY - deletes the account of that currency\n"
             + "\t create-account CURRENCY - creates an account of that currency\n"
+            + "\t trans [flag] [search parameter] - displays transactions for existing accounts\n"
+            + "\t\t no flag - displays all transactions\n"
+            + "\t\t trans desc <description> - displays all transactions with the matching description\n"
+            + "\t\t trans c <CURRENCY> - displays all transactions associated to the currency provided\n"
+            + "\t\t trans d <dd-MM-yyyy> - displays all transactions that occurred on the specific day provided\n"
+            + "\t\t trans m <MM-yyyy> - displays all transactions that occurred within the month provided\n"
             + "\t exit - exits the program\n"
             + "\t Available Currencies: SGD, USD, EUR, GBP, THB, MYR, IDR, VND, CNY, JPY, KRW"),
     GREETING("Welcome to MoneyMoover!"),

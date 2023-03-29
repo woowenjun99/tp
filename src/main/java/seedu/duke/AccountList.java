@@ -34,8 +34,7 @@ public class AccountList {
         if (accountHashMap.containsKey(currency)) {
             throw new AccountAlreadyExistsException();
         }
-        accountHashMap.put(currency, new Account((int) initialBalance, currency));
-        save();
+        accountHashMap.put(currency, new Account(initialBalance, currency));
     }
 
     /**
@@ -52,7 +51,6 @@ public class AccountList {
             throw new AccountNotEmptyException();
         }
         accountHashMap.remove(currency);
-        save();
     }
 
     /**

@@ -41,7 +41,7 @@ public class WithdrawCommand extends Command {
         }
         this.currency = getCurrency(words[1]);
         this.amount = new BigDecimal(words[2]);
-        if (this.amount.compareTo(BigDecimal.ZERO) <= 0) {
+        if (this.amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
             throw new InvalidWithdrawCommandException();
         }
 
@@ -67,7 +67,7 @@ public class WithdrawCommand extends Command {
             account.updateBalance(this.amount, "subtract");
             printSuccess(ui, account.getBalance());
         } catch (InvalidWithdrawCommandException e) {
-            ui.printMessage(ErrorMessage.INVALID_WITHDRAW_COMMAND);
+            ui.printMessage(ErrorMessage.INVALID_AMOUNT_TO_ADD_OR_WITHDRAW);
         } catch (NumberFormatException e) {
             ui.printMessage(ErrorMessage.INVALID_NUMERICAL_AMOUNT);
         } catch (IllegalArgumentException e) {

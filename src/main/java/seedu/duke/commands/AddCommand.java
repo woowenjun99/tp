@@ -43,7 +43,7 @@ public class AddCommand extends Command {
         this.currency = getCurrency(words[1]);
 
         this.amount = new BigDecimal(words[2]);
-        if (this.amount.compareTo(BigDecimal.ZERO) <= 0) {
+        if (this.amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
             throw new InvalidAmountToAddException();
         }
     }
@@ -74,7 +74,7 @@ public class AddCommand extends Command {
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
         } catch (InvalidAmountToAddException e) {
-            ui.printMessage(ErrorMessage.INVALID_AMOUNT_TO_ADD);
+            ui.printMessage(ErrorMessage.INVALID_AMOUNT_TO_ADD_OR_WITHDRAW);
         } catch (NullPointerException e) {
             ui.printMessage(ErrorMessage.NO_AMOUNT_PROVIDED);
         } catch (NotEnoughInAccountException e) {

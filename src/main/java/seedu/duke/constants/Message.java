@@ -10,6 +10,7 @@ public enum Message {
             + "\t help - show list of commands\n"
             + "\t add CURRENCY AMOUNT - adds that amount of money into that currency account\n"
             + "\t balance [CURRENCY] - view balances of accounts\n"
+            + "\t\t no CURRENCY - displays all currencies\n"
             + "\t exchange CURRENCY1 CURRENCY2 AMOUNT - transfer funds from a currency1 account\n"
             + "\t\t                                   into its equivalent value in currency2 account\n"
             + "\t withdraw CURRENCY AMOUNT - withdraws that amount of money from that currency account\n"

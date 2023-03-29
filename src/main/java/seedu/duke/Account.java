@@ -15,6 +15,10 @@ public class Account {
         balance = (long) (initialBalance * 100);
     }
 
+    public long getLongBalance () {
+        return balance;
+    }
+
     public float getBalance () {
         return balance / 100.0f;
     }

@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
+import seedu.duke.storage.TestStore;
 import seedu.duke.ui.Ui;
 
 import java.lang.reflect.InvocationTargetException;
@@ -85,7 +86,8 @@ public class WithdrawCommandTest {
     @Test
     public void execute_correctInputProvided_shouldUpdateAmount () {
         try {
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             accounts.addAccount(Currency.KRW, 4000);
             WithdrawCommand command = new WithdrawCommand("withdraw KRW 2000");
             Ui ui = new Ui();

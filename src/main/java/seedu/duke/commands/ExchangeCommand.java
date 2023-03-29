@@ -56,10 +56,11 @@ public class ExchangeCommand extends Command {
 
             String description = String.format("exchange %.2f %s to %.2f %s", amount, exchangeRate.getInitial().name(),
                     convertedAmount.floatValue(), exchangeRate.getTarget().name());
+            accounts.save();
 
             transaction.addTransaction(exchangeRate.getInitial(), description, false, amount,
                     BigDecimal.valueOf(oldAcc.getBalance()));
-            
+
             transaction.addTransaction(exchangeRate.getTarget(), description, true,
                     convertedAmount, BigDecimal.valueOf(newAcc.getBalance()));
             // Exception handling

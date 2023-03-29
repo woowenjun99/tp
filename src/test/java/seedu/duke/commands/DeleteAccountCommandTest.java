@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.storage.TestStore;
 import seedu.duke.ui.Ui;
 
 import java.lang.reflect.InvocationTargetException;
@@ -54,7 +55,8 @@ public class DeleteAccountCommandTest {
     @Test
     public void execute_accountNotEmpty_shouldThrowException () {
         try {
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             accounts.addAccount(Currency.KRW, 1000);
             DeleteAccountCommand command = new DeleteAccountCommand("delete-account KRW");
             Ui ui = new Ui();
@@ -73,7 +75,8 @@ public class DeleteAccountCommandTest {
         try {
             Method method = AccountList.class.getDeclaredMethod(("deleteAccount"), Currency.class);
             method.setAccessible(true);
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             accounts.addAccount(Currency.KRW, 1000);
             assertThrows(InvocationTargetException.class, () -> method.invoke(accounts, Currency.JPY));
         } catch (Exception e) {
@@ -84,7 +87,8 @@ public class DeleteAccountCommandTest {
     @Test
     public void execute_correctInputProvided_shouldDeleteAccount () {
         try {
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             accounts.addAccount(Currency.KRW, 0);
             DeleteAccountCommand command = new DeleteAccountCommand("delete-account KRW");
             Ui ui = new Ui();

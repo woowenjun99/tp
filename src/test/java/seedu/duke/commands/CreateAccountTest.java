@@ -6,6 +6,7 @@ import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.storage.TestStore;
 import seedu.duke.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
@@ -20,15 +21,16 @@ public class CreateAccountTest {
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
-    public void setUp() {
+    public void setUp () {
         System.setOut(new PrintStream(outputStreamCaptor));
     }
 
     @Test
-    public void execute_correctInputProvided_shouldCreateAccount() {
+    public void execute_correctInputProvided_shouldCreateAccount () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             Command command = new CreateAccountCommand("create-account EUR");
             command.execute(ui, accounts);
             assertDoesNotThrow(() -> {
@@ -41,27 +43,30 @@ public class CreateAccountTest {
     }
 
     @Test
-    public void execute_multipleCurrenciesProvided_shouldThrowException() {
+    public void execute_multipleCurrenciesProvided_shouldThrowException () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         Command command = new CreateAccountCommand("create-account EUR USD");
         command.execute(ui, accounts);
         assertEquals(ErrorMessage.INVALID_CREATE_ACCOUNT_COMMAND, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    public void execute_invalidCurrencyProvided_shouldThrowException() {
+    public void execute_invalidCurrencyProvided_shouldThrowException () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         Command command = new CreateAccountCommand("create-account XYZ");
         command.execute(ui, accounts);
         assertEquals(ErrorMessage.INVALID_CURRENCY, outputStreamCaptor.toString().trim());
     }
 
     @Test
-    public void execute_currencyAccountAlreadyExists_shouldThrowException() {
+    public void execute_currencyAccountAlreadyExists_shouldThrowException () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         Command command = new CreateAccountCommand("create-account EUR");
         command.execute(ui, accounts);
         command.execute(ui, accounts);

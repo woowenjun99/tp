@@ -16,6 +16,7 @@ import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 public class ExchangeCommand extends Command {
@@ -54,12 +55,14 @@ public class ExchangeCommand extends Command {
             ui.printMessage("Balance of initial account --> " + oldAcc);
             ui.printMessage("Balance of target account --> " + newAcc);
 
+            amount = amount.setScale(2, RoundingMode.DOWN);
+            convertedAmount = convertedAmount.setScale(2, RoundingMode.DOWN);
             String description = String.format("exchange %.2f %s to %.2f %s", amount, exchangeRate.getInitial().name(),
-                    convertedAmount.floatValue(), exchangeRate.getTarget().name());
+                    convertedAmount, exchangeRate.getTarget().name());
 
             transaction.addTransaction(exchangeRate.getInitial(), description, false, amount,
                     BigDecimal.valueOf(oldAcc.getBalance()));
-            
+
             transaction.addTransaction(exchangeRate.getTarget(), description, true,
                     convertedAmount, BigDecimal.valueOf(newAcc.getBalance()));
             // Exception handling

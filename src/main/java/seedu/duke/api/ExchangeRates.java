@@ -45,12 +45,14 @@ public class ExchangeRates {
                     saveMap(exchangeRatesMap);
                 } else {
                     ui.printMessage(ErrorMessage.RESPONSE_CODE_OUT_OF_BOUNDS);
+                    populateRates(ui);
                 }
             }
 
             @Override
             public void onFailure(Call<ExchangeRatesResponse> call, Throwable t) {
                 ui.printMessage(ErrorMessage.NETWORK_OR_UNEXPECTED_ERROR);
+                populateRates(ui);
             }
         });
     }
@@ -83,6 +85,27 @@ public class ExchangeRates {
         }
         assert convertedMap.size() == Currency.values().length;
         return convertedMap;
+    }
+
+    /*
+     * If API doesn't load, manually initializes slightly outdated exchange rates.
+     * correct as of 2023-03-15 18:15 SGT according to
+     * <a href="https://www.xe.com/currencyconverter/convert">https://www.xe.com/currencyconverter/convert</a>
+     */
+    public static void populateRates (Ui ui) {
+        savedMap = new HashMap<Currency, BigDecimal>();
+        ui.printMessage(ErrorMessage.OUTDATED_RATES);
+        savedMap.put(Currency.SGD, BigDecimal.valueOf(1.000f));
+        savedMap.put(Currency.MYR, BigDecimal.valueOf(3.3295727f));
+        savedMap.put(Currency.USD, BigDecimal.valueOf(0.74265183f));
+        savedMap.put(Currency.IDR, BigDecimal.valueOf(11442.776f));
+        savedMap.put(Currency.JPY, BigDecimal.valueOf(99.414735f));
+        savedMap.put(Currency.THB, BigDecimal.valueOf(25.689173f));
+        savedMap.put(Currency.CNY, BigDecimal.valueOf(5.1222378f));
+        savedMap.put(Currency.GBP, BigDecimal.valueOf(0.61293137f));
+        savedMap.put(Currency.EUR, BigDecimal.valueOf(0.69567172f));
+        savedMap.put(Currency.KRW, BigDecimal.valueOf(974.90478f));
+        savedMap.put(Currency.VND, BigDecimal.valueOf(17490.625f));
     }
 
     // Accessor method for saved map

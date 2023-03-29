@@ -1,5 +1,26 @@
 # User Guide
 
+<!-- TOC -->
+
+* [User Guide](#user-guide)
+    * [Introduction](#introduction)
+    * [Quick Start](#quick-start)
+    * [Features](#features)
+        * [Viewing help: `help`](#viewing-help--help)
+        * [Creating accounts `create-account`](#creating-accounts-create-account)
+        * [Delete currency account: `delete-account`](#delete-currency-account--delete-account)
+        * [Getting the balances of an account or multiple accounts `balance`](#getting-the-balances-of-an-account-or-multiple-accounts-balance)
+        * [Deposit money into existing account `add`](#deposit-money-into-existing-account-add)
+        * [Exchange money between international currencies `exchange`](#exchange-money-between-international-currencies-exchange)
+        * [Withdrawing money: `withdraw`](#withdrawing-money--withdraw)
+        * [Show the exchange rate between two currencies `show-rate`](#show-the-exchange-rate-between-two-currencies-show-rate)
+        * [Show transactions `trans`](#show-transactions-trans)
+        * [Exiting the program: `Exit`](#exiting-the-program--exit)
+    * [FAQ](#faq)
+    * [Command Summary](#command-summary)
+
+<!-- TOC -->
+
 ## Introduction
 
 MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a
@@ -12,14 +33,38 @@ It will also help them convert to foreign currencies so they can see how much th
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `Duke` from [here](http://link.to/duke).
 
 ## Features
 
-{Give detailed description of each feature}
+### Viewing help: `help`
+
+Format: help
+
+Examples:
+
+```text
+>> help
+>> Here are the commands available:
+            help - show list of commands"
+            add CURRENCY AMOUNT [DESCRIPTION] - adds that amount of money into that currency account
+            balance [CURRENCY] - view balances of accounts
+            exchange CURRENCY1 CURRENCY2 AMOUNT - transfer funds from a currency1 account
+                                         into its equivalent value in currency2 account
+            withdraw CURRENCY AMOUNT [DESCRIPTION] - withdraws that amount of money from that currency account
+            show-rate CURRENCY1 CURRENCY2 [AMOUNT] - shows the value of each dollar in CURRENCY1 in terms of CURRENCY2
+            trans [FLAG] [SEARCH PARAM]  - Appropriate flags are
+                                             - desc : search by the description as search parameter
+                                             - c : search by currency as search parameter
+                                             - d : search by date as search parameter in the form dd-MM-yyyy
+                                             - m : search by month as search parameter in the form MM-yyyy
+            delete-account CURRENCY - deletes the account of that currency
+            create-account CURRENCY - creates an account of that currency
+            exit - exits the program"
+            Available Currencies: SGD, USD, EUR, GBP, THB, MYR, IDR, VND, CNY, JPY, KRW"),
+
+```
 
 ### Creating accounts `create-account`
 
@@ -42,6 +87,22 @@ Format: `create-account <Currency>`
 >>> An invalid currency has been provided
 ```
 
+### Delete currency account: `delete-account`
+
+Deletes the specified accounts.
+
+Format: `delete-account CURRENCY`
+
+- Your account must have a balance of 0 to be deleted.
+- You must have an account of CURRENCY to delete it.
+
+Examples:
+
+```text
+>> delete-account USD
+>> You have successfully deleted your SGD account
+```
+
 ### Getting the balances of an account or multiple accounts `balance`
 
 If the currency is specified, get the balance of the account with the currency. Otherwise, get the balances of all the
@@ -53,7 +114,6 @@ Format: `balance [Currency]`
   will be shown.
 - An error will be shown if the currency specified is not one of our registered currencies or an account with the
   currency
-  does not exist.
 
 Example of usage:
 
@@ -108,7 +168,7 @@ Format: `exchange <initialCurrency> <targetCurrency> <amount>`
 Examples of usage (assuming accounts are created) :
 
 ```text
->> exchange SGD USD  100
+>> exchange SGD USD 100
 // S$100 will be moved from your $SGD account, transferred into $USD, then added to your $USD account
 
 >> exchange THB MYR 5000
@@ -126,6 +186,18 @@ Examples of error messages:
 
 >>> exchange THB SGD -10
 >>> Please enter a valid number to exchange
+```
+
+### Withdrawing money: `withdraw`
+
+Format: `withdraw CURRENCY AMOUNT`
+
+- Withdraw the amount of money of specified currency.
+
+```text
+>> withdraw SGD 10
+>> You have successfully withdrawn 10.00 SGD from your account
+   Now you have remaining 0.00 SGD in your account 
 ```
 
 ### Show the exchange rate between two currencies `show-rate`
@@ -216,6 +288,19 @@ Examples of usage:
 >>> At: 28 Mar 2023, 5:17:53PM
 ```
 
+### Exiting the program: `Exit`
+
+Exits the program.
+
+Format: `exit`
+
+Examples:
+
+```text
+>> exit
+>> Thank you for using MoneyMoover!We hope to see you again soon:)
+```
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -224,8 +309,15 @@ Examples of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+| Action         | Format & Example                                                          |
+|----------------|---------------------------------------------------------------------------|
+| help           | `help`                                                                    |
+| add            | `add CURRENCY AMOUNT [DESCRIPTION]`<br/> e.g. `add SGD 10`                |
+| balance        | `balance CURRENCY`<br/>e.g. `balance SGD`                                 |
+| exchange       | `exchange CURRENCY1 CURRENCY2 AMOUNT`<br/>e.g. `exchange SGD USD 10`      |
+| withdraw       | `withdraw CURRENCY AMOUNT [DESCRIPTION]`<br/>e.g. `withdaw SGD 100`       |
+| show-rate      | `show-rate CURRENCY1 CURRENCY2 [AMOUNT]`<br/>e.g. `show-rate SGD THB 100` |
+| delete-account | `delete-account CURRENCY`<br/>e.g. delete-account USD`                    |
+| create-account | `create-account CURRENCY`<br/>e.g. `create-account EUR`                   |
+| exit           | `exit`                                                                    |
 
-- Help `help`
-- Create account `create-account <Currency>`
-- Get balance `balance <Currency>`

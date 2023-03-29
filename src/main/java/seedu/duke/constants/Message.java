@@ -17,11 +17,6 @@ public enum Message {
             + "\t withdraw CURRENCY AMOUNT [DESCRIPTION] - withdraws that amount of money from that currency account\n"
             + "\t show-rate CURRENCY1 CURRENCY2 [AMOUNT] - shows the value of each dollar in CURRENCY1 in " +
             "terms of CURRENCY2\n"
-            + "\t trans [FLAG] [SEARCH PARAM]  - Appropriate flags are\n"
-            + "\t                                   - desc : search by the description as search parameter\n"
-            + "\t                                   - c : search by currency as search parameter\n"
-            + "\t                                   - d : search by date as search parameter in the form dd-MM-yyyy\n"
-            + "\t                                   - m : search by month as search parameter in the form MM-yyyy\n"
             + "\t delete-account CURRENCY - deletes the account of that currency\n"
             + "\t create-account CURRENCY - creates an account of that currency\n"
             + "\t trans [flag] [search parameter] - displays transactions for existing accounts\n"

@@ -7,12 +7,17 @@ import seedu.duke.exceptions.TooLargeAmountException;
 import java.math.BigDecimal;
 
 public class Account {
+    private static final long UPPER_BOUND = 1_000_000_000;
     private long balance;
     private final Currency currency;
-
+    
     Account (float initialBalance, Currency currency) {
         this.currency = currency;
         balance = (long) (initialBalance * 100);
+    }
+
+    public long getLongBalance () {
+        return balance;
     }
 
     public float getBalance () {
@@ -35,7 +40,7 @@ public class Account {
         long newBalance;
         if (action.equals("add")) {
             newBalance = balance + changeInBalance.multiply(BigDecimal.valueOf(100)).longValue();
-            long UPPER_BOUND = 1_000_000_000;
+
             if (newBalance > UPPER_BOUND) {
                 throw new TooLargeAmountException();
             }

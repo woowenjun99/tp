@@ -5,6 +5,7 @@ import seedu.duke.exceptions.InvalidSearchTransactionByDateException;
 import seedu.duke.exceptions.InvalidSearchTransactionByMonthException;
 import seedu.duke.exceptions.NoTransactionsOfSearchParameterException;
 import seedu.duke.exceptions.NoTransactionsRecordedException;
+import seedu.duke.storage.StoreInterface;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -12,6 +13,8 @@ import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class that composites all the transactions
@@ -21,9 +24,12 @@ import java.util.Iterator;
 public class TransactionManager {
     private static TransactionManager instance = null;
     private ArrayList<Transaction> transactions;
+    private StoreInterface store;
+    private final Logger logger = Logger.getLogger("logger");
 
-    private TransactionManager () {
+    private TransactionManager (StoreInterface store) {
         transactions = new ArrayList<>();
+        this.store = store;
     }
 
     /**
@@ -33,7 +39,7 @@ public class TransactionManager {
      */
     public static TransactionManager getInstance () {
         if (instance == null) {
-            instance = new TransactionManager();
+            instance = new TransactionManager(null);
         }
         return instance;
     }
@@ -53,6 +59,7 @@ public class TransactionManager {
         Transaction newTransaction = new Transaction(currency, description, isCredit,
                 changeInBalance, balanceAfterTransaction);
         transactions.add(newTransaction);
+        save();
     }
 
     /**
@@ -68,6 +75,7 @@ public class TransactionManager {
                 itr.remove();
             }
         }
+        save();
     }
 
     private void deleteTransaction (Transaction transactionToBeDeleted) {
@@ -82,6 +90,7 @@ public class TransactionManager {
      */
     public void populateTransactions (ArrayList<Transaction> transactions) {
         this.transactions = transactions;
+        // we do not save here as the only time this is called is when we load from file
     }
 
     /**
@@ -242,6 +251,43 @@ public class TransactionManager {
             throw new NoTransactionsOfSearchParameterException();
         }
         return stringToReturn;
+    }
+
+    /**
+     * Method that returns the number of transactions
+     *
+     * @return The number of transactions in the list
+     */
+    public Integer getSize () {
+        return transactions.size();
+    }
+
+    /**
+     * Method that sets the store for the TransactionManager singleton
+     *
+     * @param store The class that implements the StoreInterface
+     */
+    public void setStore (StoreInterface store) {
+        this.store = store;
+    }
+
+    /**
+     * Saves all the transactions to the store, should be called after every command that modifies the account list
+     * or accounts within it
+     */
+    public void save () {
+        logger.log(Level.FINE, "Saving transactions to store");
+        if (store == null) {
+            logger.log(Level.INFO, "No store set, not saving transactions");
+            return;
+        }
+        try {
+            store.saveTransactionsToStore(transactions);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error saving transactions to store", e);
+            return;
+        }
+        logger.log(Level.FINE, "done saving");
     }
 
 }

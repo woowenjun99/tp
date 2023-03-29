@@ -9,6 +9,7 @@ import seedu.duke.TransactionManager;
 import seedu.duke.constants.DateConstants;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
+import seedu.duke.storage.TestStore;
 import seedu.duke.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
@@ -38,7 +39,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_successPrintAll_shouldPrintAllTransactions () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         Transaction transaction = new Transaction(Currency.SGD, "Buy broccoli",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -58,7 +60,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_noTransactionsRecorded_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         Command command = new TransactionCommand("trans");
         command.execute(ui, accounts);
@@ -68,7 +71,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_invalidFlag_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         Command command = new TransactionCommand("trans duke");
         command.execute(ui, accounts);
         assertEquals(ErrorMessage.INVALID_TRANSACTION_FLAG, outputStreamCaptor.toString().trim());
@@ -77,7 +81,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_successfulDescSearch_shouldPrintRelevantTransactions () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         Transaction transaction = new Transaction(Currency.SGD, "Buy broccoli",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -97,7 +102,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_invalidDescSearchParameters_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         Command command = new TransactionCommand("trans desc");
         command.execute(ui, accounts);
         assertEquals(ErrorMessage.INVALID_TRANSACTIONS_OF_DESC, outputStreamCaptor.toString().trim());
@@ -106,7 +112,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_noMatchingDescription_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy broccoli",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -118,7 +125,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_invalidDateSearchParameters_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -130,7 +138,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_successfulDateSearch_shouldPrintRelevantTransactions () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         Transaction transaction = new Transaction(Currency.SGD, "Buy broccoli",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -151,7 +160,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_notEnoughDateSearchParameters_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
 
         Command command = new TransactionCommand("trans d");
         command.execute(ui, accounts);
@@ -161,7 +171,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_noMatchingDate_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -173,7 +184,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_successfulCurrencySearch_shouldPrintRelevantTransactions () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         Transaction transaction = new Transaction(Currency.SGD, "Buy broccoli",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -193,7 +205,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_invalidCurrencySearchParameters_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -205,7 +218,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_notEnoughCurrencySearchParameters_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
 
         Command command = new TransactionCommand("trans c");
         command.execute(ui, accounts);
@@ -215,7 +229,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_noMatchingCurrency_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -227,7 +242,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_successfulMonthSearch_shouldPrintRelevantTransactions () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         Transaction transaction = new Transaction(Currency.SGD, "Buy broccoli",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -248,7 +264,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_invalidMonthSearchParameters_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -260,7 +277,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_notEnoughMonthSearchParameters_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -272,7 +290,8 @@ public class TransactionCommandTest {
     @Test
     public void execute_noMatchingMonth_shouldPrintError () {
         Ui ui = new Ui();
-        AccountList accounts = new AccountList();
+        TestStore store = new TestStore();
+        AccountList accounts = new AccountList(store);
         TransactionManager.getInstance().populateTransactions(new ArrayList<>());
         TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                 false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -285,7 +304,8 @@ public class TransactionCommandTest {
     public void printTransactionsByFlag_invalidFlag_shouldThrowException () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             Method method = TransactionCommand.class.getDeclaredMethod("printTransactionsByFlag",
                     Ui.class, String[].class, String.class);
             method.setAccessible(true);
@@ -301,7 +321,8 @@ public class TransactionCommandTest {
     public void printTransactionsByFlag_notEnoughParametersForDescSearch_shouldThrowException () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             Method method = TransactionCommand.class.getDeclaredMethod("printTransactionsByFlag",
                     Ui.class, String[].class, String.class);
             method.setAccessible(true);
@@ -318,7 +339,8 @@ public class TransactionCommandTest {
     public void printTransactionsByFlag_notEnoughParametersForDateSearch_shouldThrowException () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             Method method = TransactionCommand.class.getDeclaredMethod("printTransactionsByFlag",
                     Ui.class, String[].class, String.class);
             method.setAccessible(true);
@@ -334,7 +356,8 @@ public class TransactionCommandTest {
     public void printTransactionsByFlag_invalidParametersForDateSearch_shouldThrowException () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             TransactionManager.getInstance().populateTransactions(new ArrayList<>());
             TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                     false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));
@@ -353,7 +376,8 @@ public class TransactionCommandTest {
     public void printTransactionsByFlag_notEnoughParametersForCurrencySearch_shouldThrowException () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             Method method = TransactionCommand.class.getDeclaredMethod("printTransactionsByFlag",
                     Ui.class, String[].class, String.class);
             method.setAccessible(true);
@@ -369,7 +393,8 @@ public class TransactionCommandTest {
     public void printTransactionsByFlag_invalidParametersForCurrencySearch_shouldThrowException () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             Method method = TransactionCommand.class.getDeclaredMethod("printTransactionsByFlag",
                     Ui.class, String[].class, String.class);
             method.setAccessible(true);
@@ -385,7 +410,8 @@ public class TransactionCommandTest {
     public void printTransactionsByFlag_notEnoughParametersForMonthSearch_shouldThrowException () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             Method method = TransactionCommand.class.getDeclaredMethod("printTransactionsByFlag",
                     Ui.class, String[].class, String.class);
             method.setAccessible(true);
@@ -401,7 +427,8 @@ public class TransactionCommandTest {
     public void printTransactionsByFlag_invalidParametersForMonthSearch_shouldThrowException () {
         try {
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             TransactionManager.getInstance().populateTransactions(new ArrayList<>());
             TransactionManager.getInstance().addTransaction(Currency.SGD, "Buy chicken rice",
                     false, BigDecimal.valueOf(5), BigDecimal.valueOf(10));

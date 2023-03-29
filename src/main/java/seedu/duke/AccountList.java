@@ -4,17 +4,23 @@ package seedu.duke;
 import seedu.duke.exceptions.AccountAlreadyExistsException;
 import seedu.duke.exceptions.AccountNotEmptyException;
 import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.storage.StoreInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AccountList {
     // Currency implementation only specifies one account per currency, if required would have to change to a
     // Hashmap of ArrayList of account in the future and randomly generate an ID for that account
     private final HashMap<Currency, Account> accountHashMap;
-    
-    public AccountList () {
+    private final StoreInterface store;
+    private final Logger logger = Logger.getLogger("logger");
+
+    public AccountList (StoreInterface store) {
         accountHashMap = new HashMap<>();
+        this.store = store;
     }
 
     /**
@@ -29,6 +35,7 @@ public class AccountList {
             throw new AccountAlreadyExistsException();
         }
         accountHashMap.put(currency, new Account((int) initialBalance, currency));
+        save();
     }
 
     /**
@@ -45,6 +52,7 @@ public class AccountList {
             throw new AccountNotEmptyException();
         }
         accountHashMap.remove(currency);
+        save();
     }
 
     /**
@@ -70,6 +78,23 @@ public class AccountList {
             throw new NoAccountException();
         }
         return accountHashMap.get(currency);
+    }
+
+    /**
+     * Saves all the accounts to the store, should be called after every command that modifies the account list
+     * or accounts within it
+     *
+     * @throws Exception
+     */
+    public void save () {
+        logger.log(Level.FINE, "Saving accounts to store");
+        try {
+            store.saveAccountsToStore(getAllAccounts());
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Error saving accounts to store", e);
+            return;
+        }
+        logger.log(Level.FINE, "done saving accounts to store");
     }
 
 }

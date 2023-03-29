@@ -75,6 +75,7 @@ public class WithdrawCommand extends Command {
             processCommand();
             Account account = accounts.getAccount(this.currency);
             account.updateBalance(this.amount, "subtract");
+            accounts.save();
             printSuccess(ui, account.getBalance());
 
             transactions.addTransaction(this.currency, this.description, false,

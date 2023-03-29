@@ -284,7 +284,7 @@ public class TransactionManager {
         try {
             store.saveTransactionsToStore(transactions);
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "Error saving accounts to store", e);
+            logger.log(Level.SEVERE, "Error saving transactions to store", e);
             return;
         }
         logger.log(Level.FINE, "done saving");

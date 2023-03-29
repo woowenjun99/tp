@@ -74,7 +74,8 @@ public class Store implements StoreInterface {
         Storage[] store = gson.fromJson(br, Storage[].class);
         for (Storage account : store) {
             Currency currency = Currency.valueOf(account.getCurrency());
-            long value = account.getValue();
+            float value = account.getValue() / 100.0f;
+            logger.log(Level.INFO, "Loaded account " + currency + " with value " + value);
             accounts.addAccount(currency, value);
         }
         // If the 2 lengths do not match, there is a problem.

@@ -26,9 +26,9 @@ import java.util.logging.Logger;
  * It uses the Gson library to serialize and deserialize JSON data.
  */
 public class Store implements StoreInterface {
+    private static final String ACCOUNTS_FILE_NAME = "accounts.json";
+    private static final String TRANSACTIONS_FILE_NAME = "transactions.json";
     private final String directory;
-    private final String accountsFileName = "accounts.json";
-    private final String transactionsFileName = "transactions.json";
     private final Gson gson;
     private final Logger logger = Logger.getLogger("logger");
 
@@ -69,7 +69,7 @@ public class Store implements StoreInterface {
      * @param accounts The AccountList instance
      */
     public void loadAccountsFromStore (AccountList accounts) throws Exception {
-        String fullPath = directory + accountsFileName;
+        String fullPath = directory + ACCOUNTS_FILE_NAME;
         createFileIfNotExist(fullPath);
         BufferedReader br = new BufferedReader(new FileReader(fullPath));
         Storage[] store = gson.fromJson(br, Storage[].class);
@@ -90,7 +90,7 @@ public class Store implements StoreInterface {
      * @param transactions The TransactionManager instance
      */
     public void loadTransactionsFromStore (TransactionManager transactions) throws Exception {
-        String fullPath = directory + transactionsFileName;
+        String fullPath = directory + TRANSACTIONS_FILE_NAME;
         createFileIfNotExist(fullPath);
         BufferedReader br = new BufferedReader(new FileReader(fullPath));
         ArrayList<Transaction> store = gson.fromJson(br, new TypeToken<ArrayList<Transaction>>() {
@@ -107,7 +107,7 @@ public class Store implements StoreInterface {
      * @param accounts The ArrayList of accounts
      */
     public void saveAccountsToStore (ArrayList<Account> accounts) throws IOException {
-        String fullPath = directory + accountsFileName;
+        String fullPath = directory + ACCOUNTS_FILE_NAME;
         createFileIfNotExist(fullPath);
         File file = new File(fullPath);
         FileWriter fw = null;
@@ -134,7 +134,7 @@ public class Store implements StoreInterface {
      * @param transactions The ArrayList of transactions
      */
     public void saveTransactionsToStore (ArrayList<Transaction> transactions) throws IOException {
-        String fullPath = directory + transactionsFileName;
+        String fullPath = directory + TRANSACTIONS_FILE_NAME;
         createFileIfNotExist(fullPath);
         File file = new File(fullPath);
         FileWriter fw = null;

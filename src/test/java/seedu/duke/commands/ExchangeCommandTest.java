@@ -6,6 +6,7 @@ import seedu.duke.Forex;
 import seedu.duke.Currency;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
 public class ExchangeCommandTest {
 
     @Test
-    public void testParseAmount_nonNumericInput_shouldThrowInvalidNumberException() {
+    public void testParseAmount_nonNumericInput_shouldThrowInvalidNumberException () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD xyz");
             assertThrows(InvalidNumberException.class, cmd::parseAmount);
@@ -26,7 +27,7 @@ public class ExchangeCommandTest {
     }
 
     @Test
-    public void testParseAmount_negativeInput_shouldThrowInvalidNumberException() {
+    public void testParseAmount_negativeInput_shouldThrowInvalidNumberException () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD -1.0");
             assertThrows(InvalidNumberException.class, cmd::parseAmount);
@@ -36,7 +37,7 @@ public class ExchangeCommandTest {
     }
 
     @Test
-    public void testFormatInput_incorrectSyntax_shouldThrowInvalidExchangeArgumentException() {
+    public void testFormatInput_incorrectSyntax_shouldThrowInvalidExchangeArgumentException () {
         try {
             ExchangeCommand cmd1 = new ExchangeCommand("exchange THB SGD 1.0 2.0");
             ExchangeCommand cmd2 = new ExchangeCommand("exchange THB SGD");
@@ -52,7 +53,7 @@ public class ExchangeCommandTest {
     }
 
     @Test
-    public void testFormatInput_invalidCurrency_shouldThrowIllegalArgumentException() {
+    public void testFormatInput_invalidCurrency_shouldThrowIllegalArgumentException () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB XYZ 1.0");
             assertThrows(IllegalArgumentException.class, cmd::formatInput);
@@ -62,7 +63,7 @@ public class ExchangeCommandTest {
     }
 
     @Test
-    public void testFormatInput_correctSyntax_shouldNotThrow() {
+    public void testFormatInput_correctSyntax_shouldNotThrow () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD 1.0");
             assertDoesNotThrow(cmd::formatInput);
@@ -72,7 +73,7 @@ public class ExchangeCommandTest {
     }
 
     @Test
-    public void testParseAmount_correctSyntax_shouldNotThrow() {
+    public void testParseAmount_correctSyntax_shouldNotThrow () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD 1.0");
             assertDoesNotThrow(cmd::parseAmount);
@@ -82,7 +83,7 @@ public class ExchangeCommandTest {
     }
 
     @Test
-    public void intializeRates_shouldCallAPI() {
+    public void intializeRates_shouldCallAPI () {
         try {
             Forex.initializeRates();
             Forex usdToUsd = new Forex(Currency.USD, Currency.USD);
@@ -94,3 +95,4 @@ public class ExchangeCommandTest {
 
     }
 }
+

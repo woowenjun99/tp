@@ -92,6 +92,7 @@ public class AccountList {
             store.saveAccountsToStore(getAllAccounts());
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error saving accounts to store", e);
+            return;
         }
         logger.log(Level.FINE, "done saving accounts to store");
     }

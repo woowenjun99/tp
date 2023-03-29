@@ -211,9 +211,9 @@ Format: `delete-account CURRENCY`
 
 Examples:
 
-```java
->>delete-account USD
-        >>You have successfully deleted your SGD account
+```text
+>> delete-account USD
+>> You have successfully deleted your SGD account
 ```
 
 ### Create new currency account: `create-account`

@@ -178,7 +178,7 @@ This data
 is then extracted using saveMap, which filters out the rates for our supported currencies and performs type conversion.
 The savedMap attribute of ExchangeRates is set to this filtered map, which is then passed to Forex via getExchangeRates.
 
-If onFalire() is called, it means an unexpected error was encountered, such as losing Internet connection.
+If onFailure() is called, it means an unexpected error was encountered, such as losing Internet connection.
 
 Below is a UML Diagram of the classes and their respective methods.
 ![APIClassDiagram](images/APIClassDiagram.png)

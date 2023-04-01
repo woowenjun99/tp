@@ -7,7 +7,7 @@
     * [Quick Start](#quick-start)
     * [Features](#features)
         * [Notes about command format](#notes-about-command-format)
-        * [Viewing help: `help`](#viewing-help--help)
+        * [Viewing help `help`](#viewing-help-help)
         * [Creating accounts `create-account`](#creating-accounts-create-account)
         * [Delete currency account `delete-account`](#delete-currency-account-delete-account)
         * [Getting the balances of an account or multiple accounts `balance`](#getting-the-balances-of-an-account-or-multiple-accounts-balance)
@@ -49,7 +49,7 @@ It will also help them convert to foreign currencies so they can see how much th
     - upper limit
     - only integer? no comma
 
-### Viewing help: `help`
+### Viewing help `help`
 
 Format: `help`
 
@@ -162,7 +162,7 @@ Example of usage:
 
 Format: `exchange CURRENCY1 CURRENCY2 AMOUNT`
 
-- Both an `CURRENCY1` and `CURRENCY2` must be specified.
+- Both `CURRENCY1` and `CURRENCY2` must be specified.
 - The value provided will be subtracted from the balance of
   the `CURRENCY1`  and exchanged into the `CURRENCY2`, and will be added
   to the account of the target currency. You must have accounts for both the initial and target currency to perform this
@@ -176,7 +176,7 @@ Examples of usage (assuming accounts are created) :
   Balance of initial account --> SGD: 895.00
   Balance of target account --> USD: 77.14
   
-//Above example are for reference only.Actual rates might varies depend on the market.
+//Above example are for reference only. Actual rates might varies depend on the market.
 ```
 
 ### Withdrawing money `withdraw`
@@ -299,15 +299,16 @@ Examples:
 
 ## Command Summary
 
-|     Action     | Format & Example                                                          |
-|:--------------:|---------------------------------------------------------------------------|
-|      help      | `help`                                                                    |
-|      add       | `add CURRENCY AMOUNT [DESCRIPTION]`<br/> e.g. `add SGD 10`                |
-|    balance     | `balance CURRENCY`<br/>e.g. `balance SGD`                                 |
-|    exchange    | `exchange CURRENCY1 CURRENCY2 AMOUNT`<br/>e.g. `exchange SGD USD 10`      |
-|    withdraw    | `withdraw CURRENCY AMOUNT [DESCRIPTION]`<br/>e.g. `withdaw SGD 100`       |
-|   show-rate    | `show-rate CURRENCY1 CURRENCY2 [AMOUNT]`<br/>e.g. `show-rate SGD THB 100` |
-| delete-account | `delete-account CURRENCY`<br/>e.g. `delete-account USD`                   |
-| create-account | `create-account CURRENCY`<br/>e.g. `create-account EUR`                   |
-|      exit      | `exit`                                                                    |
+| Action                  | Format                                   | Example                                                                                      |
+|:------------------------|:-----------------------------------------|----------------------------------------------------------------------------------------------|
+| Viewing help            | `help`                                   | `help`                                                                                       |
+| Depositing money        | `add CURRENCY AMOUNT [DESCRIPTION]`      | `add SGD 10` ,`add SGD 5.5 part time`                                                        |
+| Getting the balances    | `balance CURRENCY`                       | `balance SGD` , `balance`                                                                    |
+| Exchange money          | `exchange CURRENCY1 CURRENCY2 AMOUNT`    | `exchange SGD USD 10`                                                                        |
+| Withdrawing money       | `withdraw CURRENCY AMOUNT [DESCRIPTION]` | `withdaw SGD 100` ,`withdraw USD 3 Chicken Rice`                                             |
+| Show the exchange rate  | `show-rate CURRENCY1 CURRENCY2 [AMOUNT]` | `show-rate SGD THB 100`                                                                      |
+| Show transactions       | `trans [FLAG] [SEARCH_PARAM]`            | `trans`, `trans desc part time`, `trans c SGD`, <br/>`trans d 28-03-2023`, `trans m 03-2023` |
+| Delete currency account | `delete-account CURRENCY`                | `delete-account USD`                                                                         |
+| Creating accounts       | `create-account CURRENCY`                | `create-account EUR`                                                                         |
+| Exiting the program     | `exit`                                   | `exit`                                                                                       |
 

@@ -6,16 +6,17 @@
     * [Introduction](#introduction)
     * [Quick Start](#quick-start)
     * [Features](#features)
+        * [Notes about command format](#notes-about-command-format)
         * [Viewing help: `help`](#viewing-help--help)
         * [Creating accounts `create-account`](#creating-accounts-create-account)
-        * [Delete currency account: `delete-account`](#delete-currency-account--delete-account)
+        * [Delete currency account `delete-account`](#delete-currency-account-delete-account)
         * [Getting the balances of an account or multiple accounts `balance`](#getting-the-balances-of-an-account-or-multiple-accounts-balance)
         * [Deposit money into existing account `add`](#deposit-money-into-existing-account-add)
         * [Exchange money between international currencies `exchange`](#exchange-money-between-international-currencies-exchange)
-        * [Withdrawing money: `withdraw`](#withdrawing-money--withdraw)
+        * [Withdrawing money `withdraw`](#withdrawing-money-withdraw)
         * [Show the exchange rate between two currencies `show-rate`](#show-the-exchange-rate-between-two-currencies-show-rate)
         * [Show transactions `trans`](#show-transactions-trans)
-        * [Exiting the program: `Exit`](#exiting-the-program--exit)
+        * [Exiting the program `exit`](#exiting-the-program-exit)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
@@ -46,6 +47,7 @@ It will also help them convert to foreign currencies so they can see how much th
 - **Number Format**
     1) 2dp
     2) upper limit
+    3) only integer? no comma
 
 ### Viewing help: `help`
 
@@ -63,7 +65,7 @@ Examples:
                                          into its equivalent value in currency2 account
             withdraw CURRENCY AMOUNT [DESCRIPTION] - withdraws that amount of money from that currency account
             show-rate CURRENCY1 CURRENCY2 [AMOUNT] - shows the value of each dollar in currency1 in terms of currency2
-            trans [FLAG] [SEARCH PARAM]  - Appropriate flags are
+            trans [FLAG] [SEARCH_PARAM]  - Appropriate flags are
                                               i) desc : search by the description as search parameter
                                              ii) c : search by currency as search parameter
                                             iii) d : search by date as search parameter in the form dd-MM-yyyy
@@ -92,7 +94,7 @@ Example:
 >>> You have successfully added the SGD account
 ```
 
-### Delete currency account: `delete-account`
+### Delete currency account `delete-account`
 
 Deletes the specified accounts.
 
@@ -177,7 +179,7 @@ Examples of usage (assuming accounts are created) :
 //Above example are for reference only.Actual rates might varies depend on the market.
 ```
 
-### Withdrawing money: `withdraw`
+### Withdrawing money `withdraw`
 
 Withdraw the amount of money of specified currency.
 
@@ -276,7 +278,7 @@ Examples of usage:
     At: 28 Mar 2023, 5:17:53PM
 ```
 
-### Exiting the program: `exit`
+### Exiting the program `exit`
 
 Exits the program.
 

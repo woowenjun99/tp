@@ -42,12 +42,12 @@ It will also help them convert to foreign currencies so they can see how much th
 ### Notes about command format
 
 - **Parameters**
-    1) Parameters in `UPPER_CASE` are compulsory and must be provided.
-    2) Parameters in square brackets (`[OPTIONAL]`) are optional parameters.
+    - Parameters in `UPPER_CASE` are compulsory and must be provided.
+    - Parameters in square brackets `[OPTIONAL]` are optional parameters.
 - **Number Format**
-    1) 2dp
-    2) upper limit
-    3) only integer? no comma
+    - 2dp
+    - upper limit
+    - only integer? no comma
 
 ### Viewing help: `help`
 

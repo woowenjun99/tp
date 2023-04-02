@@ -8,9 +8,10 @@ import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
 import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.InvalidAmountToAddException;
+import seedu.duke.exceptions.InvalidBigDecimalException;
+import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
-import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
 
@@ -24,7 +25,7 @@ public class AddCommand extends Command {
     private BigDecimal amount;
 
     private String description;
-    private TransactionManager transactions = TransactionManager.getInstance();
+    private final TransactionManager transactions = TransactionManager.getInstance();
 
     /**
      * @param input The user input including the command.
@@ -37,8 +38,39 @@ public class AddCommand extends Command {
         return Currency.valueOf(currencyString);
     }
 
+    /**
+     * This method is used to validate the amount that is being passed in
+     * by the user and determines if it is a valid amount. If the amount
+     * provided is invalid, we will throw an error. Otherwise, we will
+     * return the amount to be processed.
+     *
+     * @param amount The amount that is being provided in string
+     * @return The big decimal amount that was being processed
+     * @throws NumberFormatException      If the string that is being processed
+     *                                    cannot be represented as a big decimal.
+     * @throws InvalidBigDecimalException If the amount provided is invalid.
+     *                                    This may be due to more than 2 dp or if
+     *                                    the value is more than 10_000_000.
+     */
+    private BigDecimal validateAndGetAmount (String amount) throws InvalidBigDecimalException {
+        BigDecimal value = new BigDecimal(amount);
+
+        // Checks whether more than 2 dp is provided.
+        if (Math.max(0, value.stripTrailingZeros().scale()) > 2) {
+            throw new InvalidBigDecimalException("Please do not provide more than 2 decimal places");
+        }
+
+        // Checks whether the amount is more than 10_000_000. We do not compare directly as it will
+        // lead to an issue of overflow.
+        if (value.compareTo(new BigDecimal("10000000")) > 0) {
+            throw new InvalidBigDecimalException("Please do not provide a value of more than $10,000,000");
+        }
+        return value;
+    }
+
+
     private void processCommand () throws InvalidAddCommandException,
-            InvalidAmountToAddException {
+            InvalidAmountToAddException, InvalidBigDecimalException {
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
@@ -47,7 +79,7 @@ public class AddCommand extends Command {
         }
         this.currency = getCurrency(words[1]);
 
-        this.amount = new BigDecimal(words[2]);
+        this.amount = validateAndGetAmount(words[2]);
         if (this.amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
             throw new InvalidAmountToAddException();
         }
@@ -101,6 +133,8 @@ public class AddCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+        } catch (InvalidBigDecimalException e) {
+            ui.printMessage(e.getDescription());
         }
     }
 }

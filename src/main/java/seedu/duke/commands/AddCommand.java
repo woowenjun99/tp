@@ -52,7 +52,8 @@ public class AddCommand extends Command {
      *                                    This may be due to more than 2 dp or if
      *                                    the value is more than 10_000_000.
      */
-    private BigDecimal validateAndGetAmount (String amount) throws InvalidBigDecimalException {
+    private BigDecimal validateAndGetAmount (String amount) throws InvalidBigDecimalException, 
+            InvalidAmountToAddException {
         BigDecimal value = new BigDecimal(amount);
 
         // Checks whether more than 2 dp is provided.
@@ -64,6 +65,10 @@ public class AddCommand extends Command {
         // lead to an issue of overflow.
         if (value.compareTo(new BigDecimal("10000000")) > 0) {
             throw new InvalidBigDecimalException("Please do not provide a value of more than $10,000,000");
+        }
+
+        if (this.amount.compareTo(new BigDecimal("0")) <= 0) {
+            throw new InvalidAmountToAddException();
         }
         return value;
     }
@@ -80,9 +85,6 @@ public class AddCommand extends Command {
         this.currency = getCurrency(words[1]);
 
         this.amount = validateAndGetAmount(words[2]);
-        if (this.amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
-            throw new InvalidAmountToAddException();
-        }
 
         if (words.length == 4) {
             this.description = words[3];

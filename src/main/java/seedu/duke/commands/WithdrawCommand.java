@@ -6,12 +6,7 @@ import seedu.duke.Currency;
 import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
-import seedu.duke.exceptions.InvalidBigDecimalException;
-import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
-import seedu.duke.exceptions.InvalidWithdrawCommandException;
-import seedu.duke.exceptions.NoAccountException;
-import seedu.duke.exceptions.NotEnoughInAccountException;
-import seedu.duke.exceptions.TooLargeAmountException;
+import seedu.duke.exceptions.*;
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;
@@ -51,7 +46,8 @@ public class WithdrawCommand extends Command {
      *                                    This may be due to more than 2 dp or if
      *                                    the value is more than 10_000_000.
      */
-    private BigDecimal validateAndGetAmount (String amount) throws InvalidBigDecimalException {
+    private BigDecimal validateAndGetAmount (String amount) throws InvalidBigDecimalException,
+            InvalidWithdrawCommandException {
         BigDecimal value = new BigDecimal(amount);
 
         // Checks whether more than 2 dp is provided.
@@ -63,6 +59,10 @@ public class WithdrawCommand extends Command {
         // lead to an issue of overflow.
         if (value.compareTo(new BigDecimal("10000000")) > 0) {
             throw new InvalidBigDecimalException("Please do not provide a value of more than $10,000,000");
+        }
+
+        if (this.amount.compareTo(new BigDecimal("0")) <= 0) {
+            throw new InvalidWithdrawCommandException();
         }
         return value;
     }
@@ -77,9 +77,6 @@ public class WithdrawCommand extends Command {
 
         this.currency = getCurrency(words[1]);
         this.amount = validateAndGetAmount(words[2]);
-        if (this.amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
-            throw new InvalidWithdrawCommandException();
-        }
 
         boolean containDescription = words.length == 4;
         if (containDescription) {

@@ -15,7 +15,7 @@ import retrofit2.Response;
 
 public class ExchangeRates {
 
-    private static final String APP_ID = "392d39a60ac5437ea539006a990d8d65";
+    private static final String APP_ID = "1349651eb52b4f85a5ced93d579652ea";
     private static final String BASE_CURRENCY = "USD";
 
     private static Map<String, Double> exchangeRatesMap;

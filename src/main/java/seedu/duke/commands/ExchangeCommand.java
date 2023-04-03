@@ -59,6 +59,8 @@ public class ExchangeCommand extends Command {
             convertedAmount = convertedAmount.setScale(2, RoundingMode.DOWN);
             String description = String.format("exchange %.2f %s to %.2f %s", amount, exchangeRate.getInitial().name(),
                     convertedAmount, exchangeRate.getTarget().name());
+            accounts.save();
+
 
             transaction.addTransaction(exchangeRate.getInitial(), description, false, amount,
                     BigDecimal.valueOf(oldAcc.getBalance()));

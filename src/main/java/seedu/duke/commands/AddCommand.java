@@ -76,6 +76,7 @@ public class AddCommand extends Command {
             processCommand();
             Account account = accounts.getAccount(this.currency);
             account.updateBalance(this.amount, "add");
+            accounts.save();
             printSuccess(ui);
 
             transactions.addTransaction(this.currency, this.description, true, this.amount,

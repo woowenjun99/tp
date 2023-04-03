@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.TransactionManager;
+import seedu.duke.storage.TestStore;
 import seedu.duke.ui.Ui;
 
 import java.lang.reflect.InvocationTargetException;
@@ -92,7 +93,8 @@ public class AddCommandTest {
     @Test
     public void execute_correctInputProvided_shouldUpdateAmount () {
         try {
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             TransactionManager transactions = TransactionManager.getInstance();
             accounts.addAccount(Currency.KRW, 4000.0f);
             AddCommand command = new AddCommand("add KRW 200.00");

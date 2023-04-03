@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.storage.TestStore;
 import seedu.duke.ui.Ui;
 import seedu.duke.AccountList;
 import seedu.duke.Forex;
@@ -10,16 +11,18 @@ import seedu.duke.exceptions.InvalidShowrateArgumentException;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
 public class ShowRateCommandTest {
 
     @Test
-    public void testExecute_correctSyntax_shouldNotException() {
+    public void testExecute_correctSyntax_shouldNotException () {
         try {
             Forex.initializeRates();
             Ui ui = new Ui();
-            AccountList accounts = new AccountList();
+            TestStore store = new TestStore();
+            AccountList accounts = new AccountList(store);
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD 1.0");
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD");
             assertDoesNotThrow(() -> cmd1.execute(ui, accounts));
@@ -30,7 +33,7 @@ public class ShowRateCommandTest {
     }
 
     @Test
-    public void testParseInput_invalidCurrency_shouldThrowIllegalCurrencyException() {
+    public void testParseInput_invalidCurrency_shouldThrowIllegalCurrencyException () {
         try {
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB XYZ");
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate SGD 1");
@@ -42,7 +45,7 @@ public class ShowRateCommandTest {
     }
 
     @Test
-    public void testParseInput_invalidInputLength_shouldThrowInvalidShowrateArgumentException() {
+    public void testParseInput_invalidInputLength_shouldThrowInvalidShowrateArgumentException () {
         try {
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate");
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB");
@@ -56,7 +59,7 @@ public class ShowRateCommandTest {
     }
 
     @Test
-    public void testParseAmount_nonNumericValue_shouldThrowIllegalArgumentException() {
+    public void testParseAmount_nonNumericValue_shouldThrowIllegalArgumentException () {
         try {
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD F");
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD ../");
@@ -68,7 +71,7 @@ public class ShowRateCommandTest {
     }
 
     @Test
-    public void testParseAmount_negativeValue_shouldThrowInvalidNumberException() {
+    public void testParseAmount_negativeValue_shouldThrowInvalidNumberException () {
         try {
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD -0.001");
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD -1000000");

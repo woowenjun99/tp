@@ -58,6 +58,7 @@ public class DeleteAccountCommand extends Command {
             accounts.deleteAccount(this.currency);
             printSuccess(ui);
             transactions.deleteCurrencyTransaction(this.currency);
+            accounts.save();
         } catch (InvalidDeleteAccountCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_DELETE_ACCOUNT_COMMAND);
         } catch (NumberFormatException e) {

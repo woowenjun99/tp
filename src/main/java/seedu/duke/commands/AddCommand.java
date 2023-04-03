@@ -12,6 +12,7 @@ import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.TooLargeAmountException;
+import seedu.duke.exceptions.DescriptionTooLongException;
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;
@@ -38,7 +39,7 @@ public class AddCommand extends Command {
     }
 
     private void processCommand () throws InvalidAddCommandException,
-            InvalidAmountToAddException {
+            InvalidAmountToAddException, DescriptionTooLongException {
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
@@ -52,8 +53,12 @@ public class AddCommand extends Command {
             throw new InvalidAmountToAddException();
         }
 
-        if (words.length == 4) {
-            this.description = words[3];
+        boolean containDescription = words.length == 4;
+        if (containDescription) {
+            if (words[3].trim().length() > 100) {
+                throw new DescriptionTooLongException();
+            }
+            this.description = words[3].trim();
         } else {
             this.description = "";
         }
@@ -101,6 +106,8 @@ public class AddCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+        } catch (DescriptionTooLongException e) {
+            ui.printMessage(ErrorMessage.DESCRIPTION_TOO_LONG);
         }
     }
 }

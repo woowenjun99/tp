@@ -6,11 +6,7 @@ import seedu.duke.Currency;
 import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
-import seedu.duke.exceptions.InvalidWithdrawCommandException;
-import seedu.duke.exceptions.NoAccountException;
-import seedu.duke.exceptions.NotEnoughInAccountException;
-import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
-import seedu.duke.exceptions.TooLargeAmountException;
+import seedu.duke.exceptions.*;
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;
@@ -36,7 +32,7 @@ public class WithdrawCommand extends Command {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand () throws InvalidWithdrawCommandException {
+    private void processCommand () throws InvalidWithdrawCommandException, DescriptionTooLongException {
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
@@ -52,7 +48,10 @@ public class WithdrawCommand extends Command {
 
         boolean containDescription = words.length == 4;
         if (containDescription) {
-            this.description = words[3];
+            if (words[3].trim().length() > 100) {
+                throw new DescriptionTooLongException();
+            }
+            this.description = words[3].trim();
         } else {
             this.description = "";
         }
@@ -95,6 +94,8 @@ public class WithdrawCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+        } catch (DescriptionTooLongException e) {
+            ui.printMessage(ErrorMessage.DESCRIPTION_TOO_LONG);
         }
     }
 }

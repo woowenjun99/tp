@@ -39,15 +39,22 @@ It will also help them convert to foreign currencies so they can see how much th
 
 ## Features
 
-### Notes about command format
+### Notes
 
-- **Parameters**
+- **Command Parameters**
     - Parameters in `UPPER_CASE` are compulsory and must be provided.
     - Parameters in square brackets `[OPTIONAL]` are optional parameters.
 - **Number Format**
-    - 2dp
-    - upper limit
-    - only integer? no comma
+    - User are only allowed to input **max 2 decimal points** float amount.
+        - For example: `1.03`, `1`, `196.74`.
+    - You are not allowed to store more than $10,000,000 of any currency in your account.
+    - User are only allowed to input **pure numerical character**.
+        - Example of invalid number format : `1,000`, `5_000_000`.
+- **Transactions related**
+    - `add`, `withdraw` and `exchange` action will be saved in transaction list automatically
+        - `DESCRIPTION` of `add` and `withdraw` command accepts all sort **non-space** char/string.
+        - transaction description of `exchange` command is fixed by default as the relative exchange info.
+            - Example: `exchange 10 SGD to 50 THB`
 
 ### Viewing help `help`
 
@@ -146,7 +153,7 @@ Format: `add CURRENCY AMOUNT [DESCRIPTION]`
 
 - `CURRENCY`: Compulsory argument. A registered currency.
 - `AMOUNT`  : Compulsory argument. The amount to be deposited.
-- `[DESCRIPTION]`: Optional argument. ??? Accept integer?
+- `[DESCRIPTION]`: Optional argument. Is set to `NIL` if not provided.
 
 Example of usage:
 
@@ -187,7 +194,7 @@ Format: `withdraw CURRENCY AMOUNT [DESCRPTION]`
 
 - `CURRENCY`: Compulsory argument. A registered currency.
 - `AMOUNT`  : Compulsory argument. The amount to be deposited.
-- `[DESCRIPTION]`: Optional argument. ??? Accept integer?
+- `[DESCRIPTION]`: Optional argument. Is set to `NIL` if not provided.
 
 Example:
 
@@ -236,11 +243,12 @@ Format `trans FLAG SEARCH_PARAMETERS`:
 - Appropriate `FLAG` are
     1) `desc` - search by the description as search parameter
     2) `c` - search by currency as search parameter
-    3) `d` - search by date as search parameter in the form dd-MM-yyyy
-    4) `m` - search by month as search parameter in the form MM-yyyy
+    3) `d` - search by date as search parameter in the form `DD-MM-YYYY`
+    4) `m` - search by month as search parameter in the form `MM-YYYY`
 
 - All transactions are printed in reverse-chronological order
 - `FLAG` and `SEARCH_PARAMETER` are optional, neglecting them will print all transactions
+- User are only allowed to input **one** flag at a time.
 - An error is thrown if the flag is invalid or search parameter is invalid
 
 Examples of usage:

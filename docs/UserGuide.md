@@ -302,10 +302,10 @@ Examples:
 | Action                  | Format                                   | Example                                                                                      |
 |:------------------------|:-----------------------------------------|----------------------------------------------------------------------------------------------|
 | Viewing help            | `help`                                   | `help`                                                                                       |
-| Depositing money        | `add CURRENCY AMOUNT [DESCRIPTION]`      | `add SGD 10` ,`add SGD 5.5 part time`                                                        |
-| Getting the balances    | `balance CURRENCY`                       | `balance SGD` , `balance`                                                                    |
+| Depositing money        | `add CURRENCY AMOUNT [DESCRIPTION]`      | `add SGD 10`, `add SGD 5.5 part time`                                                        |
+| Getting the balances    | `balance CURRENCY`                       | `balance SGD`, `balance`                                                                     |
 | Exchange money          | `exchange CURRENCY1 CURRENCY2 AMOUNT`    | `exchange SGD USD 10`                                                                        |
-| Withdrawing money       | `withdraw CURRENCY AMOUNT [DESCRIPTION]` | `withdaw SGD 100` ,`withdraw USD 3 Chicken Rice`                                             |
+| Withdrawing money       | `withdraw CURRENCY AMOUNT [DESCRIPTION]` | `withdaw SGD 100`, `withdraw USD 3 Chicken Rice`                                             |
 | Show the exchange rate  | `show-rate CURRENCY1 CURRENCY2 [AMOUNT]` | `show-rate SGD THB 100`                                                                      |
 | Show transactions       | `trans [FLAG] [SEARCH_PARAM]`            | `trans`, `trans desc part time`, `trans c SGD`, <br/>`trans d 28-03-2023`, `trans m 03-2023` |
 | Delete currency account | `delete-account CURRENCY`                | `delete-account USD`                                                                         |

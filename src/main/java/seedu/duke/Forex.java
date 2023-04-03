@@ -35,7 +35,7 @@ public class Forex {
 
     /**
      * Initializes the exchange rates by fetching them from the ExchangeRates class.
-     * Buffers for 3 seconds to allow the API call to go through.
+     * Buffers for 5 seconds to allow the API call to go through.
      * This method will only be called once upon starting the program.
      */ 
     public static void initializeRates() {
@@ -43,7 +43,7 @@ public class Forex {
         ExchangeRates initRates = new ExchangeRates();
         ui.printMessage(Message.LOADING_EXCHANGE_RATES.getMessage());
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             ui.printMessage(ErrorMessage.RATE_LOADING_INCOMPLETE);
         }

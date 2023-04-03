@@ -2,22 +2,22 @@
 
 <!-- TOC -->
 
-* [User Guide](#user-guide)
-    * [Introduction](#introduction)
-    * [Quick Start](#quick-start)
-    * [Features](#features)
-        * [Viewing help: `help`](#viewing-help--help)
-        * [Creating accounts `create-account`](#creating-accounts-create-account)
-        * [Delete currency account: `delete-account`](#delete-currency-account--delete-account)
-        * [Getting the balances of an account or multiple accounts `balance`](#getting-the-balances-of-an-account-or-multiple-accounts-balance)
-        * [Deposit money into existing account `add`](#deposit-money-into-existing-account-add)
-        * [Exchange money between international currencies `exchange`](#exchange-money-between-international-currencies-exchange)
-        * [Withdrawing money: `withdraw`](#withdrawing-money--withdraw)
-        * [Show the exchange rate between two currencies `show-rate`](#show-the-exchange-rate-between-two-currencies-show-rate)
-        * [Show transactions `trans`](#show-transactions-trans)
-        * [Exiting the program: `Exit`](#exiting-the-program--exit)
-    * [FAQ](#faq)
-    * [Command Summary](#command-summary)
+- [User Guide](#user-guide)
+  - [Introduction](#introduction)
+  - [Quick Start](#quick-start)
+  - [Features](#features)
+    - [Viewing help: `help`](#viewing-help--help)
+    - [Creating accounts `create-account`](#creating-accounts-create-account)
+    - [Delete currency account: `delete-account`](#delete-currency-account--delete-account)
+    - [Getting the balances of an account or multiple accounts `balance`](#getting-the-balances-of-an-account-or-multiple-accounts-balance)
+    - [Deposit money into existing account `add`](#deposit-money-into-existing-account-add)
+    - [Exchange money between international currencies `exchange`](#exchange-money-between-international-currencies-exchange)
+    - [Withdrawing money: `withdraw`](#withdrawing-money--withdraw)
+    - [Show the exchange rate between two currencies `show-rate`](#show-the-exchange-rate-between-two-currencies-show-rate)
+    - [Show transactions `trans`](#show-transactions-trans)
+    - [Exiting the program: `Exit`](#exiting-the-program--exit)
+  - [FAQ](#faq)
+  - [Command Summary](#command-summary)
 
 <!-- TOC -->
 
@@ -197,14 +197,15 @@ Format: `withdraw CURRENCY AMOUNT`
 ```text
 >> withdraw SGD 10
 >> You have successfully withdrawn 10.00 SGD from your account
-   Now you have remaining 0.00 SGD in your account 
+   Now you have remaining 0.00 SGD in your account
 ```
 
 ### Show the exchange rate between two currencies `show-rate`
 
 The show rate has an optional parameter amount. The command will show the value of amount exchanged both ways. If amount
 is not provided,
-the command will use a value of 1. The command must be given supported currencies, and numerical non-negative values.
+the command will use a value of 1. The command must be given supported currencies, and numerical non-negative values. The
+value must also be within the range of 0.01 and 1,000,000 for the starting currency to avoid exchange inaccuracies.
 
 Format: `show-rate <initialCurrency> <targetCurrency> [amount]`
 
@@ -245,10 +246,10 @@ Otherwise, prints all transactions in reverse chronological order
 Format `trans [flag] [search parameter]`:
 
 - Appropriate flags are
-    - desc - search by the description as search parameter
-    - c - search by currency as search parameter
-    - d - search by date as search parameter in the form dd-MM-yyyy
-    - m - search by month as search parameter in the form MM-yyyy
+  - desc - search by the description as search parameter
+  - c - search by currency as search parameter
+  - d - search by date as search parameter in the form dd-MM-yyyy
+  - m - search by month as search parameter in the form MM-yyyy
 - All transactions are printed in reverse-chronological order
 - Flag and search parameter is optional, neglecting them will print all transactions
 - An error is thrown if the flag is invalid or search parameter is invalid
@@ -310,7 +311,7 @@ Examples:
 ## Command Summary
 
 | Action         | Format & Example                                                          |
-|----------------|---------------------------------------------------------------------------|
+| -------------- | ------------------------------------------------------------------------- |
 | help           | `help`                                                                    |
 | add            | `add CURRENCY AMOUNT [DESCRIPTION]`<br/> e.g. `add SGD 10`                |
 | balance        | `balance CURRENCY`<br/>e.g. `balance SGD`                                 |
@@ -320,4 +321,3 @@ Examples:
 | delete-account | `delete-account CURRENCY`<br/>e.g. delete-account USD`                    |
 | create-account | `create-account CURRENCY`<br/>e.g. `create-account EUR`                   |
 | exit           | `exit`                                                                    |
-

@@ -62,7 +62,7 @@ public class ShowRateCommandTest {
     public void testParseAmount_nonNumericValue_shouldThrowIllegalArgumentException () {
         try {
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD F");
-            ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD ../");
+            ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD 1.0f");
             assertThrows(IllegalArgumentException.class, cmd1::parseAmount);
             assertThrows(IllegalArgumentException.class, cmd2::parseAmount);
         } catch (Exception e) {
@@ -77,6 +77,26 @@ public class ShowRateCommandTest {
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD -1000000");
             assertThrows(InvalidNumberException.class, cmd1::parseAmount);
             assertThrows(InvalidNumberException.class, cmd2::parseAmount);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testParseAmount_largeValue_shouldThrowInvalidNumberException () {
+        try {
+            ShowRateCommand cmd = new ShowRateCommand("show-rate THB SGD 10000000000000000");
+            assertThrows(InvalidNumberException.class, cmd::parseAmount);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testParseAmount_smallValue_shouldThrowInvalidNumberException () {
+        try {
+            ShowRateCommand cmd = new ShowRateCommand("show-rate THB SGD 0.000001");
+            assertThrows(InvalidNumberException.class, cmd::parseAmount);
         } catch (Exception e) {
             fail();
         }

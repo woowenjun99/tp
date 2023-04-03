@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import seedu.duke.Currency;
 import seedu.duke.ui.Ui;
 import seedu.duke.constants.ErrorMessage;
+import seedu.duke.constants.Message;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,6 +45,7 @@ public class ExchangeRates {
                     ExchangeRatesResponse rates = response.body();
                     exchangeRatesMap = rates.getExchangeRates();
                     saveMap(exchangeRatesMap);
+                    ui.printMessage(Message.API_INITIALIZED.getMessage());
                 } else {
                     ui.printMessage(ErrorMessage.RESPONSE_CODE_OUT_OF_BOUNDS);
                     populateRates(ui);

@@ -70,6 +70,7 @@ public class ExchangeCommand extends Command {
             // Exception handling
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
+            printMissingAccounts(ui, accounts);
         } catch (IllegalArgumentException e) {
             ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (InvalidExchangeArgumentException e) {
@@ -121,6 +122,30 @@ public class ExchangeCommand extends Command {
             return amountAsFloat;
         } catch (NumberFormatException e) {
             throw new InvalidNumberException();
+        }
+    }
+
+    /**
+    * Prints a message indicating if any required accounts are missing.
+    *
+    * @param ui the user interface to use for printing the message
+    * @param accounts the list of accounts to check for missing accounts
+    */
+    private void printMissingAccounts (Ui ui, AccountList accounts) {
+        try {
+            Forex exchangeRate = formatInput();
+            try {
+                accounts.getAccount(exchangeRate.getInitial());
+            } catch (NoAccountException f) {
+                ui.printMessage("You need a " + exchangeRate.getInitial() + " account!");
+            }
+            try {
+                accounts.getAccount(exchangeRate.getTarget());
+            } catch (NoAccountException f) {
+                ui.printMessage("You need a " + exchangeRate.getTarget() + " account!");
+            }
+        } catch (InvalidExchangeArgumentException e) {
+            ui.printMessage(ErrorMessage.INVALID_EXCHANGE_ARGUMENT);
         }
     }
 }

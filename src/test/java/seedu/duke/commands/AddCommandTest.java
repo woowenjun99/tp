@@ -95,7 +95,7 @@ public class AddCommandTest {
             TestStore store = new TestStore();
             AccountList accounts = new AccountList(store);
             accounts.addAccount(Currency.KRW, 4000.0f);
-            AddCommand command = new AddCommand("add KRW 200.00");
+            AddCommand command = new AddCommand("add KRW 200.00 into the account");
             Ui ui = new Ui();
             command.execute(ui, accounts);
 

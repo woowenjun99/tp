@@ -56,5 +56,8 @@ public class Duke {
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Something went wrong with starting the app", e);
         }
+        // This is a workaround to solve the issue where
+        // the program takes a long time to end for an indeterminate reason
+        System.exit(0);
     }
 }

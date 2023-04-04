@@ -9,6 +9,7 @@ import seedu.duke.storage.StoreInterface;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -76,10 +77,6 @@ public class TransactionManager {
             }
         }
         save();
-    }
-
-    private void deleteTransaction (Transaction transactionToBeDeleted) {
-        transactions.remove(transactionToBeDeleted);
     }
 
     /**
@@ -203,6 +200,10 @@ public class TransactionManager {
             throw new InvalidSearchTransactionByDateException();
         }
 
+        // This is necessary as LocalDate.parse does not throw an error for months that shouldn't have all 31 days
+        if (!isDateValid(date, dateString)) {
+            throw new InvalidSearchTransactionByDateException();
+        }
         String stringToReturn = "";
         for (int i = transactions.size() - 1; i >= 0; --i) {
             Transaction transaction = transactions.get(i);
@@ -238,6 +239,7 @@ public class TransactionManager {
         } catch (DateTimeParseException e) {
             throw new InvalidSearchTransactionByMonthException();
         }
+
         YearMonth monthToSearch = YearMonth.from(date);
         String stringToReturn = "";
         for (int i = transactions.size() - 1; i >= 0; --i) {
@@ -251,6 +253,64 @@ public class TransactionManager {
             throw new NoTransactionsOfSearchParameterException();
         }
         return stringToReturn;
+    }
+
+    /**
+     * Method that performs validation on the LocalDate variable
+     * It ensures that the date doesn't have a day that is more than the number of days in its month
+     * The original dateString is required since LocalDate parse
+     * automatically reduces the day to the highest correct value if it exceeds the number of days in its month
+     *
+     * @param date       The date to be validated
+     * @param dateString The original dateString before being parsed
+     * @return The boolean representing whether the date is valid
+     */
+    private boolean isDateValid (LocalDate date, String dateString) {
+        Month month = date.getMonth();
+        int day;
+        try {
+            day = Integer.parseInt(dateString.substring(0, 2));
+        } catch (NumberFormatException e) {
+            assert false;
+            return false;
+        }
+
+        switch (month) {
+        case SEPTEMBER:
+        case APRIL:
+        case JUNE:
+        case NOVEMBER:
+            // Should have only 30 days
+            if (day > 30) {
+                return false;
+            }
+            return true;
+        case JANUARY:
+        case MAY:
+        case JULY:
+        case MARCH:
+        case AUGUST:
+        case OCTOBER:
+        case DECEMBER:
+            // Can have all 31 days
+            return true;
+        case FEBRUARY:
+            if (date.isLeapYear()) {
+                if (day > 29) {
+                    return false;
+                }
+                return true;
+            }
+            if (day > 28) {
+                return false;
+            }
+            return true;
+        default:
+            // Should never reach this point because then month must be null
+            logger.log(Level.SEVERE, "Month invalid during further validation on date in TransactionManager");
+            assert false;
+            return false;
+        }
     }
 
     /**

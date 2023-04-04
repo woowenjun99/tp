@@ -77,11 +77,11 @@ public class ShowRateCommand extends Command {
         if (!args[3].matches("[0-9\\.-]+")) {
             throw new IllegalArgumentException();
         }
-        float val = Float.valueOf(args[3]); // Potential IllegalArgumentException
-        if (val < MIN_VALUE || val > MAX_VALUE) {
+        BigDecimal val = new BigDecimal(args[3]); // Potential NumberFormatException
+        if (val.compareTo(BigDecimal.valueOf(MIN_VALUE)) < 0 || val.compareTo(BigDecimal.valueOf(MAX_VALUE)) > 0) {
             throw new InvalidNumberException();
         }
-        return new BigDecimal(val);
+        return val;
     }
 
     /**

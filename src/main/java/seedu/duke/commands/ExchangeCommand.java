@@ -6,7 +6,14 @@ import seedu.duke.Currency;
 import seedu.duke.Forex;
 import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
-import seedu.duke.exceptions.*;
+import seedu.duke.exceptions.AmountTooPreciseException;
+import seedu.duke.exceptions.ExchangeAmountTooSmallException;
+import seedu.duke.exceptions.InvalidExchangeArgumentException;
+import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
+import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.exceptions.NotEnoughInAccountException;
+import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;

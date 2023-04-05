@@ -4,8 +4,6 @@
 
 MoneyMoover is a Java CLI application modeled after Revolut, a currency exchange application for travelers. MoneyMoover supports conversion for currencies across Asia, and pulls live exchange rates from the Internet using an API.
 
-This project particularly resonates with me because I am an exchange student in Singapore. During my time studying at the National University of Singapore, I have taken several trips to countries across Asia, including Thailand, Cambodia, Malaysia, Indonesia, Taiwan, and hopefully more. Memorizing exchange rates between the various currencies and the USD can be quite a hassle, and having conversion apps has saved me a lot of time and money. Thus, I was very happy to work on a project that has been particularly helpful to me during my time in Singapore.
-
 ### Summary of Contributions
 
 Given below are my contributions to the project:
@@ -16,13 +14,13 @@ Given below are my contributions to the project:
 
   - What it does: Represents a relationship between two currencies on the platform.
   - Justification: Forex objects are a core feature of MoneyMoover because they are the backbone of two key feature: exchanging and displaying exchange rates. Forex objects concretize the relationship between two currencies so it can be used to perform important functions
-  - Highlights: The Forex class also contains the function to convert between two currencies. When creating this class, I decided it would be better to use a single currency as an intermediary for conversions so that we would not need to store a 2D data structure of exchange rates. So, when a conversion is performed, the value is first converted into USD, then converted from USD into the target currency. This way, we only needed to store the rates from 1 USD to all other currencies.
+  - Highlights: The Forex class also contains the function to convert between two currencies. When creating this class, I decided it would be better to use a single currency as an intermediary for conversions so that we would not need to store a 2D data structure of exchange rates.
 
 - **New Feature:** Exchange money between currencies [#34](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/34)
 
   - What it does: Move money between currency accounts according to live exchange rates
   - Justification: Exchanging money between currencies is the cornerstone of MoneyMoover. Exchanging with live rates is the purpose of our application, and what makes it useful to our users.
-  - Highlights: The exchange command makes use of Forex objects, which are used to represent the relationship between currencies. The actual method to convert between currencies is contained with the Forex class, but exception handling is done within the exchange command class.
+  - Highlights: The exchange command makes use of Forex objects, which are used to represent the relationship between currencies.
 
 - **New Feature:** Display exchange rates between currencies [#39](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/39)
 
@@ -50,7 +48,6 @@ Given below are my contributions to the project:
   - Wrote UG docs with examples for show-rate command [#97](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/97)
 
 - **Contributions to DG**
-
   - Wrote Forex class DG docs with class diagram [#74](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/74)
   - Wrote exchange command explanation with sequence diagram [#75](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/75)
   - Wrote show-rate command explanation with sequence diagram [#79](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/79)

@@ -13,8 +13,8 @@ Given below are my contributions to the project:
 - **New Feature:** Forex objects to represent currency relationships [#34](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/34)
 
   - What it does: Represents a relationship between two currencies on the platform.
-  - Justification: Forex objects are a core feature of MoneyMoover because they are the backbone of two key feature: exchanging and displaying exchange rates. Forex objects concretize the relationship between two currencies so it can be used to perform important functions
-  - Highlights: The Forex class also contains the function to convert between two currencies. When creating this class, I decided it would be better to use a single currency as an intermediary for conversions so that we would not need to store a 2D data structure of exchange rates.
+  - Justification: Forex objects are a core feature of MoneyMoover because they are the backbone of two key feature: exchanging and displaying exchange rates. Forex objects represent the relationship between two currencies
+  - Highlights: Used a single currency as an intermediary for conversions so that we would not need to store a 2D data structure of exchange rates.
 
 - **New Feature:** Exchange money between currencies [#34](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/34)
 
@@ -25,7 +25,7 @@ Given below are my contributions to the project:
 - **New Feature:** Display exchange rates between currencies [#39](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/39)
 
   - What it does: Displays the exchange rate between two currencies.
-  - Justification: Prior to moving money between accounts, the user may want a preview of what the exchange rates are. This command can also display rates with a chosen value, and shows conversion both ways.
+  - Justification: Prior to moving money between accounts, the user may want a preview of what the exchange rates are.
   - Highlights: By default, this command will show the exchange rate of 1:X going both ways. The user can instead input a value if they want to see what a transaction might look like before its performed
 
 - **Enhancement to Existing Features:** Open Exchange Rates API [#83](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/83)

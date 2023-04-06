@@ -12,11 +12,8 @@ It will also help them convert to foreign currencies so they can see how much th
 
 ### Summary of Contributions
 
-#### Code Contributed
-
-[RepoSense Link](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=arif-khalid&breakdown=true)
-
-#### Enhancements implemented
+* Code Contributed:
+  [RepoSense Link](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=arif-khalid&breakdown=true)
 
 ##### Account and Account List classes
 
@@ -25,7 +22,6 @@ attributes from within the `AccountList` class that other developers can call an
 
 * Justification: The core functionality of the program relies on these classes to manage user's expense.
 * Highlights:
-    * Use of OOP and encapsulation in `AccountList` class following best software development practices
     * Implementation required an analysis of design alternatives to determine what is the best way to implement
       these classes keeping in mind all the future functionality intended.
     * Future commands relied on these classes, therefore changes to it would be harder to perform in the future.
@@ -51,13 +47,10 @@ performed critical functions such as adding, erasing and retrieving transactions
 In addition, I implemented the `trans` command which printed transactions of a certain search parameter.
 The user was allowed to search by date, month, description, currency or simply print all transactions.
 
-* Justification: Just like a bank, transactions allowed user to see where their money went or where they earned
+* Justification: Transactions allowed user to see where their money went or where they earned
   the most from, allowing them to better plan their finances. This also provides a layer of security
   as fraudulent charges can be easily identified.
 * Highlights:
-    * Use of OOP and encapsulation in `TransactionManager` class following best software development practices.
-    * Deep understanding of requirements specification was required to develop what was stored in a
-      `Transaction`, storing things that the user would want to see such as balance changes.
     * Understanding and research on the java LocalDateTime API was required to store and search by dates.
     * Discussion and iterative development based on tester feedback was used to determine what search parameters users
       would want to have
@@ -68,10 +61,10 @@ The user was allowed to search by date, month, description, currency or simply p
     * Added documentation for the `create-account` command and the `trans` show transactions command,
       along with all its possible search parameters and accompanying flags.
 * Developer Guide
-    * Added implementation details of the `Accounts` component with relevant class diagrams
-    * Added implementation details of the `Transactions` component with relevant class diagrams
-    * Added implementation details of the `create-account` feature with sequence diagrams
-    * Added implementation details of the `trans` show transactions feature with sequence diagrams
+    * Added implementation details of the `Accounts` component
+    * Added implementation details of the `Transactions` component
+    * Added implementation details of the `create-account` feature
+    * Added implementation details of the `trans` show transactions feature
 
 ##### Community
 

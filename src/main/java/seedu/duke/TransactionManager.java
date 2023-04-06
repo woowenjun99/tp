@@ -267,47 +267,18 @@ public class TransactionManager {
      */
     private boolean isDateValid (LocalDate date, String dateString) {
         Month month = date.getMonth();
-        int day;
         try {
-            day = Integer.parseInt(dateString.substring(0, 2));
-        } catch (NumberFormatException e) {
-            assert false;
-            return false;
-        }
+            int day = Integer.parseInt(dateString.substring(0, 2));
+            int daysInMonth = DateConstants.DAYS_IN_MONTH.get(month);
 
-        switch (month) {
-        case SEPTEMBER:
-        case APRIL:
-        case JUNE:
-        case NOVEMBER:
-            // Should have only 30 days
-            if (day > 30) {
-                return false;
+            // Special case if isLeapYear and is in february, needed as DAYS_IN_MONTH assumes it is not a leap year
+            if (month == Month.FEBRUARY && date.isLeapYear()) {
+                daysInMonth = 29;
             }
-            return true;
-        case JANUARY:
-        case MAY:
-        case JULY:
-        case MARCH:
-        case AUGUST:
-        case OCTOBER:
-        case DECEMBER:
-            // Can have all 31 days
-            return true;
-        case FEBRUARY:
-            if (date.isLeapYear()) {
-                if (day > 29) {
-                    return false;
-                }
-                return true;
-            }
-            if (day > 28) {
-                return false;
-            }
-            return true;
-        default:
-            // Should never reach this point because then month must be null
-            logger.log(Level.SEVERE, "Month invalid during further validation on date in TransactionManager");
+
+            return day <= daysInMonth;
+        } catch (NumberFormatException e) {
+            logger.log(Level.SEVERE, "Invalid dateString during further validation on date in TransactionManager");
             assert false;
             return false;
         }

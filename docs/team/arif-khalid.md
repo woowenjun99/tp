@@ -79,4 +79,6 @@ The user was allowed to search by date, month, description, currency or simply p
   [#37](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/37),
   [#184](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/184),
   [#185](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/185)
-  
+* Suggestions for other teams
+  [DoctorDuke](https://github.com/nus-cs2113-AY2223S2/tp/pull/54),
+  [PetTracker](https://github.com/Arif-Khalid/ped/issues)

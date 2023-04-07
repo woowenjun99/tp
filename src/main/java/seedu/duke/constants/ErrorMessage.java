@@ -5,10 +5,11 @@ package seedu.duke.constants;
  */
 public interface ErrorMessage {
     String INVALID_ADD_COMMAND = "Please check that you have correctly provided the currency and amount";
+    String INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW = "Please provide a value greater than or equal to 0.01";
+    String INVALID_COMMAND_TOO_PRECISE_AMOUNT = "Please provide an amount that has a precision of not more than 2 dp";
     String INVALID_WITHDRAW_COMMAND = "This is an invalid withdraw command format. \n" +
             "Please check that you have correctly provided the currency and amount according this format:\n" +
             "\t withdraw CURRENCY AMOUNT [DESCRIPTION] ";
-    String INVALID_AMOUNT_TO_ADD_OR_WITHDRAW = "Please provide a value greater than or equal to 0.01";
     String INVALID_CURRENCY = "An invalid currency has been provided.";
     String INVALID_NUMERICAL_AMOUNT = "Please provide a 2 decimal points float amount to update.";
     String INVALID_CREATE_ACCOUNT_COMMAND = "create-account must be used with the following format: " +

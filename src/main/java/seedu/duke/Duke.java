@@ -41,7 +41,6 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main (String[] args) {
-
         try {
             logger.setUseParentHandlers(false);
             logger.addHandler(new FileHandler("log.txt"));

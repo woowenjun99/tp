@@ -26,12 +26,21 @@ I am in charge of writing the `AddCommand` class for the project. This class is 
 
 I am in charge of writing a class that is used to validate the amount that is read in by the user. This class is used to validate and see whether the amount provided by the user contains any alphabetical characters or lie within the range of 0 to 10 million dollars.
 
+### Contributions to the DG
+
+I contributed to the DG by adding the UI Class and added in the UML diagram.
+
+![Images](../images/UiClassDiagram.png)
+
+I have also contributed to the DG by adding in the documentation for the BalanceCommand, and coming up with a sequence diagram for it.
+
+![Images](../images/BalanceSeqDiagram.png)
+
 ### Contribution to team based task
 
 1. I set up the GitHub organisation for my team.
 2. I helped to maintain the GitHub issues for our team.
 3. I helped to install GSON to be used as a storage for our project.
-
 
 ### Review/mentoring contributions
 

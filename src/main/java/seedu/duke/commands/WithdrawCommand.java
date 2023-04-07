@@ -6,12 +6,14 @@ import seedu.duke.Currency;
 import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
+import seedu.duke.exceptions.InvalidWithdrawAmountException;
 import seedu.duke.exceptions.AmountTooPreciseException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.InvalidWithdrawCommandException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.TooLargeAmountException;
+
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;
@@ -37,7 +39,8 @@ public class WithdrawCommand extends Command {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand () throws InvalidWithdrawCommandException, AmountTooPreciseException {
+    private void processCommand () throws InvalidWithdrawCommandException, InvalidWithdrawAmountException,
+            AmountTooPreciseException {
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
@@ -48,7 +51,7 @@ public class WithdrawCommand extends Command {
         currency = getCurrency(words[1]);
         amount = new BigDecimal(words[2]);
         if (amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
-            throw new InvalidWithdrawCommandException();
+            throw new InvalidWithdrawAmountException();
         }
 
         if (getNumberOfDecimalPlaces(amount) > 2) {
@@ -85,7 +88,7 @@ public class WithdrawCommand extends Command {
             transactions.addTransaction(this.currency, this.description, false,
                     this.amount, BigDecimal.valueOf(account.getBalance()));
 
-        } catch (InvalidWithdrawCommandException e) {
+        } catch (InvalidWithdrawAmountException e) {
             ui.printMessage(ErrorMessage.INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW);
         } catch (AmountTooPreciseException e) {
             ui.printMessage(ErrorMessage.INVALID_COMMAND_TOO_PRECISE_AMOUNT);
@@ -101,6 +104,8 @@ public class WithdrawCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+        } catch (InvalidWithdrawCommandException e) {
+            ui.printMessage(ErrorMessage.INVALID_WITHDRAW_COMMAND);
         }
     }
 }

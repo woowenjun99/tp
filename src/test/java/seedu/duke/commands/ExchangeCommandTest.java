@@ -92,7 +92,6 @@ public class ExchangeCommandTest {
         } catch (Exception e) {
             fail();
         }
-
     }
 }
 

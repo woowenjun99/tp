@@ -6,12 +6,13 @@ import seedu.duke.Currency;
 import seedu.duke.Forex;
 import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
-import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.exceptions.AmountTooPreciseException;
+import seedu.duke.exceptions.ExchangeAmountTooSmallException;
 import seedu.duke.exceptions.InvalidExchangeArgumentException;
 import seedu.duke.exceptions.InvalidNumberException;
-import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
-import seedu.duke.exceptions.ExchangeAmountTooSmallException;
+import seedu.duke.exceptions.NoAccountException;
+import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.ui.Ui;
 
@@ -49,6 +50,9 @@ public class ExchangeCommand extends Command {
             if (convertedAmount.compareTo(comparator) < 0) {
                 throw new ExchangeAmountTooSmallException();
             }
+            if (getNumberOfDecimalPlaces(amount) > 2) {
+                throw new AmountTooPreciseException();
+            }
             oldAcc.updateBalance(amount, "subtract");
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
             ui.printMessage(exchangeRate);
@@ -71,6 +75,8 @@ public class ExchangeCommand extends Command {
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
             printMissingAccounts(ui, accounts);
+        } catch (AmountTooPreciseException e) {
+            ui.printMessage(ErrorMessage.INVALID_COMMAND_TOO_PRECISE_AMOUNT);
         } catch (IllegalArgumentException e) {
             ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (InvalidExchangeArgumentException e) {
@@ -115,11 +121,11 @@ public class ExchangeCommand extends Command {
     public BigDecimal parseAmount () throws InvalidNumberException {
         try {
             String amount = input.trim().split(" ")[3];
-            BigDecimal amountAsFloat = new BigDecimal(amount);
-            if (amountAsFloat.compareTo(BigDecimal.ZERO) <= 0) {
+            BigDecimal bigDecimal = new BigDecimal(amount);
+            if (bigDecimal.compareTo(BigDecimal.ZERO) <= 0) {
                 throw new InvalidNumberException();
             }
-            return amountAsFloat;
+            return bigDecimal;
         } catch (NumberFormatException e) {
             throw new InvalidNumberException();
         }

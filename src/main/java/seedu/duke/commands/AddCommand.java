@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     private BigDecimal amount;
 
     private String description;
-    private TransactionManager transactions = TransactionManager.getInstance();
+    private final TransactionManager transactions = TransactionManager.getInstance();
 
     /**
      * @param input The user input including the command.

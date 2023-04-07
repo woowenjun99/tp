@@ -93,6 +93,10 @@ Examples of error messages:
 
 ![ExchangeSeqDiagram](../images/ExchangeSeqDiagram.png)
 
+**Show Rate Command Sequence Diagram**
+
+![ShowRateSeqDiagram](../images/ShowRateSeqDiagram)
+
 **API Class Diagram**
 
 ![APIClassDiagram](../images/APIClassDiagram.png)

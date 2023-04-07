@@ -50,12 +50,17 @@ It will also help them convert to foreign currencies so they can see how much th
     - You are not allowed to store more than $10,000,000 of any currency in your account.
     - User are only allowed to input **pure numerical character**.
         - Example of invalid number format : `1,000`, `5_000_000`.
-- **Transactions related**
+- **Transactions Related**
     - `add`, `withdraw` and `exchange` action will be saved in transaction list automatically
         - `DESCRIPTION` of `add` and `withdraw` command accepts all sort **non-space** char/string.
         - `DESCRIPTION` is limited to 100 characters only.
         - transaction description of `exchange` command is fixed by default as the relative exchange info.
             - Example: `exchange 10 SGD to 50 THB`
+- **Storage Related**
+    - Account balances and transactions are stored in the "data" folder in the same directory as the JAR file.
+    - Users are not meant to edit the data files directly, doing so may cause the application to behave in an
+      unexpected manner.
+    - If any of the files become corrupted, MoneyMoover will create a new empty file to replace it.
 
 ### Viewing help `help`
 

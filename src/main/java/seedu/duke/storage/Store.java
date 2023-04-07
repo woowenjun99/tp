@@ -100,6 +100,14 @@ public class Store implements StoreInterface {
             float value = account.getValue() / 100.0f;
             logger.log(Level.INFO, "Loaded account " + currency + " with value " + value);
             try {
+                if (value < 0) {
+                    ui.printMessage(ErrorMessage.ACCOUNT_BALANCE_NEGATIVE_WHEN_LOADING);
+                    value = 0;
+                }
+                if (value > Account.UPPER_BOUND) {
+                    ui.printMessage(ErrorMessage.ACCOUNT_BALANCE_TOO_LARGE_WHEN_LOADING);
+                    value = (float) Account.UPPER_BOUND;
+                }
                 accounts.addAccount(currency, value);
             } catch (AccountAlreadyExistsException e) {
                 logger.log(Level.WARNING,

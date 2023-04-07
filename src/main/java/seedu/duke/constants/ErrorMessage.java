@@ -67,6 +67,9 @@ public interface ErrorMessage {
     String ERR_LOADING_ACCOUNTS = "There was an error loading your accounts from the file, creating a new one";
 
     String DUPLICATE_ACCOUNT_WHEN_LOADING = "Skipping duplicate account of currency %s in loaded file\n";
+    String ACCOUNT_BALANCE_NEGATIVE_WHEN_LOADING = "Negative account balance found in file, defaulting to 0";
+    String ACCOUNT_BALANCE_TOO_LARGE_WHEN_LOADING =
+            "Account balance greater than 1 billion found in file, defaulting to 1 billion";
 
     String UNKNOWN_COMMAND = "Sorry, I don't understand that command. Type 'help' to see the list of commands.";
 

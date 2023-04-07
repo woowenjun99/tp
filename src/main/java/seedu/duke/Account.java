@@ -5,15 +5,23 @@ import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.TooLargeAmountException;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Account {
-    private static final long UPPER_BOUND = 1_000_000_000;
+    public static final long UPPER_BOUND = 1_000_000_000;
     private long balance;
     private final Currency currency;
-    
+
+    /**
+     * Constructor for Account.
+     *
+     * @param initialBalance the initial balance of the account in DOLLARS (multiplication is done here)
+     * @param currency       the currency of the account
+     */
     Account (float initialBalance, Currency currency) {
         this.currency = currency;
-        balance = (long) (initialBalance * 100);
+        // scaleByPowerOfTen(2) is used to convert dollars to cents, same as multiplying by 100
+        this.balance = BigDecimal.valueOf(initialBalance).scaleByPowerOfTen(2).longValue();
     }
 
     public long getLongBalance () {
@@ -58,7 +66,9 @@ public class Account {
     @Override
     public String toString () {
         String currencyType = currency.name();
-        return currencyType + ": " + String.format("%.2f", balance / 100.0);
+        return currencyType + ": " + String.format("%.2f",
+                BigDecimal.valueOf(balance).divide(BigDecimal.valueOf(100), 10, RoundingMode.DOWN)
+        );
     }
 
 }

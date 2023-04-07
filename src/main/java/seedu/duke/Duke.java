@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 public class Duke {
 
     private static Ui ui;
-    private static final Store store = new Store("data/");
-    private static final AccountList accounts = new AccountList(store);
+    private static Store store;
+    private static AccountList accounts;
     private static final Logger logger = Logger.getLogger("logger");
 
 
@@ -41,15 +41,23 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main (String[] args) {
+        ui = new Ui();
         try {
+
+            // sets up the logger to write to file instead of to console
             logger.setUseParentHandlers(false);
             logger.addHandler(new FileHandler("log.txt"));
-            ui = new Ui();
+
             ui.printGreeting();
+
+            store = new Store("data/", ui);
+            accounts = new AccountList(store);
             store.loadAccountsFromStore(accounts);
             TransactionManager.getInstance().setStore(store);
             store.loadTransactionsFromStore(TransactionManager.getInstance());
+
             Forex.initializeRates();
+
             ui.printSpacer();
             run();
         } catch (Exception e) {

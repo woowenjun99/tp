@@ -1,4 +1,4 @@
 package seedu.duke.exceptions;
 
-public class InvalidDeleteAccountCommandException extends Exception{
+public class InvalidDeleteAccountCommandException extends Exception {
 }

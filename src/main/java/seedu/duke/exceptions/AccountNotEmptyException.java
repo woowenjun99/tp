@@ -1,4 +1,4 @@
 package seedu.duke.exceptions;
 
-public class AccountNotEmptyException extends Exception{
+public class AccountNotEmptyException extends Exception {
 }

@@ -11,11 +11,12 @@ public class ExchangeRatesApiClient {
     private static Retrofit retrofit;
 
     /**
-     * Creates a Retrofit instance for API requests. 
+     * Creates a Retrofit instance for API requests.
      * If the instance is null, creates a new instance.
+     *
      * @return The Retrofit instance.
      */
-    public static Retrofit getClient() {
+    public static Retrofit getClient () {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
@@ -27,9 +28,10 @@ public class ExchangeRatesApiClient {
 
     /**
      * Defines the endpoints for the OpenExchangeRates API.
+     *
      * @return An instance of the ExchangeRatesApi interface.
      */
-    public static ExchangeRatesApi getExchangeRatesApi() {
+    public static ExchangeRatesApi getExchangeRatesApi () {
         return getClient().create(ExchangeRatesApi.class);
     }
 }

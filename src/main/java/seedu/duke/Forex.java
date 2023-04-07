@@ -3,6 +3,7 @@ package seedu.duke;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
+
 import seedu.duke.ui.Ui;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
@@ -37,8 +38,8 @@ public class Forex {
      * Initializes the exchange rates by fetching them from the ExchangeRates class.
      * Buffers for 5 seconds to allow the API call to go through.
      * This method will only be called once upon starting the program.
-     */ 
-    public static void initializeRates() {
+     */
+    public static void initializeRates () {
         Ui ui = new Ui();
         ExchangeRates initRates = new ExchangeRates();
         ui.printMessage(Message.LOADING_EXCHANGE_RATES.getMessage());

@@ -8,6 +8,9 @@ import seedu.duke.AccountList;
 import seedu.duke.Transaction;
 import seedu.duke.TransactionManager;
 import seedu.duke.Currency;
+import seedu.duke.constants.ErrorMessage;
+import seedu.duke.exceptions.AccountAlreadyExistsException;
+import seedu.duke.ui.Ui;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,13 +34,30 @@ public class Store implements StoreInterface {
     private final String directory;
     private final Gson gson;
     private final Logger logger = Logger.getLogger("logger");
+    private final Ui ui;
 
-    public Store (String directory) {
+    public Store (String directory, Ui ui) {
         this.directory = directory;
         // creates new gson instance with the LocalDateTime adapter
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter());
         this.gson = gsonBuilder.create();
+        this.ui = ui;
+    }
+
+    /**
+     * Creates the directory and/or files with an empty json
+     *
+     * @param fullPath The full path of the file, including the directory and file name
+     * @throws IOException if the file cannot be created
+     */
+    private void createFile (String fullPath) throws IOException {
+        logger.log(Level.INFO, "Created file " + fullPath);
+        FileWriter writer = new FileWriter(fullPath);
+        // Add in an empty array to prevent error from being thrown.
+        writer.write("[]");
+        writer.close();
+
     }
 
 
@@ -53,11 +73,7 @@ public class Store implements StoreInterface {
             logger.log(Level.INFO, "Created directory " + directory);
         }
         if (!file.exists()) {
-            logger.log(Level.INFO, "Created file " + fullPath);
-            FileWriter writer = new FileWriter(fullPath);
-            // Add in an empty array to prevent error from being thrown.
-            writer.write("[]");
-            writer.close();
+            createFile(fullPath);
         }
     }
 
@@ -67,20 +83,34 @@ public class Store implements StoreInterface {
      *
      * @param accounts The AccountList instance
      */
-    public void loadAccountsFromStore (AccountList accounts) throws Exception {
+    public void loadAccountsFromStore (AccountList accounts) throws IOException {
         String fullPath = directory + ACCOUNTS_FILE_NAME;
         createFileIfNotExist(fullPath);
         BufferedReader br = new BufferedReader(new FileReader(fullPath));
-        Storage[] store = gson.fromJson(br, Storage[].class);
+        Storage[] store = new Storage[]{};
+        try {
+            store = gson.fromJson(br, Storage[].class);
+        } catch (Exception e) {
+            ui.printMessage(ErrorMessage.ERR_LOADING_ACCOUNTS);
+            createFile(fullPath);
+        }
+
         for (Storage account : store) {
             Currency currency = Currency.valueOf(account.getCurrency());
             float value = account.getValue() / 100.0f;
             logger.log(Level.INFO, "Loaded account " + currency + " with value " + value);
-            accounts.addAccount(currency, value);
+            try {
+                accounts.addAccount(currency, value);
+            } catch (AccountAlreadyExistsException e) {
+                logger.log(Level.WARNING,
+                        "Skipping duplicate account " + currency + " with value " + value + " found in store");
+                ui.printf(ErrorMessage.DUPLICATE_ACCOUNT_WHEN_LOADING, currency);
+            }
         }
         // If the 2 lengths do not match, there is a problem.
         assert accounts.getAllAccounts().size() == store.length;
-        logger.log(Level.INFO, "accounts loaded successfully");
+        logger.log(Level.INFO, "Accounts loaded successfully");
+
     }
 
     /**
@@ -89,16 +119,23 @@ public class Store implements StoreInterface {
      *
      * @param transactions The TransactionManager instance
      */
-    public void loadTransactionsFromStore (TransactionManager transactions) throws Exception {
+    public void loadTransactionsFromStore (TransactionManager transactions) throws IOException {
         String fullPath = directory + TRANSACTIONS_FILE_NAME;
         createFileIfNotExist(fullPath);
         BufferedReader br = new BufferedReader(new FileReader(fullPath));
-        ArrayList<Transaction> store = gson.fromJson(br, new TypeToken<ArrayList<Transaction>>() {
-        }.getType());
+        ArrayList<Transaction> store = new ArrayList<>();
+        try {
+            store = gson.fromJson(br, new TypeToken<ArrayList<Transaction>>() {
+            }.getType());
+        } catch (Exception e) {
+            ui.printMessage(ErrorMessage.ERR_LOADING_TRANSACTIONS);
+            createFile(fullPath);
+        }
+
         transactions.populateTransactions(store);
         // If the 2 lengths do not match, there is a problem.
         assert transactions.getSize() == store.size();
-        logger.log(Level.INFO, "transactions loaded successfully");
+        logger.log(Level.INFO, "Transactions loaded successfully");
     }
 
     /**
@@ -110,9 +147,7 @@ public class Store implements StoreInterface {
         String fullPath = directory + ACCOUNTS_FILE_NAME;
         createFileIfNotExist(fullPath);
         File file = new File(fullPath);
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter(file);
+        try (FileWriter fw = new FileWriter(file)) {
             ArrayList<Storage> storages = new ArrayList<>();
             for (Account account : accounts) {
                 storages.add(new Storage(account.getCurrencyType().toString(), account.getLongBalance()));
@@ -121,10 +156,6 @@ public class Store implements StoreInterface {
             fw.flush();
         } catch (Exception e) {
             logger.log(Level.SEVERE, String.format("Error saving accounts to store: %s", e.getMessage()));
-        } finally {
-            if (fw != null) {
-                fw.close();
-            }
         }
     }
 
@@ -137,17 +168,11 @@ public class Store implements StoreInterface {
         String fullPath = directory + TRANSACTIONS_FILE_NAME;
         createFileIfNotExist(fullPath);
         File file = new File(fullPath);
-        FileWriter fw = null;
-        try {
-            fw = new FileWriter(file);
+        try (FileWriter fw = new FileWriter(file)) {
             gson.toJson(transactions, fw);
             fw.flush();
         } catch (Exception e) {
             logger.log(Level.SEVERE, String.format("Error saving transactions to store: %s", e.getMessage()));
-        } finally {
-            if (fw != null) {
-                fw.close();
-            }
         }
     }
 }

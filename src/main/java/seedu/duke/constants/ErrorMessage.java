@@ -6,7 +6,8 @@ package seedu.duke.constants;
 public interface ErrorMessage {
     String INVALID_ADD_COMMAND = "Please check that you have correctly provided the currency and amount";
     String INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW = "Please provide a value greater than or equal to 0.01";
-    String INVALID_COMMAND_TOO_PRECISE_AMOUNT = "Please provide an amount that has a precision of not more than 2 dp";
+    String INVALID_COMMAND_TOO_PRECISE_AMOUNT =
+            "Please provide an amount that has a precision of not more than 2 decimal places";
     String INVALID_WITHDRAW_COMMAND = "This is an invalid withdraw command format. \n" +
             "Please check that you have correctly provided the currency and amount according this format:\n" +
             "\t withdraw CURRENCY AMOUNT [DESCRIPTION] ";
@@ -61,5 +62,10 @@ public interface ErrorMessage {
 
     String DESCRIPTION_TOO_LONG = "Please limit your description to 100 characters";
     String SHOW_RATE_RANGE = "Your show-rate value must be no smaller than 0.01 and no greater than 1 billion!";
+
+    String ERR_LOADING_TRANSACTIONS = "There was an error loading your transactions from the file, creating a new one";
+    String ERR_LOADING_ACCOUNTS = "There was an error loading your accounts from the file, creating a new one";
+
+    String DUPLICATE_ACCOUNT_WHEN_LOADING = "Skipping duplicate account of currency %s in loaded file\n";
 
 }

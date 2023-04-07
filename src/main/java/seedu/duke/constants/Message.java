@@ -28,8 +28,6 @@ public enum Message {
             + "\t exit - exits the program\n"
             + "\t Available Currencies: SGD, USD, EUR, GBP, THB, MYR, IDR, VND, CNY, JPY, KRW"),
     GREETING("Welcome to MoneyMoover!"),
-    ERR_UNKNOWN_COMMAND("Sorry, I don't understand that command. Type 'help' to see the list of commands."),
-    ERR_INVALID_SHOW_RATE("show-rate must be used with the following format: show-rate <CURRENCY1> <CURRENCY2>"),
     SUCCESSFUL_WITHDRAW_COMMAND("You have successfully withdrawn %.2f %s from your account\n " +
             "Now you have remaining %.2f %s in your account "),
     SUCCESSFUL_DELETE_ACCOUNT_COMMAND("You have successfully deleted your %s account\n"),

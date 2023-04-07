@@ -68,4 +68,6 @@ public interface ErrorMessage {
 
     String DUPLICATE_ACCOUNT_WHEN_LOADING = "Skipping duplicate account of currency %s in loaded file\n";
 
+    String UNKNOWN_COMMAND = "Sorry, I don't understand that command. Type 'help' to see the list of commands.";
+
 }

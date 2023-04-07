@@ -1,6 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.constants.Message;
+import seedu.duke.constants.ErrorMessage;
 
 public enum CommandType {
     ADD("add"),
@@ -32,6 +32,6 @@ public enum CommandType {
                 return commandType;
             }
         }
-        throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
+        throw new IllegalArgumentException(ErrorMessage.UNKNOWN_COMMAND);
     }
 }

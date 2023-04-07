@@ -6,9 +6,11 @@ MoneyMoover is a **CLI application for managing and transferring international c
 
 Our app will help students to **track their expenses and income** in order to stay within their budgets, so that they have enough money to travel. It will also help them convert to foreign currencies so they can see how much they have to spend overseas.
 
-## Summary of Contributions
+## Code Contributed
 
 Code Contributed: [RepoSense Link](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=woowenjun99&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-02-17)
+
+## Enhancements Implemented
 
 ### UI Class
 
@@ -25,6 +27,10 @@ I am in charge of writing the `AddCommand` class for the project. This class is 
 ### Validation Class
 
 I am in charge of writing a class that is used to validate the amount that is read in by the user. This class is used to validate and see whether the amount provided by the user contains any alphabetical characters or lie within the range of 0 to 10 million dollars.
+
+### Contributions to the UG
+
+I have updated the UG for the AddCommand and BalanceCommand with the expected outputs after I am done with the working on them.
 
 ### Contributions to the DG
 

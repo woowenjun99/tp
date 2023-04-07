@@ -24,7 +24,7 @@ public class Validator {
     public BigDecimal validateAmount (String amount) throws InvalidBigDecimalException {
         // Validates if there are non-numeric characters apart from . and -
         if (!amount.matches("[0-9.-]+")) {
-            throw new IllegalArgumentException();
+            throw new InvalidBigDecimalException("Please only provide numbers");
         }
 
         BigDecimal value = new BigDecimal(amount);
@@ -35,7 +35,7 @@ public class Validator {
         }
 
         // Checks whether the amount is more than Upper Bound
-        double UPPER_BOUND = 1000000000;
+        double UPPER_BOUND = 10_000_000;
         if (value.compareTo(new BigDecimal(UPPER_BOUND)) > 0) {
             throw new InvalidBigDecimalException("Please do not provide a value more than $1000000000");
         }
@@ -43,7 +43,7 @@ public class Validator {
         // Checks whether the amount is smaller than Lower Bound
         double LOWER_BOUND = 0;
         if (value.compareTo(new BigDecimal(LOWER_BOUND)) <= 0) {
-            throw new InvalidBigDecimalException("Please do not provide a value of more than $10,000,000");
+            throw new InvalidBigDecimalException("Please provide a value more than $0");
         }
 
         return value;

@@ -13,6 +13,7 @@ import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.TooLargeAmountException;
+import seedu.duke.exceptions.DescriptionTooLongException;
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;
@@ -39,7 +40,8 @@ public class AddCommand extends Command {
     }
 
     private void processCommand () throws InvalidAddCommandException,
-            InvalidAmountToAddException, AmountTooPreciseException {
+            InvalidAmountToAddException, DescriptionTooLongException, AmountTooPreciseException {
+
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
@@ -56,8 +58,12 @@ public class AddCommand extends Command {
             throw new AmountTooPreciseException();
         }
 
-        if (words.length == 4) {
-            description = words[3];
+        boolean containDescription = words.length == 4;
+        if (containDescription) {
+            if (words[3].trim().length() > 100) {
+                throw new DescriptionTooLongException();
+            }
+            description = words[3].trim();
         } else {
             description = "";
         }
@@ -84,7 +90,7 @@ public class AddCommand extends Command {
             accounts.save();
             printSuccess(ui);
 
-            transactions.addTransaction(this.currency, this.description, true, this.amount,
+            transactions.addTransaction(this.currency, description, true, this.amount,
                     BigDecimal.valueOf(account.getBalance()));
 
         } catch (InvalidAddCommandException e) {
@@ -108,6 +114,8 @@ public class AddCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+        } catch (DescriptionTooLongException e) {
+            ui.printMessage(ErrorMessage.DESCRIPTION_TOO_LONG);
         }
     }
 }

@@ -10,6 +10,7 @@ import seedu.duke.exceptions.InvalidWithdrawAmountException;
 import seedu.duke.exceptions.AmountTooPreciseException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.InvalidWithdrawCommandException;
+import seedu.duke.exceptions.DescriptionTooLongException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.TooLargeAmountException;
@@ -39,8 +40,10 @@ public class WithdrawCommand extends Command {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand () throws InvalidWithdrawCommandException, InvalidWithdrawAmountException,
-            AmountTooPreciseException {
+    private void processCommand () throws InvalidWithdrawCommandException, DescriptionTooLongException,
+            InvalidWithdrawAmountException, AmountTooPreciseException {
+
+
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
@@ -59,7 +62,10 @@ public class WithdrawCommand extends Command {
         }
         boolean containDescription = words.length == 4;
         if (containDescription) {
-            description = words[3];
+            if (words[3].trim().length() > 100) {
+                throw new DescriptionTooLongException();
+            }
+            description = words[3].trim();
         } else {
             description = "";
         }
@@ -85,7 +91,7 @@ public class WithdrawCommand extends Command {
             accounts.save();
             printSuccess(ui, account.getBalance());
 
-            transactions.addTransaction(this.currency, this.description, false,
+            transactions.addTransaction(this.currency, description, false,
                     this.amount, BigDecimal.valueOf(account.getBalance()));
 
         } catch (InvalidWithdrawAmountException e) {
@@ -104,6 +110,9 @@ public class WithdrawCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+
+        } catch (DescriptionTooLongException e) {
+            ui.printMessage(ErrorMessage.DESCRIPTION_TOO_LONG);
         } catch (InvalidWithdrawCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_WITHDRAW_COMMAND);
         }

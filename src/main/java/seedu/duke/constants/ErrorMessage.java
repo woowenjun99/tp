@@ -56,5 +56,5 @@ public interface ErrorMessage {
     String NETWORK_OR_UNEXPECTED_ERROR = "The API could not be loaded! Please check your Internet connection " +
             "and try again. If problems persist, please report this error to the MoneyMoover team!";
     String OUTDATED_RATES = "In the meantime, we will use recently saved exchange rates!";
-    String DESCRIPTION_TOO_LONG = "Please enter a description with no more than 100 characters";
+    String DESCRIPTION_TOO_LONG = "Please limit your description to 100 characters";
 }

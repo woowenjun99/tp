@@ -211,7 +211,15 @@ Example:
 
 ### Show the exchange rate between two currencies `show-rate`
 
+<<<<<<< HEAD
 Format: `show-rate CURRENCY1 CURRENCY2 [AMOUNT]`
+=======
+The show rate has an optional parameter amount. The command will show the value of amount exchanged both ways. If amount
+is not provided,
+the command will use a value of 1. The command must be given supported currencies, and numerical non-negative values.
+The
+value must also be within the range of 0.01 and 1,000,000 for the starting currency to avoid exchange inaccuracies.
+> > > > > > > master
 
 - The command will show the value of amount exchanged both ways.
 - If amount is not provided,the command will use a value of 1.
@@ -246,6 +254,7 @@ Format `trans FLAG SEARCH_PARAMETERS`:
     2) `c` - search by currency as search parameter
     3) `d` - search by date as search parameter in the form `DD-MM-YYYY`
     4) `m` - search by month as search parameter in the form `MM-YYYY`
+
 
 - All transactions are printed in reverse-chronological order
 - `FLAG` and `SEARCH_PARAMETER` are optional, neglecting them will print all transactions
@@ -310,8 +319,8 @@ Examples:
 
 | Action                  | Format                                   | Example                                                                                      |
 |:------------------------|:-----------------------------------------|----------------------------------------------------------------------------------------------|
-| Viewing help            | `help`                                   | `help`                                                                                       |
-| Depositing money        | `add CURRENCY AMOUNT [DESCRIPTION]`      | `add SGD 10`, `add SGD 5.5 part time`                                                        |
+| Viewing  help           | `help`                                   | `help`                                                                                       |
+| Depositing  money       | `add CURRENCY AMOUNT [DESCRIPTION]`      | `add SGD 10`, `add SGD 5.5 part time`                                                        |
 | Getting the balances    | `balance CURRENCY`                       | `balance SGD`, `balance`                                                                     |
 | Exchange money          | `exchange CURRENCY1 CURRENCY2 AMOUNT`    | `exchange SGD USD 10`                                                                        |
 | Withdrawing money       | `withdraw CURRENCY AMOUNT [DESCRIPTION]` | `withdaw SGD 100`, `withdraw USD 3 Chicken Rice`                                             |
@@ -320,4 +329,3 @@ Examples:
 | Delete currency account | `delete-account CURRENCY`                | `delete-account USD`                                                                         |
 | Creating accounts       | `create-account CURRENCY`                | `create-account EUR`                                                                         |
 | Exiting the program     | `exit`                                   | `exit`                                                                                       |
-

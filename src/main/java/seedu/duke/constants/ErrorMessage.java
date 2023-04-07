@@ -5,16 +5,17 @@ package seedu.duke.constants;
  */
 public interface ErrorMessage {
     String INVALID_ADD_COMMAND = "Please check that you have correctly provided the currency and amount";
+    String INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW = "Please provide a value greater than or equal to 0.01";
+    String INVALID_COMMAND_TOO_PRECISE_AMOUNT = "Please provide an amount that has a precision of not more than 2 dp";
     String INVALID_WITHDRAW_COMMAND = "This is an invalid withdraw command format. \n" +
             "Please check that you have correctly provided the currency and amount according this format:\n" +
             "\t withdraw CURRENCY AMOUNT [DESCRIPTION] ";
-    String INVALID_AMOUNT_TO_ADD_OR_WITHDRAW = "Please provide a value greater than or equal to 0.01";
     String INVALID_CURRENCY = "An invalid currency has been provided.";
     String INVALID_NUMERICAL_AMOUNT = "Please provide a 2 decimal points float amount to update.";
     String INVALID_CREATE_ACCOUNT_COMMAND = "create-account must be used with the following format: " +
             "create-account CURRENCY";
     String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
-    String NO_SUCH_ACCOUNT = "You do not have an account for the currency.";
+    String NO_SUCH_ACCOUNT = "You do not have an account for these currencies.";
 
     String NO_AMOUNT_PROVIDED = "Please provide an amount to be added.";
 
@@ -57,4 +58,5 @@ public interface ErrorMessage {
     String NETWORK_OR_UNEXPECTED_ERROR = "The API could not be loaded! Please check your Internet connection " +
             "and try again. If problems persist, please report this error to the MoneyMoover team!";
     String OUTDATED_RATES = "In the meantime, we will use recently saved exchange rates!";
+    String SHOW_RATE_RANGE = "Your show-rate value must be no smaller than 0.01 and no greater than 1 billion!";
 }

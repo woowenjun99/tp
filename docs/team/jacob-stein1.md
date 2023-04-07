@@ -95,7 +95,7 @@ Examples of error messages:
 
 **Show Rate Command Sequence Diagram**
 
-![ShowRateSeqDiagram](../images/ShowRateSeqDiagram)
+![ShowRateSeqDiagram](../images/ShowRateSeqDiagram.png)
 
 **API Class Diagram**
 

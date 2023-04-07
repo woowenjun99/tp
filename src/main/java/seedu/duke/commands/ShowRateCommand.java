@@ -74,10 +74,11 @@ public class ShowRateCommand extends Command {
         if (args.length == 3) {
             return new BigDecimal(1);
         }
+        // Checks for any non-numeric characters that are no '-' or '.'
         if (!args[3].matches("[0-9\\.-]+")) {
             throw new IllegalArgumentException();
         }
-        BigDecimal val = new BigDecimal(args[3]); // Potential NumberFormatException
+        BigDecimal val = new BigDecimal(args[3]);
         if (val.compareTo(BigDecimal.valueOf(MIN_VALUE)) < 0 || val.compareTo(BigDecimal.valueOf(MAX_VALUE)) > 0) {
             throw new InvalidNumberException();
         }

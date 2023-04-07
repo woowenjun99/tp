@@ -6,7 +6,7 @@
     * [Introduction](#introduction)
     * [Quick Start](#quick-start)
     * [Features](#features)
-        * [Notes about command format](#notes-about-command-format)
+        * [Notes](#notes)
         * [Viewing help `help`](#viewing-help-help)
         * [Creating accounts `create-account`](#creating-accounts-create-account)
         * [Delete currency account `delete-account`](#delete-currency-account-delete-account)
@@ -53,6 +53,7 @@ It will also help them convert to foreign currencies so they can see how much th
 - **Transactions related**
     - `add`, `withdraw` and `exchange` action will be saved in transaction list automatically
         - `DESCRIPTION` of `add` and `withdraw` command accepts all sort **non-space** char/string.
+        - `DESCRIPTION` is limited to 100 characters only.
         - transaction description of `exchange` command is fixed by default as the relative exchange info.
             - Example: `exchange 10 SGD to 50 THB`
 

@@ -2,7 +2,7 @@
 
 ## Overview - MoneyMoover
 
-MoneyMoover is a Java CLI application modeled after Revolut, a currency exchange application for travelers. MoneyMoover supports conversion for currencies across Asia, and pulls live exchange rates from the Internet using an API.
+MoneyMoover is a Java CLI application for travelers to exchange between international currencies. MoneyMoover supports conversion for currencies across Asia, and pulls live exchange rates from the Internet using an API. MoneyMoover also helps track expenses and income, to ensure travelers stay within their budget.
 
 ### Summary of Contributions
 

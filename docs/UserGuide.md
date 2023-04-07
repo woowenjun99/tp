@@ -280,14 +280,14 @@ Examples of usage:
 >>> You have no transactions of the specified search parameters
 
 >>> trans d 28-03-2023
->>> Below are all your transactions with the description go:
+>>> Below are all your transactions with the date 28-03-2023:
     +USD 200.00
     Amount in account after transaction: USD 200.00
     Description: Pass Go
     At: 28 Mar 2023, 5:17:53PM
 
 >>> trans m 03-2023
->>> Below are all your transactions with the description go:
+>>> Below are all your transactions during the month of 03-2023:
     +USD 200.00
     Amount in account after transaction: USD 200.00
     Description: Pass Go

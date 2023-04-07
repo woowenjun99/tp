@@ -136,12 +136,12 @@ public class ExchangeCommand extends Command {
             Forex exchangeRate = formatInput();
             try {
                 accounts.getAccount(exchangeRate.getInitial());
-            } catch (NoAccountException f) {
+            } catch (NoAccountException e) {
                 ui.printMessage("You need a " + exchangeRate.getInitial() + " account!");
             }
             try {
                 accounts.getAccount(exchangeRate.getTarget());
-            } catch (NoAccountException f) {
+            } catch (NoAccountException e) {
                 ui.printMessage("You need a " + exchangeRate.getTarget() + " account!");
             }
         } catch (InvalidExchangeArgumentException e) {

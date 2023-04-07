@@ -55,13 +55,6 @@ public class AddCommand extends Command {
 
         Validator validator = new Validator();
         amount = validator.validateAmount(words[2]);
-        amount = new BigDecimal(words[2]);
-        if (amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
-            throw new InvalidAmountToAddException();
-        }
-        if (getNumberOfDecimalPlaces(amount) > 2) {
-            throw new AmountTooPreciseException();
-        }
 
         boolean containDescription = words.length == 4;
         if (containDescription) {

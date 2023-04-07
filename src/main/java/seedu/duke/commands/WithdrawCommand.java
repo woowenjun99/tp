@@ -56,13 +56,7 @@ public class WithdrawCommand extends Command {
         currency = getCurrency(words[1]);
         Validator validator = new Validator();
         amount = validator.validateAmount(words[2]);
-        if (amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
-            throw new InvalidWithdrawAmountException();
-        }
 
-        if (getNumberOfDecimalPlaces(amount) > 2) {
-            throw new AmountTooPreciseException();
-        }
         boolean containDescription = words.length == 4;
         if (containDescription) {
             if (words[3].trim().length() > 100) {

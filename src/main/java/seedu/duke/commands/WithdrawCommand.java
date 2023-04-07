@@ -6,11 +6,15 @@ import seedu.duke.Currency;
 import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
+import seedu.duke.exceptions.InvalidWithdrawAmountException;
+import seedu.duke.exceptions.AmountTooPreciseException;
+import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.InvalidWithdrawCommandException;
+import seedu.duke.exceptions.DescriptionTooLongException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
-import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.TooLargeAmountException;
+
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;
@@ -36,7 +40,10 @@ public class WithdrawCommand extends Command {
         return Currency.valueOf(currencyString);
     }
 
-    private void processCommand () throws InvalidWithdrawCommandException {
+    private void processCommand () throws InvalidWithdrawCommandException, DescriptionTooLongException,
+            InvalidWithdrawAmountException, AmountTooPreciseException {
+
+
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
@@ -44,17 +51,23 @@ public class WithdrawCommand extends Command {
             throw new InvalidWithdrawCommandException();
         }
 
-        this.currency = getCurrency(words[1]);
-        this.amount = new BigDecimal(words[2]);
-        if (this.amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
-            throw new InvalidWithdrawCommandException();
+        currency = getCurrency(words[1]);
+        amount = new BigDecimal(words[2]);
+        if (amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
+            throw new InvalidWithdrawAmountException();
         }
 
+        if (getNumberOfDecimalPlaces(amount) > 2) {
+            throw new AmountTooPreciseException();
+        }
         boolean containDescription = words.length == 4;
         if (containDescription) {
-            this.description = words[3];
+            if (words[3].trim().length() > 100) {
+                throw new DescriptionTooLongException();
+            }
+            description = words[3].trim();
         } else {
-            this.description = "";
+            description = "";
         }
     }
 
@@ -78,11 +91,13 @@ public class WithdrawCommand extends Command {
             accounts.save();
             printSuccess(ui, account.getBalance());
 
-            transactions.addTransaction(this.currency, this.description, false,
+            transactions.addTransaction(this.currency, description, false,
                     this.amount, BigDecimal.valueOf(account.getBalance()));
 
-        } catch (InvalidWithdrawCommandException e) {
-            ui.printMessage(ErrorMessage.INVALID_AMOUNT_TO_ADD_OR_WITHDRAW);
+        } catch (InvalidWithdrawAmountException e) {
+            ui.printMessage(ErrorMessage.INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW);
+        } catch (AmountTooPreciseException e) {
+            ui.printMessage(ErrorMessage.INVALID_COMMAND_TOO_PRECISE_AMOUNT);
         } catch (NumberFormatException e) {
             ui.printMessage(ErrorMessage.INVALID_NUMERICAL_AMOUNT);
         } catch (IllegalArgumentException e) {
@@ -95,6 +110,11 @@ public class WithdrawCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+
+        } catch (DescriptionTooLongException e) {
+            ui.printMessage(ErrorMessage.DESCRIPTION_TOO_LONG);
+        } catch (InvalidWithdrawCommandException e) {
+            ui.printMessage(ErrorMessage.INVALID_WITHDRAW_COMMAND);
         }
     }
 }

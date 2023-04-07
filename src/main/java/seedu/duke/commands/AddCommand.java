@@ -6,12 +6,14 @@ import seedu.duke.Currency;
 import seedu.duke.TransactionManager;
 import seedu.duke.constants.ErrorMessage;
 import seedu.duke.constants.Message;
+import seedu.duke.exceptions.AmountTooPreciseException;
 import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.InvalidAmountToAddException;
+import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
-import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.TooLargeAmountException;
+import seedu.duke.exceptions.DescriptionTooLongException;
 import seedu.duke.ui.Ui;
 
 import java.math.BigDecimal;
@@ -38,27 +40,36 @@ public class AddCommand extends Command {
     }
 
     private void processCommand () throws InvalidAddCommandException,
-            InvalidAmountToAddException {
+            InvalidAmountToAddException, DescriptionTooLongException, AmountTooPreciseException {
+
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
         boolean isValidCommand = words.length >= 3;
         if (!isValidCommand) {
             throw new InvalidAddCommandException();
         }
-        this.currency = getCurrency(words[1]);
+        currency = getCurrency(words[1]);
 
-        this.amount = new BigDecimal(words[2]);
-        if (this.amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
+        amount = new BigDecimal(words[2]);
+        if (amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
             throw new InvalidAmountToAddException();
         }
+        if (getNumberOfDecimalPlaces(amount) > 2) {
+            throw new AmountTooPreciseException();
+        }
 
-        if (words.length == 4) {
-            this.description = words[3];
+        boolean containDescription = words.length == 4;
+        if (containDescription) {
+            if (words[3].trim().length() > 100) {
+                throw new DescriptionTooLongException();
+            }
+            description = words[3].trim();
         } else {
-            this.description = "";
+            description = "";
         }
 
     }
+
 
     private void printSuccess (Ui ui) {
         ui.printf(Message.SUCCESSFUL_ADD_COMMAND.getMessage(), this.currency.name(), this.amount);
@@ -79,11 +90,13 @@ public class AddCommand extends Command {
             accounts.save();
             printSuccess(ui);
 
-            transactions.addTransaction(this.currency, this.description, true, this.amount,
+            transactions.addTransaction(this.currency, description, true, this.amount,
                     BigDecimal.valueOf(account.getBalance()));
 
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);
+        } catch (AmountTooPreciseException e) {
+            ui.printMessage(ErrorMessage.INVALID_COMMAND_TOO_PRECISE_AMOUNT);
         } catch (NumberFormatException e) {
             ui.printMessage(ErrorMessage.INVALID_NUMERICAL_AMOUNT);
         } catch (IllegalArgumentException e) {
@@ -91,7 +104,7 @@ public class AddCommand extends Command {
         } catch (NoAccountException e) {
             ui.printMessage(ErrorMessage.NO_SUCH_ACCOUNT);
         } catch (InvalidAmountToAddException e) {
-            ui.printMessage(ErrorMessage.INVALID_AMOUNT_TO_ADD_OR_WITHDRAW);
+            ui.printMessage(ErrorMessage.INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW);
         } catch (NullPointerException e) {
             ui.printMessage(ErrorMessage.NO_AMOUNT_PROVIDED);
         } catch (NotEnoughInAccountException e) {
@@ -101,6 +114,8 @@ public class AddCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+        } catch (DescriptionTooLongException e) {
+            ui.printMessage(ErrorMessage.DESCRIPTION_TOO_LONG);
         }
     }
 }

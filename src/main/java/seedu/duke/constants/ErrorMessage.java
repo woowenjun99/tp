@@ -15,7 +15,7 @@ public interface ErrorMessage {
     String INVALID_CREATE_ACCOUNT_COMMAND = "create-account must be used with the following format: " +
             "create-account CURRENCY";
     String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
-    String NO_SUCH_ACCOUNT = "You do not have an account for the currency.";
+    String NO_SUCH_ACCOUNT = "You do not have an account for these currencies.";
 
     String NO_AMOUNT_PROVIDED = "Please provide an amount to be added.";
 

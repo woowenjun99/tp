@@ -31,8 +31,9 @@ public interface ErrorMessage {
     String SHOWRATE_SYNTAX = "Please structure show-rate as 'show-rate CURRENCY1 CURRENCY2 [AMOUNT]'";
     String ACCOUNT_ALREADY_EXISTS = "You already have an account of this currency";
     String INVALID_UPDATE_BALANCE_ACTION = "The provided action for updating balance was invalid";
-    String EXCEED_AMOUNT_ALLOWED = "You are not allowed to store more than $10,000,000 in your account.\nPlease"
-            + " check how much you have in your balance and how much you are depositing before adding the value in.";
+    String EXCEED_AMOUNT_ALLOWED = "You are not allowed to store more than $10,000,000 of any currency in your " +
+            "account.\nPlease check how much you have in your balance and how much you are depositing before " +
+            "adding the value in.";
     String EXCHANGE_AMOUNT_TOO_SMALL = "The amount is too small to exchange " +
             "(e.g. does not become at least 0.01 in the target currency)";
     String NO_TRANSACTIONS_RECORDED = "You have no transactions with any of your existing accounts";
@@ -57,5 +58,8 @@ public interface ErrorMessage {
     String NETWORK_OR_UNEXPECTED_ERROR = "The API could not be loaded! Please check your Internet connection " +
             "and try again. If problems persist, please report this error to the MoneyMoover team!";
     String OUTDATED_RATES = "In the meantime, we will use recently saved exchange rates!";
+
+    String DESCRIPTION_TOO_LONG = "Please limit your description to 100 characters";
     String SHOW_RATE_RANGE = "Your show-rate value must be no smaller than 0.01 and no greater than 1 billion!";
+
 }

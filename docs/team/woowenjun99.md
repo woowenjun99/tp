@@ -8,7 +8,7 @@ Our app will help students to **track their expenses and income** in order to st
 
 ## Summary of Contributions
 
--   Code Contributed: [RepoSense Link](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=woowenjun99&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-02-17)
+Code Contributed: [RepoSense Link](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=woowenjun99&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-02-17)
 
 ### UI Class
 
@@ -20,62 +20,42 @@ I am in charged of writing the `BalanceCommand` class for the project. This clas
 
 ### Add Command
 
-I am in charge of 
+I am in charge of writing the `AddCommand` class for the project. This class is mainly used to empower the users to add funds into the account based on the specified currency.
 
-### Contributions to team-based tasks
+### Validation Class
 
--   I was responsible for the initial translation of User Stories into
-    issues and delegation of work to different members of the team
--   I advocated for the use of PR templates to ensure that all PRs were consistent, easy to review and passed
-    all the necessary checks
--   I proposed the usage of the BigDecimal library for floating point arithmetic, which was used in the
-    implementation of many features in the application.
+I am in charge of writing a class that is used to validate the amount that is read in by the user. This class is used to validate and see whether the amount provided by the user contains any alphabetical characters or lie within the range of 0 to 10 million dollars.
 
-### Community
+### Contribution to team based task
 
--   PRs reviewed
-    [#39](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/39)
-    [#98](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/98)
-    [#104](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/104)
+1. I set up the GitHub organisation for my team.
+2. I helped to maintain the GitHub issues for our team.
+3. I helped to install GSON to be used as a storage for our project.
 
--   Suggestions for other teams
-    [Food Supply Tracker](https://github.com/nus-cs2113-AY2223S2/tp/pull/9),
-    [WellNUS++](https://github.com/bawfen/ped/issues)
 
-### Documentation
+### Review/mentoring contributions
 
--   Developer Guide
-    -   Added Architecture section and architecture diagram.
-    -   Added General Sequence section, providing a high-level overview of how the program processes a single command.
-    -   Added Parser section
+#### Pull Request Reviewed
 
-##### Architecture
+1. [PR 27](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/27)
+2. [PR 28](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/28)
+3. [PR 37](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/37)
+4. [PR 38](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/38)
+5. [PR 50](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/50)
+6. [PR 83](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/83)
+7. [PR 183](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/183)
 
-![ArchitectureDiagram](../images/ArchitectureDiagram.png)
+### Contributions beyond the project team
 
-The diagram above provides a high-level overview of how the project is structured. The main components are:
+#### Suggestions for other teams
 
-1. The `Main` class which initialises all the other components at startup, and connects them with each other
-2. The `UI` component which is responsible for all user input and output
-3. The `Parser` component which parses user input and creates the relevant Command objects
-4. The `Command` component which executes the logic
-5. The `Accounts` component which manages the user's accounts
-6. The `Forex` (Foreign Exchange) component which handles exchange-rate related logic
-7. The `Transactions` component which manages the user's transactions
-8. The `Storage` component which handles the saving and loading of data to disk
+[Meal360](https://github.com/nus-cs2113-AY2223S2/tp/pull/44)
+[Clanki](https://github.com/nus-cs2113-AY2223S2/tp/pull/36)
+[MyLedger](https://github.com/woowenjun99/ped)
 
-##### General Sequence
+#### Forum Questions Answered
 
-The following is a high-level sequence of a single `create-account SGD` command, which demonstrates how the components
-interact with each other:
-
-![BasicSequence](../images/BasicSequence.png)
-
-##### Parser component
-
-![Parser Class Diagram](../images/ParserClassDiagram.png)
-
-The `Parser` Component
-
--   Parses the user input and creates the relevant `Command` object
--   Makes use of the `CommandType` enum to determine the type of command to create
+1. [Issue 16](https://github.com/nus-cs2113-AY2223S2/forum/issues/16#issuecomment-1407394745)
+2. [Issue 21](https://github.com/nus-cs2113-AY2223S2/forum/issues/21#issuecomment-1413058531)
+3. [Issue 34](https://github.com/nus-cs2113-AY2223S2/forum/issues/34#issuecomment-1463500291)
+4. [Issue 36](https://github.com/nus-cs2113-AY2223S2/forum/issues/36#issuecomment-1465348359)

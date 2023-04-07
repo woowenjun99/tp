@@ -13,7 +13,7 @@ public interface ErrorMessage {
             "Please check that you have correctly provided the currency and amount according this format:\n" +
             "\t withdraw CURRENCY AMOUNT [DESCRIPTION] ";
     String INVALID_CURRENCY = "An invalid currency has been provided.";
-    String INVALID_NUMERICAL_AMOUNT = "Please provide a 2 decimal points float amount to update.";
+    String INVALID_NUMERICAL_AMOUNT = "Please provide a float amount of up to 2 decimal places to update.";
     String INVALID_CREATE_ACCOUNT_COMMAND = "create-account must be used with the following format: " +
             "create-account CURRENCY";
     String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
@@ -63,5 +63,5 @@ public interface ErrorMessage {
 
     String DESCRIPTION_TOO_LONG = "Please limit your description to 100 characters";
     String SHOW_RATE_RANGE = "Your show-rate value must be no smaller than 0.01 and no greater than 1 billion!";
-
+    String EXCEED_UPPER_BOUND = "Please limit your value to $10,000,000";
 }

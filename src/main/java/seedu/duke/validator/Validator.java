@@ -1,5 +1,6 @@
 package seedu.duke.validator;
 
+import seedu.duke.constants.ErrorMessage;
 import seedu.duke.exceptions.InvalidBigDecimalException;
 
 import java.math.BigDecimal;
@@ -24,26 +25,26 @@ public class Validator {
     public BigDecimal validateAmount (String amount) throws InvalidBigDecimalException {
         // Validates if there are non-numeric characters apart from . and -
         if (!amount.matches("[0-9.-]+")) {
-            throw new InvalidBigDecimalException("Please only provide numbers");
+            throw new InvalidBigDecimalException(ErrorMessage.INVALID_NUMERICAL_AMOUNT);
         }
 
         BigDecimal value = new BigDecimal(amount);
 
         // Checks whether more than 2 dp is provided.
         if (Math.max(0, value.stripTrailingZeros().scale()) > 2) {
-            throw new InvalidBigDecimalException("Please do not provide more than 2 decimal places");
+            throw new InvalidBigDecimalException(ErrorMessage.INVALID_COMMAND_TOO_PRECISE_AMOUNT);
         }
 
         // Checks whether the amount is more than Upper Bound
         double UPPER_BOUND = 10_000_000;
         if (value.compareTo(new BigDecimal(UPPER_BOUND)) > 0) {
-            throw new InvalidBigDecimalException("Please do not provide a value more than $1000000000");
+            throw new InvalidBigDecimalException(ErrorMessage.EXCEED_UPPER_BOUND);
         }
 
         // Checks whether the amount is smaller than Lower Bound
         double LOWER_BOUND = 0;
         if (value.compareTo(new BigDecimal(LOWER_BOUND)) <= 0) {
-            throw new InvalidBigDecimalException("Please provide a value more than $0");
+            throw new InvalidBigDecimalException(ErrorMessage.INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW);
         }
 
         return value;

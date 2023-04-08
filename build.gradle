@@ -32,11 +32,11 @@ test {
 }
 
 application {
-    mainClass = "seedu.duke.Duke"
+    mainClass = "com.moneymoover.MoneyMoover"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "moneymoover"
     archiveClassifier = null
 }
 
@@ -44,6 +44,6 @@ checkstyle {
     toolVersion = '10.2'
 }
 
-run{
+run {
     standardInput = System.in
 }

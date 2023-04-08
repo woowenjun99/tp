@@ -51,7 +51,7 @@ If you plan to use Intellij IDEA (highly recommended):
    IDEA.<br>
    :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
 3. **Verify the setup**:
-    1. Run the `seedu.duke.Duke` and try a few commands.
+    1. Run the `com.moneymoover.MoneyMoover` and try a few commands.
     2. Run the tests using `./gradlew check` to ensure they all pass.
 
 ---

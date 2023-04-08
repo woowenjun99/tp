@@ -7,6 +7,10 @@ import java.math.BigDecimal;
 
 public class Validator {
 
+
+    private static final double UPPER_BOUND = 10_000_000;
+    private static final double LOWER_BOUND = 0;
+
     /**
      * This validator class is used to validate the amount of money that the users intend
      * to put in. The limit is between $0 and $10,000,000 and an exception will be
@@ -36,13 +40,13 @@ public class Validator {
         }
 
         // Checks whether the amount is more than Upper Bound
-        double UPPER_BOUND = 10_000_000;
+
         if (value.compareTo(new BigDecimal(UPPER_BOUND)) > 0) {
             throw new InvalidBigDecimalException(ErrorMessage.EXCEED_UPPER_BOUND);
         }
 
         // Checks whether the amount is smaller than Lower Bound
-        double LOWER_BOUND = 0;
+
         if (value.compareTo(new BigDecimal(LOWER_BOUND)) <= 0) {
             throw new InvalidBigDecimalException(ErrorMessage.INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW);
         }

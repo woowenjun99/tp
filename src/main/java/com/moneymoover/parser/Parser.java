@@ -13,7 +13,7 @@ import com.moneymoover.commands.HelpCommand;
 import com.moneymoover.commands.ShowRateCommand;
 import com.moneymoover.commands.TransactionCommand;
 import com.moneymoover.commands.WithdrawCommand;
-import com.moneymoover.constants.Message;
+import com.moneymoover.constants.ErrorMessage;
 
 
 /**
@@ -37,7 +37,7 @@ public class Parser {
         try {
             command = CommandType.get(args[0]);
         } catch (IndexOutOfBoundsException e) {
-            throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.UNKNOWN_COMMAND);
         }
 
 
@@ -51,11 +51,7 @@ public class Parser {
         case WITHDRAW:
             return new WithdrawCommand(input);
         case SHOW_RATE:
-            try {
-                return new ShowRateCommand(input);
-            } catch (IndexOutOfBoundsException e) {
-                throw new IllegalArgumentException(Message.ERR_INVALID_SHOW_RATE.getMessage());
-            }
+            return new ShowRateCommand(input);
         case EXCHANGE:
             return new ExchangeCommand(input);
         case CREATE_ACCOUNT:
@@ -67,7 +63,7 @@ public class Parser {
         case TRANSACTION:
             return new TransactionCommand(input);
         default:
-            throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.UNKNOWN_COMMAND);
         }
     }
 }

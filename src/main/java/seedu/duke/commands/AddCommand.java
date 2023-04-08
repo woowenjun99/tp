@@ -9,12 +9,14 @@ import seedu.duke.constants.Message;
 import seedu.duke.exceptions.AmountTooPreciseException;
 import seedu.duke.exceptions.InvalidAddCommandException;
 import seedu.duke.exceptions.InvalidAmountToAddException;
+import seedu.duke.exceptions.InvalidBigDecimalException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.TooLargeAmountException;
 import seedu.duke.exceptions.DescriptionTooLongException;
 import seedu.duke.ui.Ui;
+import seedu.duke.validator.Validator;
 
 import java.math.BigDecimal;
 
@@ -26,7 +28,7 @@ public class AddCommand extends Command {
     private BigDecimal amount;
 
     private String description;
-    private TransactionManager transactions = TransactionManager.getInstance();
+    private final TransactionManager transactions = TransactionManager.getInstance();
 
     /**
      * @param input The user input including the command.
@@ -40,7 +42,8 @@ public class AddCommand extends Command {
     }
 
     private void processCommand () throws InvalidAddCommandException,
-            InvalidAmountToAddException, DescriptionTooLongException, AmountTooPreciseException {
+            InvalidAmountToAddException, DescriptionTooLongException, AmountTooPreciseException,
+            InvalidBigDecimalException {
 
         String[] words = super.input.split(" ", 4);
         // Format: [Command, CURRENCY, AMOUNT, DESCRIPTION]
@@ -50,13 +53,8 @@ public class AddCommand extends Command {
         }
         currency = getCurrency(words[1]);
 
-        amount = new BigDecimal(words[2]);
-        if (amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
-            throw new InvalidAmountToAddException();
-        }
-        if (getNumberOfDecimalPlaces(amount) > 2) {
-            throw new AmountTooPreciseException();
-        }
+        Validator validator = new Validator();
+        amount = validator.validateAmount(words[2]);
 
         boolean containDescription = words.length == 4;
         if (containDescription) {
@@ -93,6 +91,8 @@ public class AddCommand extends Command {
             transactions.addTransaction(this.currency, description, true, this.amount,
                     BigDecimal.valueOf(account.getBalance()));
 
+        } catch (InvalidBigDecimalException e) {
+            ui.printMessage(e.getDescription());
         } catch (InvalidAddCommandException e) {
             ui.printMessage(ErrorMessage.INVALID_ADD_COMMAND);
         } catch (AmountTooPreciseException e) {

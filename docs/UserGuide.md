@@ -66,7 +66,7 @@ Examples:
 ```text
 >> help
 >> Here are the commands available:
-            help - show list of commands"
+            help - show list of commands
             add CURRENCY AMOUNT [DESCRIPTION] - adds that amount of money into that currency account
             balance [CURRENCY] - view balances of accounts
             exchange CURRENCY1 CURRENCY2 AMOUNT - transfer funds from a currency1 account
@@ -76,8 +76,8 @@ Examples:
             trans [FLAG] [SEARCH_PARAM]  - Appropriate flags are
                                               i) desc : search by the description as search parameter
                                              ii) c : search by currency as search parameter
-                                            iii) d : search by date as search parameter in the form dd-MM-yyyy
-                                             iv) m : search by month as search parameter in the form MM-yyyy
+                                            iii) d : search by date as search parameter in the form DD-MM-YYYY
+                                             iv) m : search by month as search parameter in the form MM-YYYY
             delete-account CURRENCY - deletes the account of that currency
             create-account CURRENCY - creates an account of that currency
             exit - exits the program

@@ -17,7 +17,7 @@ import java.math.BigDecimal;
  */
 public class ShowRateCommand extends Command {
     private static final float MIN_VALUE = (float) 0.01;
-    private static final float  MAX_VALUE = 1000000000; // 1 bn
+    private static final float MAX_VALUE = 1000000000; // 1 bn
 
     public ShowRateCommand (String input) {
         super(false, input);
@@ -64,9 +64,8 @@ public class ShowRateCommand extends Command {
      *
      * @return a BigDecimal representing the numeric value
      * @throws IllegalArgumentException if the input string is non-numeric
-     * @throws InvalidNumberException   if the numeric value is out of the range (0.01, 1bn)
      */
-    public BigDecimal parseAmount () throws InvalidBigDecimalException  {
+    public BigDecimal parseAmount () throws InvalidBigDecimalException {
         String[] args = input.split(" ");
         if (args.length == 3) {
             return new BigDecimal(1);
@@ -93,8 +92,8 @@ public class ShowRateCommand extends Command {
         Currency initial;
         Currency target;
         try {
-            initial = Currency.valueOf(args[1]);
-            target = Currency.valueOf(args[2]);
+            initial = Currency.valueOf(args[1].toUpperCase());
+            target = Currency.valueOf(args[2].toUpperCase());
         } catch (IllegalArgumentException e) {
             // Differentiates between an invalid number being provided
             throw new IllegalCurrencyException();

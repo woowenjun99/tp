@@ -28,7 +28,7 @@ public class CreateAccountCommand extends Command {
         }
         String currencyString = userInputs[1];
         try {
-            Currency currency = Currency.valueOf(currencyString);
+            Currency currency = Currency.valueOf(currencyString.toUpperCase());
             accounts.addAccount(currency, 0.0f);
             ui.printf(Message.SUCCESSFUL_CREATE_ACCOUNT_COMMAND.getMessage(), currency);
             accounts.save();

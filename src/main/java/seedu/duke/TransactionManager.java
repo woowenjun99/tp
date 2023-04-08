@@ -165,7 +165,7 @@ public class TransactionManager {
         if (transactions.size() == 0) {
             throw new NoTransactionsRecordedException();
         }
-        Currency currency = Currency.valueOf(currencyString);
+        Currency currency = Currency.valueOf(currencyString.toUpperCase());
         String stringToReturn = "";
         for (int i = transactions.size() - 1; i >= 0; --i) {
             Transaction transaction = transactions.get(i);

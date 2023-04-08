@@ -27,7 +27,7 @@ public class DeleteAccountCommand extends Command {
     }
 
     private Currency getCurrency (String currencyString) {
-        return Currency.valueOf(currencyString);
+        return Currency.valueOf(currencyString.toUpperCase());
     }
 
     private void processCommand () throws InvalidDeleteAccountCommandException {

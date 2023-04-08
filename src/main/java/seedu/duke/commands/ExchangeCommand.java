@@ -96,8 +96,8 @@ public class ExchangeCommand extends Command {
         if (splitInput.length != 4) {
             throw new InvalidExchangeArgumentException();
         }
-        Currency initial = Currency.valueOf(splitInput[1]);
-        Currency target = Currency.valueOf(splitInput[2]);
+        Currency initial = Currency.valueOf(splitInput[1].toUpperCase());
+        Currency target = Currency.valueOf(splitInput[2].toUpperCase());
         return new Forex(initial, target);
     }
 
@@ -105,7 +105,7 @@ public class ExchangeCommand extends Command {
      * Retrieves the amount to be converted from the input
      *
      * @return BigDecimal representing amount to be converted
-     * @throws NullPointerException  if the amount is null
+     * @throws NullPointerException   if the amount is null
      * @throws InvalidNumberException if the amount is incorrectly formatted
      */
     public BigDecimal parseAmount () throws InvalidBigDecimalException {
@@ -115,11 +115,11 @@ public class ExchangeCommand extends Command {
     }
 
     /**
-    * Prints a message indicating if any required accounts are missing.
-    *
-    * @param ui the user interface to use for printing the message
-    * @param accounts the list of accounts to check for missing accounts
-    */
+     * Prints a message indicating if any required accounts are missing.
+     *
+     * @param ui       the user interface to use for printing the message
+     * @param accounts the list of accounts to check for missing accounts
+     */
     private void printMissingAccounts (Ui ui, AccountList accounts) {
         try {
             Forex exchangeRate = formatInput();

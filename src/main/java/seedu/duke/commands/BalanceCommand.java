@@ -41,7 +41,7 @@ public class BalanceCommand extends Command {
     }
 
     private Currency convertStringToEnum (String currency) throws IllegalArgumentException {
-        return Currency.valueOf(currency);
+        return Currency.valueOf(currency.toUpperCase());
     }
 
     private ArrayList<Account> getAccounts (String currencyString, AccountList accounts)

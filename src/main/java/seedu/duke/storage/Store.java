@@ -73,7 +73,7 @@ public class Store implements StoreInterface {
         BufferedReader br = new BufferedReader(new FileReader(fullPath));
         Storage[] store = gson.fromJson(br, Storage[].class);
         for (Storage account : store) {
-            Currency currency = Currency.valueOf(account.getCurrency());
+            Currency currency = Currency.valueOf(account.getCurrency().toUpperCase());
             float value = account.getValue() / 100.0f;
             logger.log(Level.INFO, "Loaded account " + currency + " with value " + value);
             accounts.addAccount(currency, value);

@@ -19,7 +19,9 @@ public class Ui {
      * @return The user input as a string.
      */
     public String getUserInput() {
-        return in.nextLine();
+        // The replaceAll method is used to replace all sets of consecutive spaces with a single space.
+        // This will prevent people from breaking our app with multiple spaces.
+        return in.nextLine().replaceAll("\\s+", " ").trim();
     }
 
     /**

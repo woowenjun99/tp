@@ -15,8 +15,8 @@ import java.math.BigDecimal;
  * Command to print the exchange rate between two currencies
  */
 public class ShowRateCommand extends Command {
-    private Currency from;
-    private Currency to;
+    private static final float MIN_VALUE = (float) 0.01;
+    private static final float  MAX_VALUE = 1000000000; // 1 bn
 
     public ShowRateCommand (String input) {
         super(false, input);
@@ -38,7 +38,7 @@ public class ShowRateCommand extends Command {
         } catch (IllegalArgumentException e) {
             ui.printMessage(ErrorMessage.INVALID_NUMBER);
         } catch (InvalidNumberException e) {
-            ui.printMessage(ErrorMessage.NEGATIVE_NUMBER);
+            ui.printMessage(ErrorMessage.SHOW_RATE_RANGE);
         } catch (IllegalCurrencyException e) {
             ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (InvalidShowrateArgumentException e) {
@@ -65,18 +65,22 @@ public class ShowRateCommand extends Command {
      *
      * @return a BigDecimal representing the numeric value
      * @throws IllegalArgumentException if the input string is non-numeric
-     * @throws InvalidNumberException   if the numeric value is negative
+     * @throws InvalidNumberException   if the numeric value is out of the range (0.01, 1bn)
      */
     public BigDecimal parseAmount () throws IllegalArgumentException, InvalidNumberException {
         String[] args = input.split(" ");
         if (args.length == 3) {
             return new BigDecimal(1);
         }
-        float val = Float.valueOf(args[3]); // Potential IllegalArgumentException
-        if (val < 0) {
-            throw new InvalidNumberException(); // For negative inputs
+        // Checks for any non-numeric characters that are no '-' or '.'
+        if (!args[3].matches("[0-9\\.-]+")) {
+            throw new IllegalArgumentException();
         }
-        return new BigDecimal(val);
+        BigDecimal val = new BigDecimal(args[3]);
+        if (val.compareTo(BigDecimal.valueOf(MIN_VALUE)) < 0 || val.compareTo(BigDecimal.valueOf(MAX_VALUE)) > 0) {
+            throw new InvalidNumberException();
+        }
+        return val;
     }
 
     /**

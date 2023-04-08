@@ -4,7 +4,9 @@ package seedu.duke.constants;
  * A public interface that is used to contain all the error messages throughout the application.
  */
 public interface ErrorMessage {
-    String INVALID_ADD_COMMAND = "Please check that you have correctly provided the currency and amount";
+    String INVALID_ADD_COMMAND = "This is an invalid add command format. \n" +
+        "Please check that you have correctly provided the currency and amount according this format:\n" +
+        "\t add CURRENCY AMOUNT [DESCRIPTION]";
     String INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW = "Please provide a value greater than or equal to 0.01";
     String INVALID_COMMAND_TOO_PRECISE_AMOUNT =
             "Please provide an amount that has a precision of not more than 2 decimal places";
@@ -12,7 +14,7 @@ public interface ErrorMessage {
             "Please check that you have correctly provided the currency and amount according this format:\n" +
             "\t withdraw CURRENCY AMOUNT [DESCRIPTION] ";
     String INVALID_CURRENCY = "An invalid currency has been provided.";
-    String INVALID_NUMERICAL_AMOUNT = "Please provide a 2 decimal points float amount to update.";
+    String INVALID_NUMERICAL_AMOUNT = "Please provide a float amount of up to 2 decimal places to update.";
     String INVALID_CREATE_ACCOUNT_COMMAND = "create-account must be used with the following format: " +
             "create-account CURRENCY";
     String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
@@ -73,4 +75,5 @@ public interface ErrorMessage {
 
     String UNKNOWN_COMMAND = "Sorry, I don't understand that command. Type 'help' to see the list of commands.";
 
+    String EXCEED_UPPER_BOUND = "Please limit your value to $10,000,000";
 }

@@ -4,7 +4,8 @@ import seedu.duke.AccountList;
 import seedu.duke.Currency;
 import seedu.duke.ui.Ui;
 import seedu.duke.Forex;
-import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.validator.Validator;
+import seedu.duke.exceptions.InvalidBigDecimalException;
 import seedu.duke.exceptions.InvalidShowrateArgumentException;
 import seedu.duke.exceptions.IllegalCurrencyException;
 import seedu.duke.constants.ErrorMessage;
@@ -35,10 +36,8 @@ public class ShowRateCommand extends Command {
             Forex reverse = new Forex(instance.getTarget(), instance.getInitial());
             ui.printMessage(getRateString(instance, val));
             ui.printMessage(getRateString(reverse, val));
-        } catch (IllegalArgumentException e) {
-            ui.printMessage(ErrorMessage.INVALID_NUMBER);
-        } catch (InvalidNumberException e) {
-            ui.printMessage(ErrorMessage.SHOW_RATE_RANGE);
+        } catch (InvalidBigDecimalException e) {
+            ui.printMessage(e.getDescription());
         } catch (IllegalCurrencyException e) {
             ui.printMessage(ErrorMessage.INVALID_CURRENCY);
         } catch (InvalidShowrateArgumentException e) {
@@ -67,19 +66,14 @@ public class ShowRateCommand extends Command {
      * @throws IllegalArgumentException if the input string is non-numeric
      * @throws InvalidNumberException   if the numeric value is out of the range (0.01, 1bn)
      */
-    public BigDecimal parseAmount () throws IllegalArgumentException, InvalidNumberException {
+    public BigDecimal parseAmount () throws InvalidBigDecimalException  {
         String[] args = input.split(" ");
         if (args.length == 3) {
             return new BigDecimal(1);
         }
         // Checks for any non-numeric characters that are no '-' or '.'
-        if (!args[3].matches("[0-9\\.-]+")) {
-            throw new IllegalArgumentException();
-        }
-        BigDecimal val = new BigDecimal(args[3]);
-        if (val.compareTo(BigDecimal.valueOf(MIN_VALUE)) < 0 || val.compareTo(BigDecimal.valueOf(MAX_VALUE)) > 0) {
-            throw new InvalidNumberException();
-        }
+        Validator validator = new Validator();
+        BigDecimal val = validator.validateAmount(args[3]);
         return val;
     }
 

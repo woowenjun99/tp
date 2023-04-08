@@ -5,7 +5,7 @@ import seedu.duke.ui.Ui;
 import seedu.duke.AccountList;
 import seedu.duke.Forex;
 import seedu.duke.exceptions.IllegalCurrencyException;
-import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.InvalidBigDecimalException;
 import seedu.duke.exceptions.InvalidShowrateArgumentException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -59,44 +59,44 @@ public class ShowRateCommandTest {
     }
 
     @Test
-    public void testParseAmount_nonNumericValue_shouldThrowIllegalArgumentException () {
+    public void testParseAmount_nonNumericValue_shouldThrowInvalidBigDecimalException () {
         try {
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD F");
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD 1.0f");
-            assertThrows(IllegalArgumentException.class, cmd1::parseAmount);
-            assertThrows(IllegalArgumentException.class, cmd2::parseAmount);
+            assertThrows(InvalidBigDecimalException.class, cmd1::parseAmount);
+            assertThrows(InvalidBigDecimalException.class, cmd2::parseAmount);
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void testParseAmount_negativeValue_shouldThrowInvalidNumberException () {
+    public void testParseAmount_negativeValue_shouldThrowInvalidBigDecimalException () {
         try {
             ShowRateCommand cmd1 = new ShowRateCommand("show-rate THB SGD -0.001");
             ShowRateCommand cmd2 = new ShowRateCommand("show-rate THB SGD -1000000");
-            assertThrows(InvalidNumberException.class, cmd1::parseAmount);
-            assertThrows(InvalidNumberException.class, cmd2::parseAmount);
+            assertThrows(InvalidBigDecimalException.class, cmd1::parseAmount);
+            assertThrows(InvalidBigDecimalException.class, cmd2::parseAmount);
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void testParseAmount_largeValue_shouldThrowInvalidNumberException () {
+    public void testParseAmount_largeValue_shouldThrowInvalidBigDecimalException () {
         try {
             ShowRateCommand cmd = new ShowRateCommand("show-rate THB SGD 10000000000000000");
-            assertThrows(InvalidNumberException.class, cmd::parseAmount);
+            assertThrows(InvalidBigDecimalException.class, cmd::parseAmount);
         } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void testParseAmount_smallValue_shouldThrowInvalidNumberException () {
+    public void testParseAmount_smallValue_shouldThrowInvalidBigDecimalException () {
         try {
             ShowRateCommand cmd = new ShowRateCommand("show-rate THB SGD 0.000001");
-            assertThrows(InvalidNumberException.class, cmd::parseAmount);
+            assertThrows(InvalidBigDecimalException.class, cmd::parseAmount);
         } catch (Exception e) {
             fail();
         }

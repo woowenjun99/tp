@@ -17,7 +17,7 @@ import java.math.BigDecimal;
 public class ExchangeCommandTest {
 
     @Test
-    public void testParseAmount_nonNumericInput_shouldThrowInvalidNumberException () {
+    public void testParseAmount_nonNumericInput_shouldThrowInvalidBigDecimalException () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD xyz");
             assertThrows(InvalidBigDecimalException.class, cmd::parseAmount);
@@ -27,7 +27,7 @@ public class ExchangeCommandTest {
     }
 
     @Test
-    public void testParseAmount_negativeInput_shouldThrowInvalidNumberException () {
+    public void testParseAmount_negativeInput_shouldThrowInvalidBigDecimalException () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD -1.0");
             assertThrows(InvalidBigDecimalException.class, cmd::parseAmount);

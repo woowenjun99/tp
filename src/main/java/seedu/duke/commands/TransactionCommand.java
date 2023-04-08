@@ -32,7 +32,6 @@ public class TransactionCommand extends Command {
     @Override
     public void execute (Ui ui, AccountList accounts) {
         String[] args = input.split(" ");
-        String transactionsString;
         try {
             if (args.length == 1) {
                 // Print all transactions

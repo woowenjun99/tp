@@ -11,11 +11,13 @@ import seedu.duke.exceptions.AmountTooPreciseException;
 import seedu.duke.exceptions.InvalidUpdateBalanceActionException;
 import seedu.duke.exceptions.InvalidWithdrawCommandException;
 import seedu.duke.exceptions.DescriptionTooLongException;
+import seedu.duke.exceptions.InvalidBigDecimalException;
 import seedu.duke.exceptions.NoAccountException;
 import seedu.duke.exceptions.NotEnoughInAccountException;
 import seedu.duke.exceptions.TooLargeAmountException;
 
 import seedu.duke.ui.Ui;
+import seedu.duke.validator.Validator;
 
 import java.math.BigDecimal;
 
@@ -41,7 +43,7 @@ public class WithdrawCommand extends Command {
     }
 
     private void processCommand () throws InvalidWithdrawCommandException, DescriptionTooLongException,
-            InvalidWithdrawAmountException, AmountTooPreciseException {
+            InvalidWithdrawAmountException, AmountTooPreciseException, InvalidBigDecimalException {
 
 
         String[] words = super.input.split(" ", 4);
@@ -52,14 +54,9 @@ public class WithdrawCommand extends Command {
         }
 
         currency = getCurrency(words[1]);
-        amount = new BigDecimal(words[2]);
-        if (amount.compareTo(BigDecimal.valueOf(0.01)) < 0) {
-            throw new InvalidWithdrawAmountException();
-        }
+        Validator validator = new Validator();
+        amount = validator.validateAmount(words[2]);
 
-        if (getNumberOfDecimalPlaces(amount) > 2) {
-            throw new AmountTooPreciseException();
-        }
         boolean containDescription = words.length == 4;
         if (containDescription) {
             if (words[3].trim().length() > 100) {
@@ -94,6 +91,8 @@ public class WithdrawCommand extends Command {
             transactions.addTransaction(this.currency, description, false,
                     this.amount, BigDecimal.valueOf(account.getBalance()));
 
+        } catch (InvalidBigDecimalException e) {
+            ui.printMessage(e.getDescription());
         } catch (InvalidWithdrawAmountException e) {
             ui.printMessage(ErrorMessage.INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW);
         } catch (AmountTooPreciseException e) {

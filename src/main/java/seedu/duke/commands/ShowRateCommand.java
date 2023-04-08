@@ -17,8 +17,6 @@ import java.math.BigDecimal;
 public class ShowRateCommand extends Command {
     private static final float MIN_VALUE = (float) 0.01;
     private static final float  MAX_VALUE = 1000000000; // 1 bn
-    private Currency from;
-    private Currency to;
 
     public ShowRateCommand (String input) {
         super(false, input);

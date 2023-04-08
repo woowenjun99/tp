@@ -60,7 +60,20 @@ It will also help them convert to foreign currencies so they can see how much th
     - Account balances and transactions are stored in the "data" folder in the same directory as the JAR file.
     - Users are not meant to edit the data files directly, doing so may cause the application to behave in an
       unexpected manner.
-    - If any of the files become corrupted, MoneyMoover will create a new empty file to replace it.
+    - If any of the files become corrupted, MoneyMoover will attempt to create a new empty file to replace it.
+- **Currency Related**
+    - All currency related parameters are case-insensitive.
+    - All currency related parameters are limited to the following currencies:
+        - SGD, USD, EUR, GBP, THB, MYR, IDR, VND, CNY, JPY, KRW
+    - All currency related parameters are limited to 3 characters only.
+    - All currency related parameters are limited to alphabetic characters only.
+- **Date Related**
+    - All date related parameters are limited to the following format:
+        - DD is interpreted as the day of the month, from 01 to 31.
+        - MM is interpreted as the month of the year, from 01 to 12.
+        - YYYY is interpreted as the year, from 0000 to 9999.
+    - Padded zeroes are necessary, for example 1-1-2023 is not a valid input, while 01-01-2023 is.
+    - Invalid dates are not allowed, for example 13-2023, 00-2023, 32-01-2000.
 
 ### Viewing help `help`
 

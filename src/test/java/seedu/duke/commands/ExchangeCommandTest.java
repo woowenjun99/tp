@@ -1,6 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.exceptions.InvalidNumberException;
+import seedu.duke.exceptions.InvalidBigDecimalException;
 import seedu.duke.exceptions.InvalidExchangeArgumentException;
 import seedu.duke.Forex;
 import seedu.duke.Currency;
@@ -20,7 +20,7 @@ public class ExchangeCommandTest {
     public void testParseAmount_nonNumericInput_shouldThrowInvalidNumberException () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD xyz");
-            assertThrows(InvalidNumberException.class, cmd::parseAmount);
+            assertThrows(InvalidBigDecimalException.class, cmd::parseAmount);
         } catch (Exception e) {
             fail();
         }
@@ -30,7 +30,7 @@ public class ExchangeCommandTest {
     public void testParseAmount_negativeInput_shouldThrowInvalidNumberException () {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD -1.0");
-            assertThrows(InvalidNumberException.class, cmd::parseAmount);
+            assertThrows(InvalidBigDecimalException.class, cmd::parseAmount);
         } catch (Exception e) {
             fail();
         }

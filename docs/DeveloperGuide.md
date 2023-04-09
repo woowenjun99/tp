@@ -33,8 +33,10 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+1. GSON Library for JSON parsing (https://github.com/google/gson)
+2. Retrofit Library for HTTP requests (https://github.com/square/retrofit
+3. AB-3 Developer Guide (https://se-education.org/addressbook-level3/DeveloperGuide.html)
+4. app.diagrams.net for creating diagrams (https://app.diagrams.net/)
 
 ## Setting up
 
@@ -355,19 +357,35 @@ Command Line Interface (CLI) while still having the features of other money mana
 
 ### User Stories
 
-| Version | As a ... | I want to ...             | So that I can ...                                           |
-|---------|----------|---------------------------|-------------------------------------------------------------|
-| v1.0    | new user | see usage instructions    | refer to them when I forget how to use the application      |
-| v2.0    | user     | find a to-do item by name | locate a to-do without having to go through the entire list |
+| Version | As a ...                   | I want to ...                                                | So that I can ...                                      |
+|---------|----------------------------|--------------------------------------------------------------|--------------------------------------------------------|
+| v1.0    | new user                   | see usage instructions                                       | refer to them when I forget how to use the application |
+| v1.0    | student planning to travel | know the currency exchange rates                             | better plan out my budget                              |
+| v1.0    | user                       | create accounts for different currencies                     |                                                        |
+| v1.0    | user                       | top up my account                                            | have sufficient balance in the app                     |
+| v1.0    | user                       | withdraw money from my accounts                              | I can spend it as cash                                 |
+| v1.0    | user                       | delete accounts I am no longer using                         |                                                        |
+| v1.0    | student planning to travel | quickly exchange my money for local currency                 | spend in different currencies                          |
+| v2.0    | user                       | view my previously saved accounts                            | avoid having to key in the same information every time |
+| v2.0    | user                       | add descriptions to my transactions                          | categorise and track my spending and deposits          |
+| v2.0    | user                       | view my previous transactions in reverse chronological order | view my most recent transactions more easily           |
+| v2.0    | user                       | jump to a specific date                                      | view transactions on that date                         |
+| v2.0    | user                       | view transactions with a specific description                | view how much I spend on specific categories or items  |
 
 ### Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 100 transactions without sluggishness in performance.
+3. A user that is able to type quickly should be able to accomplish most of the tasks faster than using a GUI equivalent
+   with a mouse.
 
 ### Glossary
 
-- _glossary item_ - Definition
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
 
-## Appendix: Instructions for manual testing
+## Appendix: Instructions for updating the API Key
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+- The API Key for retrieving exchange rates is stored in the `src/main/java/com/moneymoover/api/ExchangeRates.java` file
+  as the `APP_ID` property.
+- If you wish to use your own API Key, you will need to go to "https://openexchangerates.org/signup/free" and sign up
+  for a free account, then replace the `APP_ID` in the `ExchangRates.java` file with your new key.

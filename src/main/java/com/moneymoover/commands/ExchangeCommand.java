@@ -15,6 +15,7 @@ import com.moneymoover.exceptions.NoAccountException;
 import com.moneymoover.exceptions.NotEnoughInAccountException;
 import com.moneymoover.exceptions.TooLargeAmountException;
 import com.moneymoover.exceptions.InvalidBigDecimalException;
+import com.moneymoover.exceptions.ExchangeSameCurrencyException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -81,6 +82,8 @@ public class ExchangeCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+        } catch (ExchangeSameCurrencyException e) {
+            ui.printMessage(ErrorMessage.EXCHANGE_SAME_CURRENCY);
         }
     }
 
@@ -90,14 +93,18 @@ public class ExchangeCommand extends Command {
      * @return Forex object with intial and target currencies
      * @throws IllegalArgumentException         if the currencies are not supported
      * @throws InvalidExchangeArgumentException if arguments are incorrect
+     * @throws ExchangeSameCurrencyException    if the currencies are the same
      */
-    public Forex formatInput () throws InvalidExchangeArgumentException {
+    public Forex formatInput () throws InvalidExchangeArgumentException, ExchangeSameCurrencyException {
         String[] splitInput = input.trim().split(" ");
         if (splitInput.length != 4) {
             throw new InvalidExchangeArgumentException();
         }
         Currency initial = Currency.valueOf(splitInput[1].toUpperCase());
         Currency target = Currency.valueOf(splitInput[2].toUpperCase());
+        if (initial.equals(target)) {
+            throw new ExchangeSameCurrencyException();
+        }
         return new Forex(initial, target);
     }
 
@@ -135,6 +142,8 @@ public class ExchangeCommand extends Command {
             }
         } catch (InvalidExchangeArgumentException e) {
             ui.printMessage(ErrorMessage.INVALID_EXCHANGE_ARGUMENT);
+        } catch (ExchangeSameCurrencyException e) {
+            ui.printMessage(ErrorMessage.EXCHANGE_SAME_CURRENCY);
         }
     }
 }

@@ -118,6 +118,7 @@ public class ExchangeCommand extends Command {
     public BigDecimal parseAmount () throws InvalidBigDecimalException {
         Validator validator = new Validator();
         BigDecimal amount = validator.validateAmount(input.trim().split(" ")[3]);
+        assert amount != null;
         return amount;
     }
 

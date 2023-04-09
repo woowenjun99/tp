@@ -44,6 +44,7 @@ public class ExchangeRates {
                 if (response.isSuccessful()) {
                     ExchangeRatesResponse rates = response.body();
                     exchangeRatesMap = rates.getExchangeRates();
+                    assert exchangeRatesMap != null;
                     saveMap(exchangeRatesMap);
                     ui.printMessage(Message.API_INITIALIZED.getMessage());
                 } else {

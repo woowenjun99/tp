@@ -46,15 +46,15 @@ public class BalanceCommand extends Command {
 
     private ArrayList<Account> getAccounts (String currencyString, AccountList accounts)
             throws NoAccountException {
-        ArrayList<Account> accountArrayList;
         if (currencyString.equals(ALL)) {
             // Return all accounts
-            accountArrayList = accounts.getAllAccounts();
-        } else {
-            Currency currency = convertStringToEnum(currencyString);
-            accountArrayList = new ArrayList<>();
-            accountArrayList.add(accounts.getAccount(currency));
+            return accounts.getAllAccounts();
         }
+
+        ArrayList<Account> accountArrayList;
+        Currency currency = convertStringToEnum(currencyString);
+        accountArrayList = new ArrayList<>();
+        accountArrayList.add(accounts.getAccount(currency));
         return accountArrayList;
     }
 
@@ -71,6 +71,9 @@ public class BalanceCommand extends Command {
 
     /**
      * Gets the currencies from the AccountList and displays it onto the screen.
+     *
+     * @param ui       The ui instance
+     * @param accounts The global accounts database
      */
     @Override
     public void execute (Ui ui, AccountList accounts) {

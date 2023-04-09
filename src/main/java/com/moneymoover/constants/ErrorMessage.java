@@ -17,7 +17,9 @@ public interface ErrorMessage {
     String INVALID_NUMERICAL_AMOUNT = "Please provide a float amount of up to 2 decimal places to update.";
     String INVALID_CREATE_ACCOUNT_COMMAND = "create-account must be used with the following format: " +
             "create-account CURRENCY";
-    String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
+    String MORE_THAN_ONE_CURRENCY_PROVIDED = "This is an invalid balance command format. \n" + 
+            "Please check that you have correctly provided the balance and currency in the following format:\n" +
+            "\t balance [CURRENCY]";
     String NO_SUCH_ACCOUNT = "You do not have an account for these currencies.";
 
     String NO_AMOUNT_PROVIDED = "Please provide an amount to be added.";
@@ -74,6 +76,5 @@ public interface ErrorMessage {
             "Account balance greater than 1 billion found in file, defaulting to 1 billion";
 
     String UNKNOWN_COMMAND = "Sorry, I don't understand that command. Type 'help' to see the list of commands.";
-
     String EXCEED_UPPER_BOUND = "Please limit your value to $10,000,000";
 }

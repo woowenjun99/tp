@@ -59,6 +59,10 @@ public class BalanceCommand extends Command {
     }
 
     private void printCurrencies (ArrayList<Account> accountArrayList, Ui ui) {
+        if (accountArrayList.isEmpty()) {
+            ui.printMessage(Message.NO_ACCOUNT_TO_SHOW.getMessage());
+            return;
+        }
         ui.printMessage(Message.BALANCE.getMessage());
         for (Account account : accountArrayList) {
             ui.printMessage(account.toString());

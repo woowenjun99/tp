@@ -50,12 +50,30 @@ It will also help them convert to foreign currencies so they can see how much th
     - You are not allowed to store more than $10,000,000 of any currency in your account.
     - User are only allowed to input **pure numerical character**.
         - Example of invalid number format : `1,000`, `5_000_000`.
-- **Transactions related**
+- **Transactions Related**
     - `add`, `withdraw` and `exchange` action will be saved in transaction list automatically
         - `DESCRIPTION` of `add` and `withdraw` command accepts all sort **non-space** char/string.
         - `DESCRIPTION` is limited to 100 characters only.
         - transaction description of `exchange` command is fixed by default as the relative exchange info.
             - Example: `exchange 10 SGD to 50 THB`
+- **Storage Related**
+    - Account balances and transactions are stored in the "data" folder in the same directory as the JAR file.
+    - Users are not meant to edit the data files directly, doing so may cause the application to behave in an
+      unexpected manner.
+    - If any of the files become corrupted, MoneyMoover will attempt to create a new empty file to replace it.
+- **Currency Related**
+    - All currency related parameters are case-insensitive.
+    - All currency related parameters are limited to the following currencies:
+        - SGD, USD, EUR, GBP, THB, MYR, IDR, VND, CNY, JPY, KRW
+    - All currency related parameters are limited to 3 characters only.
+    - All currency related parameters are limited to alphabetic characters only.
+- **Date Related**
+    - All date related parameters are limited to the following format:
+        - DD is interpreted as the day of the month, from 01 to 31.
+        - MM is interpreted as the month of the year, from 01 to 12.
+        - YYYY is interpreted as the year, from 0000 to 9999.
+    - Padded zeroes are necessary, for example 1-1-2023 is not a valid input, while 01-01-2023 is.
+    - Invalid dates are not allowed, for example 13-2023, 00-2023, 32-01-2000.
 
 ### Viewing help `help`
 
@@ -66,20 +84,22 @@ Examples:
 ```text
 >> help
 >> Here are the commands available:
-            help - show list of commands"
+            help - show list of commands
             add CURRENCY AMOUNT [DESCRIPTION] - adds that amount of money into that currency account
             balance [CURRENCY] - view balances of accounts
+                    balance CURRENCY - View the balance of the specified currency in the account
+                    balance - displays all currencies
             exchange CURRENCY1 CURRENCY2 AMOUNT - transfer funds from a currency1 account
-                                         into its equivalent value in currency2 account
+                                                  into its equivalent value in currency2 account
             withdraw CURRENCY AMOUNT [DESCRIPTION] - withdraws that amount of money from that currency account
-            show-rate CURRENCY1 CURRENCY2 [AMOUNT] - shows the value of each dollar in currency1 in terms of currency2
-            trans [FLAG] [SEARCH_PARAM]  - Appropriate flags are
-                                              i) desc : search by the description as search parameter
-                                             ii) c : search by currency as search parameter
-                                            iii) d : search by date as search parameter in the form dd-MM-yyyy
-                                             iv) m : search by month as search parameter in the form MM-yyyy
+            show-rate CURRENCY1 CURRENCY2 [AMOUNT] - shows the value of each dollar in CURRENCY1 in terms of CURRENCY2
             delete-account CURRENCY - deletes the account of that currency
             create-account CURRENCY - creates an account of that currency
+            trans [FLAG] [SEARCH_PARAM]  - Appropriate flags are
+                    i) desc : search by the description as search parameter
+                    ii) c : search by currency as search parameter
+                    iii) d : search by date as search parameter in the form DD-MM-YYYY
+                    iv) m : search by month as search parameter in the form MM-YYYY
             exit - exits the program
             Available Currencies: SGD, USD, EUR, GBP, THB, MYR, IDR, VND, CNY, JPY, KRW
 

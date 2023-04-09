@@ -51,7 +51,7 @@ If you plan to use Intellij IDEA (highly recommended):
    IDEA.<br>
    :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
 3. **Verify the setup**:
-    1. Run the `seedu.duke.Duke` and try a few commands.
+    1. Run the `com.moneymoover.MoneyMoover` and try a few commands.
     2. Run the tests using `./gradlew check` to ensure they all pass.
 
 ---
@@ -209,14 +209,17 @@ Only currency account which 0 balance can be deleted.
 Given below is an example of the usage of this feature and the mechanism at each step
 
 Step 1: The user launches the application for the first time and `AccountList` is created with no `Account`
+
 ![AccountListObjectDiagram1](images/AccountListObjectDiagram1.png)
 
 Step 2: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is a valid string representing one
 of the elements of the `Currency` enum
+
 ![AccountListObjectDiagram1](images/AccountListObjectDiagram2.png)
 
 Step 3: The user passes in the command `create-account <CURRENCY>`, where `CURRENCY` is also valid but different to that
 in step 1.
+
 ![AccountListObjectDiagram1](images/AccountListObjectDiagram3.png)
 
 Step 4: The user passes the command `delete-account CURRENCY`, for example `delete-account SGD`.
@@ -224,9 +227,12 @@ Step 4: The user passes the command `delete-account CURRENCY`, for example `dele
 ![AccountListObjectDiagram4](images/AccountListObjectDiagram4.png)
 
 The following sequence diagram shows how the Create Account operation works
+
 ![AccountListObjectDiagram1](images/CreateAccountSeqDiagram.png)
 
-### Delete-account feature
+The following sequence diagram shows how the Delete Account operation works
+
+![](images/DeleteAccountCommandSeqDiagram.png)
 
 ### Add/Withdraw money feature
 
@@ -236,14 +242,17 @@ and `WithdrawCommand`
 update the balance of respective currency account accordingly.
 
 Step 1. The newly created `SGD` account has an initial balance of 0
+
 ![AddWithdrawCommandObjectDiagram1](images/AddWithdrawCommandObjectDiagram1.png)
 
 Step 2. The user passes command `add CURRENCY AMOUNT` (eg. `add SGD 100`), where `CURRENCY` must be one of the available
 currency and `AMOUNT` must be positive numbers.
+
 ![AddWithdrawCommandObjectDiagram2](images/AddWithdrawCommandObjectDiagram2.png)
 
 Step 3. The user passes command `withdraw` (eg. `withdraw SGD 25`), where `AMOUNT` must be smaller than the currency
 account balance.
+
 ![AddWithdrawCommandObjectDiagram3](images/AddWithdrawCommandObjectDiagram3.png)
 
 The following sequence diagram shows how the add money operation works.
@@ -281,6 +290,7 @@ The show-rate command executes as follows
 - The Ui will print the unit rate both ways if no amount was provided
 
 The following sequence diagram shows how the Show Rate command works
+
 ![ShowRateSeqDiagram](images/ShowRateSeqDiagram.png)
 
 ### Money exchange feature
@@ -310,6 +320,7 @@ The exchange command executes as follows:
 - The new balances are printed
 
 The following sequence diagram shows how the Exchange command works
+
 ![ExchangeSeqDiagram](images/ExchangeSeqDiagram.png)
 
 ### Show transactions feature
@@ -324,6 +335,7 @@ The Transaction command executes as follows:
 - The relevant transactions are printed
 
 The following sequence diagram shows how the Transaction command works
+
 ![TransactionSeqDiagram](images/ShowTransactionsSeqDiagram.png)
 
 ## Appendix: Requirements

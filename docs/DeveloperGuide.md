@@ -388,4 +388,4 @@ Command Line Interface (CLI) while still having the features of other money mana
 - The API Key for retrieving exchange rates is stored in the `src/main/java/com/moneymoover/api/ExchangeRates.java` file
   as the `APP_ID` property.
 - If you wish to use your own API Key, you will need to go to "https://openexchangerates.org/signup/free" and sign up
-  for a free account, then replace the `APP_ID` in the `ExchangRates.java` file with your new key.
+  for a free account, then replace the `APP_ID` in the `ExchangeRates.java` file with your new key.

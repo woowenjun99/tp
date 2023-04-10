@@ -89,7 +89,7 @@ Examples:
            balance CURRENCY - View the balance of the specified currency in the account
            balance - displays all currencies
        exchange CURRENCY1 CURRENCY2 AMOUNT - transfer funds from a currency1 account
-                                           into its equivalent value in currency2 account
+                                             into its equivalent value in currency2 account
        withdraw CURRENCY AMOUNT [DESCRIPTION] - withdraws that amount of money from that currency account
        show-rate CURRENCY1 CURRENCY2 [AMOUNT] - shows the value of each dollar in CURRENCY1 in terms of CURRENCY2
        delete-account CURRENCY - deletes the account of that currency

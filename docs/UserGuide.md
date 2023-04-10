@@ -173,6 +173,8 @@ Format: `add CURRENCY AMOUNT [DESCRIPTION]`
 - `CURRENCY`: Compulsory argument. A registered currency.
 - `AMOUNT` : Compulsory argument. The amount to be deposited.
 - `[DESCRIPTION]`: Optional argument. Is set to `NIL` if not provided.
+- `[DESCRIPTION]` must consist of at least one non-space character.
+- Multiple consecutive spaces in `[DESCRIPTION]` will be replaced with a single space.
 - An error will be thrown if either the `CURRENCY` or `AMOUNT` is not provided, the `CURRENCY` is not one of the
   registered currencies, the `AMOUNT` is not numeric or the account with the `CURRENCY` does not exist.
 
@@ -221,6 +223,8 @@ Format: `withdraw CURRENCY AMOUNT [DESCRIPTION]`
 - `CURRENCY`: Compulsory argument. A registered currency.
 - `AMOUNT` : Compulsory argument. The amount to be deposited.
 - `[DESCRIPTION]`: Optional argument. Is set to `NIL` if not provided.
+- `[DESCRIPTION]` must consist of at least one non-space character.
+- Multiple consecutive spaces in `[DESCRIPTION]` will be replaced with a single space.
 
 Example:
 

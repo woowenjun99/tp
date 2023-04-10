@@ -46,12 +46,11 @@ First, **fork** this repo, and **clone** the fork into your computer.
 If you plan to use Intellij IDEA (highly recommended):
 
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the
-   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 11
-   **.
+   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 11**.
 2. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle
    project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into
-   IDEA.<br>
-   :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
+   IDEA.  
+   **Note:** Importing a Gradle project is slightly different from importing a normal Java project.
 3. **Verify the setup**:
     1. Run the `com.moneymoover.MoneyMoover` and try a few commands.
     2. Run the tests using `./gradlew check` to ensure they all pass.
@@ -72,9 +71,6 @@ If you plan to use Intellij IDEA (highly recommended):
 3. **Learn the design**
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading
    about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).
-
-When you are ready to start coding, we recommend that you get some sense of the overall design by reading
-about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).
 
 ## Design
 
@@ -387,5 +383,6 @@ Command Line Interface (CLI) while still having the features of other money mana
 
 - The API Key for retrieving exchange rates is stored in the `src/main/java/com/moneymoover/api/ExchangeRates.java` file
   as the `APP_ID` property.
-- If you wish to use your own API Key, you will need to go to "https://openexchangerates.org/signup/free" and sign up
+- If you wish to use your own API Key, you will need to go
+  to [https://openexchangerates.org/signup/free](https://openexchangerates.org/signup/free) and sign up
   for a free account, then replace the `APP_ID` in the `ExchangeRates.java` file with your new key.

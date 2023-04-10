@@ -156,12 +156,12 @@ Example of usage:
 ```text
 >>> balance
 >>> Here are the balances that you have requested:
->>> USD: 2.00
->>> JPY: 100.00
+    USD: 2.00
+    JPY: 100.00
 
 >>> balance USD
 >>> Here are the balances that you have requested:
->>> USD: 2.00
+    USD: 2.00
 ```
 
 ### Deposit money into existing account `add`
@@ -241,7 +241,8 @@ Format: `show-rate CURRENCY1 CURRENCY2 [AMOUNT]`
 - `CURRENCY1`: Compulsory argument. A registered currency, the initial `CURRENCY`.
 - `CURRENCY2`: Compulsory argument. A registered currency, the target `CURRENCY`.
 - `[AMOUNT]`: Optional argument. The amount to show-rate for. Is set to 1 if not provided.
-- The `AMOUNT` must be within the range of 0.01 and 10,000,000 for the starting currency to avoid exchange inaccuracies.
+- The `[AMOUNT]` must be within the range of 0.01 and 10,000,000 for the initial currency to avoid exchange
+  inaccuracies.
 - The command will show the value of amount exchanged both ways.
 - The command must be given supported currencies, and numerical non-negative values.
 
@@ -280,7 +281,7 @@ Format `trans [FLAG] [SEARCH_PARAMETER]`:
 - All transactions are printed in reverse-chronological order
 - `[FLAG]` and `[SEARCH_PARAMETER]` are optional, neglecting them will print all transactions
 - If `[FLAG]` is provided, `[SEARCH_PARAMETER]` must also be provided.
-- User are only allowed to input **one** flag at a time.
+- Users are only allowed to input **one** flag at a time.
 - An error is thrown if the flag is invalid or search parameter is invalid
 
 Examples of usage:

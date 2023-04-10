@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-04-10T13:20:11.237Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="wnmn-GxARmu8am9rtwoe" version="21.1.5" type="device">
+<mxfile host="app.diagrams.net" modified="2023-04-10T13:32:00.918Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="9H1DxxQ0S-IubvCR3oss" version="21.1.5" type="device">
   <diagram name="Page-1" id="vAl6ECt_cNf6O5D6-D3h">
-    <mxGraphModel dx="954" dy="450" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="954" dy="507" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -13,7 +13,7 @@
         <mxCell id="h44oGfwBhWr0qdJ2aVvA-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" parent="h44oGfwBhWr0qdJ2aVvA-1" vertex="1">
           <mxGeometry y="52" width="320" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="h44oGfwBhWr0qdJ2aVvA-4" value="+ toString(): String&lt;br&gt;+ convert(amount: BigDecimal): BigDecimal&lt;br&gt;+ getInitial(): Currency&lt;br&gt;+ get Target(): Currency&lt;br&gt;+ Forex(from: Currency, to: Currency)&lt;br&gt;&lt;u&gt;+ initializeRates(): void&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="h44oGfwBhWr0qdJ2aVvA-1" vertex="1">
+        <mxCell id="h44oGfwBhWr0qdJ2aVvA-4" value="+ toString(): String&lt;br&gt;+ convert(amount: BigDecimal): BigDecimal&lt;br&gt;+ getInitial(): Currency&lt;br&gt;+ getTarget(): Currency&lt;br&gt;+ Forex(from: Currency, to: Currency)&lt;br&gt;&lt;u&gt;+ initializeRates()&lt;/u&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="h44oGfwBhWr0qdJ2aVvA-1" vertex="1">
           <mxGeometry y="60" width="320" height="100" as="geometry" />
         </mxCell>
         <mxCell id="h44oGfwBhWr0qdJ2aVvA-5" value="&amp;lt;&amp;lt; enumeration &amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Currency&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">

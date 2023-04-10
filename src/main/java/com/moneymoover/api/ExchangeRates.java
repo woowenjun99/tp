@@ -3,6 +3,8 @@ package com.moneymoover.api;
 import java.util.Map;
 import java.util.HashMap;
 import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.moneymoover.Currency;
 import com.moneymoover.constants.ErrorMessage;
@@ -17,6 +19,7 @@ public class ExchangeRates {
 
     private static final String APP_ID = "1349651eb52b4f85a5ced93d579652ea";
     private static final String BASE_CURRENCY = "USD";
+    private static final Logger logger = Logger.getLogger("logger");
 
     private static Map<String, Double> exchangeRatesMap;
     private static HashMap<Currency, BigDecimal> savedMap;
@@ -47,9 +50,11 @@ public class ExchangeRates {
                     assert exchangeRatesMap != null;
                     saveMap(exchangeRatesMap);
                     ui.printMessage(Message.API_INITIALIZED.getMessage());
+                    logger.log(Level.FINE, "Live exchange rates initialized");
                 } else {
                     ui.printMessage(ErrorMessage.RESPONSE_CODE_OUT_OF_BOUNDS);
                     populateRates(ui);
+                    logger.log(Level.SEVERE, "API call unsuccessful, initializing saved rates");
                 }
             }
 
@@ -57,6 +62,7 @@ public class ExchangeRates {
             public void onFailure (Call<ExchangeRatesResponse> call, Throwable t) {
                 ui.printMessage(ErrorMessage.NETWORK_OR_UNEXPECTED_ERROR);
                 populateRates(ui);
+                logger.log(Level.SEVERE, "API call unsuccessful, initializing saved rates");
             }
         });
     }

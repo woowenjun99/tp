@@ -118,7 +118,7 @@ inputs. We will pass in the instance of UI into the `execute` method of the `Com
 
 - Printing text such as new line, spacer, farewell message, greeting message.
 
-- Empowers the users to print customised message in `printf` and `printMessage` method.
+- Empowers the developers to print customised message in `printf` and `printMessage` method.
 
 - Reads in the user input as `String`.
 

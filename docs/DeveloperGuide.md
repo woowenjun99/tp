@@ -389,6 +389,8 @@ and are not an exhaustive list of test cases.
 1. Download the jar file and copy it into an empty folder
 2. Go to that directory in the command line and run `java -jar FILENAME.jar`.
 3. The app should automatically create a data folder and the necessary files for the app to run.
+4. An internet connection is required to retrieve live exchange rates. If there is no internet,
+   fallback values will be used instead.
 
 ### Help Command
 

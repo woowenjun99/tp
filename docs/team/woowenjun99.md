@@ -40,6 +40,28 @@ The `validateAmount()` method takes in a string and determines if the amount con
 
 This class is important as it helps to prevent many errors, such as reading in more than 2 decimal places which should not be possible or using a very huge number that might cause overflow, of which are commonly raised as issues during the PED.
 
+### Contribution to team based task
+
+1. I set up the GitHub organisation for my team.
+2. I helped to maintain the GitHub issues for our team.
+3. I helped to install GSON to be used as a storage for our project.
+
+### Review/mentoring contributions
+
+#### Pull Request Reviewed
+
+[PR 27](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/27), [PR 28](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/28), [PR 37](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/37), [PR 38](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/38), [PR 50](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/50), [PR 83](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/83), [PR 183](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/183)
+
+### Contributions beyond the project team
+
+#### Suggestions for other teams
+
+[Meal360](https://github.com/nus-cs2113-AY2223S2/tp/pull/44), [Clanki](https://github.com/nus-cs2113-AY2223S2/tp/pull/36), [MyLedger](https://github.com/woowenjun99/ped)
+
+#### Forum Questions Answered
+
+[Issue 16](https://github.com/nus-cs2113-AY2223S2/forum/issues/16#issuecomment-1407394745), [Issue 21](https://github.com/nus-cs2113-AY2223S2/forum/issues/21#issuecomment-1413058531), [Issue 34](https://github.com/nus-cs2113-AY2223S2/forum/issues/34#issuecomment-1463500291), [Issue 36](https://github.com/nus-cs2113-AY2223S2/forum/issues/36#issuecomment-1465348359)
+
 ### Contributions to the UG
 
 In terms of the UG, I am responsible for writing the `AddCommand` and `BalanceCommand` aspect of the UG.
@@ -53,36 +75,3 @@ I contributed to the DG by adding the UI Class and added in the UML diagram.
 I have also contributed to the DG by adding in the documentation for the BalanceCommand, and coming up with a sequence diagram for it.
 
 ![Images](../images/BalanceSeqDiagram.png)
-
-### Contribution to team based task
-
-1. I set up the GitHub organisation for my team.
-2. I helped to maintain the GitHub issues for our team.
-3. I helped to install GSON to be used as a storage for our project.
-
-### Review/mentoring contributions
-
-#### Pull Request Reviewed
-
-1. [PR 27](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/27)
-2. [PR 28](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/28)
-3. [PR 37](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/37)
-4. [PR 38](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/38)
-5. [PR 50](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/50)
-6. [PR 83](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/83)
-7. [PR 183](https://github.com/AY2223S2-CS2113-T13-1/tp/pull/183)
-
-### Contributions beyond the project team
-
-#### Suggestions for other teams
-
-[Meal360](https://github.com/nus-cs2113-AY2223S2/tp/pull/44)
-[Clanki](https://github.com/nus-cs2113-AY2223S2/tp/pull/36)
-[MyLedger](https://github.com/woowenjun99/ped)
-
-#### Forum Questions Answered
-
-1. [Issue 16](https://github.com/nus-cs2113-AY2223S2/forum/issues/16#issuecomment-1407394745)
-2. [Issue 21](https://github.com/nus-cs2113-AY2223S2/forum/issues/21#issuecomment-1413058531)
-3. [Issue 34](https://github.com/nus-cs2113-AY2223S2/forum/issues/34#issuecomment-1463500291)
-4. [Issue 36](https://github.com/nus-cs2113-AY2223S2/forum/issues/36#issuecomment-1465348359)

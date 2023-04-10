@@ -2,41 +2,52 @@
 
 <!-- TOC -->
 
-- [Developer Guide](#developer-guide)
-    - [Acknowledgements](#acknowledgements)
-    - [Setting up](#setting-up)
-        - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
-        - [Before writing code](#before-writing-code)
-    - [Design](#design)
-        - [Architecture](#architecture)
-        - [General Sequence](#general-sequence)
-        - [UI component](#ui-component)
-        - [Parser component](#parser-component)
-        - [Accounts Component](#accounts-component)
-        - [Forex component](#forex-component)
-    - [Implementation](#implementation)
-        - [Create/Delete account feature](#createdelete-account-feature)
-        - [Delete-account feature](#delete-account-feature)
-        - [Add/Withdraw money feature](#addwithdraw-money-feature)
-        - [View balance feature](#view-balance-feature)
-        - [Show-rate feature](#show-rate-feature)
-        - [Money exchange feature](#money-exchange-feature)
-    - [Appendix: Requirements](#appendix--requirements)
-        - [Product scope](#product-scope)
-        - [Target user profile](#target-user-profile)
-        - [Value proposition](#value-proposition)
-        - [User Stories](#user-stories)
-        - [Non-Functional Requirements](#non-functional-requirements)
-        - [Glossary](#glossary)
-    - [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
-  <!-- TOC -->
+* [Developer Guide](#developer-guide)
+    * [Acknowledgements](#acknowledgements)
+    * [Setting up](#setting-up)
+        * [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+        * [Before writing code](#before-writing-code)
+    * [Design](#design)
+        * [Architecture](#architecture)
+        * [General Sequence](#general-sequence)
+        * [UI component](#ui-component)
+        * [Parser component](#parser-component)
+        * [Accounts Component](#accounts-component)
+        * [Forex component](#forex-component)
+        * [Open Exchange Rates API](#open-exchange-rates-api)
+        * [Transactions Component](#transactions-component)
+    * [Implementation](#implementation)
+        * [Create/Delete account feature](#createdelete-account-feature)
+        * [Add/Withdraw money feature](#addwithdraw-money-feature)
+        * [View balance feature](#view-balance-feature)
+        * [Show-rate feature](#show-rate-feature)
+        * [Money exchange feature](#money-exchange-feature)
+        * [Show transactions feature](#show-transactions-feature)
+    * [Appendix&#58; Requirements](#appendix58-requirements)
+        * [Product scope](#product-scope)
+            * [Target user profile](#target-user-profile)
+            * [Value proposition](#value-proposition)
+        * [User Stories](#user-stories)
+        * [Non-Functional Requirements](#non-functional-requirements)
+        * [Glossary](#glossary)
+    * [Appendix&#58; Instructions for Manual Testing](#appendix58-instructions-for-manual-testing)
+        * [Initial Launch](#initial-launch)
+        * [Help Command](#help-command)
+        * [Creating an account](#creating-an-account)
+        * [Creating transactions](#creating-transactions)
+        * [Viewing exchange rates](#viewing-exchange-rates)
+        * [Exchanging money between different currencies](#exchanging-money-between-different-currencies)
+        * [Deleting accounts](#deleting-accounts)
+    * [Appendix: Instructions for updating the API Key](#appendix--instructions-for-updating-the-api-key)
+
+<!-- TOC -->
 
 ## Acknowledgements
 
-1. GSON Library for JSON parsing (https://github.com/google/gson)
-2. Retrofit Library for HTTP requests (https://github.com/square/retrofit
-3. AB-3 Developer Guide (https://se-education.org/addressbook-level3/DeveloperGuide.html)
-4. app.diagrams.net for creating diagrams (https://app.diagrams.net/)
+1. [GSON Library for JSON parsing](https://github.com/google/gson)
+2. [Retrofit Library for HTTP requests](https://github.com/square/retrofit)
+3. [AB-3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+4. [app.diagrams.net for creating diagrams](https://app.diagrams.net/)
 
 ## Setting up
 
@@ -107,7 +118,7 @@ inputs. We will pass in the instance of UI into the `execute` method of the `Com
 
 - Printing text such as new line, spacer, farewell message, greeting message.
 
-- Empowers the users to print customised message in `printf` and `printMessage` method.
+- Empowers the developers to print customised message in `printf` and `printMessage` method.
 
 - Reads in the user input as `String`.
 
@@ -253,11 +264,11 @@ account balance.
 
 ![AddWithdrawCommandObjectDiagram3](images/AddWithdrawCommandObjectDiagram3.png)
 
-The following sequence diagram shows how the add money operation works.
+The following sequence diagram shows how the **add money** operation works.
 
 ![](images/AddCommandSeqDiagram.png)
 
-The following sequence diagram shows how the money withdrawal operation works.
+The following sequence diagram shows how the **money withdrawal** operation works.
 
 ![](images/WithdrawCommandSeqDiagram.png)
 
@@ -287,7 +298,7 @@ The show-rate command executes as follows
 - The Ui prints the exchanged amount if an amount was provided by the user for both rates
 - The Ui will print the unit rate both ways if no amount was provided
 
-The following sequence diagram shows how the Show Rate command works
+The following sequence diagram shows how the **Show Rate command** works
 
 ![ShowRateSeqDiagram](images/ShowRateSeqDiagram.png)
 
@@ -317,7 +328,7 @@ The exchange command executes as follows:
 - The value of the target `Account` is updated
 - The new balances are printed
 
-The following sequence diagram shows how the Exchange command works
+The following sequence diagram shows how the **Exchange command** works
 
 ![ExchangeSeqDiagram](images/ExchangeSeqDiagram.png)
 
@@ -332,11 +343,11 @@ The Transaction command executes as follows:
 - Interaction with the `TransactionManager` to retrieve relevant accounts
 - The relevant transactions are printed
 
-The following sequence diagram shows how the Transaction command works
+The following sequence diagram shows how the **Transaction command** works
 
 ![TransactionSeqDiagram](images/ShowTransactionsSeqDiagram.png)
 
-## Appendix: Requirements
+## Appendix&#58; Requirements
 
 ### Product scope
 
@@ -379,7 +390,7 @@ Command Line Interface (CLI) while still having the features of other money mana
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
-## Appendix: Instructions for Manual Testing
+## Appendix&#58; Instructions for Manual Testing
 
 Given below are some instructions for testing the app manually. Note that they are meant to provide a starting point
 and are not an exhaustive list of test cases.

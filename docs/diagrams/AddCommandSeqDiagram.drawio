@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-04-08T05:36:19.784Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="NRnQDtSPRBqg-qtHtlOn" version="21.1.5" type="device">
+<mxfile host="app.diagrams.net" modified="2023-04-10T13:01:59.339Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="qm5YP-i-G3UPPwyPjp9j" version="21.1.5" type="device">
   <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
-    <mxGraphModel dx="733" dy="413" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
+    <mxGraphModel dx="425" dy="240" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" background="#FFFFFF" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -104,8 +104,8 @@
         <mxCell id="cWejEI39qg-8yP3Bkxt4-37" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="cWejEI39qg-8yP3Bkxt4-36" vertex="1">
           <mxGeometry x="50.5" y="320" width="10" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="cWejEI39qg-8yP3Bkxt4-38" value="updateBalance(changeInBalnce:BigDecimal, &quot;add&quot;:String)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
-          <mxGeometry x="-0.0191" relative="1" as="geometry">
+        <mxCell id="cWejEI39qg-8yP3Bkxt4-38" value="updateBalance(changeInBalance:BigDecimal, &quot;add&quot;:String)" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
+          <mxGeometry x="-0.0194" relative="1" as="geometry">
             <mxPoint x="438" y="480" as="sourcePoint" />
             <mxPoint x="834.5" y="480" as="targetPoint" />
             <Array as="points">
@@ -208,13 +208,13 @@
         <mxCell id="cWejEI39qg-8yP3Bkxt4-66" value="[else]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="260" y="320" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="UOihixvM6FPwpNL-e_B5-1" value="transaction: TransactionManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+        <mxCell id="UOihixvM6FPwpNL-e_B5-1" value="transaction: TransactionManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="910" y="160" width="111" height="560" as="geometry" />
         </mxCell>
-        <mxCell id="UOihixvM6FPwpNL-e_B5-3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="UOihixvM6FPwpNL-e_B5-1">
+        <mxCell id="UOihixvM6FPwpNL-e_B5-3" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="UOihixvM6FPwpNL-e_B5-1" vertex="1">
           <mxGeometry x="50.5" y="510" width="10" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="UOihixvM6FPwpNL-e_B5-4" value="&lt;div&gt;addTransaction (currency: Currency, description: String, true: isCredit,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; changeInBalance: BigDecimal, balanceAfterTransaction: BigDecimal)&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" edge="1" parent="1">
+        <mxCell id="UOihixvM6FPwpNL-e_B5-4" value="&lt;div&gt;addTransaction (currency: Currency, description: String, true: isCredit,&lt;/div&gt;&lt;div&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; changeInBalance: BigDecimal, balanceAfterTransaction: BigDecimal)&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="438" y="671.1666666666667" as="sourcePoint" />
             <mxPoint x="960.4999999999998" y="671.1666666666667" as="targetPoint" />

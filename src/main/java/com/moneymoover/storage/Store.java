@@ -97,7 +97,7 @@ public class Store implements StoreInterface {
 
         for (Storage account : store) {
             Currency currency = Currency.valueOf(account.getCurrency().toUpperCase());
-            float value = account.getValue() / 100.0f;
+            long value = account.getValue();
             logger.log(Level.INFO, "Loaded account " + currency + " with value " + value);
             try {
                 if (value < 0) {
@@ -106,9 +106,9 @@ public class Store implements StoreInterface {
                 }
                 if (value > Account.UPPER_BOUND) {
                     ui.printMessage(ErrorMessage.ACCOUNT_BALANCE_TOO_LARGE_WHEN_LOADING);
-                    value = (float) Account.UPPER_BOUND;
+                    value = Account.UPPER_BOUND;
                 }
-                accounts.addAccount(currency, value);
+                accounts.addAccountWithLong(currency, value);
             } catch (AccountAlreadyExistsException e) {
                 logger.log(Level.WARNING,
                         "Skipping duplicate account " + currency + " with value " + value + " found in store");

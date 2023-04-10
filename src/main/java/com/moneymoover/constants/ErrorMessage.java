@@ -78,4 +78,5 @@ public interface ErrorMessage {
     String UNKNOWN_COMMAND = "Sorry, I don't understand that command. Type 'help' to see the list of commands.";
     String EXCEED_UPPER_BOUND = "Please limit your value to $10,000,000";
     String EXCHANGE_SAME_CURRENCY = "You cannot exchange between the same currency!";
+    String LOSS_OF_EXCHANGE_VALUE = "Please try a larger amount so you don't lose money!";
 }

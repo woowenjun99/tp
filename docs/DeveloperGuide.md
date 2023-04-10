@@ -46,12 +46,11 @@ First, **fork** this repo, and **clone** the fork into your computer.
 If you plan to use Intellij IDEA (highly recommended):
 
 1. **Configure the JDK**: Follow the guide [_[se-edu/guides] IDEA: Configuring the
-   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 11
-   **.
+   JDK_](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use **JDK 11**.
 2. **Import the project as a Gradle project**: Follow the guide [_[se-edu/guides] IDEA: Importing a Gradle
    project_](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into
-   IDEA.<br>
-   :exclamation: Note: Importing a Gradle project is slightly different from importing a normal Java project.
+   IDEA.  
+   **Note:** Importing a Gradle project is slightly different from importing a normal Java project.
 3. **Verify the setup**:
     1. Run the `com.moneymoover.MoneyMoover` and try a few commands.
     2. Run the tests using `./gradlew check` to ensure they all pass.
@@ -72,9 +71,6 @@ If you plan to use Intellij IDEA (highly recommended):
 3. **Learn the design**
    When you are ready to start coding, we recommend that you get some sense of the overall design by reading
    about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).
-
-When you are ready to start coding, we recommend that you get some sense of the overall design by reading
-about [MoneyMoover’s architecture](DeveloperGuide.md#architecture).
 
 ## Design
 
@@ -154,7 +150,7 @@ The `Forex` Component
 The `Currency` Enum
 
 - Keeps all currency types supported by the exchange
-- Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
+- Exchange rates were manually pulled from [https://openexchangerates.org](https://openexchangerates.org)
 - Each `Forex` instance must have two `Currency` associated with it
 
 ### Open Exchange Rates API
@@ -304,7 +300,7 @@ implementation will use an API to maintain up-to-date exchange rates. An exchang
 transaction activity. A debit transaction will reflect on initial account and credit transaction will
 reflect on target account
 
-Exchange rate source: https://www.xe.com/currencyconverter/convert
+Exchange rate source: [https://openexchangerates.org](https://openexchangerates.org)
 
 This command is executed under the assumption that an `Account` for both the initial and target
 currencies exist. To avoid redundancy, please see the `create-account` feature in the developer
@@ -344,13 +340,13 @@ The following sequence diagram shows how the Transaction command works
 
 ### Product scope
 
-### Target user profile
+#### Target user profile
 
 - Students who are planning to travel overseas
 - People who need to exchange money for travel
 - People who are comfortable using a CLI
 
-### Value proposition
+#### Value proposition
 
 MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a
 Command Line Interface (CLI) while still having the features of other money management applications.
@@ -383,9 +379,52 @@ Command Line Interface (CLI) while still having the features of other money mana
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
+## Appendix: Instructions for Manual Testing
+
+Given below are some instructions for testing the app manually. Note that they are meant to provide a starting point
+and are not an exhaustive list of test cases.
+
+### Initial Launch
+
+1. Download the jar file and copy it into an empty folder
+2. Go to that directory in the command line and run `java -jar FILENAME.jar`.
+3. The app should automatically create a data folder and the necessary files for the app to run.
+4. An internet connection is required to retrieve live exchange rates. If there is no internet,
+   fallback values will be used instead.
+
+### Help Command
+
+1. You can view the list of available commands by using the `help` command
+
+### Creating an account
+
+1. Before doing any other commands, you should create an account using the `create-account` command.
+2. Example: `create-account SGD`
+
+### Creating transactions
+
+1. You can now begin to add or withdraw money from your account. Use the `add` and `withdraw` commands to do this.
+2. You can then view the balances of your accounts using `balance`, or view past transactions using `trans`.
+
+### Viewing exchange rates
+
+1. You can view the exchange rates between different currencies using the `show-rate` command.
+
+### Exchanging money between different currencies
+
+1. You can exchange money between different currencies using the `exchange` command if you have accounts in both
+   currencies. The transactions should be reflected in the `trans` command.
+
+### Deleting accounts
+
+1. Before deleting an account, you must first make sure the balance is 0. This can be done either by exchanging to
+   another currency or withdrawing all the money.
+2. You can then delete an account using the `delete-account` command.
+
 ## Appendix: Instructions for updating the API Key
 
 - The API Key for retrieving exchange rates is stored in the `src/main/java/com/moneymoover/api/ExchangeRates.java` file
   as the `APP_ID` property.
-- If you wish to use your own API Key, you will need to go to "https://openexchangerates.org/signup/free" and sign up
+- If you wish to use your own API Key, you will need to go
+  to [https://openexchangerates.org/signup/free](https://openexchangerates.org/signup/free) and sign up
   for a free account, then replace the `APP_ID` in the `ExchangeRates.java` file with your new key.

@@ -13,7 +13,18 @@ public class Account {
     private final Currency currency;
 
     /**
-     * Constructor for Account.
+     * Constructor for Account using a long.
+     *
+     * @param initialBalance the initial balance of the account in CENTS
+     * @param currency       the currency of the account
+     */
+    Account (long initialBalance, Currency currency) {
+        this.currency = currency;
+        this.balance = initialBalance;
+    }
+
+    /**
+     * Constructor for Account using a float.
      *
      * @param initialBalance the initial balance of the account in DOLLARS (multiplication is done here)
      * @param currency       the currency of the account

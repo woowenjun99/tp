@@ -150,7 +150,7 @@ The `Forex` Component
 The `Currency` Enum
 
 - Keeps all currency types supported by the exchange
-- Exchange rates are manually pulled from https://www.xe.com/currencyconverter/convert
+- Exchange rates were manually pulled from [https://openexchangerates.org](https://openexchangerates.org)
 - Each `Forex` instance must have two `Currency` associated with it
 
 ### Open Exchange Rates API
@@ -300,7 +300,7 @@ implementation will use an API to maintain up-to-date exchange rates. An exchang
 transaction activity. A debit transaction will reflect on initial account and credit transaction will
 reflect on target account
 
-Exchange rate source: https://www.xe.com/currencyconverter/convert
+Exchange rate source: [https://openexchangerates.org](https://openexchangerates.org)
 
 This command is executed under the assumption that an `Account` for both the initial and target
 currencies exist. To avoid redundancy, please see the `create-account` feature in the developer
@@ -340,13 +340,13 @@ The following sequence diagram shows how the Transaction command works
 
 ### Product scope
 
-### Target user profile
+#### Target user profile
 
 - Students who are planning to travel overseas
 - People who need to exchange money for travel
 - People who are comfortable using a CLI
 
-### Value proposition
+#### Value proposition
 
 MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a
 Command Line Interface (CLI) while still having the features of other money management applications.

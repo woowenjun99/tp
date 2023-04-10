@@ -16,6 +16,7 @@ import com.moneymoover.exceptions.NotEnoughInAccountException;
 import com.moneymoover.exceptions.TooLargeAmountException;
 import com.moneymoover.exceptions.InvalidBigDecimalException;
 import com.moneymoover.exceptions.ExchangeSameCurrencyException;
+import com.moneymoover.exceptions.ConvertedAmountTooSmallException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -47,7 +48,7 @@ public class ExchangeCommand extends Command {
             Account oldAcc = accounts.getAccount(exchangeRate.getInitial());
             Account newAcc = accounts.getAccount(exchangeRate.getTarget());
             BigDecimal convertedAmount = exchangeRate.convert(amount);
-            BigDecimal comparator = new BigDecimal("0.01");
+            checkAmt(convertedAmount, exchangeRate);
             oldAcc.updateBalance(amount, "subtract");
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
             ui.printMessage(exchangeRate);
@@ -84,6 +85,8 @@ public class ExchangeCommand extends Command {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
         } catch (ExchangeSameCurrencyException e) {
             ui.printMessage(ErrorMessage.EXCHANGE_SAME_CURRENCY);
+        } catch (ConvertedAmountTooSmallException e) {
+            ui.printMessage(ErrorMessage.LOSS_OF_EXCHANGE_VALUE);
         }
     }
 
@@ -145,6 +148,19 @@ public class ExchangeCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_EXCHANGE_ARGUMENT);
         } catch (ExchangeSameCurrencyException e) {
             ui.printMessage(ErrorMessage.EXCHANGE_SAME_CURRENCY);
+        }
+    }
+
+    /**
+     * A wrapper method to check if the target amount is too small
+     * @param amount the amount to check
+     * @param inst the currency relationship
+     * @throws ConvertedAmountTooSmallException if the number is too small 
+     */
+    private static void checkAmt (BigDecimal amt, Forex inst) throws ConvertedAmountTooSmallException {
+        Validator val = new Validator();
+        if (!val.validateTargetValue(amt, inst)) {
+            throw new ConvertedAmountTooSmallException();
         }
     }
 }

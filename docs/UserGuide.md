@@ -17,7 +17,6 @@
         * [Show the exchange rate between two currencies `show-rate`](#show-the-exchange-rate-between-two-currencies-show-rate)
         * [Show transactions `trans`](#show-transactions-trans)
         * [Exiting the program `exit`](#exiting-the-program-exit)
-    * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
 <!-- TOC -->
@@ -173,7 +172,7 @@ Example of usage:
 Format: `add CURRENCY AMOUNT [DESCRIPTION]`
 
 - `CURRENCY`: Compulsory argument. A registered currency.
-- `AMOUNT`  : Compulsory argument. The amount to be deposited.
+- `AMOUNT` : Compulsory argument. The amount to be deposited.
 - `[DESCRIPTION]`: Optional argument. Is set to `NIL` if not provided.
 
 Example of usage:
@@ -192,9 +191,11 @@ Format: `exchange CURRENCY1 CURRENCY2 AMOUNT`
 
 - Both `CURRENCY1` and `CURRENCY2` must be specified.
 - The value provided will be subtracted from the balance of
-  the `CURRENCY1`  and exchanged into the `CURRENCY2`, and will be added
+  the `CURRENCY1` and exchanged into the `CURRENCY2`, and will be added
   to the account of the target currency. You must have accounts for both the initial and target currency to perform this
   command.
+- If the converted amount is less than 0.01, the user will be asked to convert a value that calculates
+  to at least 0.01 in the target currency to avoid loss of precision and money.
 
 Examples of usage (assuming accounts are created) :
 
@@ -203,8 +204,8 @@ Examples of usage (assuming accounts are created) :
 >>Exchanging from SGD to USD
   Balance of initial account --> SGD: 895.00
   Balance of target account --> USD: 77.14
-  
-//Above example are for reference only. Actual rates might varies depend on the market.
+
+//Above example are for reference only. Actual rates might vary depend on the market.
 ```
 
 ### Withdrawing money `withdraw`
@@ -214,7 +215,7 @@ Withdraw the amount of money of specified currency.
 Format: `withdraw CURRENCY AMOUNT [DESCRIPTION]`
 
 - `CURRENCY`: Compulsory argument. A registered currency.
-- `AMOUNT`  : Compulsory argument. The amount to be deposited.
+- `AMOUNT` : Compulsory argument. The amount to be deposited.
 - `[DESCRIPTION]`: Optional argument. Is set to `NIL` if not provided.
 
 Example:
@@ -268,11 +269,11 @@ Otherwise, prints all transactions in reverse chronological order
 Format `trans FLAG SEARCH_PARAMETERS`:
 
 - Appropriate `FLAG` are
-    1) `desc` - search by the description as search parameter
-    2) `c` - search by currency as search parameter
-    3) `d` - search by date as search parameter in the form `DD-MM-YYYY`
-    4) `m` - search by month as search parameter in the form `MM-YYYY`
 
+    1. `desc` - search by the description as search parameter
+    2. `c` - search by currency as search parameter
+    3. `d` - search by date as search parameter in the form `DD-MM-YYYY`
+    4. `m` - search by month as search parameter in the form `MM-YYYY`
 
 - All transactions are printed in reverse-chronological order
 - `FLAG` and `SEARCH_PARAMETER` are optional, neglecting them will print all transactions

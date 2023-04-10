@@ -211,7 +211,7 @@ Examples of usage (assuming accounts are created) :
 
 Withdraw the amount of money of specified currency.
 
-Format: `withdraw CURRENCY AMOUNT [DESCRPTION]`
+Format: `withdraw CURRENCY AMOUNT [DESCRIPTION]`
 
 - `CURRENCY`: Compulsory argument. A registered currency.
 - `AMOUNT`  : Compulsory argument. The amount to be deposited.
@@ -222,7 +222,7 @@ Example:
 ```text
 >> withdraw SGD 10
 >> You have successfully withdrawn 10.00 SGD from your account
-   Now you have remaining XXX.XX SGD in your account
+   Now you have remaining 90.00 SGD in your account
     
 >> withdraw SGD 5 Chicken Rice
 >> You have successfully withdrawn 5.00 SGD from your account
@@ -326,12 +326,6 @@ Examples:
 >> exit
 >> Thank you for using MoneyMoover! We hope to see you again soon:)
 ```
-
-## FAQ
-
-**Q**: How do I transfer my data to another computer?
-
-**A**: {your answer here}
 
 ## Command Summary
 

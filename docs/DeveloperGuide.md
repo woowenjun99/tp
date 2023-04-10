@@ -379,6 +379,40 @@ Command Line Interface (CLI) while still having the features of other money mana
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
+## Appendix: Instructions for Manual Testing
+
+Given below are some instructions for testing the app manually. Note that they are meant to provide a starting point
+and are not an exhaustive list of test cases.
+
+### Initial Launch
+
+1. Download the jar file and copy it into an empty folder
+2. Go to that directory in the command line and run `java -jar FILENAME.jar`.
+3. The app should automatically create a data folder and the necessary files for the app to run.
+
+### Help Command
+
+1. You can view the list of available commands by using the `help` command
+
+### Creating an account
+
+1. Before doing any other commands, you should create an account using the `create-account` command.
+2. Example: `create-account SGD`
+
+### Creating transactions
+
+1. You can now begin to add or withdraw money from your account. Use the `add` and `withdraw` commands to do this.
+2. You can then view the balances of your accounts using `balance`, or view past transactions using `trans`.
+
+### Viewing exchange rates
+
+1. You can view the exchange rates between different currencies using the `show-rate` command.
+
+### Exchanging money between different currencies
+
+1. You can exchange money between different currencies using the `exchange` command if you have accounts in both
+   currencies. The transactions should be reflected in the `trans` command.
+
 ## Appendix: Instructions for updating the API Key
 
 - The API Key for retrieving exchange rates is stored in the `src/main/java/com/moneymoover/api/ExchangeRates.java` file

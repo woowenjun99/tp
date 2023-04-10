@@ -3,33 +3,42 @@
 <!-- TOC -->
 
 - [Developer Guide](#developer-guide)
-    - [Acknowledgements](#acknowledgements)
-    - [Setting up](#setting-up)
-        - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
-        - [Before writing code](#before-writing-code)
-    - [Design](#design)
-        - [Architecture](#architecture)
-        - [General Sequence](#general-sequence)
-        - [UI component](#ui-component)
-        - [Parser component](#parser-component)
-        - [Accounts Component](#accounts-component)
-        - [Forex component](#forex-component)
-    - [Implementation](#implementation)
-        - [Create/Delete account feature](#createdelete-account-feature)
-        - [Delete-account feature](#delete-account-feature)
-        - [Add/Withdraw money feature](#addwithdraw-money-feature)
-        - [View balance feature](#view-balance-feature)
-        - [Show-rate feature](#show-rate-feature)
-        - [Money exchange feature](#money-exchange-feature)
-    - [Appendix: Requirements](#appendix--requirements)
-        - [Product scope](#product-scope)
-        - [Target user profile](#target-user-profile)
-        - [Value proposition](#value-proposition)
-        - [User Stories](#user-stories)
-        - [Non-Functional Requirements](#non-functional-requirements)
-        - [Glossary](#glossary)
-    - [Appendix: Instructions for manual testing](#appendix--instructions-for-manual-testing)
-  <!-- TOC -->
+  - [Acknowledgements](#acknowledgements)
+  - [Setting up](#setting-up)
+    - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
+    - [Before writing code](#before-writing-code)
+  - [Design](#design)
+    - [Architecture](#architecture)
+    - [General Sequence](#general-sequence)
+    - [UI component](#ui-component)
+    - [Parser component](#parser-component)
+    - [Accounts Component](#accounts-component)
+    - [Forex component](#forex-component)
+    - [Open Exchange Rates API](#open-exchange-rates-api)
+    - [Transactions Component](#transactions-component)
+  - [Implementation](#implementation)
+    - [Create/Delete account feature](#createdelete-account-feature)
+    - [Add/Withdraw money feature](#addwithdraw-money-feature)
+    - [View balance feature](#view-balance-feature)
+    - [Show-rate feature](#show-rate-feature)
+    - [Money exchange feature](#money-exchange-feature)
+    - [Show transactions feature](#show-transactions-feature)
+  - [Appendix: Requirements](#appendix-requirements)
+    - [Product scope](#product-scope)
+      - [Target user profile](#target-user-profile)
+      - [Value proposition](#value-proposition)
+    - [User Stories](#user-stories)
+    - [Non-Functional Requirements](#non-functional-requirements)
+    - [Glossary](#glossary)
+  - [Appendix: Instructions for Manual Testing](#appendix-instructions-for-manual-testing)
+    - [Initial Launch](#initial-launch)
+    - [Help Command](#help-command)
+    - [Creating an account](#creating-an-account)
+    - [Creating transactions](#creating-transactions)
+    - [Viewing exchange rates](#viewing-exchange-rates)
+    - [Exchanging money between different currencies](#exchanging-money-between-different-currencies)
+    - [Deleting accounts](#deleting-accounts)
+  - [Appendix: Instructions for updating the API Key](#appendix-instructions-for-updating-the-api-key)
 
 ## Acknowledgements
 
@@ -107,7 +116,7 @@ inputs. We will pass in the instance of UI into the `execute` method of the `Com
 
 - Printing text such as new line, spacer, farewell message, greeting message.
 
-- Empowers the users to print customised message in `printf` and `printMessage` method.
+- Empowers the developers to print customised message in `printf` and `printMessage` method.
 
 - Reads in the user input as `String`.
 

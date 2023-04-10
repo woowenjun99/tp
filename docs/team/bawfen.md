@@ -22,12 +22,12 @@ The main class initializes the core components of the application, such as the P
 It also instantiates the logger, and configures it to write to a log file.
 Once all the relevant components are loaded, it runs the main input loop until the program exits.
 
-##### Parser Class
+##### Feature: Parser Class
 
 The Parser class is responsible for parsing user input and returning the appropriate `Command` object.
 It was designed to be simple and extensible, allowing for easy addition of new commands.
 
-##### Storage Class
+##### Feature: Loading from file
 
 I implemented most of the read logic for the Store class, allowing the program to load data from previous sessions.
 
@@ -59,12 +59,19 @@ I implemented most of the read logic for the Store class, allowing the program t
   [Food Supply Tracker](https://github.com/nus-cs2113-AY2223S2/tp/pull/9),
   [WellNUS++](https://github.com/bawfen/ped/issues)
 
+<div style="page-break-after: always;"></div>
+
 ### Documentation
 
+* User Guide
+    * Added section on Storage Related, Currency Related and Date Related inputs under Notes.
 * Developer Guide
     * Added Architecture section and architecture diagram.
     * Added General Sequence section, providing a high-level overview of how the program processes a single command.
     * Added Parser section
+    * Added Appendix: Requirements
+    * Added Appendix: Instructions for Manual Testing
+    * Added Appendix: Instructions for updating the API Key
 
 ##### Architecture
 

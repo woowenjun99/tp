@@ -1,36 +1,48 @@
 # Wen Jun Personal Portfolio Page
 
-## Overview
+## 1. Overview
 
-MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a Command Line Interface (CLI) while still having the features of other money management applications.
+MoneyMoover is a **CLI application for managing and transferring international currencies**, optimized for use via a Command Line Interface (CLI) while still having the features of other money management applications. Our app will help students to **track their expenses and income** in order to stay within their budgets, so that they have enough money to travel. It will also help them convert to foreign currencies so they can see how much they have to spend overseas.
 
-Our app will help students to **track their expenses and income** in order to stay within their budgets, so that they have enough money to travel. It will also help them convert to foreign currencies so they can see how much they have to spend overseas.
-
-## Code Contributed
+## 2. Code Contributed
 
 Code Contributed: [RepoSense Link](https://nus-cs2113-ay2223s2.github.io/tp-dashboard/?search=woowenjun99&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2023-02-17)
 
-## Enhancements Implemented
+## 3. Enhancements Implemented
 
-### UI Class
+### 3.1. UI Class
 
-I am in charge of writing the `UI Class` which is used to mainly handle the User Interface aspect. This includes reading in input, printing message and printing formatted strings. It mainly hides the complex features so that the other developers can get the intended input.
+I am in charge of implementing the `Ui Class` which is used to mainly handle the User Interface aspect of the application, including reading the input, printing message and printing formatted string.
 
-### Balance Command
+#### 3.1.1. Motivation
 
-I am in charged of writing the `BalanceCommand` class for the project. This class is mainly used to show the balance in a specific account or all the accounts depending on the parameters provided.
+1. Instead of letting users to call `System.out.println`, `System.out.printf` or `in.nextLine()` directly, all developers in the team are expected to use the UI class. We have a `printFarewell()` and `printGreeting()` method which is to print the corresponding messages.
 
-### Add Command
+2. Another reason why we need the UI class is for abstraction. For instance, in one of the PED issue, a user tries to break the code by inserting a lot of spaces. The `getUserInput()` method helps to remove these unnecessary spaces so that the command given can be properly parsed by the commands.
 
-I am in charge of writing the `AddCommand` class for the project. This class is mainly used to empower the users to add funds into the account based on the specified currency.
+### 3.2. Balance Command
 
-### Validation Class
+I am responsible for writing the `BalanceCommand` class that extends the abstract `Command` class. This class is used to show the balance in a specific account if specified, or all the accounts.
 
-I am in charge of writing a class that is used to validate the amount that is read in by the user. This class is used to validate and see whether the amount provided by the user contains any alphabetical characters or lie within the range of 0 to 10 million dollars.
+### 3.3. Add Command
+
+I am in charge of writing the `AddCommand` class for the project. This class is mainly used to empower the users to add funds into the account based on the specified currency and the account if any.
+
+### 3.4. Validator Class
+
+I am in charge of writing a class that is used to validate the amount that is read in by the user.
+
+#### 3.4.1. Motivation
+
+Unlike the `AddCommand` and `BalanceCommand` in 3.2 and 3.3., the `Validator` class is an important utility class that is used to validate the amount provided by the user.
+
+The `validateAmount()` method takes in a string and determines if the amount contains any alphabetical character in it or lies outside the range of 0 to 10 million dollars. If it does, an error will be thrown. Otherwise, we will return the corresponding `BigDecimal` value.
+
+This class is important as it helps to prevent many errors, such as reading in more than 2 decimal places which should not be possible or using a very huge number that might cause overflow, of which are commonly raised as issues during the PED.
 
 ### Contributions to the UG
 
-I have updated the UG for the AddCommand and BalanceCommand with the expected outputs after I am done with the working on them.
+In terms of the UG, I am responsible for writing the `AddCommand` and `BalanceCommand` aspect of the UG.
 
 ### Contributions to the DG
 

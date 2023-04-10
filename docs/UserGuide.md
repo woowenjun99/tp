@@ -276,12 +276,10 @@ Format `trans [FLAG] [SEARCH_PARAMETER]`:
 - `[FLAG]`: Optional argument. Determines the category to search the transactions by.
 - `[SEARCH_PARAMETER]`: Optional argument. What to search the transactions for.
 - Appropriate `[FLAG]` are
-
     1. `desc` - search by the description as search parameter
     2. `c` - search by currency as search parameter
     3. `d` - search by date as search parameter in the form `DD-MM-YYYY`
     4. `m` - search by month as search parameter in the form `MM-YYYY`
-
 - All transactions are printed in reverse-chronological order
 - `[FLAG]` and `[SEARCH_PARAMETER]` are optional, neglecting them will print all transactions
 - If `[FLAG]` is provided, `[SEARCH_PARAMETER]` must also be provided.

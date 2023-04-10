@@ -153,10 +153,11 @@ public class ExchangeCommand extends Command {
 
     /**
      * A wrapper method to check if the target amount is too small
-     * @param amount the amount to check
+     *
+     * @param amt  the amount to check
      * @param inst the currency relationship
-     * @param ui Ui instance
-     * @throws ConvertedAmountTooSmallException if the number is too small 
+     * @param ui   Ui instance
+     * @throws ConvertedAmountTooSmallException if the number is too small
      */
     private static void checkAmt (BigDecimal amt, Forex inst, Ui ui) throws ConvertedAmountTooSmallException {
         Validator val = new Validator();

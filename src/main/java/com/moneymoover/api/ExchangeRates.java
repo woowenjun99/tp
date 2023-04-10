@@ -17,7 +17,7 @@ import retrofit2.Response;
 
 public class ExchangeRates {
 
-    private static final String APP_ID = "1349651eb52b4f85a5ced93d579652ea";
+    private static final String APP_ID = "38226e471c1740d084a22b5473111529";
     private static final String BASE_CURRENCY = "USD";
     private static final Logger logger = Logger.getLogger("logger");
 

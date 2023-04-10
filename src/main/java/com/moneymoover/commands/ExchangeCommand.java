@@ -15,6 +15,8 @@ import com.moneymoover.exceptions.NoAccountException;
 import com.moneymoover.exceptions.NotEnoughInAccountException;
 import com.moneymoover.exceptions.TooLargeAmountException;
 import com.moneymoover.exceptions.InvalidBigDecimalException;
+import com.moneymoover.exceptions.ExchangeSameCurrencyException;
+import com.moneymoover.exceptions.ConvertedAmountTooSmallException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -46,7 +48,7 @@ public class ExchangeCommand extends Command {
             Account oldAcc = accounts.getAccount(exchangeRate.getInitial());
             Account newAcc = accounts.getAccount(exchangeRate.getTarget());
             BigDecimal convertedAmount = exchangeRate.convert(amount);
-            BigDecimal comparator = new BigDecimal("0.01");
+            checkAmt(convertedAmount, exchangeRate, ui);
             oldAcc.updateBalance(amount, "subtract");
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
             ui.printMessage(exchangeRate);
@@ -81,6 +83,10 @@ public class ExchangeCommand extends Command {
             ui.printMessage(ErrorMessage.INVALID_UPDATE_BALANCE_ACTION);
         } catch (TooLargeAmountException e) {
             ui.printMessage(ErrorMessage.EXCEED_AMOUNT_ALLOWED);
+        } catch (ExchangeSameCurrencyException e) {
+            ui.printMessage(ErrorMessage.EXCHANGE_SAME_CURRENCY);
+        } catch (ConvertedAmountTooSmallException e) {
+            ui.printMessage(ErrorMessage.LOSS_OF_EXCHANGE_VALUE);
         }
     }
 
@@ -90,14 +96,18 @@ public class ExchangeCommand extends Command {
      * @return Forex object with intial and target currencies
      * @throws IllegalArgumentException         if the currencies are not supported
      * @throws InvalidExchangeArgumentException if arguments are incorrect
+     * @throws ExchangeSameCurrencyException    if the currencies are the same
      */
-    public Forex formatInput () throws InvalidExchangeArgumentException {
+    public Forex formatInput () throws InvalidExchangeArgumentException, ExchangeSameCurrencyException {
         String[] splitInput = input.trim().split(" ");
         if (splitInput.length != 4) {
             throw new InvalidExchangeArgumentException();
         }
         Currency initial = Currency.valueOf(splitInput[1].toUpperCase());
         Currency target = Currency.valueOf(splitInput[2].toUpperCase());
+        if (initial.equals(target)) {
+            throw new ExchangeSameCurrencyException();
+        }
         return new Forex(initial, target);
     }
 
@@ -111,6 +121,7 @@ public class ExchangeCommand extends Command {
     public BigDecimal parseAmount () throws InvalidBigDecimalException {
         Validator validator = new Validator();
         BigDecimal amount = validator.validateAmount(input.trim().split(" ")[3]);
+        assert amount != null;
         return amount;
     }
 
@@ -135,6 +146,23 @@ public class ExchangeCommand extends Command {
             }
         } catch (InvalidExchangeArgumentException e) {
             ui.printMessage(ErrorMessage.INVALID_EXCHANGE_ARGUMENT);
+        } catch (ExchangeSameCurrencyException e) {
+            ui.printMessage(ErrorMessage.EXCHANGE_SAME_CURRENCY);
+        }
+    }
+
+    /**
+     * A wrapper method to check if the target amount is too small
+     *
+     * @param amt  the amount to check
+     * @param inst the currency relationship
+     * @param ui   Ui instance
+     * @throws ConvertedAmountTooSmallException if the number is too small
+     */
+    private static void checkAmt (BigDecimal amt, Forex inst, Ui ui) throws ConvertedAmountTooSmallException {
+        Validator val = new Validator();
+        if (!val.validateTargetValue(amt, inst, ui)) {
+            throw new ConvertedAmountTooSmallException();
         }
     }
 }

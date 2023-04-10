@@ -73,6 +73,7 @@ public class ShowRateCommand extends Command {
         // Checks for any non-numeric characters that are no '-' or '.'
         Validator validator = new Validator();
         BigDecimal val = validator.validateAmount(args[3]);
+        assert val != null;
         return val;
     }
 

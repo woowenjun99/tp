@@ -1,6 +1,6 @@
 package com.moneymoover.commands;
 
-import com.moneymoover.constants.Message;
+import com.moneymoover.constants.ErrorMessage;
 
 public enum CommandType {
     ADD("add"),
@@ -32,6 +32,6 @@ public enum CommandType {
                 return commandType;
             }
         }
-        throw new IllegalArgumentException(Message.ERR_UNKNOWN_COMMAND.getMessage());
+        throw new IllegalArgumentException(ErrorMessage.UNKNOWN_COMMAND);
     }
 }

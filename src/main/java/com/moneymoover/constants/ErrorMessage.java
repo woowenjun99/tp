@@ -8,7 +8,8 @@ public interface ErrorMessage {
             "Please check that you have correctly provided the currency and amount according this format:\n" +
             "\t add CURRENCY AMOUNT [DESCRIPTION]";
     String INVALID_TOO_SMALL_AMOUNT_TO_ADD_OR_WITHDRAW = "Please provide a value greater than or equal to 0.01";
-    String INVALID_COMMAND_TOO_PRECISE_AMOUNT = "Please provide an amount that has a precision of not more than 2 dp";
+    String INVALID_COMMAND_TOO_PRECISE_AMOUNT =
+            "Please provide an amount that has a precision of not more than 2 decimal places";
     String INVALID_WITHDRAW_COMMAND = "This is an invalid withdraw command format. \n" +
             "Please check that you have correctly provided the currency and amount according this format:\n" +
             "\t withdraw CURRENCY AMOUNT [DESCRIPTION] ";
@@ -16,7 +17,9 @@ public interface ErrorMessage {
     String INVALID_NUMERICAL_AMOUNT = "Please provide a float amount of up to 2 decimal places to update.";
     String INVALID_CREATE_ACCOUNT_COMMAND = "create-account must be used with the following format: " +
             "create-account CURRENCY";
-    String MORE_THAN_ONE_CURRENCY_PROVIDED = "Please do not provide more than one currency.";
+    String MORE_THAN_ONE_CURRENCY_PROVIDED = "This is an invalid balance command format. \n" + 
+            "Please check that you have correctly provided the balance and currency in the following format:\n" +
+            "\t balance [CURRENCY]";
     String NO_SUCH_ACCOUNT = "You do not have an account for these currencies.";
 
     String NO_AMOUNT_PROVIDED = "Please provide an amount to be added.";
@@ -63,5 +66,17 @@ public interface ErrorMessage {
 
     String DESCRIPTION_TOO_LONG = "Please limit your description to 100 characters";
     String SHOW_RATE_RANGE = "Your show-rate value must be no smaller than 0.01 and no greater than 1 billion!";
+
+    String ERR_LOADING_TRANSACTIONS = "There was an error loading your transactions from the file, creating a new one";
+    String ERR_LOADING_ACCOUNTS = "There was an error loading your accounts from the file, creating a new one";
+
+    String DUPLICATE_ACCOUNT_WHEN_LOADING = "Skipping duplicate account of currency %s in loaded file\n";
+    String ACCOUNT_BALANCE_NEGATIVE_WHEN_LOADING = "Negative account balance found in file, defaulting to 0";
+    String ACCOUNT_BALANCE_TOO_LARGE_WHEN_LOADING =
+            "Account balance greater than 1 billion found in file, defaulting to 1 billion";
+
+    String UNKNOWN_COMMAND = "Sorry, I don't understand that command. Type 'help' to see the list of commands.";
     String EXCEED_UPPER_BOUND = "Please limit your value to $10,000,000";
+    String EXCHANGE_SAME_CURRENCY = "You cannot exchange between the same currency!";
+    String LOSS_OF_EXCHANGE_VALUE = "Please try a larger amount so you don't lose money!";
 }

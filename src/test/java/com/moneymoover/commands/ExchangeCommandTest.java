@@ -3,6 +3,7 @@ package com.moneymoover.commands;
 import com.moneymoover.Currency;
 import com.moneymoover.exceptions.InvalidBigDecimalException;
 import com.moneymoover.exceptions.InvalidExchangeArgumentException;
+import com.moneymoover.exceptions.ExchangeSameCurrencyException;
 import com.moneymoover.Forex;
 
 import org.junit.jupiter.api.Test;
@@ -67,6 +68,20 @@ public class ExchangeCommandTest {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD 1.0");
             assertDoesNotThrow(cmd::formatInput);
+        } catch (Exception e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void testFormatInput_sameCurrency_shouldThrowExchangeSameCurrencyException () {
+        try {
+            ExchangeCommand cmd1 = new ExchangeCommand("exchange THB THB 1.0");
+            ExchangeCommand cmd2 = new ExchangeCommand("exchange SGD SGD 1.0");
+            ExchangeCommand cmd3 = new ExchangeCommand("exchange MYR MYR 1.0");
+            assertThrows(ExchangeSameCurrencyException.class, cmd1::formatInput);
+            assertThrows(ExchangeSameCurrencyException.class, cmd2::formatInput);
+            assertThrows(ExchangeSameCurrencyException.class, cmd3::formatInput);
         } catch (Exception e) {
             fail();
         }

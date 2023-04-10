@@ -48,7 +48,7 @@ public class ExchangeCommand extends Command {
             Account oldAcc = accounts.getAccount(exchangeRate.getInitial());
             Account newAcc = accounts.getAccount(exchangeRate.getTarget());
             BigDecimal convertedAmount = exchangeRate.convert(amount);
-            checkAmt(convertedAmount, exchangeRate);
+            checkAmt(convertedAmount, exchangeRate, ui);
             oldAcc.updateBalance(amount, "subtract");
             newAcc.updateBalance(exchangeRate.convert(amount), "add");
             ui.printMessage(exchangeRate);
@@ -155,11 +155,12 @@ public class ExchangeCommand extends Command {
      * A wrapper method to check if the target amount is too small
      * @param amount the amount to check
      * @param inst the currency relationship
+     * @param ui Ui instance
      * @throws ConvertedAmountTooSmallException if the number is too small 
      */
-    private static void checkAmt (BigDecimal amt, Forex inst) throws ConvertedAmountTooSmallException {
+    private static void checkAmt (BigDecimal amt, Forex inst, Ui ui) throws ConvertedAmountTooSmallException {
         Validator val = new Validator();
-        if (!val.validateTargetValue(amt, inst)) {
+        if (!val.validateTargetValue(amt, inst, ui)) {
             throw new ConvertedAmountTooSmallException();
         }
     }

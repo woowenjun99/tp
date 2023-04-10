@@ -66,17 +66,16 @@ public class Validator {
      *
      * @param amount the converted value provided by the user
      * @param inst the currency relationship used
+     * @param ui Ui instance
      * @return if the amount is valid
      */
-    public boolean validateTargetValue (BigDecimal amount, Forex inst) {
+    public boolean validateTargetValue (BigDecimal amount, Forex inst, Ui ui) {
         if (amount.compareTo(new BigDecimal(0.01)) < 0) {
-            Ui ui = new Ui();
             Currency init = inst.getInitial();
             Currency targ = inst.getTarget();
             Forex reverse = new Forex(targ, init);
             BigDecimal allowedMin = reverse.convert(new BigDecimal(0.01));
-            allowedMin = allowedMin.setScale(2, RoundingMode.HALF_UP);
-            allowedMin = allowedMin.add(BigDecimal.ONE); // Provide padding to prevent precision issue
+            allowedMin = allowedMin.setScale(2, RoundingMode.UP);
             ui.printMessage("You must convert at least " + allowedMin + " " + init + " to " + targ);
             return false;
         }

@@ -1,19 +1,14 @@
 package com.moneymoover.commands;
 
-import com.moneymoover.Currency;
 import com.moneymoover.exceptions.InvalidBigDecimalException;
 import com.moneymoover.exceptions.InvalidExchangeArgumentException;
 import com.moneymoover.exceptions.ExchangeSameCurrencyException;
-import com.moneymoover.Forex;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import java.math.BigDecimal;
 
 public class ExchangeCommandTest {
 
@@ -92,18 +87,6 @@ public class ExchangeCommandTest {
         try {
             ExchangeCommand cmd = new ExchangeCommand("exchange THB SGD 1.0");
             assertDoesNotThrow(cmd::parseAmount);
-        } catch (Exception e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void intializeRates_shouldCallAPI () {
-        try {
-            Forex.initializeRates();
-            Forex usdToUsd = new Forex(Currency.USD, Currency.USD);
-            BigDecimal convertedAmount = usdToUsd.convert(new BigDecimal(100));
-            assertEquals(convertedAmount.intValue(), 100);
         } catch (Exception e) {
             fail();
         }

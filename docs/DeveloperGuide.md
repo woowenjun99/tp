@@ -415,6 +415,12 @@ and are not an exhaustive list of test cases.
 1. You can exchange money between different currencies using the `exchange` command if you have accounts in both
    currencies. The transactions should be reflected in the `trans` command.
 
+### Deleting accounts
+
+1. Before deleting an account, you must first make sure the balance is 0. This can be done either by exchanging to
+   another currency or withdrawing all the money.
+2. You can then delete an account using the `delete-account` command.
+
 ## Appendix: Instructions for updating the API Key
 
 - The API Key for retrieving exchange rates is stored in the `src/main/java/com/moneymoover/api/ExchangeRates.java` file

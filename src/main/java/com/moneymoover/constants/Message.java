@@ -38,7 +38,8 @@ public enum Message {
     SHOW_TRANSACTIONS_OF_DATE_HEADER("Below are all your transactions with the date "),
     SHOW_TRANSACTIONS_OF_CURRENCY_HEADER("Below are all your transactions with currency "),
     SHOW_TRANSACTIONS_OF_MONTH_HEADER("Below are all your transactions during the month of "),
-    API_INITIALIZED("Real-time exchange rates have been set! You are free to use MoneyMoover!");
+    API_INITIALIZED("Real-time exchange rates have been set! You are free to use MoneyMoover!"),
+    NO_ACCOUNT_TO_SHOW("There is no account to be displayed");
 
     private final String message;
 

@@ -17,7 +17,6 @@
         * [Show the exchange rate between two currencies `show-rate`](#show-the-exchange-rate-between-two-currencies-show-rate)
         * [Show transactions `trans`](#show-transactions-trans)
         * [Exiting the program `exit`](#exiting-the-program-exit)
-    * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
 <!-- TOC -->
@@ -60,7 +59,20 @@ It will also help them convert to foreign currencies so they can see how much th
     - Account balances and transactions are stored in the "data" folder in the same directory as the JAR file.
     - Users are not meant to edit the data files directly, doing so may cause the application to behave in an
       unexpected manner.
-    - If any of the files become corrupted, MoneyMoover will create a new empty file to replace it.
+    - If any of the files become corrupted, MoneyMoover will attempt to create a new empty file to replace it.
+- **Currency Related**
+    - All currency related parameters are case-insensitive.
+    - All currency related parameters are limited to the following currencies:
+        - SGD, USD, EUR, GBP, THB, MYR, IDR, VND, CNY, JPY, KRW
+    - All currency related parameters are limited to 3 characters only.
+    - All currency related parameters are limited to alphabetic characters only.
+- **Date Related**
+    - All date related parameters are limited to the following format:
+        - DD is interpreted as the day of the month, from 01 to 31.
+        - MM is interpreted as the month of the year, from 01 to 12.
+        - YYYY is interpreted as the year, from 0000 to 9999.
+    - Padded zeroes are necessary, for example 1-1-2023 is not a valid input, while 01-01-2023 is.
+    - Invalid dates are not allowed, for example 13-2023, 00-2023, 32-01-2000.
 
 ### Viewing help `help`
 
@@ -160,7 +172,7 @@ Example of usage:
 Format: `add CURRENCY AMOUNT [DESCRIPTION]`
 
 - `CURRENCY`: Compulsory argument. A registered currency.
-- `AMOUNT`  : Compulsory argument. The amount to be deposited.
+- `AMOUNT` : Compulsory argument. The amount to be deposited.
 - `[DESCRIPTION]`: Optional argument. Is set to `NIL` if not provided.
 
 Example of usage:
@@ -179,9 +191,11 @@ Format: `exchange CURRENCY1 CURRENCY2 AMOUNT`
 
 - Both `CURRENCY1` and `CURRENCY2` must be specified.
 - The value provided will be subtracted from the balance of
-  the `CURRENCY1`  and exchanged into the `CURRENCY2`, and will be added
+  the `CURRENCY1` and exchanged into the `CURRENCY2`, and will be added
   to the account of the target currency. You must have accounts for both the initial and target currency to perform this
   command.
+- If the converted amount is less than 0.01, the user will be asked to convert a value that calculates
+  to at least 0.01 in the target currency to avoid loss of precision and money.
 
 Examples of usage (assuming accounts are created) :
 
@@ -190,18 +204,18 @@ Examples of usage (assuming accounts are created) :
 >>Exchanging from SGD to USD
   Balance of initial account --> SGD: 895.00
   Balance of target account --> USD: 77.14
-  
-//Above example are for reference only. Actual rates might varies depend on the market.
+
+//Above example are for reference only. Actual rates might vary depend on the market.
 ```
 
 ### Withdrawing money `withdraw`
 
 Withdraw the amount of money of specified currency.
 
-Format: `withdraw CURRENCY AMOUNT [DESCRPTION]`
+Format: `withdraw CURRENCY AMOUNT [DESCRIPTION]`
 
 - `CURRENCY`: Compulsory argument. A registered currency.
-- `AMOUNT`  : Compulsory argument. The amount to be deposited.
+- `AMOUNT` : Compulsory argument. The amount to be deposited.
 - `[DESCRIPTION]`: Optional argument. Is set to `NIL` if not provided.
 
 Example:
@@ -209,7 +223,7 @@ Example:
 ```text
 >> withdraw SGD 10
 >> You have successfully withdrawn 10.00 SGD from your account
-   Now you have remaining XXX.XX SGD in your account
+   Now you have remaining 90.00 SGD in your account
     
 >> withdraw SGD 5 Chicken Rice
 >> You have successfully withdrawn 5.00 SGD from your account
@@ -255,11 +269,11 @@ Otherwise, prints all transactions in reverse chronological order
 Format `trans FLAG SEARCH_PARAMETERS`:
 
 - Appropriate `FLAG` are
-    1) `desc` - search by the description as search parameter
-    2) `c` - search by currency as search parameter
-    3) `d` - search by date as search parameter in the form `DD-MM-YYYY`
-    4) `m` - search by month as search parameter in the form `MM-YYYY`
 
+    1. `desc` - search by the description as search parameter
+    2. `c` - search by currency as search parameter
+    3. `d` - search by date as search parameter in the form `DD-MM-YYYY`
+    4. `m` - search by month as search parameter in the form `MM-YYYY`
 
 - All transactions are printed in reverse-chronological order
 - `FLAG` and `SEARCH_PARAMETER` are optional, neglecting them will print all transactions
@@ -313,12 +327,6 @@ Examples:
 >> exit
 >> Thank you for using MoneyMoover! We hope to see you again soon:)
 ```
-
-## FAQ
-
-**Q**: How do I transfer my data to another computer?
-
-**A**: {your answer here}
 
 ## Command Summary
 

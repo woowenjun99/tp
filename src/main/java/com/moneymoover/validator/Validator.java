@@ -2,8 +2,12 @@ package com.moneymoover.validator;
 
 import com.moneymoover.constants.ErrorMessage;
 import com.moneymoover.exceptions.InvalidBigDecimalException;
+import com.moneymoover.ui.Ui;
+import com.moneymoover.Currency;
+import com.moneymoover.Forex;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Validator {
 
@@ -52,5 +56,29 @@ public class Validator {
         }
 
         return value;
+    }
+
+    /**
+     * This method is used to check if the converted value in a show-rate or exchange command
+     * is less than 0.01. If it is, it will truncate to 0 in the transaction history, resulting
+     * in a loss of money for the user. The method will print what the minimum amount that must
+     * be converted from the initial currency is.
+     *
+     * @param amount the converted value provided by the user
+     * @param inst the currency relationship used
+     * @param ui Ui instance
+     * @return if the amount is valid
+     */
+    public boolean validateTargetValue (BigDecimal amount, Forex inst, Ui ui) {
+        if (amount.compareTo(new BigDecimal(0.01)) < 0) {
+            Currency init = inst.getInitial();
+            Currency targ = inst.getTarget();
+            Forex reverse = new Forex(targ, init);
+            BigDecimal allowedMin = reverse.convert(new BigDecimal(0.01));
+            allowedMin = allowedMin.setScale(2, RoundingMode.UP);
+            ui.printMessage("You must convert at least " + allowedMin + " " + init + " to " + targ);
+            return false;
+        }
+        return true;
     }
 }

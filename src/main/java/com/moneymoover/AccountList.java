@@ -27,10 +27,24 @@ public class AccountList {
      * Adds an account to the account list
      *
      * @param currency       The currency of the new account to be added
-     * @param initialBalance The initial balance of the new account to be added
+     * @param initialBalance The initial balance of the new account to be added in DOLLARS
      * @throws AccountAlreadyExistsException If the account already exists
      */
     public void addAccount (Currency currency, float initialBalance) throws AccountAlreadyExistsException {
+        if (accountHashMap.containsKey(currency)) {
+            throw new AccountAlreadyExistsException();
+        }
+        accountHashMap.put(currency, new Account(initialBalance, currency));
+    }
+
+    /**
+     * Adds an account to the account list using a long for the balance
+     *
+     * @param currency       The currency of the new account to be added
+     * @param initialBalance The initial balance of the new account to be added in CENTS
+     * @throws AccountAlreadyExistsException If the account already exists
+     */
+    public void addAccountWithLong (Currency currency, long initialBalance) throws AccountAlreadyExistsException {
         if (accountHashMap.containsKey(currency)) {
             throw new AccountAlreadyExistsException();
         }

@@ -235,7 +235,7 @@ Example:
     
 >> withdraw SGD 5 Chicken Rice
 >> You have successfully withdrawn 5.00 SGD from your account
-    Now you have remaining 880.00 SGD in your account
+   Now you have remaining 880.00 SGD in your account
 ```
 
 ### Show the exchange rate between two currencies `show-rate`
